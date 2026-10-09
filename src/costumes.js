@@ -32,38 +32,65 @@ export const COSTUMES_DATA = [
     realPhotography: {
       locationVi: "Hoàng Thành Thăng Long (Hà Nội)",
       locationEn: "Imperial Citadel of Thang Long (Hanoi)",
-      photoTitleVi: "Áo Ngũ Thân Sĩ Tử & Hoàng Thành Nắng Chiều",
-      photoTitleEn: "Scholar Ngu Than in Thang Long Citadel Sunset",
-      shootingNotesVi: "Góc chụp Low-angle (từ dưới lên) tạo phong thái đĩnh đạc, ánh sáng chiều tà (Golden Hour 16:30 - 17:30) làm nổi bật chất lụa tơ tằm Vạn Phúc dệt thủ công.",
-      shootingNotesEn: "Low-angle framing accentuating upright scholarly posture, golden hour sidelight highlighting handwoven Van Phuc raw silk texture.",
-      heroPhoto: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+      photoTitleVi: "Áo Ngũ Thân Tay Chẽn Sĩ Tử Hoàng Thành",
+      photoTitleEn: "Scholar Ngu Than Tay Chen in Imperial Citadel",
+      shootingNotesVi: "Người mẫu diện Áo Ngũ Thân tay chẽn lụa lam sẫm, vạt cánh cung giấu chỉ đĩnh đạc tại không gian di sản cổ kính Hoàng Thành.",
+      shootingNotesEn: "Male model in deep indigo Tay Chen Ngu Than tunic, arched bow-hem with fine tailoring at the heritage citadel.",
+      heroPhoto: "/costumes/ngu-than-hero.webp",
       gallery: [
         {
-          titleVi: "Tư liệu lịch sử: Phụ nữ An Nam mặc Áo Ngũ Thân (1904)",
-          titleEn: "Historical Archive: Vietnamese Women in Ngu Than (1904)",
-          tagVi: "Tư liệu Viện Viễn Đông Bác Cổ (EFEO)",
-          tagEn: "EFEO Archival Record",
-          contextVi: "Ảnh tư liệu chụp tại Bắc Kỳ năm 1904, lưu giữ trên kho tư liệu lịch sử, đối chiếu độ chuẩn xác của phom dáng và cổ lập lĩnh.",
-          contextEn: "Archival record from Tonkin 1904, verifying authentic silhouette and lap linh stand collar.",
-          imageUrl: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85"
+          titleVi: "Người mẫu diện Áo Ngũ Thân tay chẽn tại Hoàng Thành",
+          titleEn: "Editorial: Male Scholar in Tay Chen Ngu Than",
+          tagVi: "Ảnh chụp di sản",
+          tagEn: "Heritage Editorial",
+          contextVi: "Bộ ảnh thực tế ghi lại phong thái nho nhã của nam sĩ tử diện áo ngũ thân tay chẽn tại di tích Hoàng Thành.",
+          contextEn: "Live photoshoot capturing scholarly elegance in narrow-sleeved Ngu Than robe at the Imperial Citadel.",
+          imageUrl: "/costumes/ngu-than-hero.webp"
         },
         {
-          titleVi: "Cận cảnh 5 khuy nữu & cổ lập lĩnh vuông vức",
-          titleEn: "Macro: 5 Knotted Buttons & Upright Stand Collar",
+          titleVi: "Cận cảnh Cổ Lập Lĩnh & Khuy Nữu cài vai (Gấm dệt cao cấp)",
+          titleEn: "Macro: Upright Stand Collar & Fastener Knots on Brocade",
           tagVi: "Chi tiết may đo thủ công",
           tagEn: "Handcrafted Macro",
-          contextVi: "Khuy nữu cài từ cổ kéo sang nách phải, đường may giấu chỉ tinh xảo không lộ mũi kim trên nền lụa tơ tằm.",
-          contextEn: "Knotted fasteners running diagonally to the armpit with refined invisible stitching on mulberry silk.",
-          imageUrl: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=800&q=80"
+          contextVi: "Cổ đứng lập lĩnh cao 3-4cm ôm khít cổ, có lớp lót đơn y trắng nhô nhẹ 1-2mm và khuy cài vai tinh xảo.",
+          contextEn: "3-4cm upright collar with pure white inner lining peek and delicate shoulder knot button.",
+          imageUrl: "/costumes/ngu-than-collar.webp"
         },
         {
-          titleVi: "Người mẫu Gen Z diện Áo Ngũ Thân tay chẽn dạo phố",
-          titleEn: "Gen Z Model Styling Ngu Than for Street Heritage",
-          tagVi: "Phối đồ dạo phố",
-          tagEn: "Street Editorial",
-          contextVi: "Kết hợp áo ngũ thân sắc lam sẫm cùng quần thụng lụa trắng và kính râm hoài cổ tại không gian di sản.",
-          contextEn: "Deep indigo silk tunic paired with white flowing silk trousers and vintage eyewear in heritage quarters.",
-          imageUrl: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80"
+          titleVi: "Mô hình phục dựng: Mặt trước Áo Ngũ Thân Nữ gấm thêu phượng",
+          titleEn: "Reproduction Model: Front View of Embroidered Silk Robe",
+          tagVi: "Mô hình phục dựng",
+          tagEn: "Costume Reproduction",
+          contextVi: "Mô hình trang phục ngũ thân nữ dệt gấm xanh ngọc thêu chim phượng và hoa văn mây cát tường, cài khuy nách phải chuẩn mực.",
+          contextEn: "Emerald silk brocade female Ngu Than robe featuring auspicious phoenix and cloud motifs.",
+          imageUrl: "/costumes/ngu-than-model-front.png"
+        },
+        {
+          titleVi: "Mô hình phục dựng: Mặt sau (Đường sống lưng Trung Phùng)",
+          titleEn: "Reproduction Model: Back View & Central Spine Seam",
+          tagVi: "Chuẩn mực cổ chế",
+          tagEn: "Authentic Seamwork",
+          contextVi: "Đặc tả đường may trung phùng nối đôi thân sau thẳng tắp từ cổ xuống gấu - biểu tượng của tâm thế cương trực, đoan chính.",
+          contextEn: "Continuous central back seam (trung phung) connecting two panels from collar to hem, signifying moral rectitude.",
+          imageUrl: "/costumes/ngu-than-model-back.png"
+        },
+        {
+          titleVi: "Cặp đôi Cổ Phục Ngũ Thân Tay Chẽn Nam & Nữ",
+          titleEn: "Couple Editorial: Male & Female Ngu Than Tay Chen",
+          tagVi: "Phối đồ nam nữ",
+          tagEn: "Couples Styling",
+          contextVi: "Sự kết hợp hoàn hảo giữa nam diện áo ngũ thân xanh ngọc lụa bóng cùng nữ vấn khăn đỏ diện ngũ thân gấm thêu.",
+          contextEn: "Coordinated pair in traditional silk Ngu Than robes, styled with turban and headdress.",
+          imageUrl: "/costumes/ngu-than-nam-nu.jpg"
+        },
+        {
+          titleVi: "Áo Ngũ Thân Tay Chẽn Nam truyền thống (Lụa đen, khăn đóng)",
+          titleEn: "Traditional Male Tay Chen: Black Silk & Khan Dong Turban",
+          tagVi: "Chuẩn mực truyền thống",
+          tagEn: "Traditional Standard",
+          contextVi: "Trang phục nam giới mẫu mực với sắc đen tuyền trang nghiêm, quần thụng trắng và khăn đóng chữ Nhất.",
+          contextEn: "Classic gentleman attire in dignified black silk, white silk trousers, and structured turban.",
+          imageUrl: "/costumes/ngu-than-nam-chuan.jpg"
         }
       ],
       editorialQuoteVi: "Đường trung phùng thẳng tắp nối sống lưng - Giữ cho tâm thế luôn đoan chính khiêm nhường.",
@@ -196,7 +223,7 @@ export const COSTUMES_DATA = [
       photoTitleEn: "Imperial Court Nhat Binh at Hue Palace",
       shootingNotesVi: "Góc chụp chính diện đối xứng (Symmetry) tôn vinh dải cổ chữ nhật và hoa văn Phượng Loan ổ rực rỡ dưới ánh nắng vàng hoàng gia.",
       shootingNotesEn: "Symmetrical front-facing composition capturing the rectangular embroidered collar and Phoenix roundels in majestic palace light.",
-      heroPhoto: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=85",
+      heroPhoto: "/costumes/nhat-binh.jpg",
       gallery: [
         {
           titleVi: "Tư liệu lịch sử: Mệnh phụ triều Nguyễn diện Áo Nhật Bình",
@@ -354,7 +381,7 @@ export const COSTUMES_DATA = [
       photoTitleEn: "Dai Viet Cross-Collar Giao Linh Robe",
       shootingNotesVi: "Bối cảnh hành lang chùa cổ rêu phong, ánh sáng mờ sương (Misty Ambient) làm nổi bật vẻ thanh thoát, bay bổng của vạt áo vắt chéo Hữu Nhậm.",
       shootingNotesEn: "Atmospheric ancient pagoda corridors with diffused misty light, capturing the serene ethereal drape of cross-collar lapels.",
-      heroPhoto: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85",
+      heroPhoto: "/costumes/giao-linh.webp",
       gallery: [
         {
           titleVi: "Tư liệu điêu khắc: Tượng thời Lý - Trần tại di tích cổ",
@@ -504,7 +531,7 @@ export const COSTUMES_DATA = [
       photoTitleEn: "Kinh Bac Four-Panel Dress & Broad Palm Hat",
       shootingNotesVi: "Góc chụp trung cảnh (Medium shot) bắt trọn nét duyên nụ cười nghiêng nón quai thao, dải yếm đào thắm sắc và thắt lưng ngũ sắc buông lơi.",
       shootingNotesEn: "Medium shot highlighting the charming smile framed under broad palm hat, vibrant scarlet yem halter, and fluttering waist sashes.",
-      heroPhoto: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=85",
+      heroPhoto: "/costumes/tu-than.jpg",
       gallery: [
         {
           titleVi: "Tư liệu thực tế: Liền chị Quan họ Bắc Ninh hát đối đáp",
