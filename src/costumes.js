@@ -672,7 +672,7 @@ export const COSTUMES_DATA = [
       photoTitleEn: "Southern Silk Ao Ba Ba & Mekong Checkered Scarf",
       shootingNotesVi: "Ánh sáng tự nhiên rực rỡ vùng châu thổ sông Cửu Long, tà áo lụa bóng màu ngọc bích nổi bật bên chiếc xuồng ba lá mộc mạc và nón lá nghiêng che.",
       shootingNotesEn: "Radiant natural tropical daylight along the Mekong waterways, pastel silk blouse contrasted against rustic wooden sampan boats.",
-      heroPhoto: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=85",
+      heroPhoto: "/costumes/ba-ba-hero.png",
       gallery: [
         {
           titleVi: "Thiếu nữ Nam Bộ chèo xuồng diện Áo Bà Ba lụa xanh",
@@ -681,7 +681,7 @@ export const COSTUMES_DATA = [
           tagEn: "Riverfront Life",
           contextVi: "Áo bà ba xẻ tà hai bên hông cao ngang eo, giúp vận động khoan thai, linh hoạt khi chèo xuồng trên kênh rạch.",
           contextEn: "Waist-height side slits allow fluid unrestricted motion while navigating southern delta canals.",
-          imageUrl: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=85"
+          imageUrl: "/costumes/ba-ba-hero.png"
         },
         {
           titleVi: "Cận cảnh hai túi may ốp phía trước & cúc bấm cài",
