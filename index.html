@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="vi" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VietHeritage Remix - Gen Z Heritage Co-Creation Platform</title>
+    <meta name="description" content="Indochine High-Fashion Editorial Lookbook, 2D Layered Costume Anatomy, AI Personal Color & Styling, Cultural Guardrail, and Gemini Cultural Advisor." />
+    <meta property="og:title" content="VietHeritage Remix - Gen Z Heritage Co-Creation Platform" />
+    <meta property="og:description" content="Indochine High-Fashion Editorial Lookbook, 2D Layered Costume Anatomy, AI Personal Color & Styling, Cultural Guardrail, and Gemini Cultural Advisor." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Font: Be Vietnam Pro (100% Phông chữ Việt Hóa chuẩn xác, thanh tao, cao cấp xuyên suốt toàn bộ ứng dụng) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons CDN for Clean Professional Iconography -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Leaflet.js for 100% Authentic, Geographically Accurate Vietnam Map with Sovereign Archipelagos -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Tailwind CSS CDN Configured with Unified Be Vietnam Pro Typography -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              linen: '#FAF7F2',
+              'linen-dark': '#F0ECE1',
+              charcoal: '#222222',
+              taupe: '#666666',
+              crimson: '#8B0000',
+              'crimson-dark': '#5C0000',
+              gold: '#D4AF37',
+              'gold-light': '#FDF6E2',
+              'amber-seal': '#B33927'
+            },
+            fontFamily: {
+              sans: ['"Be Vietnam Pro"', 'sans-serif'],
+              serif: ['"Be Vietnam Pro"', 'sans-serif'],
+              mono: ['"Be Vietnam Pro"', 'sans-serif']
+            },
+            keyframes: {
+              shimmer: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(200%)' }
+              },
+              shake: {
+                '0%, 100%': { transform: 'translateX(0)' },
+                '20%, 60%': { transform: 'translateX(-6px)' },
+                '40%, 80%': { transform: 'translateX(6px)' }
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      /* Unified Single Vietnamese Typeface 'Be Vietnam Pro' Throughout */
+      *, *::before, *::after {
+        font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+      }
+      html, body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, a, label, strong, em, small {
+        font-family: 'Be Vietnam Pro', sans-serif !important;
+      }
+
+      /* Imperial Vietnamese Lotus Background (Hoa Sen Cung Đình) & Interactive Hover Dynamics */
+      body {
+        background-color: #FAF7F2;
+        color: #222222;
+        position: relative;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Fixed Repeating Lotus Background Pattern with Breathing Pulse Animation & Motion Dynamics */
+      body::before {
+        content: '';
+        position: fixed;
+        top: -6%;
+        left: -6%;
+        width: 112%;
+        height: 112%;
+        pointer-events: none;
+        z-index: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cdefs%3E%3CradialGradient id='lg' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23D4AF37' stop-opacity='0.16'/%3E%3Cstop offset='60%25' stop-color='%23C47B89' stop-opacity='0.10'/%3E%3Cstop offset='100%25' stop-color='%23FAF7F2' stop-opacity='0'/%3E%3C/radialGradient%3E%3ClinearGradient id='gs' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23D4AF37' stop-opacity='0.35'/%3E%3Cstop offset='100%25' stop-color='%238B0000' stop-opacity='0.25'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='translate(80, 80)'%3E%3Ccircle cx='0' cy='0' r='42' fill='url(%23lg)'/%3E%3Cg transform='rotate(45)'%3E%3Cpath d='M0 -34 C-8 -22, -14 -10, 0 0 C14 -10, 8 -22, 0 -34 Z' fill='%23D4AF37' fill-opacity='0.06' stroke='url(%23gs)' stroke-width='0.9'/%3E%3Cpath d='M0 34 C-8 22, -14 10, 0 0 C14 10, 8 22, 0 34 Z' fill='%23D4AF37' fill-opacity='0.06' stroke='url(%23gs)' stroke-width='0.9'/%3E%3Cpath d='M-34 0 C-22 -8, -10 -14, 0 0 C-10 14, -22 8, -34 0 Z' fill='%23D4AF37' fill-opacity='0.06' stroke='url(%23gs)' stroke-width='0.9'/%3E%3Cpath d='M34 0 C22 -8, 10 -14, 0 0 C10 14, 22 8, 34 0 Z' fill='%23D4AF37' fill-opacity='0.06' stroke='url(%23gs)' stroke-width='0.9'/%3E%3C/g%3E%3Cpath d='M0 -38 C-11 -25, -18 -10, 0 0 C18 -10, 11 -25, 0 -38 Z' fill='%238B0000' fill-opacity='0.06' stroke='url(%23gs)' stroke-width='1.1'/%3E%3Cpath d='M0 38 C-11 25, -18 10, 0 0 C18 10, 11 25, 0 38 Z' fill='%238B0000' fill-opacity='0.06' stroke='url(%23gs)' stroke-width='1.1'/%3E%3Cpath d='M-38 0 C-25 -11, -10 -18, 0 0 C-10 18, -25 11, -38 0 Z' fill='%238B0000' fill-opacity='0.06' stroke='url(%23gs)' stroke-width='1.1'/%3E%3Cpath d='M38 0 C25 -11, 10 -18, 0 0 C-10 18, 25 11, 38 0 Z' fill='%238B0000' fill-opacity='0.06' stroke='url(%23gs)' stroke-width='1.1'/%3E%3Ccircle cx='0' cy='0' r='9' fill='%23D4AF37' fill-opacity='0.16' stroke='%23D4AF37' stroke-width='0.9' stroke-opacity='0.4'/%3E%3Ccircle cx='0' cy='0' r='4' fill='%238B0000' fill-opacity='0.25'/%3E%3Ccircle cx='0' cy='-4' r='0.8' fill='%23D4AF37' opacity='0.8'/%3E%3Ccircle cx='3.5' cy='-2' r='0.8' fill='%23D4AF37' opacity='0.8'/%3E%3Ccircle cx='3.5' cy='2' r='0.8' fill='%23D4AF37' opacity='0.8'/%3E%3Ccircle cx='0' cy='4' r='0.8' fill='%23D4AF37' opacity='0.8'/%3E%3Ccircle cx='-3.5' cy='2' r='0.8' fill='%23D4AF37' opacity='0.8'/%3E%3Ccircle cx='-3.5' cy='-2' r='0.8' fill='%23D4AF37' opacity='0.8'/%3E%3C/g%3E%3Cg transform='translate(0, 0)'%3E%3Cpath d='M0 26 Q18 18, 26 0' fill='none' stroke='%23D4AF37' stroke-width='0.8' stroke-opacity='0.25'/%3E%3Cpath d='M0 34 Q26 26, 34 0' fill='none' stroke='%23D4AF37' stroke-width='0.6' stroke-opacity='0.18' stroke-dasharray='3,2'/%3E%3Ccircle cx='9' cy='9' r='1.5' fill='%23D4AF37' opacity='0.3'/%3E%3C/g%3E%3Cg transform='translate(160, 0)'%3E%3Cpath d='M0 26 Q-18 18, -26 0' fill='none' stroke='%23D4AF37' stroke-width='0.8' stroke-opacity='0.25'/%3E%3Cpath d='M0 34 Q-26 26, -34 0' fill='none' stroke='%23D4AF37' stroke-width='0.6' stroke-opacity='0.18' stroke-dasharray='3,2'/%3E%3Ccircle cx='-9' cy='9' r='1.5' fill='%23D4AF37' opacity='0.3'/%3E%3C/g%3E%3Cg transform='translate(0, 160)'%3E%3Cpath d='M0 -26 Q18 -18, 26 0' fill='none' stroke='%23D4AF37' stroke-width='0.8' stroke-opacity='0.25'/%3E%3Cpath d='M0 -34 Q26 -26, 34 0' fill='none' stroke='%23D4AF37' stroke-width='0.6' stroke-opacity='0.18' stroke-dasharray='3,2'/%3E%3Ccircle cx='9' cy='-9' r='1.5' fill='%23D4AF37' opacity='0.3'/%3E%3C/g%3E%3Cg transform='translate(160, 160)'%3E%3Cpath d='M0 -26 Q-18 -18, -26 0' fill='none' stroke='%23D4AF37' stroke-width='0.8' stroke-opacity='0.25'/%3E%3Cpath d='M0 -34 Q-26 -26, -34 0' fill='none' stroke='%23D4AF37' stroke-width='0.6' stroke-opacity='0.18' stroke-dasharray='3,2'/%3E%3Ccircle cx='-9' cy='-9' r='1.5' fill='%23D4AF37' opacity='0.3'/%3E%3C/g%3E%3Cg transform='translate(80, 6)'%3E%3Cpath d='M0 -5 C-3.5 0, -3.5 4, 0 7 C3.5 4, 3.5 0, 0 -5 Z' fill='%238B0000' fill-opacity='0.08' stroke='%23D4AF37' stroke-width='0.7' stroke-opacity='0.28'/%3E%3C/g%3E%3Cg transform='translate(80, 154)'%3E%3Cpath d='M0 5 C-3.5 0, -3.5 -4, 0 -7 C3.5 -4, 3.5 0, 0 5 Z' fill='%238B0000' fill-opacity='0.08' stroke='%23D4AF37' stroke-width='0.7' stroke-opacity='0.28'/%3E%3C/g%3E%3Cg transform='translate(6, 80)'%3E%3Cpath d='M-5 0 C0 -3.5, 4 -3.5, 7 0 C4 3.5, 0 3.5, -5 0 Z' fill='%238B0000' fill-opacity='0.08' stroke='%23D4AF37' stroke-width='0.7' stroke-opacity='0.28'/%3E%3C/g%3E%3Cg transform='translate(154, 80)'%3E%3Cpath d='M5 0 C0 -3.5, -4 -3.5, -7 0 C-4 3.5, 0 3.5, 5 0 Z' fill='%238B0000' fill-opacity='0.08' stroke='%23D4AF37' stroke-width='0.7' stroke-opacity='0.28'/%3E%3C/g%3E%3C/svg%3E");
+        background-size: 160px 160px;
+        background-repeat: repeat;
+        opacity: var(--lotus-base-opacity, 0.65);
+        transform: rotate(var(--lotus-mouse-rotate, 0deg)) scale(1);
+        transform-origin: center center;
+        animation: lotusBreathingPulse 11s ease-in-out infinite;
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+        will-change: transform, opacity;
+      }
+
+      /* Slow, Organic Breathing Pulse Keyframes (Scale Up/Down & Subtle Illuminating Glow) */
+      @keyframes lotusBreathingPulse {
+        0%, 100% {
+          transform: rotate(var(--lotus-mouse-rotate, 0deg)) scale(1);
+          opacity: var(--lotus-base-opacity, 0.65);
+          filter: drop-shadow(0 0 0px rgba(212, 175, 55, 0));
+        }
+        50% {
+          transform: rotate(calc(var(--lotus-mouse-rotate, 0deg) + 0.6deg)) scale(1.036);
+          opacity: calc(var(--lotus-base-opacity, 0.65) + 0.16);
+          filter: drop-shadow(0 0 3px rgba(212, 175, 55, 0.28));
+        }
+      }
+
+      /* Hover Effect: Amplifies the breathing pulse with higher luminosity when user interacts with the page */
+      body:hover::before {
+        opacity: calc(var(--lotus-base-opacity, 0.65) + 0.26);
+        filter: drop-shadow(0 0 2.5px rgba(212, 175, 55, 0.35));
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body::before {
+          animation: none;
+        }
+      }
+
+      /* Specific Card/Container Hover Lotus Reaction */
+      .lotus-card-interactive {
+        position: relative;
+        transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      }
+      .lotus-card-interactive::after {
+        content: '';
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 38px;
+        height: 38px;
+        pointer-events: none;
+        opacity: 0.2;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 15 C35 30, 25 50, 50 85 C75 50, 65 30, 50 15 Z' fill='%23D4AF37' fill-opacity='0.4' stroke='%238B0000' stroke-width='2'/%3E%3Cpath d='M15 50 C30 35, 50 25, 85 50 C50 75, 30 65, 15 50 Z' fill='%23D4AF37' fill-opacity='0.4' stroke='%238B0000' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%238B0000'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        transform: rotate(0deg) scale(0.9);
+        transform-origin: center center;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+      }
+      .lotus-card-interactive:hover::after {
+        opacity: 0.75;
+        transform: rotate(18deg) scale(1.18);
+      }
+
+      /* Interactive Lotus Clusters (Hero Section & Accents) */
+      .interactive-lotus-pattern {
+        transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+        pointer-events: auto !important;
+        cursor: pointer;
+      }
+      .interactive-lotus-pattern:hover {
+        transform: scale(1.1) rotate(6deg) translateY(-8px) !important;
+        opacity: 0.95 !important;
+        filter: drop-shadow(0 12px 24px rgba(212, 175, 55, 0.45));
+      }
+
+      .interactive-lotus-pattern-rev {
+        transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+        pointer-events: auto !important;
+        cursor: pointer;
+      }
+      .interactive-lotus-pattern-rev:hover {
+        transform: scale(1.1) rotate(-6deg) translateY(-8px) scaleX(-1) !important;
+        opacity: 0.95 !important;
+        filter: drop-shadow(0 12px 24px rgba(212, 175, 55, 0.45));
+      }
+
+      /* Floating Lotus Animation Keyframes */
+      @keyframes floatSlow {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-8px) rotate(2deg); }
+      }
+      @keyframes floatReverse {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(8px) rotate(-2deg); }
+      }
+      .animate-float-lotus {
+        animation: floatSlow 6s ease-in-out infinite;
+      }
+      .animate-float-lotus-rev {
+        animation: floatReverse 7s ease-in-out infinite;
+      }
+
+      /* Custom High-Fashion Scrollbars */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #FAF7F2;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #D4AF37;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #8B0000;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col justify-between selection:bg-[#8B0000] selection:text-[#FAF7F2]">
+    <!-- Navbar Container -->
+    <div id="navbarContainer"></div>
+
+    <!-- Main Dynamic Experience (Hero, Hub 1, Hub 2) -->
+    <main id="mainContent" class="flex-grow"></main>
+
+    <!-- Global Footer -->
+    <footer class="bg-[#222222] text-[#FAF7F2] border-t border-[#D4AF37]/40 py-12 px-4 sm:px-6 lg:px-8 mt-16 font-sans">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="space-y-3">
+          <div class="flex items-center space-x-2">
+            <span class="w-8 h-8 rounded bg-[#8B0000] text-[#D4AF37] flex items-center justify-center font-serif font-bold text-lg border border-[#D4AF37]">V</span>
+            <span class="font-serif font-bold text-xl text-[#FAF7F2]">VietHeritage Remix</span>
+          </div>
+          <p class="text-xs text-stone-400 leading-relaxed font-sans">
+            Nền tảng đồng sáng tạo cổ phục Việt Nam cho thế hệ Z. Cầu nối số hóa chuẩn sử, phối màu thông minh và tôn vinh bản sắc dân tộc.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs font-bold text-[#D4AF37] uppercase tracking-wider mb-3">Tư Liệu Di Sản</h4>
+          <ul class="text-xs text-stone-300 space-y-2 font-mono">
+            <li><a href="https://www.youtube.com/watch?v=2G8125IkyjE" target="_blank" rel="noreferrer" class="hover:text-[#D4AF37]">✦ Thước phim Áo Ngũ Thân 1744</a></li>
+            <li><a href="https://maps.google.com/?q=Bảo+tàng+Áo+Dài,+Hồ+Chí+Minh" target="_blank" rel="noreferrer" class="hover:text-[#D4AF37]">✦ Tọa độ Bảo Tàng Áo Dài</a></li>
+            <li><span>✦ Khâm Định Đại Nam Hội Điển Sự Lệ</span></li>
+            <li><span>✦ Điển chế phục trang Triều Nguyễn</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs font-bold text-[#D4AF37] uppercase tracking-wider mb-3">Tính Năng Cốt Lõi</h4>
+          <ul class="text-xs text-stone-300 space-y-2 font-mono">
+            <li><span>✦ 2D Layered Anatomy Flaps</span></li>
+            <li><span>✦ Personal Color & Dyes Engine</span></li>
+            <li><span>✦ Cultural Guardrail Score</span></li>
+            <li><span>✦ Gemini Live Cultural Stylist</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs font-bold text-[#D4AF37] uppercase tracking-wider mb-3">Đạo Lý & Bản Quyền</h4>
+          <p class="text-xs text-stone-400 leading-relaxed">
+            Dự án nghiên cứu & ứng dụng phi lợi nhuận hướng tới bảo tồn văn hóa. Tôn trọng triết lý Nho giáo: Ngũ Thường, Ngũ Luân và Tứ Thân Phụ Mẫu.
+          </p>
+          <div class="mt-3 text-[11px] font-mono text-[#D4AF37]">
+            © 2026 VietHeritage Remix · Indochine High-Fashion Editorial
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modals Container -->
+    <div id="modalContainer"></div>
+
+    <!-- Gemini Live AI Chatbot Widget -->
+    <div id="chatbotContainer"></div>
+
+    <!-- Main Module Application Logic -->
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>

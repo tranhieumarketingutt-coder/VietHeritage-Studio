@@ -1,0 +1,367 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 1200" width="100%" height="100%" class="vietnam-dongson-map-svg">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="parchmentBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF7EE" />
+      <stop offset="50%" stop-color="#F4ECE1" />
+      <stop offset="100%" stop-color="#EADBCE" />
+    </linearGradient>
+
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF9E6" stop-opacity="0.9" />
+      <stop offset="40%" stop-color="#E6C875" stop-opacity="0.6" />
+      <stop offset="70%" stop-color="#C59B27" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#8B6508" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="seaWater" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2EEF8" />
+      <stop offset="50%" stop-color="#D0E3F0" />
+      <stop offset="100%" stop-color="#B8D5E5" />
+    </linearGradient>
+
+    <linearGradient id="mainlandRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B91C1C" />
+      <stop offset="50%" stop-color="#991B1B" />
+      <stop offset="100%" stop-color="#7F1D1D" />
+    </linearGradient>
+
+    <linearGradient id="goldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#996515" />
+    </linearGradient>
+
+    <filter id="softShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="4" stdDeviation="4" flood-color="#3E2723" flood-opacity="0.3" />
+    </filter>
+
+    <filter id="glowYellow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Bronze Drum Star Pattern -->
+    <g id="dongSonStar">
+      <circle cx="0" cy="0" r="16" fill="#D4AF37" />
+      <!-- 14 rays -->
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(25.71)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(51.42)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(77.14)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(102.85)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(128.57)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(154.28)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(180)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(205.71)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(231.42)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(257.14)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(282.85)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(308.57)" />
+      <path d="M 0,-55 L 6,-20 L 0,-15 L -6,-20 Z" fill="#C59B27" transform="rotate(334.28)" />
+    </g>
+
+    <!-- Flying Lac Bird (Chim Lạc) Motif -->
+    <g id="lacBird">
+      <path d="M -18,-4 C -10,-12 5,-15 22,-8 C 14,-6 8,-3 0,0 C -5,2 -12,2 -18,-4 Z" fill="#B8860B" opacity="0.8" />
+      <path d="M -15,-4 C -22,-6 -28,-1 -25,3 C -20,4 -15,1 -10,0 Z" fill="#D4AF37" />
+      <circle cx="-23" cy="0" r="1.5" fill="#5D4037" />
+    </g>
+
+    <!-- Vietnam Flag Badge -->
+    <g id="vnFlag">
+      <rect x="-12" y="-8" width="24" height="16" rx="2" fill="#DA251D" stroke="#FFE600" stroke-width="0.8" />
+      <polygon points="0,-6 1.8,-1.5 6.3,-1.5 2.7,1.2 4,5.7 0,3 -4,5.7 -2.7,1.2 -6.3,-1.5 -1.8,-1.5" fill="#FFFF00" />
+    </g>
+  </defs>
+
+  <!-- Background Base Map -->
+  <rect x="0" y="0" width="880" height="1200" fill="url(#parchmentBg)" />
+
+  <!-- Sea Area -->
+  <rect x="0" y="0" width="880" height="1200" fill="url(#seaWater)" opacity="0.45" />
+
+  <!-- Decorative Dong Son Drum Concentric Circles In Watermark Style -->
+  <g transform="translate(480, 560)" opacity="0.32">
+    <circle cx="0" cy="0" r="420" fill="none" stroke="#C59B27" stroke-width="2" stroke-dasharray="6,4" />
+    <circle cx="0" cy="0" r="390" fill="none" stroke="#B8860B" stroke-width="3" />
+    
+    <!-- Outer Birds Ring -->
+    <circle cx="0" cy="0" r="360" fill="none" stroke="#D4AF37" stroke-width="1.5" />
+    <use href="#lacBird" transform="rotate(0) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(30) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(60) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(90) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(120) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(150) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(180) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(210) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(240) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(270) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(300) translate(360, 0)" />
+    <use href="#lacBird" transform="rotate(330) translate(360, 0)" />
+
+    <circle cx="0" cy="0" r="310" fill="none" stroke="#B8860B" stroke-width="2" stroke-dasharray="4,4" />
+    <circle cx="0" cy="0" r="270" fill="none" stroke="#C59B27" stroke-width="1" />
+    
+    <!-- Middle Ring with Deer/Human figures stylized -->
+    <circle cx="0" cy="0" r="230" fill="none" stroke="#D4AF37" stroke-width="2" />
+    <circle cx="0" cy="0" r="180" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-dasharray="8,6" />
+    <circle cx="0" cy="0" r="130" fill="none" stroke="#C59B27" stroke-width="2" />
+    <circle cx="0" cy="0" r="80" fill="url(#sunGlow)" />
+    
+    <!-- Central Solar Star -->
+    <use href="#dongSonStar" />
+  </g>
+
+  <!-- Coordinate Grids (subtle antique lines) -->
+  <g stroke="#9E8047" stroke-width="0.5" opacity="0.25" stroke-dasharray="3,3">
+    <line x1="60" y1="180" x2="840" y2="180" />
+    <line x1="60" y1="360" x2="840" y2="360" />
+    <line x1="60" y1="540" x2="840" y2="540" />
+    <line x1="60" y1="720" x2="840" y2="720" />
+    <line x1="60" y1="900" x2="840" y2="900" />
+    <line x1="60" y1="1080" x2="840" y2="1080" />
+    <line x1="200" y1="60" x2="200" y2="1140" />
+    <line x1="400" y1="60" x2="400" y2="1140" />
+    <line x1="600" y1="60" x2="600" y2="1140" />
+    <line x1="800" y1="60" x2="800" y2="1140" />
+  </g>
+
+  <!-- East Sea (Biển Đông) Calligraphic Water Label -->
+  <g transform="translate(630, 480)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Times New Roman', serif" font-weight="bold" font-size="28" fill="#1E3A8A" opacity="0.28" letter-spacing="8">BIỂN ĐÔNG</text>
+    <text x="0" y="24" font-family="'Times New Roman', serif" font-style="italic" font-size="14" fill="#1E3A8A" opacity="0.32" letter-spacing="4">(VIỆT NAM · EAST SEA)</text>
+    <path d="M -110,40 Q 0,25 110,40" fill="none" stroke="#2563EB" stroke-width="1" opacity="0.25" />
+  </g>
+  <g transform="translate(680, 850)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Times New Roman', serif" font-weight="bold" font-size="22" fill="#1E3A8A" opacity="0.24" letter-spacing="6">VÙNG BIỂN CHỦ QUYỀN</text>
+    <text x="0" y="18" font-family="'Times New Roman', serif" font-size="12" fill="#1E3A8A" opacity="0.28" letter-spacing="2">NƯỚC CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</text>
+  </g>
+
+  <!-- Surrounding Countries (Subtle muted borders) -->
+  <!-- China to the north -->
+  <path d="M 60,60 L 260,80 L 400,90 L 520,110 L 600,130 L 620,60 Z" fill="#EADBC8" stroke="#CBB8A1" stroke-width="1" opacity="0.5" />
+  <text x="320" y="75" font-family="sans-serif" font-size="13" font-weight="bold" fill="#8C7355" opacity="0.7">TRUNG QUỐC</text>
+
+  <!-- Laos to the west -->
+  <path d="M 60,180 L 150,220 L 190,320 L 260,370 L 320,440 L 350,540 L 260,520 L 180,420 L 110,320 Z" fill="#EADBC8" stroke="#CBB8A1" stroke-width="1" opacity="0.5" />
+  <text x="180" y="360" font-family="sans-serif" font-size="13" font-weight="bold" fill="#8C7355" opacity="0.7">LÀO</text>
+
+  <!-- Cambodia to the southwest -->
+  <path d="M 190,660 L 260,640 L 330,680 L 350,750 L 320,830 L 230,810 L 160,740 Z" fill="#EADBC8" stroke="#CBB8A1" stroke-width="1" opacity="0.5" />
+  <text x="230" y="730" font-family="sans-serif" font-size="13" font-weight="bold" fill="#8C7355" opacity="0.7">CAMPUCHIA</text>
+
+  <!-- Gulf of Tonkin (Vịnh Bắc Bộ) Label -->
+  <text x="500" y="240" font-family="'Times New Roman', serif" font-style="italic" font-size="14" font-weight="bold" fill="#3B82F6" opacity="0.4" letter-spacing="3">VỊNH BẮC BỘ</text>
+  <!-- Gulf of Thailand (Vịnh Thái Lan) Label -->
+  <text x="180" y="940" font-family="'Times New Roman', serif" font-style="italic" font-size="14" font-weight="bold" fill="#3B82F6" opacity="0.4" letter-spacing="3">VỊNH THÁI LAN</text>
+
+  <!-- ======================================================== -->
+  <!-- VIETNAMESE MAINLAND TERRITORY (S-SHAPE) in Crimson Lacquer -->
+  <!-- ======================================================== -->
+  <g id="vietnamMainlandGroup" filter="url(#softShadow)">
+    
+    <!-- Complete, Continuous, Realistic Vietnam S-Shape Mainland -->
+    <path id="vietnamMainlandPath" 
+      d="
+        M 350,118 
+        C 335,115 310,120 290,130 
+        C 270,140 240,150 215,165 
+        C 195,178 175,195 165,220 
+        C 155,245 160,270 178,290 
+        C 195,310 220,320 245,340 
+        C 270,360 285,385 295,410 
+        C 305,435 320,460 345,490 
+        C 365,515 385,545 405,580 
+        C 425,615 440,650 445,690 
+        C 450,725 440,760 425,795 
+        C 410,830 380,865 355,895 
+        C 340,915 325,935 320,955 
+        C 315,975 328,995 348,1005 
+        C 368,1015 390,1010 410,990 
+        C 430,970 445,945 460,915 
+        C 475,885 490,855 505,820 
+        C 520,785 530,750 525,715 
+        C 520,680 500,645 485,615 
+        C 470,585 455,555 450,525 
+        C 445,495 455,465 470,440 
+        C 485,415 505,390 520,365 
+        C 530,345 540,320 545,295 
+        C 550,270 540,245 520,225 
+        C 500,205 470,185 445,170 
+        C 420,155 390,135 365,125 
+        Z
+      "
+      fill="url(#mainlandRed)" 
+      stroke="url(#goldBorder)" 
+      stroke-width="3" 
+    />
+
+    <!-- Internal Provincial Separation Details / Cultural Arcs (Gold Veins) -->
+    <!-- Red River Delta / Bac Bo divider -->
+    <path d="M 230,310 Q 320,325 440,280" fill="none" stroke="#FDE047" stroke-width="1.2" opacity="0.6" stroke-dasharray="2,2" />
+    <!-- North Central divider (Nghe An / Thanh Hoa) -->
+    <path d="M 285,385 Q 360,420 490,390" fill="none" stroke="#FDE047" stroke-width="1.2" opacity="0.6" stroke-dasharray="2,2" />
+    <!-- Hue / Da Nang Hai Van Pass divider -->
+    <path d="M 335,475 Q 400,505 475,470" fill="none" stroke="#FDE047" stroke-width="1.4" opacity="0.7" stroke-dasharray="3,2" />
+    <!-- Tay Nguyen & South Central divider -->
+    <path d="M 380,565 Q 430,620 480,590" fill="none" stroke="#FDE047" stroke-width="1.2" opacity="0.6" stroke-dasharray="2,2" />
+    <!-- Southern Vietnam / Mekong Delta divider -->
+    <path d="M 435,745 Q 480,780 520,750" fill="none" stroke="#FDE047" stroke-width="1.2" opacity="0.6" stroke-dasharray="2,2" />
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- CAPITAL HANOI with National Gold Star ⭐ -->
+  <!-- ======================================================== -->
+  <g transform="translate(345, 255)" filter="url(#glowYellow)">
+    <!-- Star pulsing backdrop -->
+    <circle cx="0" cy="0" r="14" fill="#FEF08A" opacity="0.6" />
+    <circle cx="0" cy="0" r="9" fill="#EAB308" />
+    <!-- Gold 5-point Star -->
+    <polygon points="0,-8 2.4,-2.4 8,-2.4 3.6,1.4 5.2,7 0,3.6 -5.2,7 -3.6,1.4 -8,-2.4 -2.4,-2.4" fill="#FFFFFF" stroke="#CA8A04" stroke-width="0.8" />
+  </g>
+  <!-- Hanoi Label Badge -->
+  <g transform="translate(370, 255)">
+    <rect x="0" y="-12" width="135" height="24" rx="4" fill="#7F1D1D" stroke="#FDE047" stroke-width="1.5" />
+    <text x="67" y="4" font-family="'Times New Roman', serif" font-weight="bold" font-size="12" fill="#FEF08A" text-anchor="middle" letter-spacing="1">THỦ ĐÔ HÀ NỘI</text>
+  </g>
+
+  <!-- Major City Landmarks On Mainland -->
+  <!-- Cố Đô Huế -->
+  <circle cx="435" cy="460" r="4.5" fill="#FDE047" stroke="#7F1D1D" stroke-width="1.5" />
+  <rect x="445" y="450" width="85" height="18" rx="3" fill="#7F1D1D" opacity="0.9" stroke="#D4AF37" stroke-width="0.8" />
+  <text x="487" y="463" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FFF9C4" text-anchor="middle">CỐ ĐÔ HUẾ</text>
+
+  <!-- TP. Đà Nẵng & Hội An -->
+  <circle cx="465" cy="485" r="4.5" fill="#FDE047" stroke="#7F1D1D" stroke-width="1.5" />
+  <rect x="475" y="475" width="85" height="18" rx="3" fill="#7F1D1D" opacity="0.9" stroke="#D4AF37" stroke-width="0.8" />
+  <text x="517" y="488" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FFF9C4" text-anchor="middle">ĐÀ NẴNG</text>
+
+  <!-- TP. Hồ Chí Minh -->
+  <circle cx="445" cy="800" r="5" fill="#FDE047" stroke="#7F1D1D" stroke-width="1.5" />
+  <rect x="455" y="790" width="125" height="20" rx="3" fill="#7F1D1D" opacity="0.95" stroke="#FDE047" stroke-width="1" />
+  <text x="517" y="804" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FFF9C4" text-anchor="middle">TP. HỒ CHÍ MINH</text>
+
+  <!-- Cực Nam Mũi Cà Mau -->
+  <circle cx="330" cy="980" r="4" fill="#FDE047" stroke="#7F1D1D" stroke-width="1" />
+  <text x="320" y="1000" font-family="sans-serif" font-weight="bold" font-size="10" fill="#7F1D1D">MŨI CÀ MAU</text>
+
+  <!-- ======================================================== -->
+  <!-- SACRED ISLANDS & ARCHIPELAGOS (HOÀNG SA & TRƯỜNG SA) -->
+  <!-- ======================================================== -->
+
+  <!-- 1. QUẦN ĐẢO HOÀNG SA (Paracel Islands) -->
+  <g id="hoangSaArchipelagoGroup" transform="translate(640, 420)" filter="url(#softShadow)">
+    <!-- Boundary Box / Sovereignty Zone -->
+    <rect x="-35" y="-35" width="190" height="150" rx="8" fill="#FFFBEB" fill-opacity="0.5" stroke="#D97706" stroke-width="1.2" stroke-dasharray="4,3" />
+
+    <!-- Island Reefs & Islets (Đảo Hoàng Sa, Cây, Tri Tôn, Phú Lâm...) -->
+    <circle cx="0" cy="0" r="5.5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="20" cy="-15" r="4.5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="45" cy="-8" r="6" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="35" cy="18" r="5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="60" cy="25" r="4" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="-15" cy="20" r="5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="10" cy="35" r="4.5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+
+    <!-- Red Flag Badge -->
+    <use href="#vnFlag" x="90" y="5" />
+
+    <!-- Official Sovereignty Label -->
+    <g transform="translate(60, 65)">
+      <rect x="-80" y="0" width="165" height="38" rx="5" fill="#881337" stroke="#FDE047" stroke-width="1.8" />
+      <text x="2" y="16" font-family="'Times New Roman', serif" font-weight="bold" font-size="12" fill="#FEF08A" text-anchor="middle" letter-spacing="1">QUẦN ĐẢO HOÀNG SA</text>
+      <text x="2" y="30" font-family="sans-serif" font-weight="bold" font-size="9" fill="#FFFFFF" text-anchor="middle">(TP. ĐÀ NẴNG · VIỆT NAM)</text>
+    </g>
+  </g>
+
+  <!-- 2. QUẦN ĐẢO TRƯỜNG SA (Spratly Islands) -->
+  <g id="truongSaArchipelagoGroup" transform="translate(620, 710)" filter="url(#softShadow)">
+    <!-- Boundary Box / Sovereignty Zone -->
+    <rect x="-40" y="-30" width="230" height="230" rx="8" fill="#FFFBEB" fill-opacity="0.5" stroke="#D97706" stroke-width="1.2" stroke-dasharray="4,3" />
+
+    <!-- Island Reefs & Atolls (Song Tử Tây, Sơn Ca, Sinh Tồn, Nam Yết, Trường Sa Lớn, An Bang, Thuyền Chài...) -->
+    <circle cx="10" cy="-10" r="5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="50" cy="-15" r="5.5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="85" cy="5" r="4.5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="35" cy="20" r="6" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="70" cy="35" r="5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="110" cy="40" r="4" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="0" cy="50" r="5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="45" cy="70" r="5.5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="90" cy="85" r="4.5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="25" cy="100" r="6" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="65" cy="115" r="5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+
+    <!-- Red Flag Badge -->
+    <use href="#vnFlag" x="135" y="15" />
+
+    <!-- Official Sovereignty Label -->
+    <g transform="translate(75, 145)">
+      <rect x="-95" y="0" width="190" height="38" rx="5" fill="#881337" stroke="#FDE047" stroke-width="1.8" />
+      <text x="0" y="16" font-family="'Times New Roman', serif" font-weight="bold" font-size="12" fill="#FEF08A" text-anchor="middle" letter-spacing="1">QUẦN ĐẢO TRƯỜNG SA</text>
+      <text x="0" y="30" font-family="sans-serif" font-weight="bold" font-size="9" fill="#FFFFFF" text-anchor="middle">(TỈNH KHÁNH HÒA · VIỆT NAM)</text>
+    </g>
+  </g>
+
+  <!-- 3. ĐẢO PHÚ QUỐC (Kiên Giang) -->
+  <g transform="translate(265, 890)" filter="url(#softShadow)">
+    <path d="M 0,-15 C 6,-10 8,5 4,18 C 0,22 -6,18 -5,5 C -4,-8 -4,-12 0,-15 Z" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <rect x="8" y="-8" width="95" height="18" rx="3" fill="#7F1D1D" stroke="#D4AF37" stroke-width="0.8" />
+    <text x="55" y="5" font-family="sans-serif" font-weight="bold" font-size="9" fill="#FFF9C4" text-anchor="middle">ĐẢO PHÚ QUỐC</text>
+  </g>
+
+  <!-- 4. QUẦN ĐẢO CÔN ĐẢO (Bà Rịa - Vũng Tàu) -->
+  <g transform="translate(485, 960)" filter="url(#softShadow)">
+    <circle cx="0" cy="0" r="5.5" fill="#DC2626" stroke="#FEF08A" stroke-width="1.5" />
+    <circle cx="8" cy="4" r="3" fill="#DC2626" stroke="#FEF08A" stroke-width="1" />
+    <circle cx="-5" cy="6" r="2.5" fill="#DC2626" stroke="#FEF08A" stroke-width="1" />
+    <rect x="15" y="-8" width="85" height="18" rx="3" fill="#7F1D1D" stroke="#D4AF37" stroke-width="0.8" />
+    <text x="57" y="5" font-family="sans-serif" font-weight="bold" font-size="9" fill="#FFF9C4" text-anchor="middle">CÔN ĐẢO</text>
+  </g>
+
+  <!-- 5. ĐẢO LÝ SƠN (Quảng Ngãi) & PHÚ QUÝ (Bình Thuận) -->
+  <g transform="translate(520, 520)">
+    <circle cx="0" cy="0" r="4" fill="#DC2626" stroke="#FEF08A" stroke-width="1.2" />
+    <text x="8" y="4" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#7F1D1D">Đ. LÝ SƠN</text>
+  </g>
+  <g transform="translate(545, 820)">
+    <circle cx="0" cy="0" r="4" fill="#DC2626" stroke="#FEF08A" stroke-width="1.2" />
+    <text x="8" y="4" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#7F1D1D">Đ. PHÚ QUÝ</text>
+  </g>
+
+  <!-- 6. ĐẢO BẠCH LONG VĨ & CÁT BÀ (Vịnh Bắc Bộ) -->
+  <g transform="translate(500, 260)">
+    <circle cx="0" cy="0" r="4" fill="#DC2626" stroke="#FEF08A" stroke-width="1.2" />
+    <text x="8" y="4" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#7F1D1D">BẠCH LONG VĨ</text>
+  </g>
+
+  <!-- Classical Compass Rose (Hoa Tiêu Hướng Bắc) -->
+  <g transform="translate(770, 160)">
+    <circle cx="0" cy="0" r="32" fill="#FAF5E8" stroke="#B8860B" stroke-width="1.5" />
+    <polygon points="0,-28 6,-4 0,0" fill="#DC2626" />
+    <polygon points="0,-28 -6,-4 0,0" fill="#991B1B" />
+    <polygon points="0,28 6,4 0,0" fill="#C59B27" />
+    <polygon points="0,28 -6,4 0,0" fill="#854D0E" />
+    <polygon points="-28,0 -4,6 0,0" fill="#C59B27" />
+    <polygon points="-28,0 -4,-6 0,0" fill="#854D0E" />
+    <polygon points="28,0 4,6 0,0" fill="#C59B27" />
+    <polygon points="28,0 4,-6 0,0" fill="#854D0E" />
+    <circle cx="0" cy="0" r="4" fill="#FEF08A" stroke="#854D0E" stroke-width="1" />
+    <text x="0" y="-34" font-family="serif" font-weight="bold" font-size="14" fill="#DC2626" text-anchor="middle">BẮC (N)</text>
+  </g>
+
+  <!-- Top Title Cartouche (Khung Tiêu Đề Cổ Điển) -->
+  <g transform="translate(60, 40)">
+    <rect x="0" y="0" width="460" height="65" rx="6" fill="#FFFBEB" stroke="#B8860B" stroke-width="2" filter="url(#softShadow)" />
+    <rect x="4" y="4" width="452" height="57" rx="4" fill="none" stroke="#D4AF37" stroke-width="0.8" />
+    <text x="230" y="26" font-family="'Times New Roman', serif" font-weight="bold" font-size="15" fill="#7F1D1D" text-anchor="middle" letter-spacing="1">BẢN ĐỒ DI SẢN CỔ PHỤC &amp; ĐỊA LÝ VIỆT NAM</text>
+    <text x="230" y="44" font-family="'Times New Roman', serif" font-style="italic" font-size="11.5" fill="#854D0E" text-anchor="middle">NƯỚC CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</text>
+    <text x="230" y="57" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#B91C1C" text-anchor="middle">CHỦ QUYỀN TOÀN VẸN LÃNH THỔ &amp; BIỂN ĐẢO THIÊNG LIÊNG</text>
+  </g>
+
+  <!-- Outer Map Border with Traditional Geometric Trim -->
+  <rect x="15" y="15" width="850" height="1170" rx="8" fill="none" stroke="#8B0000" stroke-width="3" />
+  <rect x="22" y="22" width="836" height="1156" rx="6" fill="none" stroke="#D4AF37" stroke-width="1.2" stroke-dasharray="8,4" />
+</svg>

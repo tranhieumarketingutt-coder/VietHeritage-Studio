@@ -1,0 +1,6 @@
+{
+  "name": "VietHeritage Remix - Gen Z Heritage Co-Creation Platform",
+  "description": "Indochine High-Fashion Editorial Lookbook, 2D Layered Costume Anatomy, AI Personal Color & Styling, Cultural Guardrail, and Gemini Cultural Advisor.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
