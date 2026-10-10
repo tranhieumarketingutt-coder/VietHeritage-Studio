@@ -107,19 +107,72 @@ body::before {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAF7F2;
+  background: #F0ECE1;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #D4AF37;
-  border-radius: 3px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #8B0000;
 }
+
+.modal-scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: #D4AF37 #F0ECE1;
+}
+
+.modal-scroll-area::-webkit-scrollbar {
+  width: 9px;
+}
+
+.modal-scroll-area::-webkit-scrollbar-track {
+  background: #FAF7F2;
+  border-radius: 6px;
+  margin: 6px 0;
+}
+
+.modal-scroll-area::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 6px;
+  border: 2px solid #FAF7F2;
+}
+
+.modal-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #8B0000;
+}
+
+/* Lightbox Scrollbar Vàng Hoàng Gia trên nền tối */
+.lightbox-scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: #D4AF37 #181512;
+}
+
+.lightbox-scroll-area::-webkit-scrollbar {
+  width: 10px;
+}
+
+.lightbox-scroll-area::-webkit-scrollbar-track {
+  background: #181512;
+  border-left: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.lightbox-scroll-area::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 5px;
+  border: 2px solid #181512;
+}
+
+.lightbox-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #F3CA40;
+}
+

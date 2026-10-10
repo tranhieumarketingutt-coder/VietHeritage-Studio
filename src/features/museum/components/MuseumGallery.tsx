@@ -58,18 +58,29 @@ export const MuseumGallery: React.FC<MuseumGalleryProps> = ({ lang }) => {
   }, [filter, searchQuery]);
 
   return (
-    <section className="space-y-8" id="museumGallerySection">
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-2 border-b border-stone-200/80">
+    <section 
+      className="relative rounded-3xl bg-gradient-to-b from-[#FAF7F2]/95 via-white/90 to-[#FAF7F2]/95 border-2 border-[#D4AF37]/50 shadow-[0_20px_50px_rgba(139,0,0,0.06),0_4px_16px_rgba(212,175,55,0.15)] p-6 sm:p-8 lg:p-10 space-y-8 backdrop-blur-md overflow-hidden" 
+      id="museumGallerySection"
+    >
+      {/* Decorative Heritage Corner Accents */}
+      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#8B0000] rounded-tl-2xl pointer-events-none" aria-hidden="true"></div>
+      <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#8B0000] rounded-tr-2xl pointer-events-none" aria-hidden="true"></div>
+      <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#8B0000] rounded-bl-2xl pointer-events-none" aria-hidden="true"></div>
+      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#8B0000] rounded-br-2xl pointer-events-none" aria-hidden="true"></div>
+
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-[#D4AF37]/30">
         <div>
-          <div className="inline-flex items-center space-x-1 px-3 py-1 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/30 text-[#8B0000] text-xs font-mono font-bold tracking-wider uppercase mb-2">
-            <span>✦</span>
+          <div className="inline-flex items-center space-x-1.5 px-3.5 py-1 rounded-full bg-[#8B0000]/10 border border-[#8B0000]/30 text-[#8B0000] text-xs font-mono font-bold tracking-wider uppercase mb-3 shadow-2xs">
+            <span className="text-[#D4AF37]">✦</span>
             <span>V-Museum Curated Gallery</span>
+            <span className="text-stone-400">|</span>
+            <span className="text-stone-600 font-medium">Bảo Vật Lịch Sử</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#222222]">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.6rem] font-bold text-[#222222] tracking-tight leading-tight">
             {isEn ? 'V-Museum Heritage Gallery' : 'Bảo Tàng Số V-Museum'}
           </h2>
-          <p className="text-xs sm:text-sm text-[#666666] mt-1 max-w-2xl font-sans">
-            {isEn ? 'Explore the collection of digitized traditional costumes.' : 'Khám phá bộ sưu tập cổ phục truyền thống được số hóa.'}
+          <p className="text-xs sm:text-sm text-[#666666] mt-2 max-w-2xl font-sans leading-relaxed">
+            {isEn ? 'Explore the collection of digitized traditional costumes preserved across 1,000 years of Vietnamese history.' : 'Không gian trưng bày & bảo tồn số hóa phục trang truyền thống Việt Nam qua các thời kỳ lịch sử.'}
           </p>
         </div>
 
@@ -117,31 +128,32 @@ export const MuseumGallery: React.FC<MuseumGalleryProps> = ({ lang }) => {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-between bg-[#F5F1E8] p-3 rounded-2xl border border-[#D4AF37]/50 shadow-sm gap-3">
+      <div className="flex flex-col sm:flex-row items-center justify-between bg-white/90 backdrop-blur-xs p-3.5 rounded-2xl border border-[#D4AF37]/60 shadow-[0_4px_12px_rgba(212,175,55,0.12)] gap-3">
         <div className="flex items-center space-x-2 text-xs font-mono">
-          <span className="text-[#8B0000] font-bold">✨ {isEn ? 'Display Mode for Costumes:' : 'Chế Độ Hiển Thị Cổ Phục:'}</span>
+          <span className="w-2 h-2 rounded-full bg-[#8B0000] animate-pulse"></span>
+          <span className="text-[#8B0000] font-bold tracking-wide uppercase">✦ {isEn ? 'Display Mode for Costumes:' : 'Chế Độ Trải Nghiệm Cổ Phục:'}</span>
         </div>
-        <div className="flex items-center space-x-1.5 p-1 bg-white rounded-xl border border-stone-300 shadow-sm">
+        <div className="flex items-center space-x-1.5 p-1 bg-[#FAF7F2] rounded-xl border border-[#D4AF37]/35 shadow-inner">
           <button 
             type="button" 
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${globalMode === 'real' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900 hover:bg-stone-100'}`}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${globalMode === 'real' ? 'bg-[#8B0000] text-white shadow-md' : 'text-stone-700 hover:text-stone-900 hover:bg-white/80'}`}
             onClick={() => setGlobalMode('real')}
           >
             📸 {isEn ? '4K Real Photos' : 'Ảnh Thật 4K'}
           </button>
           <button 
             type="button" 
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${globalMode === 'split' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900 hover:bg-stone-100'}`}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${globalMode === 'split' ? 'bg-[#8B0000] text-white shadow-md' : 'text-stone-700 hover:text-stone-900 hover:bg-white/80'}`}
             onClick={() => setGlobalMode('split')}
           >
-            ⚡ {isEn ? 'Split Slider' : 'Kéo Trượt'}
+            ⚡ {isEn ? 'Split Slider' : 'So Sánh Kéo Trượt'}
           </button>
           <button 
             type="button" 
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${globalMode === 'svg' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900 hover:bg-stone-100'}`}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${globalMode === 'svg' ? 'bg-[#8B0000] text-white shadow-md' : 'text-stone-700 hover:text-stone-900 hover:bg-white/80'}`}
             onClick={() => setGlobalMode('svg')}
           >
-            🎨 {isEn ? 'Vector' : 'Bản Vẽ'}
+            🎨 {isEn ? 'Vector Schema' : 'Bản Vẽ Giải Phẫu'}
           </button>
         </div>
       </div>
@@ -177,32 +189,111 @@ export const MuseumGallery: React.FC<MuseumGalleryProps> = ({ lang }) => {
         />
       )}
 
-      {lightboxPhotoUrl && (
-        <div 
-          ref={lightboxRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label={isEn ? "Enlarged 4K costume photography" : "Ảnh phóng to cổ phục 4K"}
-          tabIndex={-1}
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8 outline-none" 
-          onClick={handleCloseLightbox}
-        >
-          <button 
-            type="button" 
-            className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 rounded-full bg-white/10 hover:bg-[#8B0000] text-white flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]" 
+      {lightboxPhotoUrl && (() => {
+        const activeCostumeWithPhoto = (COSTUMES_DATA as Costume[]).find(c => 
+          c.realPhotography?.heroPhoto === lightboxPhotoUrl || 
+          c.realPhotography?.frontPhoto === lightboxPhotoUrl || 
+          c.realPhotography?.backPhoto === lightboxPhotoUrl
+        );
+
+        return (
+          <div 
+            ref={lightboxRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={isEn ? "Enlarged 4K costume photography" : "Ảnh phóng to cổ phục 4K"}
+            tabIndex={-1}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md overflow-y-scroll lightbox-scroll-area flex flex-col items-center outline-none" 
             onClick={handleCloseLightbox}
-            aria-label={isEn ? "Close enlarged photo" : "Đóng ảnh phóng to"}
           >
-            ✕
-          </button>
-          <img 
-            src={lightboxPhotoUrl} 
-            alt={isEn ? "Enlarged costume detail" : "Chi tiết cổ phục phóng to"} 
-            className="max-w-full max-h-full object-contain rounded-xl shadow-2xl" 
-            onClick={e => e.stopPropagation()} 
-          />
-        </div>
-      )}
+            {/* Thanh điều khiển cố định ở trên cùng */}
+            <header 
+              className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/95 via-black/80 to-transparent px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between pointer-events-none"
+            >
+              <div 
+                className="flex items-center space-x-3 pointer-events-auto" 
+                onClick={e => e.stopPropagation()}
+              >
+                {activeCostumeWithPhoto && (
+                  <div className="text-white">
+                    <div className="font-serif font-bold text-base sm:text-xl text-[#D4AF37] drop-shadow-md">
+                      {isEn ? activeCostumeWithPhoto.nameEn : activeCostumeWithPhoto.nameVi}
+                    </div>
+                    <div className="text-xs text-stone-300 font-mono">
+                      {activeCostumeWithPhoto.era}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Bộ chuyển đổi Mặt Trước / Mặt Sau */}
+              {activeCostumeWithPhoto?.realPhotography?.backPhoto && (
+                <div 
+                  className="pointer-events-auto flex items-center bg-stone-900/90 backdrop-blur-md rounded-2xl p-1 sm:p-1.5 border border-[#D4AF37]/80 shadow-2xl"
+                  onClick={e => e.stopPropagation()}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setLightboxPhotoUrl(activeCostumeWithPhoto.realPhotography?.frontPhoto || activeCostumeWithPhoto.realPhotography?.heroPhoto || '')}
+                    className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer flex items-center space-x-1.5 ${
+                      lightboxPhotoUrl === activeCostumeWithPhoto.realPhotography?.frontPhoto || lightboxPhotoUrl === activeCostumeWithPhoto.realPhotography?.heroPhoto
+                        ? 'bg-[#8B0000] text-white shadow-md'
+                        : 'text-stone-300 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <span>👁️</span>
+                    <span>{isEn ? 'Front View' : 'Mặt Trước'}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLightboxPhotoUrl(activeCostumeWithPhoto.realPhotography?.backPhoto || '')}
+                    className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer flex items-center space-x-1.5 ${
+                      lightboxPhotoUrl === activeCostumeWithPhoto.realPhotography?.backPhoto
+                        ? 'bg-[#8B0000] text-white shadow-md'
+                        : 'text-stone-300 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    <span>🔄</span>
+                    <span>{isEn ? 'Back View' : 'Mặt Sau'}</span>
+                  </button>
+                </div>
+              )}
+
+              <div className="pointer-events-auto">
+                <button 
+                  type="button" 
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-stone-800/80 hover:bg-[#8B0000] text-white flex items-center justify-center transition-colors cursor-pointer border border-[#D4AF37]/50 shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]" 
+                  onClick={handleCloseLightbox}
+                  aria-label={isEn ? "Close enlarged photo" : "Đóng ảnh phóng to"}
+                >
+                  ✕
+                </button>
+              </div>
+            </header>
+
+            {/* Vùng hiển thị toàn cảnh trang phục có thể cuộn xuống để xem trọn vẹn */}
+            <div 
+              className="w-full flex-1 flex flex-col items-center justify-start pt-20 sm:pt-24 pb-16 px-4"
+            >
+              <div 
+                className="relative max-w-4xl w-auto flex flex-col items-center"
+                onClick={e => e.stopPropagation()}
+              >
+                <img 
+                  src={lightboxPhotoUrl} 
+                  alt={isEn ? "Enlarged costume detail" : "Chi tiết cổ phục phóng to"} 
+                  className="w-auto h-auto max-w-full rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.9)] border-2 border-[#D4AF37]/50" 
+                />
+
+                <div className="mt-4 px-4 py-2 rounded-full bg-stone-900/90 backdrop-blur-md border border-[#D4AF37]/50 text-[#D4AF37] font-mono text-xs flex items-center space-x-2 shadow-lg select-none">
+                  <span className="text-sm">↕</span>
+                  <span>{isEn ? 'Scroll down or drag right scrollbar to inspect full costume silhouette & hem' : 'Kéo thanh cuộn bên phải hoặc lăn chuột để xem toàn cảnh vạt áo & chân trang phục'}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </section>
   );
 };

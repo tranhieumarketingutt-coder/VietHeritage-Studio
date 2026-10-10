@@ -36,11 +36,13 @@ export const COSTUMES_DATA: CostumeData[] = [
     realPhotography: {
       locationVi: "Hoàng Thành Thăng Long (Hà Nội)",
       locationEn: "Imperial Citadel of Thang Long (Hanoi)",
-      photoTitleVi: "Áo Ngũ Thân Tay Chẽn Sĩ Tử Hoàng Thành",
-      photoTitleEn: "Scholar Ngu Than Tay Chen in Imperial Citadel",
-      shootingNotesVi: "Người mẫu diện Áo Ngũ Thân tay chẽn lụa lam sẫm, vạt cánh cung giấu chỉ đĩnh đạc tại không gian di sản cổ kính Hoàng Thành.",
-      shootingNotesEn: "Male model in deep indigo Tay Chen Ngu Than tunic, arched bow-hem with fine tailoring at the heritage citadel.",
-      heroPhoto: "/costumes/ngu-than-hero.webp",
+      photoTitleVi: "Áo Ngũ Thân Tay Chẽn (Mặt trước)",
+      photoTitleEn: "Scholar Ngu Than Tay Chen (Front View)",
+      shootingNotesVi: "Mô hình và ảnh chụp chi tiết phục dựng chuẩn mực cổ phục Áo Ngũ Thân mặt trước và mặt sau.",
+      shootingNotesEn: "Detailed model reproduction of historical Ngu Than costume showing front and back views.",
+      heroPhoto: "/costumes/ai/ngu-than-front.png",
+      frontPhoto: "/costumes/ai/ngu-than-front.png",
+      backPhoto: "/costumes/ai/ngu-than-back.png",
       gallery: [
         {
           titleVi: "Người mẫu diện Áo Ngũ Thân tay chẽn tại Hoàng Thành",
@@ -223,11 +225,13 @@ export const COSTUMES_DATA: CostumeData[] = [
     realPhotography: {
       locationVi: "Đại Nội Cố Đô Huế & Cung An Định",
       locationEn: "Hue Imperial Citadel & An Dinh Palace",
-      photoTitleVi: "Áo Nhật Bình Hoàng Cung Triều Nguyễn",
-      photoTitleEn: "Imperial Court Nhat Binh at Hue Palace",
-      shootingNotesVi: "Góc chụp chính diện đối xứng (Symmetry) tôn vinh dải cổ chữ nhật và hoa văn Phượng Loan ổ rực rỡ dưới ánh nắng vàng hoàng gia.",
-      shootingNotesEn: "Symmetrical front-facing composition capturing the rectangular embroidered collar and Phoenix roundels in majestic palace light.",
-      heroPhoto: "/costumes/nhat-binh.jpg",
+      photoTitleVi: "Áo Nhật Bình Hoàng Cung (Mặt trước)",
+      photoTitleEn: "Imperial Court Nhat Binh (Front View)",
+      shootingNotesVi: "Góc chụp phục dựng chính diện và mặt sau áo Nhật Bình thể hiện chuẩn mực dải cổ viền ngũ sắc và họa tiết hoàng triều.",
+      shootingNotesEn: "Front and back views of imperial court Nhat Binh robe highlighting decorative collar bands and royal motifs.",
+      heroPhoto: "/costumes/ai/nhat-binh-front.jfif",
+      frontPhoto: "/costumes/ai/nhat-binh-front.jfif",
+      backPhoto: "/costumes/ai/nhat-binh-back.jfif",
       gallery: [
         {
           titleVi: "Tư liệu lịch sử: Mệnh phụ triều Nguyễn diện Áo Nhật Bình",
@@ -381,11 +385,13 @@ export const COSTUMES_DATA: CostumeData[] = [
     realPhotography: {
       locationVi: "Chùa Phật Tích & Phố Cổ Hội An",
       locationEn: "Phat Tich Pagoda & Hoi An Ancient Town",
-      photoTitleVi: "Áo Giao Lĩnh Hữu Nhậm Thời Lý - Trần - Hậu Lê",
-      photoTitleEn: "Dai Viet Cross-Collar Giao Linh Robe",
-      shootingNotesVi: "Bối cảnh hành lang chùa cổ rêu phong, ánh sáng mờ sương (Misty Ambient) làm nổi bật vẻ thanh thoát, bay bổng của vạt áo vắt chéo Hữu Nhậm.",
-      shootingNotesEn: "Atmospheric ancient pagoda corridors with diffused misty light, capturing the serene ethereal drape of cross-collar lapels.",
-      heroPhoto: "/costumes/giao-linh.webp",
+      photoTitleVi: "Áo Giao Lĩnh Hữu Nhậm (Mặt trước)",
+      photoTitleEn: "Dai Viet Cross-Collar Giao Linh (Front View)",
+      shootingNotesVi: "Phục dựng chuẩn mực cổ phục Áo Giao Lĩnh thời Lý - Trần - Lê với góc nhìn mặt trước và mặt sau.",
+      shootingNotesEn: "Authentic historical reproduction of Dai Viet Giao Linh showing front and back silhouettes.",
+      heroPhoto: "/costumes/ai/giao-linh-front.webp",
+      frontPhoto: "/costumes/ai/giao-linh-front.webp",
+      backPhoto: "/costumes/ai/giao-linh-back.webp",
       gallery: [
         {
           titleVi: "Tư liệu điêu khắc: Tượng thời Lý - Trần tại di tích cổ",
@@ -531,11 +537,13 @@ export const COSTUMES_DATA: CostumeData[] = [
     realPhotography: {
       locationVi: "Làng Quan Họ Diềm Xá (Bắc Ninh) & Cổng Làng Cổ",
       locationEn: "Diem Village (Bac Ninh) & Ancient Village Gates",
-      photoTitleVi: "Áo Tứ Thân & Nón Quai Thao Liền Chị Kinh Bắc",
-      photoTitleEn: "Kinh Bac Four-Panel Dress & Broad Palm Hat",
-      shootingNotesVi: "Góc chụp trung cảnh (Medium shot) bắt trọn nét duyên nụ cười nghiêng nón quai thao, dải yếm đào thắm sắc và thắt lưng ngũ sắc buông lơi.",
-      shootingNotesEn: "Medium shot highlighting the charming smile framed under broad palm hat, vibrant scarlet yem halter, and fluttering waist sashes.",
-      heroPhoto: "/costumes/tu-than.jpg",
+      photoTitleVi: "Áo Tứ Thân Kinh Bắc (Mặt trước)",
+      photoTitleEn: "Kinh Bac Four-Panel Dress (Front View)",
+      shootingNotesVi: "Phục dựng chuẩn mực cổ phục Áo Tứ Thân liền chị Kinh Bắc góc nhìn mặt trước và mặt sau.",
+      shootingNotesEn: "Authentic historical reproduction of Kinh Bac Tu Than dress showing front and back views.",
+      heroPhoto: "/costumes/ai/tu-than-front.webp",
+      frontPhoto: "/costumes/ai/tu-than-front.webp",
+      backPhoto: "/costumes/ai/tu-than-back.webp",
       gallery: [
         {
           titleVi: "Tư liệu thực tế: Liền chị Quan họ Bắc Ninh hát đối đáp",
@@ -672,11 +680,13 @@ export const COSTUMES_DATA: CostumeData[] = [
     realPhotography: {
       locationVi: "Chợ Nổi Cái Răng & Bến Ninh Kiều (Cần Thơ)",
       locationEn: "Cai Rang Floating Market & Ninh Kieu Wharf",
-      photoTitleVi: "Áo Bà Ba Lụa Nam Bộ & Khăn Rằn Sông Nước",
-      photoTitleEn: "Southern Silk Ao Ba Ba & Mekong Checkered Scarf",
-      shootingNotesVi: "Ánh sáng tự nhiên rực rỡ vùng châu thổ sông Cửu Long, tà áo lụa bóng màu ngọc bích nổi bật bên chiếc xuồng ba lá mộc mạc và nón lá nghiêng che.",
-      shootingNotesEn: "Radiant natural tropical daylight along the Mekong waterways, pastel silk blouse contrasted against rustic wooden sampan boats.",
-      heroPhoto: "/costumes/ba-ba-hero.png",
+      photoTitleVi: "Áo Bà Ba Nam Bộ (Mặt trước)",
+      photoTitleEn: "Southern Silk Ao Ba Ba (Front View)",
+      shootingNotesVi: "Phục dựng chuẩn mực phục trang Áo Bà Ba Nam Bộ với góc nhìn mặt trước và mặt sau.",
+      shootingNotesEn: "Authentic reproduction of Southern Ao Ba Ba showing front and back views.",
+      heroPhoto: "/costumes/ai/ba-ba-front.png",
+      frontPhoto: "/costumes/ai/ba-ba-front.png",
+      backPhoto: "/costumes/ai/ba-ba-back.webp",
       gallery: [
         {
           titleVi: "Thiếu nữ Nam Bộ chèo xuồng diện Áo Bà Ba lụa xanh",
@@ -828,11 +838,13 @@ export const COSTUMES_DATA: CostumeData[] = [
     realPhotography: {
       locationVi: "Hồ Gươm & Phố Cổ Hà Nội / Bảo Tàng Áo Dài TP.HCM",
       locationEn: "Hoan Kiem Lake & Hanoi Old Quarter / Ao Dai Museum",
-      photoTitleVi: "Áo Dài Trắng Lụa Hà Đông - Quốc Phục Việt Nam",
-      photoTitleEn: "Pristine White Silk Ao Dai - National Attire",
-      shootingNotesVi: "Góc chụp bắt khoảnh khắc (Action freeze) tà áo dài tung bay trong gió nhẹ, hoa sen hồng cầm tay dưới tán cây cổ thụ ven hồ buổi sớm mai.",
-      shootingNotesEn: "Action-freeze portrait capturing floor-skimming panels fluttering in morning breeze with fresh lotus blooms by the lake.",
-      heroPhoto: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+      photoTitleVi: "Áo Dài Truyền Thống (Mặt trước)",
+      photoTitleEn: "Traditional Ao Dai (Front View)",
+      shootingNotesVi: "Phục dựng chuẩn mực phom dáng Áo Dài truyền thống với góc nhìn mặt trước và mặt sau.",
+      shootingNotesEn: "Authentic reproduction of traditional Vietnamese Ao Dai showing front and back views.",
+      heroPhoto: "/costumes/ai/ao-dai-front.webp",
+      frontPhoto: "/costumes/ai/ao-dai-front.webp",
+      backPhoto: "/costumes/ai/ao-dai-back.png",
       gallery: [
         {
           titleVi: "Khoảnh khắc hai tà áo dài lụa trắng tung bay trong gió",

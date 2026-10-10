@@ -197,8 +197,8 @@ export const StudioSection: React.FC<StudioSectionProps> = ({ onOpenPhotocard })
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div className="lg:col-span-7">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-stretch">
+        <div className="lg:col-span-6 flex flex-col justify-between">
           <VirtualTryOn 
             state={state} 
             setState={setState} 
@@ -207,7 +207,7 @@ export const StudioSection: React.FC<StudioSectionProps> = ({ onOpenPhotocard })
           />
         </div>
         
-        <div className="lg:col-span-5 space-y-6">
+        <div className="lg:col-span-6 space-y-4 flex flex-col justify-between">
           <StylingResults 
             analysis={analysisResult} 
             resultImage={resultImage} 

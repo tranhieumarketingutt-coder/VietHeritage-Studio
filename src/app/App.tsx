@@ -96,7 +96,7 @@ export const App: React.FC<AppProps> = () => {
       />
       <main id="mainContent" className="flex-grow">
         <HeroSection onSelectHub={handleSelectHub} activeHub={activeHub} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 space-y-14">
           {activeHub === 'hub1' && (
             <div className="space-y-16">
               <div id="museumSection">

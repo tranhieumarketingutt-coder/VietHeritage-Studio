@@ -121,7 +121,7 @@ export const StylingResults: React.FC<StylingResultsProps> = ({
 
   if (!analysis && !resultImage) {
     return (
-      <div className="bg-white rounded-2xl border border-dashed border-[#D4AF37]/60 p-8 md:p-12 text-center flex flex-col items-center justify-center space-y-3 shadow-xs">
+      <div className="bg-white rounded-2xl border border-dashed border-[#D4AF37]/60 p-8 md:p-12 text-center flex flex-col items-center justify-center space-y-3 shadow-xs h-full min-h-[500px]">
         <div className="w-12 h-12 rounded-full bg-[#FAF7F2] border border-[#D4AF37]/40 flex items-center justify-center text-[#8B0000]">
           <Palette className="w-6 h-6" />
         </div>
@@ -138,7 +138,7 @@ export const StylingResults: React.FC<StylingResultsProps> = ({
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-[#D4AF37]/40 p-6 md:p-8 shadow-md space-y-6">
+    <div className="bg-white rounded-2xl border border-[#D4AF37]/40 p-5 md:p-6 shadow-md space-y-5 flex flex-col justify-between flex-1">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-stone-200 pb-4 gap-2">
         <div>
           <span className="text-xs font-mono font-bold text-[#8B0000] tracking-wider uppercase">✦ LOOKBOOK ARCHIVE</span>
@@ -179,10 +179,12 @@ export const StylingResults: React.FC<StylingResultsProps> = ({
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start bg-[#FAF7F2] rounded-xl p-5 md:p-6 border border-stone-200">
+      {/* Hàng trên: Khung ảnh kết quả phóng to (Trái) & Tư vấn phối đồ theo ngữ cảnh (Phải) */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-stretch bg-[#FAF7F2] rounded-xl p-4 sm:p-5 border border-stone-200">
+        {/* Khung ảnh kết quả phóng to */}
         <div className="md:col-span-5 flex flex-col items-center justify-center">
-          <div className="w-full max-w-[340px] rounded-2xl bg-white border-4 border-white shadow-xl p-3 flex flex-col items-center justify-between transition-all hover:shadow-2xl">
-            <div className="w-full h-80 sm:h-96 flex items-center justify-center overflow-hidden rounded-xl bg-stone-900 relative group">
+          <div className="w-full max-w-[340px] sm:max-w-none rounded-2xl bg-white border-4 border-white shadow-xl p-3 flex flex-col items-center justify-between transition-all hover:shadow-2xl h-full">
+            <div className="w-full h-88 sm:h-[400px] md:h-[430px] flex items-center justify-center overflow-hidden rounded-xl bg-stone-900 relative group">
               <img 
                 src={resultImage || COSTUMES_DATA.find((c: { id: string }) => c.id === costumeId)?.realPhotography?.heroPhoto || COSTUMES_DATA[0].realPhotography?.heroPhoto} 
                 alt="Styling Result" 
@@ -201,84 +203,105 @@ export const StylingResults: React.FC<StylingResultsProps> = ({
           </div>
         </div>
 
-        {analysis && (
-          <div className="md:col-span-7 space-y-3 text-xs">
+        {/* Tư vấn phối đồ theo ngữ cảnh (chuyển sang bên phải) */}
+        <div className="md:col-span-7 flex flex-col justify-between space-y-3.5 p-1 sm:p-2">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between border-b border-stone-200/80 pb-2">
+              <span className="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wide flex items-center space-x-1.5">
+                <span>✦ Tư Vấn Phối Đồ Theo Ngữ Cảnh</span>
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-[#8B0000]/10 text-[#8B0000] font-mono text-[10px] font-bold border border-[#8B0000]/20">
+                {destination}
+              </span>
+            </div>
+
             <div>
-              <span className="font-mono font-bold text-[#8B0000] uppercase text-[10px] tracking-wide">✦ Chẩn Đoán Sắc Tố Cá Nhân:</span>
-              <p className="font-serif font-bold text-base text-[#222222]">{analysis.season}</p>
-              <p className="text-stone-600 mt-0.5 leading-relaxed text-[11px]">{isEn ? analysis.descriptionEn : analysis.descriptionVi}</p>
-              <div className="mt-1 p-2 rounded-lg bg-white border border-stone-200">
-                <span className="font-mono text-[10px] text-stone-600 font-semibold block mb-0.5">Gợi ý bảng màu:</span>
-                <p className="font-mono font-medium text-[#8B0000] text-[11px]">{analysis.paletteSuggestions}</p>
+              <h4 className="font-serif font-bold text-base sm:text-lg text-[#222222]">
+                {analysis?.contextLookbook?.outfitTitle || `Phối Cổ Phục ${costumeName}`}
+              </h4>
+              <p className="text-xs text-[#666666] mt-1 leading-relaxed">
+                {analysis?.contextLookbook?.outfitDesc || 'Hòa quyện giữa đường nét trang trọng truyền thống và tinh thần đương đại khi dạo bước tại không gian di sản.'}
+              </p>
+            </div>
+
+            <div className="space-y-2.5 pt-1 text-xs">
+              <div className="bg-white p-3 rounded-xl border border-stone-200/90 shadow-2xs">
+                <span className="font-mono font-bold text-[#8B0000] text-[10px] uppercase block mb-1">💄 Kiểu Tóc & Trang Điểm:</span>
+                <p className="text-stone-700 text-[11px] leading-relaxed">
+                  Tóc: {analysis?.contextLookbook?.hairStyle || 'Tóc tết buông lơi tự nhiên cài trâm bạc'}.<br/>
+                  Makeup: {analysis?.contextLookbook?.makeupStyle || 'Tone cam đào / hồng đất nhẹ nhàng'}.
+                </p>
               </div>
-            </div>
 
-            <div>
-              <span className="font-mono font-bold text-[#8A6D1C] uppercase text-[10px] tracking-wide">✦ Cổ Phục Đề Xuất Theo Mùa:</span>
-              <p className="font-serif font-bold text-xs text-[#222222] mt-0.5">{analysis.recommendedCostume}</p>
-            </div>
-
-            {analysis.dyeList && (
-              <div>
-                <span className="font-mono text-stone-600 font-semibold uppercase text-[10px]">Màu Nhuộm Truyền Thống:</span>
-                <div className="flex items-center space-x-2 mt-1 flex-wrap gap-1">
-                  {analysis.dyeList.map((dye: { hex: string; nameEn: string; nameVi: string; descEn: string; descVi: string }) => (
-                    <div key={dye.hex} className="flex items-center space-x-1 px-2 py-0.5 rounded bg-white border border-stone-200" title={isEn ? dye.descEn : dye.descVi}>
-                      <span className="w-3 h-3 rounded-full" style={{ backgroundColor: dye.hex }}></span>
-                      <span className="text-[10px] font-mono">{isEn ? dye.nameEn : dye.nameVi}</span>
-                    </div>
+              <div className="bg-white p-3 rounded-xl border border-stone-200/90 shadow-2xs">
+                <span className="font-mono font-bold text-[#8A6D1C] text-[10px] uppercase block mb-1">✨ Phụ Kiện Đi Kèm:</span>
+                <div className="flex flex-wrap gap-1.5 mt-1">
+                  {(analysis?.contextLookbook?.accessories || ['Khăn lụa gấm', 'Kiềng bạc mảnh', 'Túi cói vintage', 'Guốc mộc']).map((acc: string) => (
+                    <span key={acc} className="px-2 py-0.5 rounded-md bg-[#FAF7F2] border border-stone-200 text-[10px] font-mono text-stone-800">
+                      {acc}
+                    </span>
                   ))}
                 </div>
               </div>
-            )}
+            </div>
+          </div>
 
-            <div>
-              <span className="font-mono text-stone-600 font-semibold uppercase text-[10px]">Kỹ Thuật May Đo & Form Dáng:</span>
-              <p className="text-stone-600 text-[11px] leading-relaxed mt-0.5">
-                {isEn ? analysis.bodyAdviceEn : analysis.bodyAdviceVi}
+          {analysis?.expertAdvice && (
+            <div className="p-3 rounded-xl bg-white border border-[#D4AF37]/50 shadow-2xs space-y-1">
+              <span className="font-mono text-[10px] text-[#8B0000] font-bold block uppercase tracking-wide">
+                ✦ Cố Vấn Phong Cách Gemini AI:
+              </span>
+              <p className="text-stone-700 text-[11px] leading-relaxed whitespace-pre-line font-sans">
+                {analysis.expertAdvice}
               </p>
             </div>
-
-            {analysis.expertAdvice && (
-              <div className="p-3 rounded-lg bg-white border border-[#D4AF37]/50 shadow-2xs space-y-1">
-                <span className="font-mono text-[10px] text-[#8B0000] font-bold block uppercase tracking-wide">
-                  ✦ Cố Vấn Phong Cách Gemini AI:
-                </span>
-                <p className="text-stone-700 text-[11px] leading-relaxed whitespace-pre-line font-sans">
-                  {analysis.expertAdvice}
-                </p>
-              </div>
-            )}
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
-      {analysis?.contextLookbook && (
-        <div className="p-4 rounded-xl bg-[#FAF7F2] border border-[#D4AF37]/30 space-y-3">
-          <div className="flex items-center justify-between border-b border-stone-200/80 pb-2">
-            <span className="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wide flex items-center space-x-1.5">
-              <span>Tư Vấn Phối Đồ Theo Ngữ Cảnh</span>
-            </span>
-          </div>
-          <div>
-            <h4 className="font-serif font-bold text-base text-[#222222]">{analysis.contextLookbook.outfitDesc ? analysis.contextLookbook.outfitTitle : analysis.contextLookbook.outfitTitle}</h4>
-            <p className="text-xs text-[#666666] mt-0.5 leading-relaxed">{analysis.contextLookbook.outfitDesc}</p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
-            <div className="bg-white p-3 rounded-lg border border-stone-200">
-              <span className="font-mono font-bold text-[#8B0000] text-[10px] uppercase block mb-1">💄 Kiểu Tóc & Trang Điểm:</span>
-              <p className="text-stone-700 text-[11px] leading-relaxed">
-                Tóc: {analysis.contextLookbook.hairStyle}.<br/>
-                Makeup: {analysis.contextLookbook.makeupStyle}
-              </p>
+      {/* Hàng dưới: Chẩn đoán sắc tố cá nhân & May đo điển chế (chuyển xuống dưới) */}
+      {analysis && (
+        <div className="p-4 sm:p-5 rounded-xl bg-[#FAF7F2] border border-[#D4AF37]/35 space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-stone-200/80 pb-2 gap-1">
+            <div>
+              <span className="font-mono font-bold text-[#8B0000] uppercase text-[10px] tracking-wide block">
+                ✦ Chẩn Đoán Sắc Tố Cá Nhân
+              </span>
+              <h4 className="font-serif font-bold text-base text-[#222222] mt-0.5">
+                {analysis.season}
+              </h4>
             </div>
-            <div className="bg-white p-3 rounded-lg border border-stone-200">
-              <span className="font-mono font-bold text-[#8A6D1C] text-[10px] uppercase block mb-1">✨ Phụ Kiện Đi Kèm:</span>
-              <div className="flex flex-wrap gap-1 mt-1">
-                {analysis.contextLookbook.accessories?.map((acc: string) => (
-                  <span key={acc} className="px-2 py-0.5 rounded bg-[#FAF7F2] border border-stone-200 text-[10px] font-mono">{acc}</span>
-                ))}
-              </div>
+            <p className="text-stone-600 text-[11px] leading-relaxed max-w-md">
+              {isEn ? analysis.descriptionEn : analysis.descriptionVi}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-xs">
+            <div className="p-3 rounded-lg bg-white border border-stone-200 shadow-2xs space-y-1">
+              <span className="font-mono text-[10px] text-stone-600 font-semibold block mb-0.5">Gợi ý bảng màu:</span>
+              <p className="font-mono font-bold text-[#8B0000] text-xs">{analysis.paletteSuggestions}</p>
+            </div>
+
+            <div className="p-3 rounded-lg bg-white border border-stone-200 shadow-2xs space-y-1">
+              <span className="font-mono font-bold text-[#8A6D1C] uppercase text-[10px] block mb-0.5">✦ Cổ Phục Đề Xuất Theo Mùa:</span>
+              <p className="font-serif font-bold text-xs text-[#222222] mt-0.5 truncate">{analysis.recommendedCostume}</p>
+              {analysis.dyeList && (
+                <div className="flex items-center space-x-1 mt-1 flex-wrap gap-1">
+                  {analysis.dyeList.map((dye: { hex: string; nameEn: string; nameVi: string; descEn: string; descVi: string }) => (
+                    <div key={dye.hex} className="flex items-center space-x-1 px-1.5 py-0.5 rounded bg-[#FAF7F2] border border-stone-200" title={isEn ? dye.descEn : dye.descVi}>
+                      <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: dye.hex }}></span>
+                      <span className="text-[9px] font-mono">{isEn ? dye.nameEn : dye.nameVi}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="p-3 rounded-lg bg-white border border-stone-200 shadow-2xs space-y-1">
+              <span className="font-mono text-stone-600 font-semibold uppercase text-[10px] block mb-0.5">Kỹ Thuật May Đo & Form Dáng:</span>
+              <p className="text-stone-600 text-[11px] leading-relaxed line-clamp-3">
+                {isEn ? analysis.bodyAdviceEn : analysis.bodyAdviceVi}
+              </p>
             </div>
           </div>
         </div>

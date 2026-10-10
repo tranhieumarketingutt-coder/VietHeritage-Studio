@@ -97,7 +97,7 @@ export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ state, setState, onA
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-[#D4AF37]/40 p-5 md:p-6 shadow-sm space-y-5">
+    <div className="bg-white rounded-2xl border border-[#D4AF37]/40 p-5 md:p-6 shadow-sm flex flex-col justify-between h-full space-y-4">
       <div className="space-y-2.5">
         <div className="flex items-center justify-between">
           <label className="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wider flex items-center space-x-1.5">

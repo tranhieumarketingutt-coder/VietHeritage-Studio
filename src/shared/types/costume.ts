@@ -50,6 +50,8 @@ export interface RealPhotography {
   shootingNotesVi: string;
   shootingNotesEn: string;
   heroPhoto: string;
+  frontPhoto?: string;
+  backPhoto?: string;
   gallery: GalleryItem[];
   editorialQuoteVi: string;
   editorialQuoteEn: string;

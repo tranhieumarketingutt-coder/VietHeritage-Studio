@@ -18,6 +18,8 @@ export interface Costume {
   philosophyEn: string;
   realPhotography?: {
     heroPhoto: string;
+    frontPhoto?: string;
+    backPhoto?: string;
     photoTitleVi: string;
     photoTitleEn: string;
     locationVi: string;
@@ -48,10 +50,14 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
   onOpenLightbox
 }) => {
   const [localMode, setLocalMode] = useState<'real' | 'split' | 'svg'>(globalMode);
+  const [cardPhotoSide, setCardPhotoSide] = useState<'front' | 'back'>('front');
   const [splitPos, setSplitPos] = useState<number>(50);
 
   const isEn = lang === 'en';
   const c = costume;
+  const currentPhoto = cardPhotoSide === 'back' && c.realPhotography?.backPhoto 
+    ? c.realPhotography.backPhoto 
+    : (c.realPhotography?.frontPhoto || c.realPhotography?.heroPhoto || '');
 
   return (
     <article 
@@ -109,7 +115,7 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
           {localMode === 'real' ? (
             <div className="w-full h-full relative rounded-lg overflow-hidden flex items-center justify-center bg-stone-900 group/img">
               <img 
-                src={c.realPhotography?.heroPhoto} 
+                src={currentPhoto} 
                 alt={isEn ? c.realPhotography?.photoTitleEn : c.realPhotography?.photoTitleVi}
                 referrerPolicy="no-referrer"
                 loading="lazy"
@@ -117,27 +123,55 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none"></div>
               
-              <button 
-                type="button" 
-                className="absolute top-2.5 right-2.5 z-20 px-2 py-0.5 rounded-lg bg-black/75 hover:bg-[#8B0000] text-white flex items-center space-x-1 text-[10px] font-mono font-bold transition-all border border-[#D4AF37]/60 shadow-md hover:scale-105 cursor-pointer backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
-                title={isEn ? 'Inspect 4K Tailoring & Craftsmanship' : 'Soi nếp may & chi tiết may đo 4K'}
-                aria-label={isEn ? `Inspect 4K craftsmanship for ${c.nameEn}` : `Soi nếp may đo 4K cho ${c.nameVi}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onOpenLightbox(c.realPhotography?.heroPhoto || '');
-                }}
-              >
-                <span>🔍</span>
-                <span>{isEn ? 'Inspect' : 'Soi Nếp May'}</span>
-              </button>
+              <div className="absolute top-2.5 right-2.5 z-20 flex items-center space-x-1.5">
+                {c.realPhotography?.backPhoto && (
+                  <div 
+                    className="flex items-center bg-black/80 backdrop-blur-sm rounded-lg p-0.5 border border-[#D4AF37]/60 shadow-md"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setCardPhotoSide('front')}
+                      className={`px-1.5 py-0.5 rounded text-[9px] font-mono font-bold transition-all ${cardPhotoSide === 'front' ? 'bg-[#8B0000] text-white' : 'text-stone-300 hover:text-white'}`}
+                      title={isEn ? "Front View" : "Mặt Trước"}
+                    >
+                      Trước
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCardPhotoSide('back')}
+                      className={`px-1.5 py-0.5 rounded text-[9px] font-mono font-bold transition-all ${cardPhotoSide === 'back' ? 'bg-[#8B0000] text-white' : 'text-stone-300 hover:text-white'}`}
+                      title={isEn ? "Back View" : "Mặt Sau"}
+                    >
+                      Sau
+                    </button>
+                  </div>
+                )}
+
+                <button 
+                  type="button" 
+                  className="px-2 py-0.5 rounded-lg bg-black/75 hover:bg-[#8B0000] text-white flex items-center space-x-1 text-[10px] font-mono font-bold transition-all border border-[#D4AF37]/60 shadow-md hover:scale-105 cursor-pointer backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+                  title={isEn ? 'Inspect 4K Tailoring & Craftsmanship' : 'Soi nếp may & chi tiết may đo 4K'}
+                  aria-label={isEn ? `Inspect 4K craftsmanship for ${c.nameEn}` : `Soi nếp may đo 4K cho ${c.nameVi}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onOpenLightbox(currentPhoto);
+                  }}
+                >
+                  <span>🔍</span>
+                  <span>{isEn ? 'Inspect' : 'Soi Nếp May'}</span>
+                </button>
+              </div>
 
               <div className="absolute bottom-2 left-2 right-2 text-white text-[11px] font-mono flex items-center justify-between pointer-events-none z-10">
                 <span className="truncate flex items-center space-x-1">
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#D4AF37] shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                  <span className="text-xs text-stone-200 font-serif font-bold">{isEn ? c.realPhotography?.locationEn : c.realPhotography?.locationVi}</span>
+                  <span className="text-xs text-stone-200 font-serif font-bold">
+                    {cardPhotoSide === 'back' ? (isEn ? 'Back View' : 'Mặt Sau') : (isEn ? 'Front View' : 'Mặt Trước')}
+                  </span>
                 </span>
                 <span className="text-[9px] bg-[#8B0000] px-2 py-0.5 rounded text-[#D4AF37] shrink-0 font-bold border border-[#D4AF37]/50 shadow-sm">
-                  ✦ 4K CHÂN THỰC
+                  {cardPhotoSide === 'back' ? '✦ MẶT SAU' : '✦ MẶT TRƯỚC'}
                 </span>
               </div>
             </div>
