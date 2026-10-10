@@ -3,12 +3,13 @@ import { Landmark, Palette } from 'lucide-react';
 
 export interface HeroSectionProps {
   onSelectHub?: (hub: 'hub1' | 'hub2') => void;
+  activeHub?: 'hub1' | 'hub2';
 }
 
 /**
  * Hero Section component for the home page.
  */
-export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectHub }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectHub, activeHub = 'hub1' }) => {
   return (
     <section className="relative overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#F5EFE6] via-[#FAF7F2] to-[#ECE4D4] border-b border-[#D4AF37]/25 py-12 md:py-16 px-4 sm:px-6 lg:px-8">
       
@@ -81,7 +82,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectHub }) => {
             type="button"
             id="heroGoHub1" 
             onClick={() => onSelectHub && onSelectHub('hub1')}
-            className="px-6 py-3 rounded-xl bg-[#8B0000] hover:bg-[#700000] text-white font-medium text-sm transition-all shadow-md hover:shadow-lg flex items-center space-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000]"
+            className={`px-6 py-3 rounded-xl font-medium text-sm transition-all shadow-md hover:shadow-lg flex items-center space-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
+              activeHub === 'hub1'
+                ? 'bg-[#8B0000] hover:bg-[#700000] text-white border border-transparent'
+                : 'bg-white hover:bg-[#FDF6E2] text-[#222222] border border-[#D4AF37]'
+            }`}
           >
             <Landmark className="w-4 h-4" />
             <span>Khám Phá Bảo Tàng</span>
@@ -90,9 +95,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectHub }) => {
             type="button"
             id="heroGoHub2" 
             onClick={() => onSelectHub && onSelectHub('hub2')}
-            className="px-6 py-3 rounded-xl bg-white hover:bg-[#FDF6E2] text-[#222222] border border-[#D4AF37] font-medium text-sm transition-all shadow-xs flex items-center space-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]"
+            className={`px-6 py-3 rounded-xl font-medium text-sm transition-all shadow-md hover:shadow-lg flex items-center space-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
+              activeHub === 'hub2'
+                ? 'bg-[#8B0000] hover:bg-[#700000] text-white border border-transparent'
+                : 'bg-white hover:bg-[#FDF6E2] text-[#222222] border border-[#D4AF37]'
+            }`}
           >
-            <Palette className="w-4 h-4 text-[#8B0000]" />
+            <Palette className={`w-4 h-4 ${activeHub === 'hub2' ? 'text-[#D4AF37]' : 'text-[#8B0000]'}`} />
             <span>Phối Màu Sắc Tố Tự Nhiên</span>
           </button>
         </div>
