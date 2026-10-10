@@ -9,10 +9,10 @@ import { PhotocardModal, PhotocardDye } from '../features/studio/components/Phot
 
 const MuseumGallery = lazy(() => import('../features/museum/components/MuseumGallery').then(m => ({ default: m.MuseumGallery })));
 const AnatomySection = lazy(() => import('../features/anatomy/components/AnatomySection').then(m => ({ default: m.AnatomySection })));
-const MapSection = lazy(() => import('../features/heritage-map/components/MapSection').then(m => ({ default: m.MapSection })));
 const StudioSection = lazy(() => import('../features/studio/components/StudioSection').then(m => ({ default: m.StudioSection })));
 const CommunityGrid = lazy(() => import('../features/community/components/CommunityGrid').then(m => ({ default: m.CommunityGrid })));
 const ChatDrawer = lazy(() => import('../features/chat/components/ChatDrawer').then(m => ({ default: m.ChatDrawer })));
+const SpreadCommunityHub = lazy(() => import('../features/community/components/SpreadCommunityHub').then(m => ({ default: m.SpreadCommunityHub })));
 
 export interface AppProps {}
 
@@ -36,7 +36,7 @@ const SectionLoader = () => (
  */
 export const App: React.FC<AppProps> = () => {
   const [lang, setLang] = useState<'vi' | 'en'>('vi');
-  const [activeHub, setActiveHub] = useState<'hub1' | 'hub2'>('hub1');
+  const [activeHub, setActiveHub] = useState<'hub1' | 'hub2' | 'hub3'>('hub1');
   const [isWardrobeOpen, setIsWardrobeOpen] = useState(false);
   const [isPhotocardOpen, setIsPhotocardOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -63,10 +63,10 @@ export const App: React.FC<AppProps> = () => {
     }
   };
 
-  const handleSelectHub = (hub: 'hub1' | 'hub2') => {
+  const handleSelectHub = (hub: 'hub1' | 'hub2' | 'hub3') => {
     setActiveHub(hub);
     setTimeout(() => {
-      const targetId = hub === 'hub1' ? 'museumSection' : 'studioSection';
+      const targetId = hub === 'hub1' ? 'museumSection' : hub === 'hub2' ? 'studioSection' : 'communityHubSection';
       const el = document.getElementById(targetId) || document.getElementById('mainContent');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -97,7 +97,7 @@ export const App: React.FC<AppProps> = () => {
       <main id="mainContent" className="flex-grow">
         <HeroSection onSelectHub={handleSelectHub} activeHub={activeHub} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
-          {activeHub === 'hub1' ? (
+          {activeHub === 'hub1' && (
             <div className="space-y-16">
               <div id="museumSection">
                 <Suspense fallback={<SectionLoader />}>
@@ -109,11 +109,10 @@ export const App: React.FC<AppProps> = () => {
               </Suspense>
               <TimelineSection />
               <WisdomCarousel />
-              <Suspense fallback={<SectionLoader />}>
-                <MapSection lang={lang} />
-              </Suspense>
             </div>
-          ) : (
+          )}
+
+          {activeHub === 'hub2' && (
             <div className="space-y-16">
               <div id="studioSection">
                 <Suspense fallback={<SectionLoader />}>
@@ -122,6 +121,14 @@ export const App: React.FC<AppProps> = () => {
               </div>
               <Suspense fallback={<SectionLoader />}>
                 <CommunityGrid />
+              </Suspense>
+            </div>
+          )}
+
+          {activeHub === 'hub3' && (
+            <div id="communityHubSection" className="space-y-16">
+              <Suspense fallback={<SectionLoader />}>
+                <SpreadCommunityHub lang={lang} />
               </Suspense>
             </div>
           )}

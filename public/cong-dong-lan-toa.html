@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cộng đồng Lan Tỏa - Hub đăng ảnh Việt</title>
+  <!-- Font Be Vietnam Pro hỗ trợ tiếng Việt đầy đủ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* BẢNG MÀU THIẾT KẾ */
+    :root {
+      --color-navy: #16213A;
+      --color-paper: #F4F7F8;
+      --color-card-bg: #FFFFFF;
+      --color-teal: #14907C;
+      --color-teal-hover: #0E7363;
+      --color-gold: #E8B04B;
+      --color-lacquer: #C8372D;
+      --color-border: #D5DEE3;
+      --color-text-main: #16213A;
+      --color-text-sub: #546575;
+      --color-disabled: #A6B4BD;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-paper);
+      color: var(--color-text-main);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* THANH ĐIỀU HƯỚNG TRÊN CÙNG */
+    header {
+      background-color: #FFFFFF;
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      padding: 0.75rem 1.5rem;
+    }
+    .header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .brand-badge {
+      background-color: var(--color-lacquer);
+      color: #FFFFFF;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .brand-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      background-color: rgba(20, 144, 124, 0.12);
+      color: var(--color-teal);
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+    }
+    .header-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-sub);
+    }
+
+    /* BỐ CỤC 3 CỘT */
+    .app-layout {
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: 320px 1fr 390px;
+      gap: 1.25rem;
+      flex: 1;
+      align-items: start;
+    }
+
+    .panel {
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: 0 1px 3px rgba(22, 33, 58, 0.04);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .panel-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 9999px;
+      background: var(--color-paper);
+      color: var(--color-text-sub);
+    }
+
+    /* CỘT TRÁI: THƯ VIỆN LOOK BOOK */
+    .lookbook-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      max-height: calc(100vh - 180px);
+      overflow-y: auto;
+      padding-right: 0.25rem;
+    }
+    .lookbook-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--color-paper);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .lookbook-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-teal);
+      box-shadow: 0 4px 12px rgba(20, 144, 124, 0.12);
+    }
+    .lookbook-card:focus-visible {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 2px;
+    }
+    .lookbook-thumb {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background-color: #E2E8F0;
+    }
+    .lookbook-info {
+      padding: 0.5rem;
+      font-size: 0.75rem;
+    }
+    .lookbook-card-name {
+      font-weight: 600;
+      color: var(--color-navy);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lookbook-card-meta {
+      font-size: 0.7rem;
+      color: var(--color-text-sub);
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.2rem;
+    }
+    .lookbook-delete-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(22, 33, 58, 0.75);
+      color: #FFFFFF;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    .lookbook-delete-btn:hover {
+      background: var(--color-lacquer);
+      transform: scale(1.1);
+    }
+    .lookbook-empty {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--color-text-sub);
+    }
+    .lookbook-empty-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .lookbook-empty-text {
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    .lookbook-empty-sub {
+      font-size: 0.78rem;
+      color: var(--color-disabled);
+    }
+
+    /* CỘT GIỮA: KHU VỰC CANVAS & ĐIỀU KHIỂN */
+    .center-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .upload-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn-file-label {
+      background-color: var(--color-teal);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    .btn-file-label:hover {
+      background-color: var(--color-teal-hover);
+    }
+    .btn-file-label:focus-within {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 2px;
+    }
+    .hidden-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Khung xem trước canvas */
+    .canvas-stage {
+      background-color: #E7EDF0;
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 440px;
+    }
+    .canvas-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
+      max-height: 600px;
+      touch-action: none;
+      cursor: grab;
+      user-select: none;
+    }
+    .canvas-wrapper:active {
+      cursor: grabbing;
+    }
+    #mainCanvas {
+      max-width: 100%;
+      max-height: 580px;
+      height: auto;
+      width: auto;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 8px 24px rgba(22, 33, 58, 0.12);
+      display: block;
+    }
+    .canvas-drag-hint {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(22, 33, 58, 0.7);
+      backdrop-filter: blur(4px);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    /* Các nút hành động chính */
+    .action-buttons-group {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      font-family: var(--font-family);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.7rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn:focus-visible {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 2px;
+    }
+    .btn-primary {
+      background-color: var(--color-navy);
+      color: #FFFFFF;
+      flex: 1;
+    }
+    .btn-primary:hover {
+      background-color: #0F172A;
+    }
+    .btn-secondary {
+      background-color: #FFFFFF;
+      border-color: var(--color-border);
+      color: var(--color-navy);
+      flex: 1;
+    }
+    .btn-secondary:hover {
+      background-color: var(--color-paper);
+      border-color: var(--color-teal);
+    }
+    .btn-share {
+      background-color: var(--color-teal);
+      color: #FFFFFF;
+    }
+    .btn-share:hover {
+      background-color: var(--color-teal-hover);
+    }
+
+    /* Công cụ chỉnh ảnh */
+    .tools-panel {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .tools-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .form-input {
+      font-family: var(--font-family);
+      font-size: 0.88rem;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background-color: #FFFFFF;
+      color: var(--color-navy);
+    }
+    .form-input:focus-visible {
+      outline: 2px solid var(--color-gold);
+      border-color: transparent;
+    }
+    .range-input {
+      accent-color: var(--color-teal);
+      cursor: pointer;
+    }
+
+    /* Bộ lọc màu */
+    .filters-list {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+    }
+    .filter-btn {
+      font-family: var(--font-family);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid var(--color-border);
+      background: var(--color-paper);
+      color: var(--color-text-main);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      border-color: var(--color-teal);
+    }
+    .filter-btn.active {
+      background-color: var(--color-teal);
+      color: #FFFFFF;
+      border-color: var(--color-teal);
+      font-weight: 600;
+    }
+    .filter-btn:focus-visible {
+      outline: 2px solid var(--color-gold);
+    }
+
+    /* CỘT PHẢI: 4 BƯỚC TUẦN TỰ */
+    .steps-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .step-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem;
+      transition: border-color 0.2s;
+    }
+    .step-card.completed {
+      border-color: rgba(20, 144, 124, 0.4);
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+    .step-num-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .step-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--color-navy);
+      color: #FFFFFF;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-card.completed .step-badge {
+      background: var(--color-teal);
+    }
+    .step-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--color-navy);
+    }
+    .step-status {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      background: var(--color-paper);
+      color: var(--color-text-sub);
+    }
+    .step-card.completed .step-status {
+      background: rgba(20, 144, 124, 0.12);
+      color: var(--color-teal);
+    }
+
+    /* BƯỚC 1: Tabs nhóm khung */
+    .frame-tabs {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+    }
+    .frame-tab-btn {
+      font-family: var(--font-family);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.65rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-paper);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .frame-tab-btn.active {
+      background: var(--color-navy);
+      color: #FFFFFF;
+      border-color: var(--color-navy);
+      font-weight: 600;
+    }
+    .frame-tab-btn:focus-visible {
+      outline: 2px solid var(--color-gold);
+    }
+
+    /* Lưới thumbnail khung ảnh (vẽ trực tiếp bằng canvas) */
+    .frame-thumbs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+    .frame-thumb-card {
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      padding: 0.35rem;
+      background: var(--color-paper);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .frame-thumb-card:hover {
+      border-color: var(--color-teal);
+      transform: translateY(-2px);
+    }
+    .frame-thumb-card.active {
+      border-color: var(--color-lacquer);
+      background: rgba(200, 55, 45, 0.04);
+      box-shadow: 0 0 0 2px rgba(200, 55, 45, 0.2);
+    }
+    .frame-thumb-card:focus-visible {
+      outline: 2px solid var(--color-gold);
+    }
+    .thumb-canvas {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-sm);
+      display: block;
+      background: #FFFFFF;
+    }
+    .thumb-name {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--color-navy);
+      margin-top: 0.35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* BƯỚC 2: Chọn nền tảng */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+    }
+    .platform-btn {
+      font-family: var(--font-family);
+      border: 1px solid var(--color-border);
+      background: var(--color-paper);
+      border-radius: var(--radius-md);
+      padding: 0.55rem 0.65rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      transition: all 0.2s;
+    }
+    .platform-btn:hover {
+      border-color: var(--color-teal);
+    }
+    .platform-btn.active {
+      background: var(--color-navy);
+      color: #FFFFFF;
+      border-color: var(--color-navy);
+    }
+    .platform-btn:focus-visible {
+      outline: 2px solid var(--color-gold);
+    }
+    .platform-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .platform-ratio {
+      font-size: 0.68rem;
+      opacity: 0.75;
+    }
+
+    /* BƯỚC 3: Chọn cảm xúc */
+    .emotions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.4rem;
+    }
+    .emotion-btn {
+      font-family: var(--font-family);
+      border: 1px solid var(--color-border);
+      background: var(--color-paper);
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.3rem;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      transition: all 0.2s;
+    }
+    .emotion-btn:hover {
+      border-color: var(--color-teal);
+    }
+    .emotion-btn.active {
+      border-color: var(--color-teal);
+      background: rgba(20, 144, 124, 0.12);
+      font-weight: 600;
+      color: var(--color-teal);
+    }
+    .emotion-btn:focus-visible {
+      outline: 2px solid var(--color-gold);
+    }
+    .emotion-icon {
+      font-size: 1.25rem;
+    }
+    .emotion-label {
+      font-size: 0.7rem;
+    }
+
+    /* BƯỚC 4: Caption gợi ý */
+    .caption-box {
+      background: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .caption-text-area {
+      font-family: var(--font-family);
+      font-size: 0.82rem;
+      color: var(--color-navy);
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+      min-height: 90px;
+      max-height: 160px;
+      overflow-y: auto;
+    }
+    .caption-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--color-text-sub);
+      border-top: 1px dashed var(--color-border);
+      padding-top: 0.4rem;
+    }
+    .time-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #9A670F;
+      font-weight: 500;
+    }
+    .caption-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .btn-small {
+      font-size: 0.75rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* THÔNG BÁO TOAST */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+    .toast {
+      background: var(--color-navy);
+      color: #FFFFFF;
+      padding: 0.75rem 1.2rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 6px 20px rgba(22, 33, 58, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border-left: 4px solid var(--color-teal);
+    }
+    .toast.toast-error {
+      border-left-color: var(--color-lacquer);
+    }
+    @keyframes toastIn {
+      from { transform: translateY(12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .app-layout {
+        grid-template-columns: 280px 1fr 340px;
+      }
+    }
+    @media (max-width: 960px) {
+      .app-layout {
+        grid-template-columns: 1fr;
+      }
+      .lookbook-grid {
+        max-height: 300px;
+      }
+    }
+    @media (max-width: 600px) {
+      .app-layout {
+        padding: 0.75rem 1rem 2rem;
+      }
+      .tools-row {
+        grid-template-columns: 1fr;
+      }
+      .emotions-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* PREFERS-REDUCED-MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- THANH ĐIỀU HƯỚNG -->
+  <header>
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="brand-badge" aria-hidden="true">V</div>
+        <div>
+          <div class="brand-title">
+            Cộng đồng Lan Tỏa
+            <span class="brand-tag">Hub đăng ảnh Việt</span>
+          </div>
+          <div class="header-desc">Gắn khung ảnh bản sắc Việt Nam, gợi ý caption đa nền tảng mạng xã hội</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BỐ CỤC CHÍNH 3 CỘT -->
+  <main class="app-layout">
+
+    <!-- CỘT 1: THƯ VIỆN LOOK BOOK -->
+    <aside class="panel" aria-label="Thư viện Look book cá nhân">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span aria-hidden="true">📖</span>
+          Look book cá nhân
+        </h2>
+        <span class="panel-badge" id="lookbookCount">0 tác phẩm</span>
+      </div>
+
+      <div class="lookbook-grid" id="lookbookGrid">
+        <!-- Khi trống sẽ hiển thị qua JS -->
+      </div>
+    </aside>
+
+    <!-- CỘT 2: KHU VỰC THAO TÁC ẢNH & CANVAS -->
+    <section class="center-col" aria-label="Khu vực chỉnh sửa ảnh">
+      <div class="panel">
+        <div class="upload-bar">
+          <label class="btn-file-label" tabindex="0">
+            <span aria-hidden="true">📁</span>
+            Chọn ảnh từ máy
+            <input type="file" id="fileInput" class="hidden-input" accept="image/*" aria-label="Tải ảnh chân dung từ thiết bị">
+          </label>
+          <span style="font-size: 0.8rem; color: var(--color-text-sub);">Hỗ trợ kéo thả ảnh trực tiếp lên khung</span>
+        </div>
+
+        <!-- Khung Canvas xem trước -->
+        <div class="canvas-stage" style="margin-top: 1rem;">
+          <div class="canvas-wrapper" id="canvasWrapper" title="Kéo chuột hoặc ngón tay để di chuyển ảnh">
+            <canvas id="mainCanvas" width="1080" height="1350" aria-label="Khung xem trước ảnh đã gắn khung"></canvas>
+            <div class="canvas-drag-hint" id="dragHint">Kéo để chỉnh vị trí ảnh</div>
+          </div>
+        </div>
+
+        <!-- Nút hành động chính -->
+        <div class="action-buttons-group" style="margin-top: 1rem;">
+          <button type="button" class="btn btn-primary" id="btnDownload">
+            <span aria-hidden="true">⬇</span>
+            Tải về máy (PNG)
+          </button>
+          <button type="button" class="btn btn-secondary" id="btnSaveLookbook">
+            <span aria-hidden="true">⭐</span>
+            Lưu vào Look book
+          </button>
+          <button type="button" class="btn btn-share" id="btnShare" style="display: none;">
+            <span aria-hidden="true">↗</span>
+            Chia sẻ
+          </button>
+        </div>
+      </div>
+
+      <!-- Bảng công cụ chỉnh ảnh -->
+      <div class="tools-panel">
+        <div class="panel-header" style="margin-bottom: 0.5rem; padding-bottom: 0.4rem;">
+          <h3 class="panel-title" style="font-size: 0.92rem;">
+            <span aria-hidden="true">🛠</span>
+            Công cụ chỉnh ảnh
+          </h3>
+          <button type="button" id="btnResetTransform" class="btn btn-secondary btn-small" style="padding: 0.2rem 0.6rem; font-size: 0.72rem;">Đặt lại vị trí</button>
+        </div>
+
+        <div class="tools-row">
+          <div class="form-group">
+            <label class="form-label" for="zoomSlider">
+              <span>Thu phóng ảnh</span>
+              <span id="zoomVal" style="color: var(--color-teal); font-mono: true;">1.0x</span>
+            </label>
+            <input type="range" id="zoomSlider" class="range-input" min="0.5" max="3" step="0.05" value="1">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="plaqueInput">Chữ trên khung (tấm biển)</label>
+            <input type="text" id="plaqueInput" class="form-input" placeholder="Tên khung hoặc lời chúc..." maxlength="30">
+          </div>
+        </div>
+
+        <!-- 6 bộ lọc màu -->
+        <div class="form-group">
+          <label class="form-label">Bộ lọc sắc màu</label>
+          <div class="filters-list" id="filtersList">
+            <button type="button" class="filter-btn active" data-filter="none">Gốc</button>
+            <button type="button" class="filter-btn" data-filter="warm">Ấm áp</button>
+            <button type="button" class="filter-btn" data-filter="cool">Thanh mát</button>
+            <button type="button" class="filter-btn" data-filter="film">Phim cổ điển</button>
+            <button type="button" class="filter-btn" data-filter="bw">Đen trắng</button>
+            <button type="button" class="filter-btn" data-filter="vibrant">Rực rỡ</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CỘT 3: 4 BƯỚC TUẦN TỰ -->
+    <aside class="steps-col" aria-label="Quy trình 4 bước tạo ảnh và caption">
+      
+      <!-- BƯỚC 1: CHỌN KHUNG ẢNH -->
+      <div class="step-card completed" id="step1Card">
+        <div class="step-header">
+          <div class="step-num-title">
+            <span class="step-badge">1</span>
+            <span class="step-title">Chọn khung ảnh</span>
+          </div>
+          <span class="step-status" id="step1Status">Đã chọn</span>
+        </div>
+
+        <div class="frame-tabs" id="frameTabs">
+          <button type="button" class="frame-tab-btn active" data-group="all">Tất cả (11)</button>
+          <button type="button" class="frame-tab-btn" data-group="culture">Văn hoá & biểu tượng</button>
+          <button type="button" class="frame-tab-btn" data-group="seasons">Bốn mùa</button>
+          <button type="button" class="frame-tab-btn" data-group="places">Danh lam thắng cảnh</button>
+        </div>
+
+        <div class="frame-thumbs-grid" id="frameThumbsGrid">
+          <!-- Render qua JS với canvas thu nhỏ -->
+        </div>
+      </div>
+
+      <!-- BƯỚC 2: CHỌN NỀN TẢNG ĐĂNG -->
+      <div class="step-card completed" id="step2Card">
+        <div class="step-header">
+          <div class="step-num-title">
+            <span class="step-badge">2</span>
+            <span class="step-title">Chọn nền tảng đăng</span>
+          </div>
+          <span class="step-status" id="step2Status">Đã chọn</span>
+        </div>
+
+        <div class="platforms-grid" id="platformsGrid">
+          <!-- Render danh sách nền tảng qua JS -->
+        </div>
+      </div>
+
+      <!-- BƯỚC 3: CHỌN CẢM XÚC -->
+      <div class="step-card completed" id="step3Card">
+        <div class="step-header">
+          <div class="step-num-title">
+            <span class="step-badge">3</span>
+            <span class="step-title">Chọn cảm xúc</span>
+          </div>
+          <span class="step-status" id="step3Status">Đã chọn</span>
+        </div>
+
+        <div class="emotions-grid" id="emotionsGrid">
+          <!-- Render danh sách cảm xúc qua JS -->
+        </div>
+      </div>
+
+      <!-- BƯỚC 4: CAPTION GỢI Ý -->
+      <div class="step-card completed" id="step4Card">
+        <div class="step-header">
+          <div class="step-num-title">
+            <span class="step-badge">4</span>
+            <span class="step-title">Caption gợi ý</span>
+          </div>
+          <span class="step-status" id="step4Status">Tự động tạo</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="customContextInput">Địa điểm hoặc dịp (tuỳ chọn)</label>
+          <input type="text" id="customContextInput" class="form-input" placeholder="Ví dụ: Tết phố cổ, Chuyến du xuân...">
+        </div>
+
+        <div class="caption-box">
+          <div class="caption-text-area" id="captionText" tabindex="0">Đang chuẩn bị caption...</div>
+          
+          <div class="caption-meta-row">
+            <span class="time-hint" id="postingTimeHint">
+              <span aria-hidden="true">⏰</span>
+              <span id="postingTimeText">Khung giờ vàng: 11:30 - 13:30</span>
+            </span>
+            <div class="caption-actions">
+              <button type="button" class="btn btn-secondary btn-small" id="btnRewriteCaption">Đổi mẫu câu</button>
+              <button type="button" class="btn btn-primary btn-small" id="btnCopyCaption">Sao chép</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- VÙNG HIỂN THỊ TOAST THÔNG BÁO -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- JAVASCRIPT THUẦN (VANILLA JS) -->
+  <script>
+    /* =========================================================================
+     * 1. CẤU HÌNH DỮ LIỆU KHUNG ẢNH (CANVAS 2D PROCEDURAL RENDERING)
+     * Mỗi khung gồm: id, group, name, context, desc, hashtags, draw(ctx, w, h, u, text)
+     * Hệ số u = width / 1080 đảm bảo khung co giãn sắc nét trên mọi tỉ lệ.
+     * ========================================================================= */
+    const FRAMES_CONFIG = [
+      // NHÓM 1: VĂN HOÁ & BIỂU TƯỢNG
+      {
+        id: 'tet-nguyen-dan',
+        group: 'culture',
+        name: 'Tết Nguyên Đán',
+        context: 'dịp Tết cổ truyền sum vầy',
+        desc: 'Màu đỏ may mắn hoà cùng sắc mai vàng rạng rỡ đón xuân.',
+        hashtags: ['#TetNguyenDan', '#XuanVietNam', '#TetSumVay', '#CoPhucViet'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 34 * u;
+          // Viền đỏ sơn mài và chỉ vàng kép
+          ctx.strokeStyle = '#C8372D';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          ctx.strokeStyle = '#E8B04B';
+          ctx.lineWidth = 4 * u;
+          ctx.strokeRect(borderW + 6 * u, borderW + 6 * u, w - (borderW + 6 * u) * 2, h - (borderW + 6 * u) * 2);
+
+          // Hoa mai 5 cánh ở 4 góc
+          const drawMai = (cx, cy, r) => {
+            ctx.save();
+            ctx.translate(cx, cy);
+            for (let i = 0; i < 5; i++) {
+              ctx.rotate((Math.PI * 2) / 5);
+              ctx.beginPath();
+              ctx.ellipse(0, -r * 0.6, r * 0.45, r * 0.6, 0, 0, Math.PI * 2);
+              ctx.fillStyle = '#F4C430';
+              ctx.fill();
+              ctx.strokeStyle = '#E8981A';
+              ctx.lineWidth = 1.5 * u;
+              ctx.stroke();
+            }
+            ctx.beginPath();
+            ctx.arc(0, 0, r * 0.3, 0, Math.PI * 2);
+            ctx.fillStyle = '#C8372D';
+            ctx.fill();
+            ctx.restore();
+          };
+          drawMai(60 * u, 60 * u, 32 * u);
+          drawMai(w - 60 * u, 60 * u, 32 * u);
+          drawMai(60 * u, h - 60 * u, 32 * u);
+          drawMai(w - 60 * u, h - 60 * u, 32 * u);
+
+          drawPlaque(ctx, w, h, u, text || 'Tết Nguyên Đán', '#C8372D', '#FFFFFF', '#E8B04B');
+        }
+      },
+      {
+        id: 'sen-viet',
+        group: 'culture',
+        name: 'Sen Việt',
+        context: 'không gian thanh tịnh của hoa sen',
+        desc: 'Nét đẹp thuần khiết, thanh cao vươn lên từ bùn lầy của quốc hoa.',
+        hashtags: ['#SenViet', '#QuocHoa', '#ThanhTinh', '#NetDepViet'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 28 * u;
+          ctx.strokeStyle = '#14907C';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          ctx.strokeStyle = '#F8D7DA';
+          ctx.lineWidth = 3 * u;
+          ctx.strokeRect(borderW + 5 * u, borderW + 5 * u, w - (borderW + 5 * u) * 2, h - (borderW + 5 * u) * 2);
+
+          // Hoa sen ở 2 góc dưới và trên
+          const drawLotus = (cx, cy, s) => {
+            ctx.save();
+            ctx.translate(cx, cy);
+            // Lá sen
+            ctx.beginPath();
+            ctx.ellipse(-15 * s, 10 * s, 35 * s, 18 * s, -0.2, 0, Math.PI * 2);
+            ctx.fillStyle = '#2A7B5E';
+            ctx.fill();
+            // Cánh sen hồng
+            ctx.fillStyle = '#E88B9E';
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 14 * s, 32 * s, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#F3A4B5';
+            ctx.beginPath();
+            ctx.ellipse(-12 * s, 6 * s, 12 * s, 28 * s, -0.3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(12 * s, 6 * s, 12 * s, 28 * s, 0.3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          };
+          drawLotus(80 * u, h - 80 * u, 1.2 * u);
+          drawLotus(w - 80 * u, 70 * u, 1.0 * u);
+
+          drawPlaque(ctx, w, h, u, text || 'Sen Việt', '#14907C', '#FFFFFF', '#E8B04B');
+        }
+      },
+      {
+        id: 'trong-dong',
+        group: 'culture',
+        name: 'Trống Đồng',
+        context: 'hào khí ngàn năm văn hiến Lạc Hồng',
+        desc: 'Họa tiết kỷ hà và vòng tròn đồng tâm gợi nhắc cội nguồn rực rỡ.',
+        hashtags: ['#TrongDong', '#DongSon', '#HaoKhiVietNam', '#DiSanVanHoa'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 32 * u;
+          ctx.strokeStyle = '#8C6225';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          ctx.strokeStyle = '#E8B04B';
+          ctx.lineWidth = 3 * u;
+          ctx.strokeRect(borderW + 6 * u, borderW + 6 * u, w - (borderW + 6 * u) * 2, h - (borderW + 6 * u) * 2);
+
+          // Hoa văn vòng tròn đồng tâm ở 4 góc
+          const drawCircles = (cx, cy, maxR) => {
+            ctx.save();
+            ctx.strokeStyle = '#E8B04B';
+            for (let r = 12 * u; r <= maxR; r += 12 * u) {
+              ctx.lineWidth = 2 * u;
+              ctx.beginPath();
+              ctx.arc(cx, cy, r, 0, Math.PI * 2);
+              ctx.stroke();
+            }
+            // Tia sao nhỏ ở tâm góc
+            ctx.fillStyle = '#E8B04B';
+            ctx.beginPath();
+            ctx.arc(cx, cy, 6 * u, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          };
+          drawCircles(50 * u, 50 * u, 48 * u);
+          drawCircles(w - 50 * u, 50 * u, 48 * u);
+          drawCircles(50 * u, h - 50 * u, 48 * u);
+          drawCircles(w - 50 * u, h - 50 * u, 48 * u);
+
+          drawPlaque(ctx, w, h, u, text || 'Hồn Trống Đồng', '#8C6225', '#FFFFFF', '#E8B04B');
+        }
+      },
+
+      // NHÓM 2: BỐN MÙA
+      {
+        id: 'xuan-hoa-dao',
+        group: 'seasons',
+        name: 'Xuân Hoa Đào',
+        context: 'những ngày đầu xuân ấm áp',
+        desc: 'Sắc hoa đào thắm tươi mang theo lời chúc an khang và khởi sắc.',
+        hashtags: ['#XuanHoaDao', '#DaoPhai', '#DuXuan', '#NhungNgayDauXuan'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 26 * u;
+          ctx.strokeStyle = '#D47385';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          // Cành hoa đào góc trên
+          ctx.strokeStyle = '#5A3825';
+          ctx.lineWidth = 4 * u;
+          ctx.beginPath();
+          ctx.moveTo(borderW, 120 * u);
+          ctx.quadraticCurveTo(100 * u, 80 * u, 160 * u, 40 * u);
+          ctx.stroke();
+
+          // Hoa đào phai
+          const drawPeachFlower = (cx, cy, r) => {
+            ctx.save();
+            ctx.translate(cx, cy);
+            for (let i = 0; i < 5; i++) {
+              ctx.rotate((Math.PI * 2) / 5);
+              ctx.beginPath();
+              ctx.ellipse(0, -r * 0.6, r * 0.45, r * 0.6, 0, 0, Math.PI * 2);
+              ctx.fillStyle = '#FF9EAF';
+              ctx.fill();
+            }
+            ctx.beginPath();
+            ctx.arc(0, 0, r * 0.25, 0, Math.PI * 2);
+            ctx.fillStyle = '#C8372D';
+            ctx.fill();
+            ctx.restore();
+          };
+          drawPeachFlower(70 * u, 100 * u, 24 * u);
+          drawPeachFlower(120 * u, 65 * u, 20 * u);
+          drawPeachFlower(165 * u, 42 * u, 16 * u);
+          // Cánh hoa rơi
+          drawPeachFlower(w - 70 * u, h - 90 * u, 18 * u);
+
+          drawPlaque(ctx, w, h, u, text || 'Xuân Hoa Đào', '#C8372D', '#FFFFFF', '#FFD1DC');
+        }
+      },
+      {
+        id: 'ha-nang-bien',
+        group: 'seasons',
+        name: 'Hạ Nắng Biển',
+        context: 'mùa hè đầy nắng gió biển xanh',
+        desc: 'Khúc ca rộn rã của sóng biển dạt dào và ánh dương rạng ngời.',
+        hashtags: ['#HaNangBien', '#BienVietNam', '#MuaHeRucRo', '#NangVang'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 28 * u;
+          ctx.strokeStyle = '#1D70B8';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          // Mặt trời góc trên phải
+          ctx.fillStyle = '#E8B04B';
+          ctx.beginPath();
+          ctx.arc(w - 70 * u, 70 * u, 36 * u, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Lớp sóng biển chân khung
+          ctx.fillStyle = 'rgba(29, 112, 184, 0.45)';
+          ctx.beginPath();
+          ctx.moveTo(0, h - 50 * u);
+          for (let x = 0; x <= w; x += 60 * u) {
+            ctx.quadraticCurveTo(x + 30 * u, h - 75 * u, x + 60 * u, h - 50 * u);
+          }
+          ctx.lineTo(w, h);
+          ctx.lineTo(0, h);
+          ctx.closePath();
+          ctx.fill();
+
+          drawPlaque(ctx, w, h, u, text || 'Hạ Nắng Biển', '#1D70B8', '#FFFFFF', '#E8B04B');
+        }
+      },
+      {
+        id: 'thu-la-vang',
+        group: 'seasons',
+        name: 'Thu Lá Vàng',
+        context: 'tiết trời mùa thu êm đềm',
+        desc: 'Khoảnh khắc dịu êm với gió heo may và sắc lá vàng xao xuyến.',
+        hashtags: ['#ThuLaVang', '#HeoMay', '#MuaThuHaNoi', '#ChutThuEmDem'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 26 * u;
+          ctx.strokeStyle = '#B86A25';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          // Lá vàng rơi ở viền
+          const drawLeaf = (cx, cy, rot, size, color) => {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(rot);
+            ctx.beginPath();
+            ctx.moveTo(0, -size);
+            ctx.quadraticCurveTo(size * 0.7, 0, 0, size);
+            ctx.quadraticCurveTo(-size * 0.7, 0, 0, -size);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.restore();
+          };
+          drawLeaf(65 * u, 80 * u, 0.4, 28 * u, '#E8A02A');
+          drawLeaf(100 * u, 130 * u, -0.6, 22 * u, '#C2581A');
+          drawLeaf(w - 70 * u, h - 90 * u, 0.9, 26 * u, '#D97A22');
+          drawLeaf(w - 110 * u, h - 60 * u, -0.3, 20 * u, '#E8B04B');
+
+          drawPlaque(ctx, w, h, u, text || 'Thu Dịu Êm', '#B86A25', '#FFFFFF', '#E8B04B');
+        }
+      },
+      {
+        id: 'dong-se-lanh',
+        group: 'seasons',
+        name: 'Đông Se Lạnh',
+        context: 'những ngày đông miền Bắc se lạnh',
+        desc: 'Hơi thở se lạnh và làn sương bạc ấm áp bên tách trà nóng.',
+        hashtags: ['#DongSeLanh', '#GioMua', '#MuaDongVietNam', '#BinhYen'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 28 * u;
+          ctx.strokeStyle = '#5B7A9C';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          // Bông tuyết / tinh thể sương
+          const drawSnowflake = (cx, cy, r) => {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 2.5 * u;
+            for (let i = 0; i < 6; i++) {
+              ctx.rotate(Math.PI / 3);
+              ctx.beginPath();
+              ctx.moveTo(0, 0);
+              ctx.lineTo(0, -r);
+              ctx.moveTo(-r * 0.3, -r * 0.6);
+              ctx.lineTo(0, -r * 0.8);
+              ctx.lineTo(r * 0.3, -r * 0.6);
+              ctx.stroke();
+            }
+            ctx.restore();
+          };
+          drawSnowflake(60 * u, 60 * u, 24 * u);
+          drawSnowflake(w - 60 * u, 60 * u, 24 * u);
+          drawSnowflake(70 * u, h - 70 * u, 20 * u);
+          drawSnowflake(w - 70 * u, h - 70 * u, 20 * u);
+
+          drawPlaque(ctx, w, h, u, text || 'Đông Se Lạnh', '#3C5B7D', '#FFFFFF', '#D9E8F5');
+        }
+      },
+
+      // NHÓM 3: DANH LAM THẮNG CẢNH
+      {
+        id: 'hanoi-ho-guom',
+        group: 'places',
+        name: 'Hà Nội - Hồ Gươm',
+        context: 'bên bờ Hồ Gươm cổ kính thủ đô',
+        desc: 'Bóng Tháp Rùa trầm mặc nghiêng mình soi bóng làn nước biếc.',
+        hashtags: ['#HaNoi', '#HoGuom', '#ThapRua', '#ThuDoHaNoi', '#PhoCo'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 30 * u;
+          ctx.strokeStyle = '#16213A';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          // Cành liễu rủ góc trên
+          ctx.strokeStyle = '#14907C';
+          ctx.lineWidth = 2 * u;
+          for (let i = 0; i < 5; i++) {
+            ctx.beginPath();
+            ctx.moveTo(borderW + i * 20 * u, borderW);
+            ctx.quadraticCurveTo(borderW + (i + 1) * 25 * u, borderW + 60 * u, borderW + i * 18 * u, borderW + 110 * u);
+            ctx.stroke();
+          }
+
+          // Hình Tháp Rùa biểu trưng góc dưới
+          ctx.fillStyle = '#E8B04B';
+          const bx = w - 120 * u, by = h - 100 * u;
+          ctx.fillRect(bx, by + 30 * u, 55 * u, 30 * u); // Tầng 1
+          ctx.fillRect(bx + 10 * u, by + 12 * u, 35 * u, 18 * u); // Tầng 2
+          ctx.fillRect(bx + 18 * u, by, 18 * u, 12 * u); // Đỉnh tháp
+
+          drawPlaque(ctx, w, h, u, text || 'Hà Nội - Hồ Gươm', '#16213A', '#FFFFFF', '#E8B04B');
+        }
+      },
+      {
+        id: 'vinh-ha-long',
+        group: 'places',
+        name: 'Vịnh Hạ Long',
+        context: 'kỳ quan Vịnh Hạ Long ngút ngàn',
+        desc: 'Những đảo đá vôi kỳ vĩ soi bóng làn nước biếc và cánh buồm no gió.',
+        hashtags: ['#HaLongBay', '#KyQuanTheGioi', '#QuangNinh', '#VietNamDep'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 28 * u;
+          ctx.strokeStyle = '#185A7D';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          // Đảo đá vôi góc dưới trái
+          ctx.fillStyle = '#2C495E';
+          ctx.beginPath();
+          ctx.moveTo(30 * u, h - 30 * u);
+          ctx.lineTo(70 * u, h - 110 * u);
+          ctx.lineTo(110 * u, h - 70 * u);
+          ctx.lineTo(150 * u, h - 120 * u);
+          ctx.lineTo(190 * u, h - 30 * u);
+          ctx.closePath();
+          ctx.fill();
+
+          // Cánh buồm nâu góc dưới phải
+          ctx.fillStyle = '#8C4325';
+          ctx.beginPath();
+          ctx.moveTo(w - 70 * u, h - 45 * u);
+          ctx.lineTo(w - 70 * u, h - 105 * u);
+          ctx.lineTo(w - 40 * u, h - 55 * u);
+          ctx.closePath();
+          ctx.fill();
+
+          drawPlaque(ctx, w, h, u, text || 'Vịnh Hạ Long', '#185A7D', '#FFFFFF', '#E8B04B');
+        }
+      },
+      {
+        id: 'hoi-an-pho-co',
+        group: 'places',
+        name: 'Phố Cổ Hội An',
+        context: 'phố cổ Hội An rực rỡ sắc màu',
+        desc: 'Ánh đèn lồng ấm áp soi rọi mái ngói rêu phong và dòng sông Hoài thơ mộng.',
+        hashtags: ['#HoiAn', '#PhoCoHoiAn', '#DenLong', '#DiSanVanHoa'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 30 * u;
+          ctx.strokeStyle = '#C8372D';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          // Đèn lồng treo góc trên
+          const drawLantern = (cx, cy, color, r) => {
+            ctx.save();
+            ctx.translate(cx, cy);
+            // Dây treo
+            ctx.strokeStyle = '#E8B04B';
+            ctx.lineWidth = 1.5 * u;
+            ctx.beginPath();
+            ctx.moveTo(0, -r * 1.5);
+            ctx.lineTo(0, -r);
+            ctx.stroke();
+            // Bầu đèn lồng
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, r * 0.7, r, 0, 0, Math.PI * 2);
+            ctx.fill();
+            // Tua rua
+            ctx.strokeStyle = '#E8B04B';
+            ctx.beginPath();
+            ctx.moveTo(0, r);
+            ctx.lineTo(0, r * 1.6);
+            ctx.stroke();
+            ctx.restore();
+          };
+          drawLantern(70 * u, 65 * u, '#E8B04B', 18 * u);
+          drawLantern(115 * u, 55 * u, '#14907C', 15 * u);
+          drawLantern(w - 70 * u, 65 * u, '#E8B04B', 18 * u);
+          drawLantern(w - 115 * u, 55 * u, '#C8372D', 15 * u);
+
+          drawPlaque(ctx, w, h, u, text || 'Phố Cổ Hội An', '#C8372D', '#FFFFFF', '#E8B04B');
+        }
+      },
+      {
+        id: 'sai-gon-len-den',
+        group: 'places',
+        name: 'Sài Gòn Lên Đèn',
+        context: 'Sài Gòn hoa lệ rực rỡ ánh đèn',
+        desc: 'Nhịp sống năng động vươn cao với đường chân trời và ánh sáng lung linh.',
+        hashtags: ['#SaiGon', '#Landmark81', '#SaiGonVeDem', '#ThanhPhoTre'],
+        draw: (ctx, w, h, u, text) => {
+          const borderW = 28 * u;
+          ctx.strokeStyle = '#16213A';
+          ctx.lineWidth = borderW;
+          ctx.strokeRect(borderW / 2, borderW / 2, w - borderW, h - borderW);
+
+          // Đường chân trời và Landmark 81 góc dưới
+          ctx.fillStyle = '#E8B04B';
+          const lx = w - 100 * u;
+          // Tháp Landmark 81 vươn cao
+          ctx.fillRect(lx, h - 160 * u, 18 * u, 130 * u);
+          ctx.fillRect(lx + 4 * u, h - 180 * u, 10 * u, 20 * u);
+          ctx.fillRect(lx + 7 * u, h - 200 * u, 4 * u, 20 * u); // Anten
+          // Các toà nhà thấp xung quanh
+          ctx.fillStyle = 'rgba(232, 176, 75, 0.5)';
+          ctx.fillRect(lx - 40 * u, h - 90 * u, 35 * u, 60 * u);
+          ctx.fillRect(lx + 22 * u, h - 110 * u, 30 * u, 80 * u);
+
+          drawPlaque(ctx, w, h, u, text || 'Sài Gòn Lên Đèn', '#16213A', '#FFFFFF', '#E8B04B');
+        }
+      }
+    ];
+
+    /**
+     * Hàm vẽ tấm biển chữ bo tròn ở cạnh dưới khung
+     */
+    function drawPlaque(ctx, w, h, u, text, bgColor, textColor, borderColor) {
+      if (!text) return;
+      ctx.save();
+      const fontSize = Math.max(16, Math.round(28 * u));
+      ctx.font = `600 ${fontSize}px 'Be Vietnam Pro', sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      const metrics = ctx.measureText(text);
+      const paddingX = 26 * u;
+      const plaqueW = Math.min(w * 0.75, metrics.width + paddingX * 2);
+      const plaqueH = fontSize + 22 * u;
+      const x = (w - plaqueW) / 2;
+      const y = h - plaqueH - 24 * u;
+      const radius = 12 * u;
+
+      // Vẽ nền bo tròn
+      ctx.beginPath();
+      ctx.roundRect(x, y, plaqueW, plaqueH, radius);
+      ctx.fillStyle = bgColor;
+      ctx.fill();
+      ctx.lineWidth = 2 * u;
+      ctx.strokeStyle = borderColor;
+      ctx.stroke();
+
+      // Vẽ bóng đổ chữ nhẹ
+      ctx.fillStyle = textColor;
+      ctx.fillText(text, w / 2, y + plaqueH / 2 + 1 * u);
+      ctx.restore();
+    }
+
+    /* =========================================================================
+     * 2. CẤU HÌNH NỀN TẢNG MẠNG XÃ HỘI & TỈ LỆ
+     * ========================================================================= */
+    const PLATFORMS_CONFIG = [
+      { id: 'instagram', name: 'Instagram', ratio: '4:5', width: 1080, height: 1350, peakTime: '11:30 - 13:30 & 19:00 - 21:00' },
+      { id: 'tiktok', name: 'TikTok', ratio: '9:16', width: 1080, height: 1920, peakTime: '18:00 - 20:00 & 21:30 - 22:30' },
+      { id: 'facebook', name: 'Facebook', ratio: '1:1', width: 1200, height: 1200, peakTime: '08:00 - 09:30 & 20:00 - 22:00' },
+      { id: 'zalo', name: 'Zalo', ratio: '1:1', width: 1080, height: 1080, peakTime: '07:30 - 09:00 & 17:30 - 19:00' },
+      { id: 'x', name: 'X (Twitter)', ratio: '16:9', width: 1600, height: 900, peakTime: '12:00 - 13:00 & 17:00 - 18:30' }
+    ];
+
+    /* =========================================================================
+     * 3. CẤU HÌNH CẢM XÚC & MẪU CÂU MỞ ĐẦU
+     * {c} sẽ được thay thế bằng ngữ cảnh khung hoặc địa điểm/dịp người dùng nhập.
+     * ========================================================================= */
+    const EMOTIONS_CONFIG = [
+      {
+        id: 'vui-ve',
+        name: 'Vui vẻ',
+        emoji: '😄',
+        templates: [
+          'Một ngày tràn đầy năng lượng tích cực tại {c}!',
+          'Cười thật tươi vì thanh xuân luôn rực rỡ cùng {c}.',
+          'Những nụ cười đẹp nhất nở rộ khi được đắm mình vào {c}.'
+        ],
+        hashtags: ['#VuiVeMoiNgay', '#NangLuongTichCuc', '#NuCuoiRangRo']
+      },
+      {
+        id: 'binh-yen',
+        name: 'Bình yên',
+        emoji: '🌿',
+        templates: [
+          'Tìm thấy chút thảnh thơi nhẹ nhõm giữa {c}.',
+          'Lắng lại một nhịp để cảm nhận sự bình yên dịu dàng tại {c}.',
+          'Không ồn ào vội vã, chỉ có sự an yên hiện hữu cùng {c}.'
+        ],
+        hashtags: ['#BinhYen', '#ThanhThoi', '#GocYenBinh', '#SlowLiving']
+      },
+      {
+        id: 'hoai-niem',
+        name: 'Hoài niệm',
+        emoji: '🍂',
+        templates: [
+          'Có những kỷ niệm xưa cũ ùa về khi ngắm nhìn {c}.',
+          'Thước phim quá khứ như sống động lại trong từng góc nhỏ của {c}.',
+          'Gửi gắm chút hoài niệm dấu yêu vào không gian {c}.'
+        ],
+        hashtags: ['#HoaiNiem', '#KyUcXua', '#NhungNgayDaQua', '#RetroVibes']
+      },
+      {
+        id: 'tu-hao',
+        name: 'Tự hào',
+        emoji: '🇻🇳',
+        templates: [
+          'Thêm yêu nét đẹp văn hoá ngàn năm và tự hào về {c}!',
+          'Tự hào khoác lên mình bản sắc quê hương tại {c}.',
+          'Dòng máu Lạc Hồng và tình yêu non sông sáng ngời cùng {c}.'
+        ],
+        hashtags: ['#TuHaoVietNam', '#BanSacDanToc', '#YeuVietNam', '#VanHoaViet']
+      },
+      {
+        id: 'hao-hung',
+        name: 'Hào hứng',
+        emoji: '✨',
+        templates: [
+          'Chuyến hành trình rực lửa với biết bao trải nghiệm mới tại {c}!',
+          'Khám phá những góc nhìn tuyệt vời không thể bỏ lỡ ở {c}.',
+          'Năng lượng bùng nổ cho một ngày đáng nhớ cùng {c}!'
+        ],
+        hashtags: ['#HaoHung', '#KhamPha', '#TraiNghiemMoi', '#CheckinVietNam']
+      },
+      {
+        id: 'biet-on',
+        name: 'Biết ơn',
+        emoji: '🙏',
+        templates: [
+          'Biết ơn vì mỗi sớm mai thức dậy lại được trân quý khoảnh khắc bên {c}.',
+          'Cảm ơn cuộc đời vì những món quà giản dị và ấm áp tại {c}.',
+          'Gửi lời tri ân chân thành đến những người đã cùng ta đồng hành qua {c}.'
+        ],
+        hashtags: ['#BietOn', '#TranQuy', '#CuocSongYeuThuong', '#GiaTriGianDi']
+      },
+      {
+        id: 'lang-man',
+        name: 'Lãng mạn',
+        emoji: '💖',
+        templates: [
+          'Khoảnh khắc ngọt ngào tựa như bản tình ca bên {c}.',
+          'Nắm tay nhau đi qua những dịu êm lãng mạn ở {c}.',
+          'Một thoáng mộng mơ gửi trao trong sắc màu của {c}.'
+        ],
+        hashtags: ['#LangMan', '#NgotNgao', '#ChuyenTinhYeu', '#KhoanhKhacDep']
+      }
+    ];
+
+    /* =========================================================================
+     * 4. TRẠNG THÁI TOÀN CỤC CỦA ỨNG DỤNG (APPLICATION STATE)
+     * ========================================================================= */
+    const state = {
+      image: null,            // HTMLImageElement đã tải lên
+      frameId: 'tet-nguyen-dan',
+      platformId: 'instagram',
+      emotionId: 'vui-ve',
+      filter: 'none',
+      zoom: 1.0,
+      panX: 0,
+      panY: 0,
+      customPlaqueText: '',
+      customContext: '',
+      templateIndex: 0,       // Chỉ số mẫu câu đang chọn
+      isDragging: false,
+      dragStartX: 0,
+      dragStartY: 0
+    };
+
+    const canvas = document.getElementById('mainCanvas');
+    const ctx = canvas.getContext('2d');
+    const canvasWrapper = document.getElementById('canvasWrapper');
+
+    /* =========================================================================
+     * 5. HÀM VẼ CHÍNH TRÊN CANVAS (MAIN RENDER LOOP)
+     * ========================================================================= */
+    function renderCanvas() {
+      const platform = PLATFORMS_CONFIG.find(p => p.id === state.platformId) || PLATFORMS_CONFIG[0];
+      const frame = FRAMES_CONFIG.find(f => f.id === state.frameId) || FRAMES_CONFIG[0];
+
+      // Đặt kích thước thực của canvas theo nền tảng
+      if (canvas.width !== platform.width || canvas.height !== platform.height) {
+        canvas.width = platform.width;
+        canvas.height = platform.height;
+      }
+
+      const w = canvas.width;
+      const h = canvas.height;
+      const u = w / 1080; // Hệ số co giãn tỉ lệ
+
+      // Xoá canvas và vẽ nền xám nhạt nếu chưa có ảnh
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = '#E8ECEF';
+      ctx.fillRect(0, 0, w, h);
+
+      // Vẽ ảnh người dùng nếu đã có
+      if (state.image) {
+        ctx.save();
+
+        // Áp dụng bộ lọc màu qua ctx.filter
+        switch (state.filter) {
+          case 'warm':
+            ctx.filter = 'sepia(0.2) saturate(1.2) brightness(1.03)';
+            break;
+          case 'cool':
+            ctx.filter = 'hue-rotate(15deg) saturate(1.1) brightness(1.02)';
+            break;
+          case 'film':
+            ctx.filter = 'contrast(1.1) brightness(0.95) saturate(0.9) sepia(0.15)';
+            break;
+          case 'bw':
+            ctx.filter = 'grayscale(1) contrast(1.15)';
+            break;
+          case 'vibrant':
+            ctx.filter = 'saturate(1.5) contrast(1.08)';
+            break;
+          default:
+            ctx.filter = 'none';
+        }
+
+        // Tính toán vẽ ảnh căn giữa theo tỉ lệ cover kết hợp thu phóng & kéo vị trí
+        const img = state.image;
+        const imgAspect = img.width / img.height;
+        const canvasAspect = w / h;
+
+        let baseW, baseH;
+        if (imgAspect > canvasAspect) {
+          baseH = h;
+          baseW = h * imgAspect;
+        } else {
+          baseW = w;
+          baseH = w / imgAspect;
+        }
+
+        const drawW = baseW * state.zoom;
+        const drawH = baseH * state.zoom;
+        const drawX = (w - drawW) / 2 + state.panX;
+        const drawY = (h - drawH) / 2 + state.panY;
+
+        ctx.drawImage(img, drawX, drawY, drawW, drawH);
+        ctx.restore();
+      } else {
+        // Gợi ý khi chưa chọn ảnh
+        ctx.save();
+        ctx.fillStyle = '#64748B';
+        ctx.font = `500 ${Math.round(24 * u)}px 'Be Vietnam Pro', sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.fillText('Bấm "Chọn ảnh từ máy" hoặc kéo thả ảnh vào đây', w / 2, h / 2 - 10 * u);
+        ctx.font = `400 ${Math.round(18 * u)}px 'Be Vietnam Pro', sans-serif`;
+        ctx.fillStyle = '#94A3B8';
+        ctx.fillText('Hỗ trợ đầy đủ định dạng JPG, PNG, WEBP', w / 2, h / 2 + 25 * u);
+        ctx.restore();
+      }
+
+      // Vẽ khung ảnh bằng hàm vẽ Canvas 2D
+      const plaqueText = state.customPlaqueText.trim() || frame.name;
+      frame.draw(ctx, w, h, u, plaqueText);
+    }
+
+    /* =========================================================================
+     * 6. KHỞI TẠO BƯỚC 1: LƯỚI KHUNG VÀ THUMBNAIL
+     * ========================================================================= */
+    function initFramesStep() {
+      const container = document.getElementById('frameThumbsGrid');
+      const tabs = document.querySelectorAll('.frame-tab-btn');
+
+      function renderThumbnails(filterGroup = 'all') {
+        container.innerHTML = '';
+        const filtered = FRAMES_CONFIG.filter(f => filterGroup === 'all' || f.group === filterGroup);
+
+        filtered.forEach(frame => {
+          const card = document.createElement('div');
+          card.className = `frame-thumb-card ${frame.id === state.frameId ? 'active' : ''}`;
+          card.tabIndex = 0;
+          card.setAttribute('role', 'button');
+          card.setAttribute('aria-label', `Chọn khung ${frame.name}`);
+
+          const thumb = document.createElement('canvas');
+          thumb.className = 'thumb-canvas';
+          thumb.width = 160;
+          thumb.height = 160;
+
+          // Vẽ thu nhỏ khung
+          const tctx = thumb.getContext('2d');
+          tctx.fillStyle = '#F4F7F8';
+          tctx.fillRect(0, 0, 160, 160);
+          frame.draw(tctx, 160, 160, 160 / 1080, '');
+
+          const title = document.createElement('div');
+          title.className = 'thumb-name';
+          title.textContent = frame.name;
+
+          card.appendChild(thumb);
+          card.appendChild(title);
+
+          card.addEventListener('click', () => {
+            state.frameId = frame.id;
+            updateFrameActiveCards();
+            renderCanvas();
+            updateCaption();
+          });
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              card.click();
+            }
+          });
+
+          container.appendChild(card);
+        });
+      }
+
+      function updateFrameActiveCards() {
+        document.querySelectorAll('.frame-thumb-card').forEach((card, index) => {
+          const frame = FRAMES_CONFIG[index];
+          if (frame) {
+            card.classList.toggle('active', frame.id === state.frameId);
+          }
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          renderThumbnails(tab.dataset.group);
+        });
+      });
+
+      renderThumbnails('all');
+    }
+
+    /* =========================================================================
+     * 7. KHỞI TẠO BƯỚC 2: CHỌN NỀN TẢNG MẠNG XÃ HỘI
+     * ========================================================================= */
+    function initPlatformsStep() {
+      const container = document.getElementById('platformsGrid');
+      container.innerHTML = '';
+
+      PLATFORMS_CONFIG.forEach(plat => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `platform-btn ${plat.id === state.platformId ? 'active' : ''}`;
+        btn.innerHTML = `
+          <span class="platform-name">${plat.name}</span>
+          <span class="platform-ratio">${plat.ratio} · ${plat.width}×${plat.height}</span>
+        `;
+        btn.addEventListener('click', () => {
+          state.platformId = plat.id;
+          document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderCanvas();
+          updateCaption();
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    /* =========================================================================
+     * 8. KHỞI TẠO BƯỚC 3: CHỌN CẢM XÚC
+     * ========================================================================= */
+    function initEmotionsStep() {
+      const container = document.getElementById('emotionsGrid');
+      container.innerHTML = '';
+
+      EMOTIONS_CONFIG.forEach(emo => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `emotion-btn ${emo.id === state.emotionId ? 'active' : ''}`;
+        btn.innerHTML = `
+          <span class="emotion-icon">${emo.emoji}</span>
+          <span class="emotion-label">${emo.name}</span>
+        `;
+        btn.addEventListener('click', () => {
+          state.emotionId = emo.id;
+          state.templateIndex = 0;
+          document.querySelectorAll('.emotion-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          updateCaption();
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    /* =========================================================================
+     * 9. KHỞI TẠO BƯỚC 4: TẠO VÀ CẬP NHẬT CAPTION THEO NỀN TẢNG
+     * ========================================================================= */
+    function updateCaption() {
+      const platform = PLATFORMS_CONFIG.find(p => p.id === state.platformId) || PLATFORMS_CONFIG[0];
+      const frame = FRAMES_CONFIG.find(f => f.id === state.frameId) || FRAMES_CONFIG[0];
+      const emotion = EMOTIONS_CONFIG.find(e => e.id === state.emotionId) || EMOTIONS_CONFIG[0];
+
+      // Ngữ cảnh: ưu tiên ô nhập người dùng nếu có, không thì lấy mặc định từ khung
+      const rawContext = state.customContext.trim() || frame.context;
+      const template = emotion.templates[state.templateIndex % emotion.templates.length];
+      const opening = template.replace('{c}', rawContext);
+
+      let caption = '';
+
+      // Quy tắc định dạng riêng cho từng nền tảng
+      switch (platform.id) {
+        case 'instagram':
+          const igTags = [...new Set([...frame.hashtags, ...emotion.hashtags, '#VietNam', '#CheckinVietNam', '#DiSanViet'])].slice(0, 10).join(' ');
+          caption = `${opening}\n\n${frame.desc}\n\nĐừng quên lưu lại bài viết để lên lịch ghé thăm nhé!\n.\n.\n.\n${igTags}`;
+          break;
+
+        case 'tiktok':
+          const ttTags = [...new Set([...frame.hashtags.slice(0, 2), ...emotion.hashtags.slice(0, 1), '#fyp', '#xuhuong'])].join(' ');
+          caption = `${opening} Xem đến cuối để cảm nhận trọn vẹn nét đẹp này nhé! ✨ ${ttTags}`;
+          break;
+
+        case 'facebook':
+          const fbTags = [...new Set([...frame.hashtags.slice(0, 2), ...emotion.hashtags.slice(0, 1)])].join(' ');
+          caption = `${opening}\n\n${frame.desc}\n\nBạn đã từng có dịp trải nghiệm khoảnh khắc tuyệt vời này chưa? Chia sẻ cùng mình nhé!\n\n${fbTags}`;
+          break;
+
+        case 'zalo':
+          // Thân mật, ngắn gọn, không dùng hashtag
+          caption = `${opening} Một chút bình dị mà ấm lòng gửi tặng cả nhà yêu thương!`;
+          break;
+
+        case 'x':
+          // Tối đa 280 ký tự, 2 hashtag
+          const xTags = `${frame.hashtags[0]} ${emotion.hashtags[0]}`;
+          let xContent = `${opening} ${frame.desc}`;
+          if (xContent.length > 250) {
+            xContent = xContent.substring(0, 245) + '...';
+          }
+          caption = `${xContent}\n\n${xTags}`;
+          break;
+      }
+
+      document.getElementById('captionText').textContent = caption;
+      document.getElementById('postingTimeText').textContent = `Khung giờ tham khảo: ${platform.peakTime}`;
+    }
+
+    /* =========================================================================
+     * 10. XỬ LÝ SỰ KIỆN KÉO THẢ ẢNH TRÊN CANVAS (POINTER EVENTS)
+     * ========================================================================= */
+    function initCanvasInteractions() {
+      canvasWrapper.addEventListener('pointerdown', (e) => {
+        if (!state.image) return;
+        state.isDragging = true;
+        state.dragStartX = e.clientX - state.panX;
+        state.dragStartY = e.clientY - state.panY;
+        canvasWrapper.setPointerCapture(e.pointerId);
+      });
+
+      canvasWrapper.addEventListener('pointermove', (e) => {
+        if (!state.isDragging) return;
+        state.panX = e.clientX - state.dragStartX;
+        state.panY = e.clientY - state.dragStartY;
+        renderCanvas();
+      });
+
+      const stopDrag = (e) => {
+        if (state.isDragging) {
+          state.isDragging = false;
+          try { canvasWrapper.releasePointerCapture(e.pointerId); } catch(err){}
+        }
+      };
+      canvasWrapper.addEventListener('pointerup', stopDrag);
+      canvasWrapper.addEventListener('pointercancel', stopDrag);
+
+      // Kéo thả file ảnh trực tiếp lên canvas stage
+      const stage = document.querySelector('.canvas-stage');
+      stage.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        stage.style.borderColor = 'var(--color-teal)';
+      });
+      stage.addEventListener('dragleave', () => {
+        stage.style.borderColor = 'var(--color-border)';
+      });
+      stage.addEventListener('drop', (e) => {
+        e.preventDefault();
+        stage.style.borderColor = 'var(--color-border)';
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          loadUserImage(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    /* =========================================================================
+     * 11. TẢI ẢNH TỪ MÁY & XỬ LÝ FILE
+     * ========================================================================= */
+    function loadUserImage(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        showToast('Vui lòng chọn tệp hình ảnh hợp lệ (PNG, JPG, WEBP).', true);
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          state.image = img;
+          state.panX = 0;
+          state.panY = 0;
+          state.zoom = 1.0;
+          document.getElementById('zoomSlider').value = 1.0;
+          document.getElementById('zoomVal').textContent = '1.0x';
+          document.getElementById('dragHint').style.display = 'none';
+          renderCanvas();
+          showToast('Đã tải ảnh lên thành công.');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    /* =========================================================================
+     * 12. THƯ VIỆN LOOK BOOK & LOCALSTORAGE
+     * ========================================================================= */
+    const STORAGE_KEY = 'vheritage_lookbook_items';
+
+    function getLookbookItems() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (err) {
+        console.error('Lỗi đọc localStorage:', err);
+        return [];
+      }
+    }
+
+    function saveLookbookItems(items) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        return true;
+      } catch (err) {
+        console.error('Lỗi ghi localStorage:', err);
+        showToast('Bộ nhớ trình duyệt đã đầy. Vui lòng xoá bớt tác phẩm cũ.', true);
+        return false;
+      }
+    }
+
+    function renderLookbookUI() {
+      const grid = document.getElementById('lookbookGrid');
+      const countBadge = document.getElementById('lookbookCount');
+      const items = getLookbookItems();
+
+      countBadge.textContent = `${items.length} tác phẩm`;
+
+      if (items.length === 0) {
+        grid.innerHTML = `
+          <div class="lookbook-empty" style="grid-column: span 2;">
+            <div class="lookbook-empty-icon">🖼</div>
+            <div class="lookbook-empty-text">Chưa có ảnh nào trong Look book</div>
+            <div class="lookbook-empty-sub">Hãy gắn khung cho bức ảnh của bạn và bấm "Lưu vào Look book" để lưu giữ tại đây.</div>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = '';
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'lookbook-card';
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Xem lại tác phẩm ${item.name}`);
+
+        card.innerHTML = `
+          <img src="${item.thumbUrl}" alt="${item.name}" class="lookbook-thumb" loading="lazy">
+          <div class="lookbook-info">
+            <div class="lookbook-card-name">${item.name}</div>
+            <div class="lookbook-card-meta">
+              <span>${item.platformName}</span>
+              <span>${item.date}</span>
+            </div>
+          </div>
+          <button type="button" class="lookbook-delete-btn" title="Xoá khỏi Look book" aria-label="Xoá tác phẩm ${item.name}">×</button>
+        `;
+
+        // Bấm vào thẻ để mở lại đúng ảnh và cài đặt
+        card.addEventListener('click', (e) => {
+          if (e.target.classList.contains('lookbook-delete-btn')) return;
+          restoreLookbookItem(item);
+        });
+
+        card.addEventListener('keydown', (e) => {
+          if (e.target.classList.contains('lookbook-delete-btn')) return;
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            restoreLookbookItem(item);
+          }
+        });
+
+        // Nút xoá thẻ
+        const delBtn = card.querySelector('.lookbook-delete-btn');
+        delBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          deleteLookbookItem(item.id);
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    function deleteLookbookItem(id) {
+      const items = getLookbookItems().filter(i => i.id !== id);
+      if (saveLookbookItems(items)) {
+        renderLookbookUI();
+        showToast('Đã xoá tác phẩm khỏi Look book.');
+      }
+    }
+
+    function restoreLookbookItem(item) {
+      state.frameId = item.frameId;
+      state.platformId = item.platformId;
+      state.emotionId = item.emotionId;
+      state.filter = item.filter;
+      state.zoom = item.zoom;
+      state.panX = item.panX;
+      state.panY = item.panY;
+      state.customPlaqueText = item.customPlaqueText || '';
+      state.customContext = item.customContext || '';
+
+      // Đồng bộ các thanh điều khiển UI
+      document.getElementById('zoomSlider').value = item.zoom;
+      document.getElementById('zoomVal').textContent = `${item.zoom.toFixed(1)}x`;
+      document.getElementById('plaqueInput').value = state.customPlaqueText;
+      document.getElementById('customContextInput').value = state.customContext;
+
+      // Đồng bộ các nút active
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === state.filter);
+      });
+      document.querySelectorAll('.platform-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.includes(item.platformName));
+      });
+      document.querySelectorAll('.emotion-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.includes(item.emotionName));
+      });
+
+      // Tải lại ảnh nguồn
+      if (item.sourcePhoto) {
+        const img = new Image();
+        img.onload = () => {
+          state.image = img;
+          renderCanvas();
+          updateCaption();
+          showToast(`Đã mở lại tác phẩm "${item.name}".`);
+        };
+        img.src = item.sourcePhoto;
+      } else {
+        renderCanvas();
+        updateCaption();
+        showToast(`Đã mở lại cài đặt của "${item.name}".`);
+      }
+    }
+
+    function saveCurrentToLookbook() {
+      if (!state.image) {
+        showToast('Vui lòng chọn ảnh trước khi lưu vào Look book.', true);
+        return;
+      }
+
+      const frame = FRAMES_CONFIG.find(f => f.id === state.frameId) || FRAMES_CONFIG[0];
+      const platform = PLATFORMS_CONFIG.find(p => p.id === state.platformId) || PLATFORMS_CONFIG[0];
+      const emotion = EMOTIONS_CONFIG.find(e => e.id === state.emotionId) || EMOTIONS_CONFIG[0];
+
+      // Tạo thumbnail nhỏ (~320px) cho thẻ look book
+      const thumbCanvas = document.createElement('canvas');
+      const thumbW = 320;
+      const thumbH = Math.round(thumbW * (canvas.height / canvas.width));
+      thumbCanvas.width = thumbW;
+      thumbCanvas.height = thumbH;
+      const tctx = thumbCanvas.getContext('2d');
+      tctx.drawImage(canvas, 0, 0, thumbW, thumbH);
+      const thumbDataUrl = thumbCanvas.toDataURL('image/jpeg', 0.82);
+
+      // Thu nhỏ ảnh nguồn (~720px) để lưu trữ an toàn trong localStorage
+      const srcCanvas = document.createElement('canvas');
+      const maxDim = 720;
+      let sW = state.image.width;
+      let sH = state.image.height;
+      if (sW > maxDim || sH > maxDim) {
+        if (sW > sH) {
+          sH = Math.round((sH * maxDim) / sW);
+          sW = maxDim;
+        } else {
+          sW = Math.round((sW * maxDim) / sH);
+          sH = maxDim;
+        }
+      }
+      srcCanvas.width = sW;
+      srcCanvas.height = sH;
+      srcCanvas.getContext('2d').drawImage(state.image, 0, 0, sW, sH);
+      const srcDataUrl = srcCanvas.toDataURL('image/jpeg', 0.82);
+
+      const newItem = {
+        id: 'lb_' + Date.now(),
+        name: state.customPlaqueText.trim() || frame.name,
+        thumbUrl: thumbDataUrl,
+        sourcePhoto: srcDataUrl,
+        frameId: state.frameId,
+        platformId: state.platformId,
+        platformName: platform.name,
+        emotionId: state.emotionId,
+        emotionName: emotion.name,
+        filter: state.filter,
+        zoom: state.zoom,
+        panX: state.panX,
+        panY: state.panY,
+        customPlaqueText: state.customPlaqueText,
+        customContext: state.customContext,
+        date: new Date().toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })
+      };
+
+      const currentItems = getLookbookItems();
+      currentItems.unshift(newItem); // Đưa lên đầu
+
+      if (saveLookbookItems(currentItems)) {
+        renderLookbookUI();
+        showToast('Đã lưu vào Look book thành công!');
+      }
+    }
+
+    /* =========================================================================
+     * 13. TẢI ẢNH XUỐNG & WEB SHARE API
+     * ========================================================================= */
+    function downloadPhoto() {
+      if (!state.image) {
+        showToast('Vui lòng chọn ảnh trước khi tải về.', true);
+        return;
+      }
+      const link = document.createElement('a');
+      link.download = `vietnam-frame-${state.frameId}-${Date.now()}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('Đang tải ảnh xuống máy...');
+    }
+
+    function setupWebShare() {
+      const shareBtn = document.getElementById('btnShare');
+      if (navigator.share) {
+        shareBtn.style.display = 'inline-flex';
+        shareBtn.addEventListener('click', async () => {
+          if (!state.image) {
+            showToast('Vui lòng chọn ảnh trước khi chia sẻ.', true);
+            return;
+          }
+          canvas.toBlob(async (blob) => {
+            if (!blob) return;
+            const file = new File([blob], `vietnam-frame.png`, { type: 'image/png' });
+            try {
+              await navigator.share({
+                title: 'Cộng đồng Lan Tỏa - Hub đăng ảnh Việt',
+                text: document.getElementById('captionText').textContent,
+                files: [file]
+              });
+              showToast('Đã chia sẻ thành công.');
+            } catch (err) {
+              if (err.name !== 'AbortError') {
+                showToast('Không thể chia sẻ tác phẩm.', true);
+              }
+            }
+          }, 'image/png');
+        });
+      }
+    }
+
+    /* =========================================================================
+     * 14. THÔNG BÁO TOAST & TIỆN ÍCH
+     * ========================================================================= */
+    function showToast(message, isError = false) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${isError ? 'toast-error' : ''}`;
+      toast.innerHTML = `
+        <span aria-hidden="true">${isError ? '⚠️' : '✓'}</span>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        setTimeout(() => toast.remove(), 250);
+      }, 3200);
+    }
+
+    /* =========================================================================
+     * 15. GẮN SỰ KIỆN GIAO DIỆN & KHỞI CHẠY (INITIALIZATION)
+     * ========================================================================= */
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Tải ảnh từ input file
+      const fileInput = document.getElementById('fileInput');
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          loadUserImage(e.target.files[0]);
+        }
+      });
+
+      // 2. Nút tải về & lưu Look book
+      document.getElementById('btnDownload').addEventListener('click', downloadPhoto);
+      document.getElementById('btnSaveLookbook').addEventListener('click', saveCurrentToLookbook);
+
+      // 3. Thanh trượt thu phóng
+      const zoomSlider = document.getElementById('zoomSlider');
+      zoomSlider.addEventListener('input', (e) => {
+        state.zoom = parseFloat(e.target.value);
+        document.getElementById('zoomVal').textContent = `${state.zoom.toFixed(1)}x`;
+        renderCanvas();
+      });
+
+      // 4. Đặt lại vị trí ảnh
+      document.getElementById('btnResetTransform').addEventListener('click', () => {
+        state.panX = 0;
+        state.panY = 0;
+        state.zoom = 1.0;
+        zoomSlider.value = 1.0;
+        document.getElementById('zoomVal').textContent = '1.0x';
+        renderCanvas();
+      });
+
+      // 5. Ô nhập chữ trên khung
+      const plaqueInput = document.getElementById('plaqueInput');
+      plaqueInput.addEventListener('input', (e) => {
+        state.customPlaqueText = e.target.value;
+        renderCanvas();
+      });
+
+      // 6. 6 bộ lọc màu
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state.filter = btn.dataset.filter;
+          renderCanvas();
+        });
+      });
+
+      // 7. Ô nhập địa điểm/dịp
+      const contextInput = document.getElementById('customContextInput');
+      contextInput.addEventListener('input', (e) => {
+        state.customContext = e.target.value;
+        updateCaption();
+      });
+
+      // 8. Đổi mẫu câu caption
+      document.getElementById('btnRewriteCaption').addEventListener('click', () => {
+        state.templateIndex++;
+        updateCaption();
+      });
+
+      // 9. Sao chép caption
+      document.getElementById('btnCopyCaption').addEventListener('click', () => {
+        const text = document.getElementById('captionText').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Đã sao chép caption vào clipboard!');
+        }).catch(() => {
+          showToast('Không thể sao chép tự động.', true);
+        });
+      });
+
+      // 10. Khởi tạo các bước và tương tác
+      initFramesStep();
+      initPlatformsStep();
+      initEmotionsStep();
+      initCanvasInteractions();
+      setupWebShare();
+      renderLookbookUI();
+      renderCanvas();
+      updateCaption();
+    });
+  </script>
+</body>
+</html>

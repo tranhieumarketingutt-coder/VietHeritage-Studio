@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cổng Thông Tin Bảo Tồn & Số Hóa Di Sản Văn Hóa Quốc Gia</title>
+  
+  <!-- Typography: Playfair Display for headings & Be Vietnam Pro for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --color-navy: #0F2A6B;
+      --color-navy-dark: #081944;
+      --color-gold: #F2B44D;
+      --color-gold-hover: #D8982D;
+      --color-overlay: rgba(255, 248, 220, 0.35);
+      --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-body: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: var(--font-body);
+      color: var(--color-navy);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Fixed full-page decorative background */
+    body {
+      background-image: url('dong_son_drum.png');
+      background-attachment: fixed;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    /* Subtle warm white overlay preserving the golden drum center star */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: var(--color-overlay);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* App container */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navigation Header */
+    header {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1.5px solid rgba(242, 180, 77, 0.45);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 20px -2px rgba(15, 42, 107, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logo placeholder */
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      text-decoration: none;
+      color: var(--color-navy);
+      cursor: pointer;
+    }
+
+    .emblem {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #F2B44D 0%, #D8982D 100%);
+      border: 2px solid #0F2A6B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(15, 42, 107, 0.2);
+      flex-shrink: 0;
+    }
+
+    .emblem svg {
+      width: 26px;
+      height: 26px;
+      fill: #0F2A6B;
+    }
+
+    .brand-text h1 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: 0.02em;
+      color: var(--color-navy);
+    }
+
+    .brand-text p {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #7A5814;
+      font-weight: 600;
+    }
+
+    /* Desktop Navigation links */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--color-navy);
+      font-weight: 600;
+      font-size: 0.92rem;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--color-gold);
+      transition: width 0.25s ease;
+      border-radius: 2px;
+    }
+
+    .nav-link:hover {
+      color: var(--color-gold-hover);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--color-navy);
+    }
+
+    /* Mobile toggle */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: var(--color-navy);
+    }
+
+    .menu-toggle svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      text-align: center;
+      padding: 4.5rem 1rem 5.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(242, 180, 77, 0.6);
+      padding: 0.4rem 1.25rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 10px rgba(15, 42, 107, 0.06);
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--color-gold);
+      box-shadow: 0 0 6px var(--color-gold);
+    }
+
+    .hero-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--color-navy);
+      max-width: 850px;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-heading span {
+      background: linear-gradient(135deg, #0F2A6B 0%, #1A44A8 60%, #C4871F 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: #1A3677;
+      max-width: 680px;
+      margin-bottom: 2.5rem;
+      font-weight: 500;
+      line-height: 1.7;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+    }
+
+    /* Call to Action Button */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, #F2B44D 0%, #E29B27 100%);
+      color: var(--color-navy-dark);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2.25rem;
+      border-radius: 9999px;
+      border: 1.5px solid rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 10px 25px -4px rgba(242, 180, 77, 0.5), 0 4px 10px rgba(15, 42, 107, 0.12);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -4px rgba(242, 180, 77, 0.65), 0 6px 14px rgba(15, 42, 107, 0.18);
+      background: linear-gradient(135deg, #F8C366 0%, #EBAB38 100%);
+    }
+
+    .cta-btn:active {
+      transform: translateY(1px);
+    }
+
+    .cta-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.2;
+      transition: transform 0.25s ease;
+    }
+
+    .cta-btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Cards Grid Section */
+    .cards-section {
+      margin-top: 1.5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--color-navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: #385596;
+      font-weight: 500;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Glassmorphism Content Cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      border-radius: 1.25rem;
+      padding: 2.25rem 2rem;
+      box-shadow: 0 12px 35px -8px rgba(15, 42, 107, 0.08), 0 2px 8px rgba(242, 180, 77, 0.1);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #F2B44D 0%, #0F2A6B 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 20px 45px -10px rgba(15, 42, 107, 0.15), 0 4px 14px rgba(242, 180, 77, 0.18);
+      border-color: rgba(242, 180, 77, 0.55);
+    }
+
+    .glass-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-top {
+      margin-bottom: 1.5rem;
+    }
+
+    .card-icon-wrapper {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(242, 180, 77, 0.2) 0%, rgba(15, 42, 107, 0.08) 100%);
+      border: 1px solid rgba(242, 180, 77, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--color-navy);
+      transition: all 0.3s ease;
+    }
+
+    .glass-card:hover .card-icon-wrapper {
+      background: var(--color-navy);
+      color: var(--color-gold);
+      transform: scale(1.06);
+    }
+
+    .card-icon-wrapper svg {
+      width: 26px;
+      height: 26px;
+      stroke-width: 2;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9A670F;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      margin-bottom: 0.85rem;
+      line-height: 1.3;
+    }
+
+    .card-description {
+      font-size: 0.92rem;
+      color: #385596;
+      line-height: 1.65;
+    }
+
+    .card-action {
+      margin-top: 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(15, 42, 107, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--color-navy);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+
+    .card-link:hover {
+      color: #D8982D;
+      gap: 0.75rem;
+    }
+
+    .card-link svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2.2;
+    }
+
+    /* Official Footer */
+    footer {
+      background: rgba(15, 42, 107, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #FAF7F2;
+      border-top: 2px solid var(--color-gold);
+      padding: 3.5rem 1.5rem 2rem;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-info h3 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--color-gold);
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    .footer-info p {
+      font-size: 0.88rem;
+      color: #E2E8F0;
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gold);
+      margin-bottom: 1rem;
+    }
+
+    .footer-list {
+      list-style: none;
+    }
+
+    .footer-list li {
+      font-size: 0.85rem;
+      color: #CBD5E1;
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .footer-list a {
+      color: #CBD5E1;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-list a:hover {
+      color: var(--color-gold);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: #94A3B8;
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 900px) {
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.5rem;
+        gap: 1rem;
+        border-bottom: 2px solid var(--color-gold);
+        box-shadow: 0 10px 25px rgba(15, 42, 107, 0.15);
+        display: none;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero-section {
+        padding: 3rem 0.5rem 4rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Subtle warm white overlay allowing the golden Dong Son pattern & center star to shine softly -->
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- Header with logo placeholder and navigation -->
+    <header>
+      <div class="nav-container">
+        <a href="#" class="brand-logo" aria-label="Trang chủ Cổng thông tin Di sản Quốc gia">
+          <div class="emblem" aria-hidden="true">
+            <!-- Stylized Star Motif / Drum Center Emblem -->
+            <svg viewBox="0 0 24 24">
+              <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h1>CỔNG DI SẢN QUỐC GIA</h1>
+            <p>National Cultural Heritage Portal</p>
+          </div>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Mở danh mục điều hướng" aria-expanded="false">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+
+        <!-- Navigation Menu -->
+        <nav>
+          <ul class="nav-menu" id="navMenu">
+            <li><a href="#home" class="nav-link active">Trang Chủ</a></li>
+            <li><a href="#about" class="nav-link">Kho Di Sản</a></li>
+            <li><a href="#museum" class="nav-link">Bảo Tàng Số</a></li>
+            <li><a href="#services" class="nav-link">Dịch Vụ Công</a></li>
+            <li><a href="#contact" class="nav-link">Liên Hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+      <!-- Hero Section centered over the golden drum pattern -->
+      <section class="hero-section" id="home">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>Bảo Tồn & Số Hóa Di Sản Văn Hóa Việt Nam</span>
+        </div>
+
+        <h2 class="hero-heading">
+          Khám Phá Chiều Dài Lịch Sử &amp; <span>Tinh Hoa Văn Hiến</span> Nghìn Năm
+        </h2>
+
+        <p class="hero-description">
+          Hệ thống cơ sở dữ liệu số hóa quốc gia kết nối di sản vật thể và phi vật thể. Bảo tồn tinh hoa văn hóa Đông Sơn, mỹ thuật triều đại và phục dựng trang phục truyền thống Việt Nam chuẩn mực.
+        </p>
+
+        <a href="#services" class="cta-btn">
+          <span>Tra Cứu Dữ Liệu Di Sản</span>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </section>
+
+      <!-- 3 Glassmorphism Content Cards Section -->
+      <section class="cards-section" id="services">
+        <div class="section-header">
+          <h3 class="section-title">Hệ Thống Dịch Vụ &amp; Trưng Bày Trực Tuyến</h3>
+          <p class="section-subtitle">Tiếp cận nguồn tư liệu chuẩn sử và các tiện ích số hóa di sản toàn quốc</p>
+        </div>
+
+        <div class="cards-grid">
+          <!-- Card 1 -->
+          <article class="glass-card">
+            <div class="card-top">
+              <div class="card-icon-wrapper" aria-hidden="true">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <span class="card-tag">Tư liệu chuẩn sử</span>
+              <h4 class="card-title">Kho Dữ Liệu Châu Bản &amp; Điển Chế</h4>
+              <p class="card-description">
+                Tra cứu hơn 10.000 hồ sơ số hóa các điển chế phục trang, văn bia, tư liệu lịch sử thời Đinh, Tiền Lê, Lý, Trần, Hậu Lê và Triều Nguyễn.
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="#" class="card-link">
+                <span>Khám phá kho tư liệu</span>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="glass-card">
+            <div class="card-top">
+              <div class="card-icon-wrapper" aria-hidden="true">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <span class="card-tag">Bảo tàng tương tác 3D</span>
+              <h4 class="card-title">Phục Dựng Cổ Vật &amp; Hoa Văn Đông Sơn</h4>
+              <p class="card-description">
+                Mô hình giải phẫu 3D chi tiết hoa văn trống đồng, chuông đồng, trang phục hoàng gia với công nghệ hiển thị thời gian thực độ phân giải cao.
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="#" class="card-link">
+                <span>Tham quan bảo tàng số</span>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="glass-card">
+            <div class="card-top">
+              <div class="card-icon-wrapper" aria-hidden="true">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <span class="card-tag">Dịch vụ công &amp; Bản quyền</span>
+              <h4 class="card-title">Đăng Ký &amp; Xác Thực Bản Quyền Hoa Văn</h4>
+              <p class="card-description">
+                Hệ thống nộp hồ sơ trực tuyến, tra cứu mã định danh di sản và cấp chứng nhận bản quyền số cho các nhà thiết kế và nghệ nhân cổ phục.
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="#" class="card-link">
+                <span>Đăng ký dịch vụ công</span>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer with simple contact info -->
+    <footer id="contact">
+      <div class="footer-container">
+        <div class="footer-info">
+          <h3>CỔNG THÔNG TIN DI SẢN VĂN HÓA QUỐC GIA</h3>
+          <p>
+            Cơ quan chủ quản: Ban Điều Hành Số Hóa Di Sản &amp; Mỹ Thuật Truyền Thống Việt Nam.<br>
+            Hệ thống phát triển nhằm gìn giữ, tôn vinh và lan tỏa giá trị văn hóa ngàn năm của dân tộc trong thời đại số.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Thông Tin Liên Hệ</h4>
+          <ul class="footer-list">
+            <li>📍 51 Tràng Tiền, Hoàn Kiếm, Hà Nội</li>
+            <li>📞 (024) 3825.4321 - 3825.4322</li>
+            <li>✉️ lienhe@disanquocgia.gov.vn</li>
+            <li>⏰ 08:00 - 17:00 (Thứ 2 - Thứ 6)</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Liên Kết Nhanh</h4>
+          <ul class="footer-list">
+            <li><a href="#">✦ Cổng Thông Tin Chính Phủ</a></li>
+            <li><a href="#">✦ Bảo Tàng Lịch Sử Quốc Gia</a></li>
+            <li><a href="#">✦ Trung Tâm Di Sản Hoàng Thành Thăng Long</a></li>
+            <li><a href="#">✦ Quy chế bảo tồn di sản số</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Cổng Thông Tin Di Sản Văn Hóa Quốc Gia. Bản quyền được bảo hộ.
+        </div>
+        <div>
+          Trang web tối ưu hóa trên mọi thiết bị di động &amp; máy tính.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Responsive Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Close menu on link click
+      navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

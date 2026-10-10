@@ -1,9 +1,9 @@
 import React from 'react';
-import { Landmark, Palette } from 'lucide-react';
+import { Landmark, Palette, Camera } from 'lucide-react';
 
 export interface HeroSectionProps {
-  onSelectHub?: (hub: 'hub1' | 'hub2') => void;
-  activeHub?: 'hub1' | 'hub2';
+  onSelectHub?: (hub: 'hub1' | 'hub2' | 'hub3') => void;
+  activeHub?: 'hub1' | 'hub2' | 'hub3';
 }
 
 /**
@@ -103,6 +103,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectHub, activeHub
           >
             <Palette className={`w-4 h-4 ${activeHub === 'hub2' ? 'text-[#D4AF37]' : 'text-[#8B0000]'}`} />
             <span>Phối Màu Sắc Tố Tự Nhiên</span>
+          </button>
+          <button 
+            type="button"
+            id="heroGoHub3" 
+            onClick={() => onSelectHub && onSelectHub('hub3')}
+            className={`px-6 py-3 rounded-xl font-medium text-sm transition-all shadow-md hover:shadow-lg flex items-center space-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
+              activeHub === 'hub3'
+                ? 'bg-[#8B0000] hover:bg-[#700000] text-white border border-transparent'
+                : 'bg-white hover:bg-[#FDF6E2] text-[#222222] border border-[#D4AF37]'
+            }`}
+          >
+            <Camera className={`w-4 h-4 ${activeHub === 'hub3' ? 'text-[#D4AF37]' : 'text-[#8B0000]'}`} />
+            <span>Cộng Đồng Lan Tỏa</span>
           </button>
         </div>
 
