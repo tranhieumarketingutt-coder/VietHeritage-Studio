@@ -197,6 +197,13 @@ describe('Heritage Museum Corner and Locations Atlas Suite', () => {
     assert.ok(appFile.includes('HeritageMuseumCorner'), 'App must import HeritageMuseumCorner');
     assert.ok(appFile.includes('heritageMuseumCornerSection'), 'App must render heritageMuseumCornerSection');
 
+    // Verify that HeritageMuseumCorner is independent and NOT rendered inside Hub 1
+    const hub1Index = appFile.indexOf("activeHub === 'hub1'");
+    const museumCornerIndex = appFile.indexOf("activeHub === 'museumCorner'");
+    assert.ok(hub1Index !== -1 && museumCornerIndex !== -1, 'Both activeHub checks must exist in App.tsx');
+    const hub1Block = appFile.substring(hub1Index, museumCornerIndex);
+    assert.ok(!hub1Block.includes('HeritageMuseumCorner'), 'HeritageMuseumCorner must not be rendered inside Hub 1');
+
     // Hard Gate: Zero em dashes in modified files
     assert.ok(!cornerFile.includes('—'), 'HeritageMuseumCorner must contain zero em dashes');
     assert.ok(!navbarFile.includes('—'), 'Navbar must contain zero em dashes');

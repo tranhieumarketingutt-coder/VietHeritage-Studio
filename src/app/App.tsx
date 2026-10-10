@@ -111,11 +111,6 @@ export const App: React.FC<AppProps> = () => {
                   <MuseumGallery lang={lang} />
                 </Suspense>
               </div>
-              <div id="heritageMuseumCornerSection">
-                <Suspense fallback={<SectionLoader />}>
-                  <HeritageMuseumCorner lang={lang} />
-                </Suspense>
-              </div>
               <Suspense fallback={<SectionLoader />}>
                 <AnatomySection lang={lang} />
               </Suspense>
