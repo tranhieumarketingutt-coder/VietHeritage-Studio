@@ -1,24 +1,24 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getGeminiStatus } from '../../src/geminiService.ts';
+import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { executeStatusHandler } from "../../server/handlers";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+/**
+ * Vercel serverless function endpoint for status inquiry.
+ */
+export default async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
   }
 
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+  if (req.method !== "GET") {
+    res.status(405).json({ error: "Method Not Allowed" });
+    return;
   }
 
-  try {
-    const status = getGeminiStatus();
-    return res.status(200).json(status);
-  } catch (error: any) {
-    console.error('API /api/gemini/status error:', error);
-    return res.status(500).json({ error: error?.message || 'Internal Server Error' });
-  }
+  const { statusCode, data } = await executeStatusHandler();
+  res.status(statusCode).json(data);
 }

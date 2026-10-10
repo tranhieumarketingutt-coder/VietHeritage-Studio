@@ -64,177 +64,7 @@ const state = {
   ]
 };
 
-// UI Translations Dictionary
-const I18N = {
-  vi: {
-    tagline: 'Nền Tảng Đồng Sáng Tạo Cổ Phục Cho Thế Hệ Z',
-    navHub1: 'HUB 1: BẢO TÀNG DI SẢN',
-    navHub2: 'HUB 2: AI CO-CREATOR',
-    wardrobeBtn: 'Tủ Đồ Di Sản',
-    communityBtn: 'Bảo Tàng Cộng Đồng',
-    loginBtn: 'Tài khoản',
-    audioTitle: 'Nhã Nhạc & Bèo Dạt Mây Trôi',
-    heroBadge: 'INDOCHINE HIGH-FASHION EDITORIAL 2026',
-    heroTitle: 'Di Sản Trong Hơi Thở Đương Đại',
-    heroDesc: 'Cầu nối số hóa thế hệ Z và cổ phục Việt Nam. Phục dựng chuẩn xác - Phối đồ thấu đáo - Tôn vinh cội nguồn.',
-    exploreBtn: 'Khám Phá Bảo Tàng Số',
-    tryOnHeroBtn: 'Thử Đồ AI & Phối Màu',
-    stat1: 'Dòng Cổ Phục Chuẩn Sử',
-    stat2: 'Nhóm Personal Color Việt',
-    stat3: 'Tọa Độ Check-in & Cho Thuê',
-    stat4: 'Cultural Guardrail',
-    anatomyTitle: 'Bóc Tách Lớp Áo 2D Cho Tất Cả Cổ Phục',
-    anatomySub: 'Tương tác trực quan đa dạng cổ phục: Áo Ngũ Thân, Áo Nhật Bình, Áo Giao Lĩnh, Áo Tứ Thân, Áo Bà Ba, Áo Dài.',
-    btnToggleFlaps: 'Mở / Đóng Vạt Áo',
-    layerAll: 'Đầy đủ các lớp',
-    layerInner: 'Chỉ lớp áo lót trắng',
-    layerOuter: 'Chỉ áo khoác ngoài',
-    museumTitle: 'Bảo Tàng Số Cổ Phục Việt Nam',
-    museumSub: 'Tổng hợp 6 tuyệt tác trang phục với tư liệu lịch sử, kỹ thuật dệt may và ý nghĩa triết học sâu sắc.',
-    btnViewDetails: 'Xem Chi Tiết Lịch Sử',
-    btnTryThis: 'Phối Đồ Với Bộ Này',
-    mediaSectionTitle: 'Tư Liệu Điện Ảnh & Thước Phim Di Sản',
-    mediaSectionSub: 'Góc nhìn thực tế về chuyển động tà áo ngũ thân và phục dựng cổ phục triều Nguyễn.',
-    mapSectionTitle: 'Bản Đồ Không Gian Văn Hóa & Dịch Vụ',
-    mapSectionSub: 'Định vị địa chỉ cho thuê trang phục uy tín, bảo tàng trưng bày và tọa độ check-in tại Hà Nội, Huế, TP.HCM.',
-    tabAll: 'Tất cả địa điểm',
-    tabShop: 'Shop bán/cho thuê',
-    tabMuseum: 'Bảo tàng trưng bày',
-    tabPhoto: 'Tọa độ chụp ảnh di sản',
-    studioTitle: 'V-Studio: Cá Nhân Hóa & Thử Đồ AI',
-    studioSub: 'Phân tích Personal Color 4 Mùa cho tông da Việt, phối đồ theo ngữ cảnh điểm đến & thời tiết, rào chắn bảo vệ văn hóa.',
-    formPhotoLabel: 'Tải Ảnh Chân Dung (Hoặc chọn mẫu)',
-    presetLabel: 'Undertone 4 Mùa:',
-    presetAutumn: 'Mùa Thu (Autumn)',
-    presetSpring: 'Mùa Xuân (Spring)',
-    presetSummer: 'Mùa Hạ (Summer)',
-    presetWinter: 'Mùa Đông (Winter)',
-    heightLabel: 'Chiều cao (cm)',
-    weightLabel: 'Cân nặng (kg)',
-    bodyShapeLabel: 'Dáng người',
-    shapeHourglass: 'Đồng hồ cát (Hourglass)',
-    shapePear: 'Quả lê (Pear)',
-    shapeRect: 'Thước kẻ (Rectangle)',
-    shapeInverted: 'Tam giác ngược (Inverted)',
-    destLabel: 'Điểm đến dự kiến',
-    destHoangThanh: 'Hoàng Thành Thăng Long',
-    destHoiAn: 'Phố cổ Hội An',
-    destTemple: 'Lễ Chùa (Chốn tôn nghiêm)',
-    destCafe: 'Cà phê Dạo phố',
-    weatherLabel: 'Thời tiết',
-    weatherCold18: 'Thu Đông lạnh 18°C',
-    weatherSummer32: 'Mùa Hè 32°C',
-    costumeSelectLabel: 'Loại cổ phục',
-    bottomSelectLabel: 'Trang phục dưới (Quần/Váy)',
-    bottomPant: 'Quần thụng lụa trắng (Chuẩn mực)',
-    bottomSkirt: 'Thường / Váy quây dệt gấm (Chuẩn mực)',
-    bottomShort: 'Quần đùi / Váy ngắn (⚠️ Vi phạm)',
-    collarSelectLabel: 'Kiểu cổ áo (Nếu chọn Giao Lĩnh)',
-    collarHuu: 'Hữu Nhậm (Vạt trái đè lên vạt phải - Chuẩn)',
-    collarTa: 'Tả Nhậm (Vạt trái nằm dưới - ⚠️ Vi phạm)',
-    btnAnalyze: 'Phân Tích & Thử Đồ AI',
-    scanningText: 'AI đang phân tích cấu trúc khuôn mặt, undertone & vóc dáng...',
-    lookbookBadge: 'HIGH-FASHION LOOKBOOK DOSSIER',
-    dyeTitle: 'Bảng Màu Nhuộm Tự Nhiên Phù Hợp',
-    bodyTitle: 'Tối Ưu Vóc Dáng & Phom Dáng',
-    guardTitle: 'Hệ Thống Cảnh Báo Văn Hóa (Cultural Guardrail)',
-    btnAddToCommunity: 'Đưa Vào Bảo Tàng Cộng Đồng',
-    btnSendEmail: 'Gửi Lookbook về Email',
-    btnSaveWardrobe: 'Lưu vào Tủ Đồ Di Sản',
-    btnCreatePhotocard: 'Tạo Thẻ Sứ Giả Văn Hóa',
-    communityHeader: 'Bảo Tàng Sáng Tạo Cộng Đồng (Live Showcase)',
-    communitySub: 'Các bản phối cổ phục ấn tượng từ thế hệ Z được chia sẻ trực tiếp qua nền tảng.',
-    btnRemix: 'Remix phong cách này',
-    chatDrawerTitle: 'Trợ lý Cổ Phục AI (Gemini Live)',
-    chatPlaceholder: 'Nhập câu hỏi về cổ phục hoặc phong cách...',
-    btnSend: 'Gửi'
-  },
-  en: {
-    tagline: 'Gen Z Heritage Co-Creation Platform',
-    navHub1: 'HUB 1: BẢO TÀNG DI SẢN',
-    navHub2: 'HUB 2: AI CO-CREATOR',
-    wardrobeBtn: 'Personal Wardrobe',
-    communityBtn: 'Community Museum',
-    loginBtn: 'Profile',
-    audioTitle: 'Dan Tranh Ambient Meditation',
-    heroBadge: 'INDOCHINE HIGH-FASHION EDITORIAL 2026',
-    heroTitle: 'Heritage in Contemporary Breath',
-    heroDesc: 'Digitizing Vietnamese imperial costumes for Gen Z. Archival accuracy, conscious styling, ancestral honor.',
-    exploreBtn: 'Explore Digital Museum',
-    tryOnHeroBtn: 'AI Styling & Color Match',
-    stat1: 'Historic Garment Forms',
-    stat2: 'Asian Personal Color Palettes',
-    stat3: 'Checked Rentals & Museums',
-    stat4: 'Cultural Guardrail',
-    anatomyTitle: '2D Layered Costume Anatomy for All Costumes',
-    anatomySub: 'Interactive 2D deconstruction across all six iconic Vietnamese costumes: Ngu Than, Nhat Binh, Giao Linh, Tu Than, Ba Ba, and Ao Dai.',
-    btnToggleFlaps: 'Open / Close Flaps',
-    layerAll: 'All Layers',
-    layerInner: 'Inner White Tunic Only',
-    layerOuter: 'Outer Coat Only',
-    museumTitle: 'Digital Museum of Vietnamese Costumes',
-    museumSub: '6 masterworks spanning centuries, detailing textiles, tailoring craftsmanship, and cultural codes.',
-    btnViewDetails: 'Historical Dossier',
-    btnTryThis: 'Style This Outfit',
-    mediaSectionTitle: 'Cinematic Heritage Footage',
-    mediaSectionSub: 'Witness authentic fabric movement and royal costume restoration.',
-    mapSectionTitle: 'Cultural Spaces & Services Map',
-    mapSectionSub: 'Locate certified costume ateliers, national museums, and imperial photo destinations.',
-    tabAll: 'All Locations',
-    tabShop: 'Rental & Tailoring',
-    tabMuseum: 'Museum Exhibitions',
-    tabPhoto: 'Heritage Coordinates',
-    studioTitle: 'AI Co-Creator & Contextual Styling',
-    studioSub: 'Personal Color calibrated for Asian olive tones, silhouette balance, and cultural guardrails.',
-    formPhotoLabel: 'Upload Portrait (Or pick a preset)',
-    presetLabel: 'Quick presets:',
-    presetAutumn: 'Warm Olive (Autumn)',
-    presetSpring: 'Warm Fair (Spring)',
-    presetSummer: 'Cool Light (Summer)',
-    heightLabel: 'Height (cm)',
-    weightLabel: 'Weight (kg)',
-    bodyShapeLabel: 'Body Shape',
-    shapeHourglass: 'Hourglass',
-    shapePear: 'Pear Shape',
-    shapeRect: 'Rectangle',
-    shapeInverted: 'Inverted Triangle',
-    destLabel: 'Destination',
-    destHue: 'Hue Imperial Citadel',
-    destHoiAn: 'Hoi An Ancient Town',
-    destVanMieu: 'Temple of Literature Hanoi',
-    destProm: 'Graduation Prom / Gala',
-    destTemple: 'Sacred Shrine / Mausoleum',
-    destCafe: 'Old Quarter Cafe / Casual',
-    weatherLabel: 'Weather',
-    weatherWarm: 'Mild Sun 25°C',
-    weatherCold: 'Breezy Cool 18°C',
-    weatherSummer: 'Tropical Heat 32°C',
-    weatherWinter: 'Northern Monsoon 14°C',
-    costumeSelectLabel: 'Garment Form',
-    bottomSelectLabel: 'Lower Garment (Pants / Skirt)',
-    bottomPant: 'White Flowing Silk Trousers (Canon)',
-    bottomSkirt: 'Long Brocade Wrap Skirt (Canon)',
-    bottomShort: 'Shorts / Miniskirt (Triggers Guardrail)',
-    collarSelectLabel: 'Lapel Crossing (For Giao Linh)',
-    collarHuu: 'Huu Nham (Left over Right - Canon)',
-    collarTa: 'Ta Nham (Right over Left - Violation)',
-    btnAnalyze: 'Analyze & AI Try-On',
-    scanningText: 'AI scanning skin undertones, silhouette & cultural statutes...',
-    lookbookBadge: 'HIGH-FASHION LOOKBOOK DOSSIER',
-    dyeTitle: 'Harmonious Natural Dye Palette',
-    bodyTitle: 'Body Silhouette Guidance',
-    guardTitle: 'Cultural Guardrail & Respect Gauge',
-    btnAddToCommunity: 'Publish to Community Museum',
-    btnSendEmail: 'Email Styling Dossier',
-    btnSaveWardrobe: 'Save to Personal Wardrobe',
-    communityHeader: 'Live Community Heritage Showcase',
-    communitySub: 'Crowd-sourced Gen Z styling remixes celebrated across Vietnam.',
-    btnRemix: 'Remix This Look',
-    chatDrawerTitle: 'AI Cultural Stylist (Gemini Live)',
-    chatPlaceholder: 'Ask about costume history, colors or styling...',
-    btnSend: 'Send'
-  }
-};
+import { I18N } from './shared/i18n';
 
 function t(key) {
   const dict = I18N[state.lang] || I18N.vi;
@@ -6188,17 +6018,20 @@ function renderStylingResults() {
     if (r.guardrails && r.guardrails.length > 0) {
       alertContainer.classList.remove('hidden');
       alertContainer.className = 'space-y-2.5 animate-[shake_0.5s_ease-in-out]';
-      alertContainer.innerHTML = r.guardrails.map(g => `
+      alertContainer.innerHTML = r.guardrails.map(g => {
+        const titleVi = g.titleVi || g.messageVi || g.message;
+        const messageVi = g.messageVi || g.message || titleVi;
+        return `
         <div class="p-3.5 rounded-xl ${g.severity === 'error' ? 'bg-red-50 border-2 border-red-300 text-red-900 shadow-sm' : 'bg-amber-50 border-2 border-amber-300 text-amber-900 shadow-2xs'} text-xs">
           <div class="font-mono font-bold mb-1 flex items-center space-x-1.5">
             <span class="text-sm">${g.severity === 'error' ? '🛑' : '💡'}</span>
-            <span class="tracking-wide">${isEn ? g.titleEn : g.titleVi}</span>
+            <span class="tracking-wide">${isEn ? g.titleEn : titleVi}</span>
           </div>
           <p class="leading-relaxed text-[11px] font-sans">
-            ${isEn ? g.messageEn : g.messageVi}
+            ${isEn ? g.messageEn : messageVi}
           </p>
         </div>
-      `).join('');
+      `}).join('');
     } else {
       alertContainer.classList.add('hidden');
       alertContainer.innerHTML = '';

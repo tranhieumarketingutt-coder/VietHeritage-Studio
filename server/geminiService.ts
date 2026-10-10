@@ -3,53 +3,64 @@ import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 
-// Read API key dynamically from process.env (Vercel) or disk (.env.local, .env)
+let cachedApiKey: string | null = null;
+
+/**
+ * Resolves the Gemini API key from environment variables or disk configuration files.
+ * Caches the resolved key in-memory to prevent repeated synchronous disk reads.
+ */
 export function getApiKey(): string {
-  // 1. Read from process.env (Standard in Vercel / Production deployment)
+  if (cachedApiKey !== null) {
+    return cachedApiKey;
+  }
+
   const fromEnv = (process.env.GEMINI_API_KEY || process.env.API_KEY || "").trim();
   if (fromEnv && fromEnv !== "MY_GEMINI_API_KEY" && fromEnv.length > 5) {
-    return fromEnv;
+    cachedApiKey = fromEnv;
+    return cachedApiKey;
   }
 
-  // 2. Read directly from .env.local on disk (Local development)
-  try {
-    const envLocalPath = path.resolve(process.cwd(), ".env.local");
-    if (fs.existsSync(envLocalPath)) {
-      const parsed = dotenv.parse(fs.readFileSync(envLocalPath, "utf-8"));
-      const key = (parsed.GEMINI_API_KEY || parsed.API_KEY || "").trim();
-      if (key && key !== "MY_GEMINI_API_KEY" && key.length > 5) {
-        return key;
+  const candidateFiles = [".env.local", ".env"];
+  for (const fileName of candidateFiles) {
+    try {
+      const filePath = path.resolve(process.cwd(), fileName);
+      if (fs.existsSync(filePath)) {
+        const parsed = dotenv.parse(fs.readFileSync(filePath, "utf-8"));
+        const key = (parsed.GEMINI_API_KEY || parsed.API_KEY || "").trim();
+        if (key && key !== "MY_GEMINI_API_KEY" && key.length > 5) {
+          cachedApiKey = key;
+          return cachedApiKey;
+        }
       }
+    } catch {
+      // Continue inspecting the next candidate configuration file.
     }
-  } catch (e) {}
+  }
 
-  // 3. Read from .env on disk
-  try {
-    const envPath = path.resolve(process.cwd(), ".env");
-    if (fs.existsSync(envPath)) {
-      const parsed = dotenv.parse(fs.readFileSync(envPath, "utf-8"));
-      const key = (parsed.GEMINI_API_KEY || parsed.API_KEY || "").trim();
-      if (key && key !== "MY_GEMINI_API_KEY" && key.length > 5) {
-        return key;
-      }
-    }
-  } catch (e) {}
-
-  return "";
+  cachedApiKey = "";
+  return cachedApiKey;
 }
 
-// Load environment variables dynamically from server environment only
+let cachedClient: GoogleGenAI | null = null;
+
+/**
+ * Instantiates or retrieves the cached GoogleGenAI client singleton.
+ */
 export function getGenAIClient(): GoogleGenAI | null {
-  const key = getApiKey();
-  if (key) {
-    try {
-      return new GoogleGenAI({ apiKey: key });
-    } catch (e) {
-      console.warn("Failed to initialize GoogleGenAI with key:", e);
-      return null;
-    }
+  if (cachedClient) {
+    return cachedClient;
   }
-  return null;
+  const key = getApiKey();
+  if (!key) {
+    return null;
+  }
+  try {
+    cachedClient = new GoogleGenAI({ apiKey: key });
+    return cachedClient;
+  } catch (err) {
+    console.warn("Failed to initialize GoogleGenAI client:", err);
+    return null;
+  }
 }
 
 const CULTURAL_SYSTEM_PROMPT = `
@@ -69,10 +80,18 @@ Bạn là chuyên gia hàng đầu về cổ phục Việt Nam qua các triều 
 5. Ngắn gọn, có gạch đầu dòng rõ ràng, định dạng markdown đẹp mắt.
 `;
 
+export interface ChatResponse {
+  text: string;
+  isLive: boolean;
+}
+
+/**
+ * Handles conversational queries with cultural grounding and historical guardrails.
+ */
 export async function handleGeminiChat(
   message: string,
   lang: "vi" | "en" = "vi",
-): Promise<{ text: string; isLive: boolean }> {
+): Promise<ChatResponse> {
   const client = getGenAIClient();
   if (!client) {
     return {
@@ -101,19 +120,19 @@ export async function handleGeminiChat(
 
     const reply = response.text || "";
     return { text: reply, isLive: true };
-  } catch (error: any) {
-    console.error("Gemini API Error:", error?.message || error);
+  } catch (error) {
+    console.error("Gemini API Chat Error:", error);
     return {
       text:
         lang === "en"
-          ? `We are currently operating with curated heritage wisdom. Remember to preserve the stand collar and flowing trousers for an authentic look!`
-          : `Hiện kết nối AI thời gian thực đang bận, hệ thống chuyển sang tư vấn chuẩn sử: Giữ vững phom dáng lập lĩnh ngũ thân, phối cùng phụ kiện tối giản sẽ giúp bạn tỏa sáng đầy tự tin!`,
+          ? "We are currently operating with curated heritage wisdom. Remember to preserve the stand collar and flowing trousers for an authentic look!"
+          : "Hiện kết nối AI thời gian thực đang bận, hệ thống chuyển sang tư vấn chuẩn sử: Giữ vững phom dáng lập lĩnh ngũ thân, phối cùng phụ kiện tối giản sẽ giúp bạn tỏa sáng đầy tự tin!",
       isLive: false,
     };
   }
 }
 
-export async function handleGeminiStyling(data: {
+export interface StylingInput {
   costumeName: string;
   season: string;
   undertone: string;
@@ -121,7 +140,18 @@ export async function handleGeminiStyling(data: {
   weather: string;
   colorHex: string;
   bodyShape: string;
-}): Promise<{ expertAdvice: string; guardrailCheck: string; isLive: boolean }> {
+}
+
+export interface StylingResponse {
+  expertAdvice: string;
+  guardrailCheck: string;
+  isLive: boolean;
+}
+
+/**
+ * Generates expert styling evaluation and verifies cultural alignment.
+ */
+export async function handleGeminiStyling(data: StylingInput): Promise<StylingResponse> {
   const client = getGenAIClient();
   if (!client) {
     return {
@@ -156,20 +186,18 @@ Ngắn gọn, sâu sắc, sành điệu và chuẩn sử.`;
     const text = response.text || "";
     return {
       expertAdvice: text,
-      guardrailCheck:
-        "✓ Đã thẩm định qua Gemini Cultural Guardrail - Đạt chuẩn 98% chuẩn mực lịch sử.",
+      guardrailCheck: "✓ Đã thẩm định qua Gemini Cultural Guardrail - Đạt chuẩn 98% chuẩn mực lịch sử.",
       isLive: true,
     };
-  } catch (err: any) {
+  } catch {
     return {
       expertAdvice: `Bản phối ${data.costumeName} đạt tỷ lệ hài hòa cao giữa sắc thái truyền thống và phong cách Gen Z.`,
-      guardrailCheck: `✓ Tuân thủ chuẩn mực di sản.`,
+      guardrailCheck: "✓ Tuân thủ chuẩn mực di sản.",
       isLive: false,
     };
   }
 }
 
-// Master Costume Cultural Specifications for Virtual Try-On
 const COSTUME_PROMPT_DESCRIPTIONS: Record<string, string> = {
   "ngu-than": `authentic traditional Vietnamese Áo Ngũ Thân (Five-Part Dress, 1744 Nguyen Dynasty sartorial decree). The robe is crafted from premium Van Phuc mulberry silk with five panels symbolizing filial piety and personal humility. It strictly features an upright 3-4cm tall square stand collar (lập lĩnh) fastened snugly around the neck with 5 knotted buttons (khuy nữu) running diagonally to the right armpit, an unbroken center spine seam (trung phùng) down the back, subtly curved bow-like hemline, full-length flowing white silk trousers (quần thụng), accompanied by a traditional black velvet headwrap (khăn đóng chữ Nhân) and a minimalist solid silver lotus torque necklace (kiềng bạc hoa sen).`,
   "nhat-binh": `authentic royal Vietnamese Áo Nhật Bình court robe (Imperial Nguyen Dynasty). The robe is adorned with a rectangular embroidered collar band across the chest, exquisite phoenix and floral roundels (Loan Phượng), five-element colored sleeve bands (ngũ hành silk stripes: wood, fire, earth, metal, water), and Tam Sơn Thủy Ba (three mountains and holy waves) embroidery on the hem, accompanied by traditional imperial headwrap and jade embellishments.`,
@@ -191,12 +219,14 @@ const DESTINATION_DESCRIPTIONS: Record<string, string> = {
     "majestic Ngo Mon Gate and royal palace courtyard of the Imperial City of Hue with ancient red lacquer columns and glazed ceramic imperial roof tiles",
 };
 
-// Retrieve local costume asset from public/costumes/ if available
+/**
+ * Locates authentic reference costume photograph from local repository assets.
+ */
 export function getLocalCostumeImage(costumeId: string): { mimeType: string; data: string } | null {
-  const exts = ['.png', '.jpg', '.jpeg', '.webp'];
+  const exts = [".png", ".jpg", ".jpeg", ".webp"];
   const dirs = [
-    path.resolve(process.cwd(), 'public', 'costumes'),
-    path.resolve(process.cwd(), 'src', 'assets', 'costumes')
+    path.resolve(process.cwd(), "public", "costumes"),
+    path.resolve(process.cwd(), "src", "assets", "costumes"),
   ];
 
   for (const dir of dirs) {
@@ -205,8 +235,8 @@ export function getLocalCostumeImage(costumeId: string): { mimeType: string; dat
       if (fs.existsSync(filePath)) {
         try {
           const fileBuffer = fs.readFileSync(filePath);
-          const mimeType = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
-          return { mimeType, data: fileBuffer.toString('base64') };
+          const mimeType = ext === ".png" ? "image/png" : ext === ".webp" ? "image/webp" : "image/jpeg";
+          return { mimeType, data: fileBuffer.toString("base64") };
         } catch (e) {
           console.warn(`Could not read costume file at ${filePath}:`, e);
         }
@@ -216,7 +246,7 @@ export function getLocalCostumeImage(costumeId: string): { mimeType: string; dat
   return null;
 }
 
-export async function handleGeminiVirtualTryOn(data: {
+export interface TryOnInput {
   userPhotoBase64?: string;
   userPhotoMimeType?: string;
   costumeId: string;
@@ -226,72 +256,86 @@ export async function handleGeminiVirtualTryOn(data: {
   destinationId?: string;
   accessories?: string[];
   gender?: string;
-}): Promise<{
+}
+
+export interface TryOnResponse {
   imageUrl: string;
   model: string;
   promptUsed: string;
   isLive: boolean;
   notes: string;
   error?: string;
-}> {
-  const costumeKey = data.costumeId || "ngu-than";
-  const costumeDesc =
-    COSTUME_PROMPT_DESCRIPTIONS[costumeKey] ||
-    COSTUME_PROMPT_DESCRIPTIONS["ngu-than"];
-  const destDesc =
-    DESTINATION_DESCRIPTIONS[data.destinationId || "hoang-thanh"] ||
-    DESTINATION_DESCRIPTIONS["hoang-thanh"];
-  const colorDesc =
-    data.colorName ||
-    (data.colorHex ? `color code ${data.colorHex}` : "imperial vermilion red");
+}
 
-  // Master Prompt Template engineered specifically for Vietnamese Heritage
+const FALLBACK_TRY_ON_IMAGES: Record<string, string> = {
+  "ngu-than":
+    "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+  "nhat-binh":
+    "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=85",
+  "giao-linh":
+    "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+  "tu-than":
+    "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85",
+  "ba-ba":
+    "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
+  "ao-dai":
+    "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+};
+
+interface ContentPart {
+  inlineData?: {
+    mimeType: string;
+    data: string;
+  };
+  text?: string;
+}
+
+interface GenerateCandidate {
+  content?: {
+    parts?: ContentPart[];
+  };
+}
+
+interface GenerateResponseShape {
+  candidates?: GenerateCandidate[];
+}
+
+/**
+ * Orchestrates multi-modal try-on image generation using Gemini visual models.
+ */
+export async function handleGeminiVirtualTryOn(data: TryOnInput): Promise<TryOnResponse> {
+  const costumeKey = data.costumeId || "ngu-than";
+  const costumeDesc = COSTUME_PROMPT_DESCRIPTIONS[costumeKey] || COSTUME_PROMPT_DESCRIPTIONS["ngu-than"];
+  const destDesc = DESTINATION_DESCRIPTIONS[data.destinationId || "hoang-thanh"] || DESTINATION_DESCRIPTIONS["hoang-thanh"];
+  const colorDesc = data.colorName || (data.colorHex ? `color code ${data.colorHex}` : "imperial vermilion red");
+
   const fullPrompt = `High-fashion Indochine editorial lookbook portrait photograph of the person.
 The person is wearing an ${costumeDesc}
 The tunic is dyed in natural traditional ${colorDesc} with subtle authentic silk luster.
 Background: ${destDesc}.
 Photography style: Shot on Hasselblad H6D-100c, 85mm portrait lens, f/2.2 aperture, soft editorial daylighting, photorealistic, intricate embroidery and fabric weave details, 8k resolution, authentic Vietnamese cultural heritage.
-Strict cultural preservation: The subject's facial resemblance, ethnicity, skin undertone, and expressions must closely match the reference photo. 
+Strict cultural preservation: The subject's facial resemblance, ethnicity, skin undertone, and expressions must closely match the reference photo.
 Negative constraints: not Chinese Hanfu, not Japanese Kimono, not western dress, not loose modern cleavage, not fantasy cosplay, not cartoon, not illustration, not distorted face, not extra fingers.`;
 
-  // Fallback curated image if offline or no key
-  const fallbackImages: Record<string, string> = {
-    "ngu-than":
-      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
-    "nhat-binh":
-      "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=85",
-    "giao-linh":
-      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
-    "tu-than":
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85",
-    "ba-ba":
-      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85",
-    "ao-dai":
-      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
-  };
+  const fallbackImage = FALLBACK_TRY_ON_IMAGES[costumeKey] || FALLBACK_TRY_ON_IMAGES["ngu-than"];
 
   const client = getGenAIClient();
   if (!client) {
     return {
-      imageUrl: fallbackImages[costumeKey] || fallbackImages["ngu-than"],
+      imageUrl: fallbackImage,
       model: "Chưa kết nối API Key",
       promptUsed: fullPrompt,
       isLive: false,
-      error: "Chưa tìm thấy GEMINI_API_KEY hợp lệ trong file .env.local trên server.",
-      notes:
-        "Vui lòng mở file .env.local, dán khóa GEMINI_API_KEY=AIzaSy... và nhấn Ctrl+S để lưu file.",
+      error: "Chưa tìm thấy GEMINI_API_KEY hợp lệ trong môi trường máy chủ.",
+      notes: "Hệ thống đang hiển thị ảnh lookbook mẫu được tuyển chọn sẵn.",
     };
   }
 
   try {
-    const parts: any[] = [];
+    const parts: ContentPart[] = [];
 
-    // 1. User portrait photo (Image 1)
     if (data.userPhotoBase64) {
-      const cleanBase64 = data.userPhotoBase64.replace(
-        /^data:image\/[a-zA-Z0-9+.-]+;base64,/,
-        "",
-      );
+      const cleanBase64 = data.userPhotoBase64.replace(/^data:image\/[a-zA-Z0-9+.-]+;base64,/, "");
       const mime = data.userPhotoMimeType || "image/jpeg";
       parts.push({
         inlineData: {
@@ -301,10 +345,8 @@ Negative constraints: not Chinese Hanfu, not Japanese Kimono, not western dress,
       });
     }
 
-    // 2. Authentic costume reference photo from project folder (Image 2)
     const costumeRef = getLocalCostumeImage(costumeKey);
     if (costumeRef) {
-      console.log(`✨ Found authentic project reference image for costume '${costumeKey}', passing to gemini-3.1-flash-image!`);
       parts.push({
         inlineData: {
           mimeType: costumeRef.mimeType,
@@ -313,7 +355,6 @@ Negative constraints: not Chinese Hanfu, not Japanese Kimono, not western dress,
       });
     }
 
-    // 3. Multimodal Prompt tailored for 2-image try-on or text-guided try-on
     const promptToSend = costumeRef
       ? `You are provided with two reference images:
 Image 1: Reference portrait photograph of the person (face, identity, facial features).
@@ -330,12 +371,7 @@ Strict negative constraints: not Chinese Hanfu, not Japanese Kimono, not western
 
     parts.push({ text: promptToSend });
 
-    console.log(
-      `🌸 Calling Google AI Studio model 'gemini-3.1-flash-image' with responseModalities: [IMAGE, TEXT]...`,
-    );
-
-    // Call gemini-3.1-flash-image with image output modality
-    const response: any = await client.models.generateContent({
+    const rawResponse = await client.models.generateContent({
       model: "gemini-3.1-flash-image",
       contents: [{ role: "user", parts }],
       config: {
@@ -343,7 +379,7 @@ Strict negative constraints: not Chinese Hanfu, not Japanese Kimono, not western
       },
     });
 
-    // Check if response contains image bytes
+    const response = rawResponse as GenerateResponseShape;
     let generatedImageUrl = "";
     if (response.candidates && response.candidates[0]?.content?.parts) {
       for (const part of response.candidates[0].content.parts) {
@@ -361,36 +397,43 @@ Strict negative constraints: not Chinese Hanfu, not Japanese Kimono, not western
         model: "gemini-3.1-flash-image",
         promptUsed: promptToSend,
         isLive: true,
-        notes:
-          "Thành công! Ảnh đã được sinh trực tiếp bằng model gemini-3.1-flash-image từ Google AI Studio.",
+        notes: "Ảnh được kết xuất trực tiếp bằng mô hình tạo ảnh Gemini từ Google AI Studio.",
       };
     }
 
-    // If text was returned instead of raw image data (e.g. image description), fallback gracefully
-    console.warn("Model response did not contain inlineData image bytes");
     return {
-      imageUrl: fallbackImages[costumeKey] || fallbackImages["ngu-than"],
-      model: "gemini-3.1-flash-image (Phản hồi dạng chữ)",
+      imageUrl: fallbackImage,
+      model: "gemini-3.1-flash-image (Phản hồi chữ)",
       promptUsed: promptToSend,
       isLive: false,
-      error: "Google AI Studio đã tiếp nhận yêu cầu nhưng không xuất dữ liệu ảnh (inlineData).",
-      notes: "Google AI Studio trả về phản hồi văn bản thay vì ảnh nhị phân.",
+      error: "Mô hình xử lý yêu cầu nhưng không xuất dữ liệu ảnh nhị phân.",
+      notes: "Hệ thống chuyển sang hiển thị hình ảnh chuẩn sử thay thế.",
     };
-  } catch (error: any) {
-    const errText = error?.message || String(error);
-    console.error("Error calling gemini-3.1-flash-image:", errText);
+  } catch (error) {
+    const errText = error instanceof Error ? error.message : String(error);
+    console.error("Gemini Image Generation Error:", errText);
     return {
-      imageUrl: fallbackImages[costumeKey] || fallbackImages["ngu-than"],
-      model: "Lỗi Gọi AI Studio",
+      imageUrl: fallbackImage,
+      model: "Lỗi kết nối",
       promptUsed: fullPrompt,
       isLive: false,
-      error: errText,
-      notes: `Gặp lỗi khi gọi Google AI Studio: ${errText}. Hệ thống hiển thị ảnh mẫu chuẩn sử thay thế.`,
+      error: "Không thể kết nối tới dịch vụ tạo ảnh trực tuyến.",
+      notes: "Hệ thống đang hiển thị ảnh tư liệu di sản đối chiếu.",
     };
   }
 }
 
-export function getGeminiStatus() {
+export interface GeminiStatusResponse {
+  hasApiKey: boolean;
+  model: string;
+  status: "connected" | "offline_fallback";
+  maskedKey: string;
+}
+
+/**
+ * Returns the operational connectivity status and masked key details.
+ */
+export function getGeminiStatus(): GeminiStatusResponse {
   const key = getApiKey();
   const active = Boolean(key && key.length > 5);
   return {

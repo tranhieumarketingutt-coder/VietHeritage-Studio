@@ -1,72 +1,58 @@
-import express, { Request, Response } from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
-import { handleGeminiChat, handleGeminiStyling, handleGeminiVirtualTryOn, getGeminiStatus } from './src/geminiService.ts';
+import express, { Request, Response } from "express";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+import {
+  executeStatusHandler,
+  executeChatHandler,
+  executeStylingHandler,
+  executeTryOnHandler,
+} from "./server/handlers";
 
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: ".env.local" });
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = parseInt(process.env.PORT || '3000', 10);
+const port = parseInt(process.env.PORT || "3000", 10);
 
-// Increase JSON limit to support high-resolution user image base64 uploads
-app.use(express.json({ limit: '25mb' }));
+app.use(express.json({ limit: "25mb" }));
 
-// API Routes
-app.get('/api/gemini/status', (_req: Request, res: Response) => {
-  res.json(getGeminiStatus());
+app.get("/api/gemini/status", async (_req: Request, res: Response) => {
+  const { statusCode, data } = await executeStatusHandler();
+  res.status(statusCode).json(data);
 });
 
-app.post('/api/gemini/chat', async (req: Request, res: Response) => {
-  try {
-    const { message, lang } = req.body;
-    if (!message || typeof message !== 'string') {
-      res.status(400).json({ error: 'Message is required' });
-      return;
-    }
-    const result = await handleGeminiChat(message, lang || 'vi');
-    res.json(result);
-  } catch (error: any) {
-    console.error('Server error on /api/gemini/chat:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+app.post("/api/gemini/chat", async (req: Request, res: Response) => {
+  const { statusCode, data } = await executeChatHandler(req.body);
+  res.status(statusCode).json(data);
 });
 
-app.post('/api/gemini/styling', async (req: Request, res: Response) => {
-  try {
-    const result = await handleGeminiStyling(req.body);
-    res.json(result);
-  } catch (error: any) {
-    console.error('Server error on /api/gemini/styling:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+app.post("/api/gemini/styling", async (req: Request, res: Response) => {
+  const { statusCode, data } = await executeStylingHandler(req.body);
+  res.status(statusCode).json(data);
 });
 
-// Virtual Try-On endpoint with model gemini-3.1-flash-image
-app.post('/api/gemini/try-on', async (req: Request, res: Response) => {
-  try {
-    const result = await handleGeminiVirtualTryOn(req.body);
-    res.json(result);
-  } catch (error: any) {
-    console.error('Server error on /api/gemini/try-on:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+app.post("/api/gemini/try-on", async (req: Request, res: Response) => {
+  const { statusCode, data } = await executeTryOnHandler(req.body);
+  res.status(statusCode).json(data);
 });
 
-// Serve static assets from Vite build in production
-const distPath = path.resolve(__dirname, 'dist');
+const distPath = path.resolve(__dirname, "dist");
 app.use(express.static(distPath));
 
-// Fallback to index.html for SPA routes
-app.get('*', (_req: Request, res: Response) => {
-  res.sendFile(path.join(distPath, 'index.html'));
+app.get("*", (_req: Request, res: Response) => {
+  const indexPath = path.join(distPath, "index.html");
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(200).send("VietHeritage Remix Server is running. Run `npm run build` to generate the client bundle.");
+  }
 });
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`🌸 VietHeritage Remix Server running at http://localhost:${port}`);
-  console.log(`🤖 Gemini Status: ${getGeminiStatus().hasApiKey ? 'Connected (Live API)' : 'Offline Curated Mode'}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`VietHeritage Remix Server listening on port ${port}`);
 });
