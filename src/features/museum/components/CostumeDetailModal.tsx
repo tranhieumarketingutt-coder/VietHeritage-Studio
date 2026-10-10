@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { COSTUMES_DATA } from '../../../costumes';
 import { Costume } from './CostumeCard';
+import { useFocusTrap } from '../../../shared/hooks/useFocusTrap';
 
 /**
  * Props for CostumeDetailModal.
@@ -24,12 +25,12 @@ export const CostumeDetailModal: React.FC<CostumeDetailModalProps> = ({
   const [lang, setLang] = useState<'vi' | 'en'>(initialLang);
   const [activeTab, setActiveTab] = useState<'history' | 'styling'>('history');
 
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
+  const dialogRef = useFocusTrap<HTMLDivElement>({
+    isOpen: true,
+    onClose,
+    lockScroll: true,
+    closeOnEscape: true
+  });
 
   const costume = (COSTUMES_DATA as Costume[]).find(c => c.id === costumeId) || (COSTUMES_DATA as Costume[])[0];
   const isEn = lang === 'en';
@@ -37,12 +38,19 @@ export const CostumeDetailModal: React.FC<CostumeDetailModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
       <div 
-        className="bg-white rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto border-2 border-[#D4AF37] p-6 md:p-8 shadow-2xl relative"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="costume-detail-title"
+        tabIndex={-1}
+        className="bg-white rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto border-2 border-[#D4AF37] p-6 md:p-8 shadow-2xl relative outline-none"
         onClick={e => e.stopPropagation()}
       >
         <button 
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 font-mono text-sm flex items-center justify-center z-10 cursor-pointer"
+          type="button"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 font-mono text-sm flex items-center justify-center z-10 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]"
           onClick={onClose}
+          aria-label={isEn ? "Close costume dossier" : "Đóng hồ sơ chi tiết cổ phục"}
         >
           ✕
         </button>
@@ -53,7 +61,7 @@ export const CostumeDetailModal: React.FC<CostumeDetailModalProps> = ({
               <span>✦ {isEn ? 'Historical Costume Dossier' : 'Hồ Sơ Cổ Phục Chuẩn Sử'}</span>
               <span>· {costume.form}</span>
             </div>
-            <h3 className="font-serif text-2xl md:text-3xl font-bold text-[#222222]">
+            <h3 id="costume-detail-title" className="font-serif text-2xl md:text-3xl font-bold text-[#222222]">
               {isEn ? costume.nameEn : costume.nameVi}
             </h3>
             <p className="text-xs text-stone-500 font-mono mt-0.5">
@@ -63,13 +71,15 @@ export const CostumeDetailModal: React.FC<CostumeDetailModalProps> = ({
 
           <div className="flex items-center space-x-1 p-1 bg-[#F5F1E8] rounded-xl border border-[#D4AF37]/60 shadow-sm shrink-0 self-start">
             <button 
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${!isEn ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'}`}
+              type="button"
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${!isEn ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'}`}
               onClick={() => setLang('vi')}
             >
               🇻🇳 Tiếng Việt
             </button>
             <button 
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${isEn ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'}`}
+              type="button"
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${isEn ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'}`}
               onClick={() => setLang('en')}
             >
               🇬🇧 English
@@ -125,8 +135,9 @@ export const CostumeDetailModal: React.FC<CostumeDetailModalProps> = ({
               </span>
               <button 
                 type="button"
-                className="pointer-events-auto px-2 py-1 rounded-lg bg-black/75 hover:bg-[#8B0000] text-white font-mono text-[10px] font-bold border border-[#D4AF37]/50 shadow-sm transition-all hover:scale-105 flex items-center space-x-1 cursor-pointer backdrop-blur-sm"
+                className="pointer-events-auto px-2 py-1 rounded-lg bg-black/75 hover:bg-[#8B0000] text-white font-mono text-[10px] font-bold border border-[#D4AF37]/50 shadow-sm transition-all hover:scale-105 flex items-center space-x-1 cursor-pointer backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
                 onClick={() => onOpenLightbox(costume.realPhotography?.heroPhoto || '')}
+                aria-label={isEn ? "Enlarge 4K real photo" : "Phóng to ảnh chụp 4K"}
               >
                 <span>🔍</span>
                 <span>{isEn ? 'Enlarge' : 'Phóng To 4K'}</span>

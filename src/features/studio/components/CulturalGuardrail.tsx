@@ -10,7 +10,23 @@ export const CulturalGuardrail: React.FC<CulturalGuardrailProps> = ({ alerts }) 
   const isEn = lang === 'en';
 
   if (!alerts || alerts.length === 0) {
-    return null;
+    return (
+      <div className="p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/80 text-emerald-900 text-xs font-mono flex items-center space-x-2.5 shadow-2xs">
+        <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
+          ✓
+        </span>
+        <div>
+          <span className="font-bold block tracking-wide">
+            {isEn ? '✓ 100% CANONICAL DECORUM ACHIEVED' : '✓ ĐẠT CHUẨN MỰC ĐIỂN CHẾ 100%'}
+          </span>
+          <span className="text-[11px] font-sans text-emerald-800">
+            {isEn
+              ? 'Garment, lapels, and destination context fully comply with traditional statutes.'
+              : 'Trang phục, cấu trúc nếp vạt và bối cảnh hoàn toàn chuẩn mực, trang nghiêm theo điển chế cổ truyền.'}
+          </span>
+        </div>
+      </div>
+    );
   }
 
   return (

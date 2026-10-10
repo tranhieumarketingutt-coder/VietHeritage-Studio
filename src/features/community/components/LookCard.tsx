@@ -44,7 +44,7 @@ export const LookCard: React.FC<LookCardProps> = ({ look, onLike }) => {
           <h4 className="font-serif font-bold text-sm text-[#222222] leading-tight line-clamp-2">
             {isEn ? look.titleEn : look.titleVi}
           </h4>
-          <p className="text-[11px] text-stone-500 truncate mt-1">
+          <p className="text-[11px] text-stone-600 truncate mt-1">
             📍 {look.destination}
           </p>
         </div>
@@ -58,10 +58,14 @@ export const LookCard: React.FC<LookCardProps> = ({ look, onLike }) => {
           <span className="text-[11px] font-medium text-stone-700 truncate">{look.author}</span>
         </div>
         <button 
+          type="button"
           onClick={handleLike}
-          className="flex items-center space-x-1 px-2 py-1 rounded-lg hover:bg-rose-50 text-stone-500 hover:text-[#8B0000] transition-colors group shrink-0"
+          aria-label={isEn 
+            ? `Like look "${look.titleEn || look.titleVi}" by ${look.author}, currently ${look.likes} likes` 
+            : `Thả tim bản phối "${look.titleVi || look.titleEn}" của ${look.author}, hiện có ${look.likes} lượt thích`}
+          className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg hover:bg-rose-50 text-stone-600 hover:text-[#8B0000] transition-colors group shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]"
         >
-          <svg className="w-3.5 h-3.5 group-hover:fill-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg aria-hidden="true" className="w-3.5 h-3.5 group-hover:fill-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
           </svg>
           <span className="text-[10px] font-mono font-bold">{look.likes}</span>

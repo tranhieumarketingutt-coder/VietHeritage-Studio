@@ -63,16 +63,23 @@ export const CostumeStage: React.FC<CostumeStageProps> = ({
         dangerouslySetInnerHTML={{ __html: preset.headwear.svg }}
       />
 
-      {preset.hotspots.map(h => (
-        <button 
-          key={h.id}
-          className={`absolute ${h.pos} w-7 h-7 rounded-full ${h.color} font-mono text-xs font-bold flex items-center justify-center shadow-lg border-2 border-white cursor-pointer z-40 transition-transform hover:scale-125 ${activeHotspot === h.id ? 'ring-4 ring-[#8B0000]/40 scale-110 animate-bounce' : 'animate-pulse'}`} 
-          title={isEn ? h.quickLabelEn : h.quickLabelVi}
-          onClick={() => onSelectHotspot(h.id)}
-        >
-          {h.id}
-        </button>
-      ))}
+      {preset.hotspots.map(h => {
+        const isCurrent = activeHotspot === h.id;
+        const hotspotName = isEn ? h.quickLabelEn : h.quickLabelVi;
+        return (
+          <button 
+            type="button"
+            key={h.id}
+            aria-label={isEn ? `Anatomy hotspot ${h.id}: ${hotspotName}${isCurrent ? ', currently active' : ''}` : `Điểm giải phẫu ${h.id}: ${hotspotName}${isCurrent ? ', đang chọn' : ''}`}
+            aria-pressed={isCurrent}
+            className={`absolute ${h.pos} w-7 h-7 rounded-full ${h.color} font-mono text-xs font-bold flex items-center justify-center shadow-lg border-2 border-white cursor-pointer z-40 transition-transform hover:scale-125 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#8B0000] ${isCurrent ? 'ring-4 ring-[#8B0000]/40 scale-110 animate-bounce' : 'animate-pulse'}`} 
+            title={hotspotName}
+            onClick={() => onSelectHotspot(h.id)}
+          >
+            <span aria-hidden="true">{h.id}</span>
+          </button>
+        );
+      })}
     </div>
   );
 };

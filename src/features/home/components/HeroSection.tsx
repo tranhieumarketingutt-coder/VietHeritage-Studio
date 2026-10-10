@@ -1,11 +1,14 @@
 import React from 'react';
+import { Landmark, Palette } from 'lucide-react';
 
-export interface HeroSectionProps {}
+export interface HeroSectionProps {
+  onSelectHub?: (hub: 'hub1' | 'hub2') => void;
+}
 
 /**
  * Hero Section component for the home page.
  */
-export const HeroSection: React.FC<HeroSectionProps> = () => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectHub }) => {
   return (
     <section className="relative overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#F5EFE6] via-[#FAF7F2] to-[#ECE4D4] border-b border-[#D4AF37]/25 py-12 md:py-16 px-4 sm:px-6 lg:px-8">
       
@@ -66,7 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
       </div>
 
       <div className="max-w-5xl mx-auto text-center relative z-10">
-        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight mb-4 leading-tight whitespace-nowrap bg-gradient-to-r from-[#5C0606] via-[#8B0000] to-[#B8860B] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(212,175,55,0.25)]">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-serif font-bold tracking-tight mb-4 leading-tight bg-gradient-to-r from-[#5C0606] via-[#8B0000] to-[#B8860B] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(212,175,55,0.25)]">
           DI SẢN HÓA MỸ THUẬT
         </h1>
         <p className="font-sans text-base sm:text-lg text-[#666666] max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
@@ -74,13 +77,23 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
-          <button id="heroGoHub1" className="px-6 py-3 rounded-xl bg-[#8B0000] hover:bg-[#700000] text-white font-medium text-sm transition-all shadow-md hover:shadow-lg flex items-center space-x-2 cursor-pointer">
-            <i data-lucide="landmark" className="w-4 h-4"></i>
+          <button 
+            type="button"
+            id="heroGoHub1" 
+            onClick={() => onSelectHub && onSelectHub('hub1')}
+            className="px-6 py-3 rounded-xl bg-[#8B0000] hover:bg-[#700000] text-white font-medium text-sm transition-all shadow-md hover:shadow-lg flex items-center space-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000]"
+          >
+            <Landmark className="w-4 h-4" />
             <span>Khám Phá Bảo Tàng</span>
           </button>
-          <button id="heroGoHub2" className="px-6 py-3 rounded-xl bg-white hover:bg-[#FDF6E2] text-[#222222] border border-[#D4AF37] font-medium text-sm transition-all shadow-xs flex items-center space-x-2 cursor-pointer">
-            <i data-lucide="wand-2" className="w-4 h-4 text-[#8B0000]"></i>
-            <span>Thử Phối Màu AI</span>
+          <button 
+            type="button"
+            id="heroGoHub2" 
+            onClick={() => onSelectHub && onSelectHub('hub2')}
+            className="px-6 py-3 rounded-xl bg-white hover:bg-[#FDF6E2] text-[#222222] border border-[#D4AF37] font-medium text-sm transition-all shadow-xs flex items-center space-x-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]"
+          >
+            <Palette className="w-4 h-4 text-[#8B0000]" />
+            <span>Phối Màu Sắc Tố Tự Nhiên</span>
           </button>
         </div>
 
@@ -90,7 +103,7 @@ export const HeroSection: React.FC<HeroSectionProps> = () => {
             <span className="text-xs text-[#666666]">Triều đại</span>
           </div>
           <div className="bg-white/80 backdrop-blur-xs p-4 rounded-xl border border-[#D4AF37]/30 shadow-2xs">
-            <span className="block text-2xl font-mono font-bold text-[#D4AF37]">4 Season</span>
+            <span className="block text-2xl font-mono font-bold text-[#8A6D1C]">4 Season</span>
             <span className="text-xs text-[#666666]">Personal Color</span>
           </div>
           <div className="bg-white/80 backdrop-blur-xs p-4 rounded-xl border border-[#D4AF37]/30 shadow-2xs">

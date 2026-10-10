@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ANATOMY_PRESETS } from '../../../anatomyData';
+import { COSTUMES_DATA } from '../../../costumes';
+import { useFocusTrap } from '../../../shared/hooks/useFocusTrap';
 import { CostumeStage } from './CostumeStage';
 import { HotspotCard } from './HotspotCard';
 
@@ -18,10 +20,19 @@ export const AnatomySection: React.FC<AnatomySectionProps> = ({ lang }) => {
   const [flapsOpen, setFlapsOpen] = useState<boolean>(false);
   const [activeLayer, setActiveLayer] = useState<string>('all');
   const [activeHotspot, setActiveHotspot] = useState<string>('1');
+  const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
 
   const isEn = lang === 'en';
   const preset = ANATOMY_PRESETS[activeCostumeKey] || ANATOMY_PRESETS['ngu-than'];
   const currentHotspot = preset.hotspots.find(h => h.id === activeHotspot) || preset.hotspots[0];
+  const matchingCostume = COSTUMES_DATA.find(c => c.id === activeCostumeKey) || COSTUMES_DATA[0];
+
+  const lightboxRef = useFocusTrap<HTMLDivElement>({
+    isOpen: isLightboxOpen,
+    onClose: () => setIsLightboxOpen(false),
+    lockScroll: true,
+    closeOnEscape: true
+  });
 
   const handleCostumeSelect = (id: string) => {
     setActiveCostumeKey(id);
@@ -53,8 +64,11 @@ export const AnatomySection: React.FC<AnatomySectionProps> = ({ lang }) => {
 
         <div className="flex items-center space-x-2 shrink-0 flex-wrap gap-2">
           <button 
-            className="px-3.5 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-950 font-mono text-xs font-bold rounded-xl border border-amber-300 shadow-sm transition-all flex items-center space-x-1.5 cursor-pointer hover:scale-105"
+            type="button"
+            onClick={() => setIsLightboxOpen(true)}
+            className="px-3.5 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-950 font-mono text-xs font-bold rounded-xl border border-amber-300 shadow-sm transition-all flex items-center space-x-1.5 cursor-pointer hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]"
             title={isEn ? 'View real photo reference for this costume' : 'Xem ảnh chụp thực tế đối chiếu của cổ phục này'}
+            aria-label={isEn ? 'View real photo reference for this costume' : 'Xem ảnh chụp thực tế đối chiếu của cổ phục này'}
           >
             <span>📸</span>
             <span>{isEn ? 'Real Photo' : 'Ảnh Chụp Đối Chiếu'}</span>
@@ -141,6 +155,42 @@ export const AnatomySection: React.FC<AnatomySectionProps> = ({ lang }) => {
           </div>
         </div>
       </div>
+
+      {isLightboxOpen && (
+        <div 
+          ref={lightboxRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={isEn ? `Real photo reference: ${matchingCostume.nameEn}` : `Ảnh chụp đối chiếu thực tế: ${matchingCostume.nameVi}`}
+          tabIndex={-1}
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8 outline-none" 
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          <button 
+            type="button" 
+            className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 rounded-full bg-white/10 hover:bg-[#8B0000] text-white flex items-center justify-center transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]" 
+            onClick={() => setIsLightboxOpen(false)}
+            aria-label={isEn ? "Close enlarged photo" : "Đóng ảnh đối chiếu"}
+          >
+            ✕
+          </button>
+          <div className="max-w-4xl max-h-[90vh] flex flex-col items-center justify-center space-y-3" onClick={e => e.stopPropagation()}>
+            <img 
+              src={matchingCostume.realPhotography?.heroPhoto || 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=85'} 
+              alt={isEn ? matchingCostume.realPhotography?.photoTitleEn || matchingCostume.nameEn : matchingCostume.realPhotography?.photoTitleVi || matchingCostume.nameVi} 
+              className="max-w-full max-h-[75vh] object-contain rounded-xl shadow-2xl border border-white/20" 
+            />
+            <div className="text-center text-white space-y-1">
+              <h4 className="font-serif text-lg font-bold">
+                {isEn ? matchingCostume.realPhotography?.photoTitleEn || matchingCostume.nameEn : matchingCostume.realPhotography?.photoTitleVi || matchingCostume.nameVi}
+              </h4>
+              <p className="text-xs text-stone-300 font-mono">
+                📍 {isEn ? matchingCostume.realPhotography?.locationEn : matchingCostume.realPhotography?.locationVi}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -16,6 +16,13 @@ export interface CommunityLook {
 
 export interface WardrobeItem {
   id: string;
+  costumeId?: string;
+  costumeName?: string;
+  destination?: string;
+  date?: string;
+  photoUrl?: string;
+  score?: number;
+  season?: string;
   [key: string]: unknown;
 }
 

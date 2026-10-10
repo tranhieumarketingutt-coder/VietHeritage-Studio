@@ -335,14 +335,35 @@ Negative constraints: not Chinese Hanfu, not Japanese Kimono, not western dress,
     const parts: ContentPart[] = [];
 
     if (data.userPhotoBase64) {
-      const cleanBase64 = data.userPhotoBase64.replace(/^data:image\/[a-zA-Z0-9+.-]+;base64,/, "");
-      const mime = data.userPhotoMimeType || "image/jpeg";
-      parts.push({
-        inlineData: {
-          mimeType: mime,
-          data: cleanBase64,
-        },
-      });
+      let cleanBase64 = "";
+      let mime = data.userPhotoMimeType || "image/jpeg";
+
+      if (data.userPhotoBase64.startsWith("http://") || data.userPhotoBase64.startsWith("https://")) {
+        try {
+          const remoteRes = await fetch(data.userPhotoBase64);
+          if (remoteRes.ok) {
+            const buf = await remoteRes.arrayBuffer();
+            cleanBase64 = Buffer.from(buf).toString("base64");
+            const cType = remoteRes.headers.get("content-type");
+            if (cType) {
+              mime = cType.split(";")[0].trim();
+            }
+          }
+        } catch (fetchErr) {
+          console.warn("Could not fetch remote user photo URL:", fetchErr);
+        }
+      } else {
+        cleanBase64 = data.userPhotoBase64.replace(/^data:image\/[a-zA-Z0-9+.-]+;base64,/, "");
+      }
+
+      if (cleanBase64) {
+        parts.push({
+          inlineData: {
+            mimeType: mime,
+            data: cleanBase64,
+          },
+        });
+      }
     }
 
     const costumeRef = getLocalCostumeImage(costumeKey);

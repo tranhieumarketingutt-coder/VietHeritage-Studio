@@ -54,7 +54,7 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
   const c = costume;
 
   return (
-    <div 
+    <article 
       className="group bg-white rounded-2xl border-2 border-[#D4AF37]/50 hover:border-[#8B0000] ring-1 ring-[#D4AF37]/20 hover:ring-[#8B0000]/30 p-6 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5 cursor-pointer relative overflow-hidden" 
       onClick={() => onOpenModal(c.id)}
       title={isEn ? 'Click anywhere on card to open historical dossier' : 'Nhấp vào thẻ để mở hồ sơ lịch sử chi tiết'}
@@ -74,7 +74,8 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
           >
             <button 
               type="button"
-              className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition-all ${localMode === 'svg' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900'}`}
+              aria-pressed={localMode === 'svg'}
+              className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8B0000] ${localMode === 'svg' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900'}`}
               onClick={() => setLocalMode('svg')}
               title={isEn ? '2D Vector Illustration' : 'Bản Đồ Họa 2D'}
             >
@@ -82,7 +83,8 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
             </button>
             <button 
               type="button"
-              className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition-all ${localMode === 'split' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900'}`}
+              aria-pressed={localMode === 'split'}
+              className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8B0000] ${localMode === 'split' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900'}`}
               onClick={() => setLocalMode('split')}
               title={isEn ? 'Interactive Split Comparison' : 'So Sánh Kéo Trượt'}
             >
@@ -90,7 +92,8 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
             </button>
             <button 
               type="button"
-              className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition-all ${localMode === 'real' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900'}`}
+              aria-pressed={localMode === 'real'}
+              className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8B0000] ${localMode === 'real' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900'}`}
               onClick={() => setLocalMode('real')}
               title={isEn ? 'Real-Life Photography 4K' : 'Ảnh Thực Tế 4K'}
             >
@@ -116,8 +119,9 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
               
               <button 
                 type="button" 
-                className="absolute top-2.5 right-2.5 z-20 px-2 py-0.5 rounded-lg bg-black/75 hover:bg-[#8B0000] text-white flex items-center space-x-1 text-[10px] font-mono font-bold transition-all border border-[#D4AF37]/60 shadow-md hover:scale-105 cursor-pointer backdrop-blur-sm"
+                className="absolute top-2.5 right-2.5 z-20 px-2 py-0.5 rounded-lg bg-black/75 hover:bg-[#8B0000] text-white flex items-center space-x-1 text-[10px] font-mono font-bold transition-all border border-[#D4AF37]/60 shadow-md hover:scale-105 cursor-pointer backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
                 title={isEn ? 'Inspect 4K Tailoring & Craftsmanship' : 'Soi nếp may & chi tiết may đo 4K'}
+                aria-label={isEn ? `Inspect 4K craftsmanship for ${c.nameEn}` : `Soi nếp may đo 4K cho ${c.nameVi}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   onOpenLightbox(c.realPhotography?.heroPhoto || '');
@@ -173,17 +177,25 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
                 className="absolute bottom-1 left-2 right-2 z-30 flex items-center space-x-1.5 bg-black/75 backdrop-blur-sm px-2 py-0.5 rounded-md border border-white/10" 
                 onClick={(e) => e.stopPropagation()}
               >
-                <span className="text-[9px] font-mono text-stone-300 shrink-0">Trượt:</span>
+                <label htmlFor={`slider-${c.id}`} className="text-[9px] font-mono text-stone-300 shrink-0">
+                  {isEn ? 'Slide:' : 'Trượt:'}
+                </label>
                 <input 
+                  id={`slider-${c.id}`}
                   type="range" 
                   min="0" 
                   max="100" 
                   value={splitPos} 
                   onChange={(e) => setSplitPos(parseInt(e.target.value, 10))}
-                  className="w-full h-1 bg-stone-700 accent-[#D4AF37] rounded cursor-ew-resize"
-                  title="Kéo trượt so sánh bản vẽ và ảnh thật"
+                  aria-label={isEn ? `Comparison slider between vector illustration and real photo for ${c.nameEn}` : `Thanh trượt so sánh bản vẽ vector và ảnh thật cho ${c.nameVi}`}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={splitPos}
+                  aria-valuetext={`${splitPos}%`}
+                  className="w-full h-1 bg-stone-700 accent-[#D4AF37] rounded cursor-ew-resize focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D4AF37]"
+                  title={isEn ? 'Slide to compare vector illustration and real photo' : 'Kéo trượt so sánh bản vẽ và ảnh thật'}
                 />
-                <span className="text-[9px] font-mono text-[#D4AF37] font-bold w-6 text-right shrink-0">{splitPos}%</span>
+                <span className="text-[9px] font-mono text-[#D4AF37] font-bold w-6 text-right shrink-0" aria-hidden="true">{splitPos}%</span>
               </div>
             </div>
           ) : (
@@ -193,7 +205,7 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
 
         <div className="flex items-center justify-between text-[11px] font-mono mb-1.5">
           <span className="text-[#8B0000] font-bold uppercase tracking-wider">✦ {c.form}</span>
-          <span className="text-stone-400 font-normal">{c.eraCategory.toUpperCase()}</span>
+          <span className="text-stone-600 font-normal">{c.eraCategory.toUpperCase()}</span>
         </div>
 
         <h3 className="font-serif text-2xl font-bold text-[#222222] mb-2 group-hover:text-[#8B0000] transition-colors leading-snug">
@@ -220,12 +232,20 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
         </div>
       </div>
 
-      <div className="w-full flex items-center justify-center space-x-2 border-t border-stone-200 pt-3">
-        <span className="text-xs font-mono font-bold text-[#8B0000] group-hover:text-[#D4AF37] transition-colors">
-          {isEn ? 'Explore Dossier' : 'Xem Hồ Sơ Lịch Sử'}
-        </span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#8B0000] group-hover:text-[#D4AF37] transition-colors"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      <div className="w-full border-t border-stone-200 pt-3">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenModal(c.id);
+          }}
+          aria-label={isEn ? `Xem hồ sơ lịch sử chi tiết cho ${c.nameEn}` : `Xem hồ sơ lịch sử chi tiết cho ${c.nameVi}`}
+          className="w-full flex items-center justify-center space-x-2 text-xs font-mono font-bold text-[#8B0000] group-hover:text-[#8A6D1C] transition-colors p-1.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]"
+        >
+          <span>{isEn ? 'Explore Dossier' : 'Xem Hồ Sơ Lịch Sử'}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#8B0000] group-hover:text-[#8A6D1C] transition-colors"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
       </div>
-    </div>
+    </article>
   );
 };

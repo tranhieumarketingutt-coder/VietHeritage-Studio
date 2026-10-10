@@ -9,27 +9,50 @@
   --color-crimson-dark: #5C0000;
   --color-gold: #D4AF37;
   --color-gold-light: #FDF6E2;
+  --color-gold-dark: #8A6D1C;      /* Tông vàng đậm cho văn bản trên nền sáng (4.59:1 - 4.90:1) */
+  --color-gold-deep: #785E15;      /* Tông đồng thau thâm nghiêm (5.76:1 - 6.16:1) */
+  --color-bronze: #8A6D1C;         /* Token ngữ nghĩa thay thế */
   --color-amber-seal: #B33927;
 
   --font-sans: "Be Vietnam Pro", sans-serif;
-  --font-serif: "Be Vietnam Pro", sans-serif;
-  --font-mono: "Be Vietnam Pro", sans-serif;
-}
-
-*, *::before, *::after {
-  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-}
-
-html, body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, a, label, strong, em, small {
-  font-family: 'Be Vietnam Pro', sans-serif !important;
+  --font-serif: "Playfair Display", "Noto Serif", serif; /* Khôi phục font Serif di sản */
+  --font-mono: "Be Vietnam Pro", monospace;
 }
 
 body {
+  font-family: var(--font-sans);
   background-color: #FAF7F2;
   color: #222222;
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* ==========================================================================
+   ACCESSIBILITY: Focus Visible Indicator (WCAG 2.2 AA 2.4.7 & 2.4.13)
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid #8B0000 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.45) !important;
+}
+
+/* Triệt tiêu viền outline khi click chuột (chỉ kích hoạt khi thao tác phím) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Hỗ trợ chế độ tương phản cao của hệ điều hành (Windows High Contrast Mode) */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 2px !important;
+    box-shadow: none !important;
+  }
 }
 
 body::before {
@@ -70,9 +93,35 @@ body:hover::before {
   filter: drop-shadow(0 0 2.5px rgba(212, 175, 55, 0.35));
 }
 
+/* ==========================================================================
+   ACCESSIBILITY: Prefers-Reduced-Motion Reset (WCAG 2.2.2 & Anti-Slop R-26)
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
   body::before {
-    animation: none;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .interactive-lotus-pattern,
+  .interactive-lotus-pattern-rev,
+  .animate-float-lotus,
+  .animate-float-lotus-rev {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .lotus-card-interactive::after {
+    transition: none !important;
   }
 }
 
@@ -143,6 +192,26 @@ body:hover::before {
 
 .animate-float-lotus-rev {
   animation: floatReverse 7s ease-in-out infinite;
+}
+
+/* Custom Keyframes for Polish & Feedback */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
 ::-webkit-scrollbar {
