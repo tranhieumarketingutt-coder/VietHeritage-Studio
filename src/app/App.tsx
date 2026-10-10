@@ -65,17 +65,13 @@ export const App: React.FC<AppProps> = () => {
 
   const handleSelectHub = (hub: 'hub1' | 'hub2') => {
     setActiveHub(hub);
-    if (hub === 'hub1') {
-      const el = document.getElementById('museumSection') || document.getElementById('mainContent');
+    setTimeout(() => {
+      const targetId = hub === 'hub1' ? 'museumSection' : 'studioSection';
+      const el = document.getElementById(targetId) || document.getElementById('mainContent');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    } else {
-      const el = document.getElementById('studioSection');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
+    }, 50);
   };
 
   const handleOpenPhotocard = (data: PhotocardState) => {
@@ -99,29 +95,36 @@ export const App: React.FC<AppProps> = () => {
         onOpenWardrobe={() => setIsWardrobeOpen(true)}
       />
       <main id="mainContent" className="flex-grow">
-        <HeroSection onSelectHub={handleSelectHub} />
+        <HeroSection onSelectHub={handleSelectHub} activeHub={activeHub} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
-          <div id="museumSection">
-            <Suspense fallback={<SectionLoader />}>
-              <MuseumGallery lang={lang} />
-            </Suspense>
-          </div>
-          <Suspense fallback={<SectionLoader />}>
-            <AnatomySection lang={lang} />
-          </Suspense>
-          <TimelineSection />
-          <WisdomCarousel />
-          <Suspense fallback={<SectionLoader />}>
-            <MapSection lang={lang} />
-          </Suspense>
-          <div id="studioSection">
-            <Suspense fallback={<SectionLoader />}>
-              <StudioSection onOpenPhotocard={handleOpenPhotocard} />
-            </Suspense>
-          </div>
-          <Suspense fallback={<SectionLoader />}>
-            <CommunityGrid />
-          </Suspense>
+          {activeHub === 'hub1' ? (
+            <div className="space-y-16">
+              <div id="museumSection">
+                <Suspense fallback={<SectionLoader />}>
+                  <MuseumGallery lang={lang} />
+                </Suspense>
+              </div>
+              <Suspense fallback={<SectionLoader />}>
+                <AnatomySection lang={lang} />
+              </Suspense>
+              <TimelineSection />
+              <WisdomCarousel />
+              <Suspense fallback={<SectionLoader />}>
+                <MapSection lang={lang} />
+              </Suspense>
+            </div>
+          ) : (
+            <div className="space-y-16">
+              <div id="studioSection">
+                <Suspense fallback={<SectionLoader />}>
+                  <StudioSection onOpenPhotocard={handleOpenPhotocard} />
+                </Suspense>
+              </div>
+              <Suspense fallback={<SectionLoader />}>
+                <CommunityGrid />
+              </Suspense>
+            </div>
+          )}
         </div>
       </main>
 
