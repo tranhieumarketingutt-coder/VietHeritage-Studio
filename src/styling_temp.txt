@@ -1,0 +1,401 @@
+﻿function renderStylingResults() {
+  if (!state.stylingResult) return;
+  const r = state.stylingResult;
+  const isEn = state.lang === 'en';
+
+  // Lookbook Title
+  const costumeObj = COSTUMES_DATA.find(c => c.id === r.costumeId) || COSTUMES_DATA[0];
+  const titleEl = document.getElementById('lookbookTitle');
+  if (titleEl) {
+    titleEl.innerText = `${isEn ? costumeObj.nameEn : costumeObj.nameVi} Â· ${r.contextLookbook?.outfitTitle || 'Lookbook 2026'}`;
+  }
+
+  // Real-time Status Banner
+  const bannerEl = document.getElementById('tryOnStatusBanner');
+  if (bannerEl) {
+    bannerEl.classList.remove('hidden');
+    if (state.tryOnIsLive && state.tryOnResultImage) {
+      bannerEl.innerHTML = `
+        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs font-mono flex items-center space-x-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+          <div>
+            <span class="font-bold">âœ¨ AI Sinh ThÃ nh CÃ´ng:</span> Bá»©c áº£nh Ä‘Æ°á»£c táº¡o láº­p trá»±c tiáº¿p tá»« model <strong>${state.tryOnModel || 'gemini-3.1-flash-image'}</strong> trÃªn Google AI Studio.
+          </div>
+        </div>
+      `;
+    } else {
+      bannerEl.innerHTML = `
+        <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 text-xs font-mono space-y-1.5">
+          <div class="flex items-center space-x-1.5 font-bold text-amber-900">
+            <span>âš ï¸ Äang hiá»ƒn thá»‹ áº£nh tÆ° liá»‡u máº«u di sáº£n</span>
+            <span class="text-[10px] font-normal px-2 py-0.5 rounded bg-amber-200 text-amber-800">ChÆ°a kÃ­ch hoáº¡t AI</span>
+          </div>
+          <p class="font-sans text-xs text-stone-700 leading-relaxed">
+            ${state.tryOnError ? state.tryOnError : (state.tryOnNotes || 'Há»‡ thá»‘ng chÆ°a tÃ¬m tháº¥y GEMINI_API_KEY trong file .env.local.')}
+          </p>
+          <div class="text-[11px] font-sans text-amber-800 pt-1 border-t border-amber-200/60">
+            ðŸ‘‰ <strong>CÃ¡ch xá»­ lÃ½:</strong> HÃ£y má»Ÿ file <code>.env.local</code> trÃªn mÃ¡y, dÃ¡n khÃ³a API vÃ o dÃ²ng <code>GEMINI_API_KEY=AIzaSy...</code> vÃ  nháº¥n <strong>Ctrl + S</strong> Ä‘á»ƒ lÆ°u file láº¡i.
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // Visual in Editorial Showcase
+  const visualEl = document.getElementById('lookbookCostumeVisual');
+  const creditEl = document.getElementById('lookbookPhotoCredit');
+
+  // Choose the best display image: AI Try-On result takes first priority ONLY if live!
+  const isLiveGenerated = Boolean(state.tryOnIsLive && state.tryOnResultImage);
+  const displayImage = isLiveGenerated 
+    ? state.tryOnResultImage 
+    : (costumeObj.realPhotography?.heroPhoto || state.userPhotoUrl);
+
+  if (visualEl) {
+    visualEl.innerHTML = `
+      <div class="relative w-full h-full rounded-xl overflow-hidden flex items-center justify-center bg-stone-900 group">
+        <img 
+          id="tryOnOutputImage"
+          src="${displayImage}" 
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+          alt="${costumeObj.nameVi}"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/25 pointer-events-none"></div>
+        <div class="absolute top-2.5 left-2.5 flex items-center space-x-1.5 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-full text-white text-[10px] font-mono border border-white/20">
+          <span class="w-2 h-2 rounded-full ${isLiveGenerated ? 'bg-emerald-400' : 'bg-amber-400'} animate-pulse"></span>
+          <span id="tryOnModelBadge">${isLiveGenerated ? 'âœ¨ AI Live (gemini-3.1-flash-image)' : 'áº¢nh Máº«u Di Sáº£n (ChÆ°a cÃ³ AI)'}</span>
+        </div>
+        <div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-xs font-mono text-white pointer-events-none px-1">
+          <span id="lookbookImageTitle" class="truncate max-w-[180px] text-[#D4AF37] font-bold">${costumeObj.nameVi}</span>
+          <span class="px-2 py-0.5 rounded ${isLiveGenerated ? 'bg-emerald-700' : 'bg-[#8B0000]'} text-[9px] uppercase tracking-wider font-bold">${isLiveGenerated ? 'AI 4K Generated' : 'Di Sáº£n Gá»‘c'}</span>
+        </div>
+      </div>
+    `;
+  }
+  if (creditEl) {
+    creditEl.innerText = isLiveGenerated 
+      ? 'âœ¨ AI Virtual Try-On Â· gemini-3.1-flash-image' 
+      : (state.tryOnError ? 'âš ï¸ ChÆ°a kÃ­ch hoáº¡t AI (Xem thÃ´ng bÃ¡o)' : 'VietHeritage Editorial');
+  }
+
+  // Personal Color
+  const pcSeason = document.getElementById('personalColorSeason');
+  const pcDesc = document.getElementById('personalColorDesc');
+  const pcPalette = document.getElementById('personalColorPalette');
+  const recCostume = document.getElementById('recommendedCostumeText');
+
+  if (pcSeason) pcSeason.innerText = r.season;
+  if (pcDesc) pcDesc.innerText = isEn ? r.descriptionEn : `${r.skinToneDesc} â€” ${r.descriptionVi}`;
+  if (pcPalette) pcPalette.innerText = r.paletteSuggestions || 'Gam mÃ u Ä‘áº¥t & sáº¯c nhuá»™m truyá»n thá»‘ng';
+  if (recCostume) recCostume.innerText = r.recommendedCostume || costumeObj.nameVi;
+
+  // Dyes
+  const dyesContainer = document.getElementById('dyesContainer');
+  if (dyesContainer && r.dyeList) {
+    dyesContainer.innerHTML = r.dyeList.map(dye => `
+      <div class="flex items-center space-x-1 px-2 py-0.5 rounded bg-white border border-stone-200 shadow-2xs">
+        <span class="w-3 h-3 rounded-full shrink-0" style="background-color: ${dye.hex}"></span>
+        <span class="text-[10px] font-mono">${isEn ? dye.nameEn : dye.nameVi}</span>
+      </div>
+    `).join('');
+  }
+
+  // Body advice
+  const bodyAdvice = document.getElementById('bodyAdviceText');
+  if (bodyAdvice) {
+    bodyAdvice.innerText = `${isEn ? r.bodyAdviceEn : r.bodyAdviceVi} (BMI: ${r.bmi})`;
+  }
+
+  // Contextual Lookbook Content
+  const ctxTitle = document.getElementById('contextOutfitTitle');
+  const ctxDesc = document.getElementById('contextOutfitDesc');
+  const ctxHairMakeup = document.getElementById('contextHairMakeup');
+  const ctxAccessories = document.getElementById('contextAccessories');
+  const ctxGuides = document.getElementById('contextYoutubeGuides');
+
+  if (ctxTitle && r.contextLookbook) ctxTitle.innerText = r.contextLookbook.outfitTitle;
+  if (ctxDesc && r.contextLookbook) ctxDesc.innerText = r.contextLookbook.outfitDesc;
+  if (ctxHairMakeup && r.contextLookbook) {
+    ctxHairMakeup.innerText = `${r.contextLookbook.hairStyle} â€” ${r.contextLookbook.makeupStyle}`;
+  }
+  if (ctxAccessories && r.contextLookbook && r.contextLookbook.accessories) {
+    ctxAccessories.innerHTML = r.contextLookbook.accessories.map(acc => `
+      <span class="px-2 py-0.5 rounded bg-[#FAF7F2] border border-stone-200 text-[10px] font-mono">${acc}</span>
+    `).join('');
+  }
+  if (ctxGuides && r.contextLookbook && r.contextLookbook.youtubeGuides) {
+    ctxGuides.innerHTML = r.contextLookbook.youtubeGuides.map(g => `
+      <a href="${g.url}" target="_blank" rel="noreferrer" class="p-2.5 rounded-lg bg-white hover:bg-rose-50/50 border border-stone-200 hover:border-[#8B0000] flex items-center justify-between text-xs transition-colors group">
+        <div class="flex items-center space-x-2 truncate">
+          <span class="w-6 h-6 rounded bg-red-100 text-red-700 flex items-center justify-center shrink-0">â–¶</span>
+          <span class="font-sans font-medium text-stone-800 text-[11px] truncate group-hover:text-[#8B0000]">${g.title}</span>
+        </div>
+        <span class="text-[10px] font-mono text-stone-400 shrink-0">${g.duration} â†—</span>
+      </a>
+    `).join('');
+  }
+
+  // Cultural Score Gauge
+  const scoreBadge = document.getElementById('respectScoreBadge');
+  if (scoreBadge) {
+    scoreBadge.innerText = `Cultural Score: ${r.score}%`;
+    if (r.score >= 85) {
+      scoreBadge.className = 'px-3 py-1.5 rounded-full font-mono text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 w-fit';
+    } else if (r.score >= 60) {
+      scoreBadge.className = 'px-3 py-1.5 rounded-full font-mono text-xs font-bold bg-amber-100 text-amber-800 border border-amber-300 w-fit';
+    } else {
+      scoreBadge.className = 'px-3 py-1.5 rounded-full font-mono text-xs font-bold bg-red-100 text-red-800 border border-red-300 animate-pulse w-fit';
+    }
+  }
+
+  // Guardrail Alerts Container (With Shake Animation)
+  const alertContainer = document.getElementById('guardrailAlerts');
+  if (alertContainer) {
+    if (r.guardrails && r.guardrails.length > 0) {
+      alertContainer.classList.remove('hidden');
+      alertContainer.className = 'space-y-2.5 animate-[shake_0.5s_ease-in-out]';
+      alertContainer.innerHTML = r.guardrails.map(g => {
+        const titleVi = g.titleVi || g.messageVi || g.message;
+        const messageVi = g.messageVi || g.message || titleVi;
+        return `
+        <div class="p-3.5 rounded-xl ${g.severity === 'error' ? 'bg-red-50 border-2 border-red-300 text-red-900 shadow-sm' : 'bg-amber-50 border-2 border-amber-300 text-amber-900 shadow-2xs'} text-xs">
+          <div class="font-mono font-bold mb-1 flex items-center space-x-1.5">
+            <span class="text-sm">${g.severity === 'error' ? 'ðŸ›‘' : 'ðŸ’¡'}</span>
+            <span class="tracking-wide">${isEn ? g.titleEn : titleVi}</span>
+          </div>
+          <p class="leading-relaxed text-[11px] font-sans">
+            ${isEn ? g.messageEn : messageVi}
+          </p>
+        </div>
+      `}).join('');
+    } else {
+      alertContainer.classList.add('hidden');
+      alertContainer.innerHTML = '';
+    }
+  }
+
+  // Refresh icons inside result card
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+function downloadPolaroidCard() {
+  const costumeObj = COSTUMES_DATA.find(c => c.id === state.stylingResult?.costumeId) || COSTUMES_DATA[0];
+  const season = state.stylingResult?.season || 'MÃ¹a Thu (Autumn - Warm)';
+  const author = state.user.name || 'Sá»© Giáº£ Di Sáº£n Gen Z';
+  const outfitName = state.stylingResult?.contextLookbook?.outfitTitle || costumeObj.nameVi;
+
+  // High-resolution canvas for print-grade Polaroid photocard (640 x 920)
+  const canvas = document.createElement('canvas');
+  canvas.width = 640;
+  canvas.height = 920;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  // Background Linen Paper
+  ctx.fillStyle = '#FAF7F2';
+  ctx.fillRect(0, 0, 640, 920);
+
+  // Outer border & vintage golden seal frame
+  ctx.strokeStyle = '#D4AF37';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(20, 20, 600, 880);
+  ctx.strokeStyle = '#8B0000';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(28, 28, 584, 864);
+
+  // Traditional corner decorations
+  const drawCorner = (x, y) => {
+    ctx.strokeStyle = '#D4AF37';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x, y, 14, 14);
+    ctx.fillStyle = '#8B0000';
+    ctx.fillRect(x + 4, y + 4, 6, 6);
+  };
+  drawCorner(34, 34);
+  drawCorner(592, 34);
+  drawCorner(34, 872);
+  drawCorner(592, 872);
+
+  // Title header
+  ctx.fillStyle = '#8B0000';
+  ctx.font = 'bold 12px "Be Vietnam Pro", sans-serif';
+  ctx.fillText('THáºº Sá»¨ GIáº¢ VÄ‚N HÃ“A Â· VIETHERITAGE REMIX', 50, 64);
+
+  ctx.fillStyle = '#222222';
+  ctx.font = 'bold 24px "Be Vietnam Pro", sans-serif';
+  ctx.fillText(costumeObj.nameVi, 50, 98);
+
+  ctx.fillStyle = '#666666';
+  ctx.font = '13px "Be Vietnam Pro", sans-serif';
+  ctx.fillText(`${season} Â· NiÃªn Ä‘áº¡i: ${costumeObj.era}`, 50, 124);
+
+  // Inner Photo Area
+  ctx.fillStyle = '#ECE4D4';
+  ctx.fillRect(45, 145, 550, 520);
+  ctx.strokeStyle = '#D4AF37';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(45, 145, 550, 520);
+
+  const drawFooterAndDownload = () => {
+    // Cultural Quote & Lookbook Details
+    ctx.fillStyle = '#222222';
+    ctx.font = 'bold 17px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(outfitName, 50, 705);
+
+    ctx.fillStyle = '#8B0000';
+    ctx.font = 'italic 13px "Be Vietnam Pro", sans-serif';
+    ctx.fillText('â€œKáº¿ thá»«a di sáº£n nghÃ¬n nÄƒm Â· Tá»± hÃ o báº£n sáº¯c Viá»‡tâ€', 50, 735);
+
+    ctx.fillStyle = '#555555';
+    ctx.font = '12px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(`Sá»© giáº£ Ä‘á»“ng sÃ¡ng táº¡o: ${author} Â· Äiá»ƒn cháº¿ phá»¥c trang 1744-2026`, 50, 762);
+
+    ctx.fillStyle = '#888888';
+    ctx.font = '11px "Be Vietnam Pro", sans-serif';
+    ctx.fillText('NgÅ© ThÆ°á»ng Â· NgÅ© LuÃ¢n Â· Tá»© ThÃ¢n Phá»¥ Máº«u Â· https://vietheritage.vn', 50, 788);
+
+    // Draw QR Code Graphic on Bottom Right
+    const qx = 480, qy = 705, qsize = 110;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(qx - 5, qy - 5, qsize + 10, qsize + 10);
+    ctx.strokeStyle = '#D4AF37';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(qx - 5, qy - 5, qsize + 10, qsize + 10);
+
+    // QR pattern simulation
+    ctx.fillStyle = '#222222';
+    const matrix = [
+      [1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1],
+      [1,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1],
+      [1,0,1,1,1,0,1,0,1,0,1,0,1,1,1,0,1],
+      [1,0,1,1,1,0,1,0,0,1,1,0,1,1,1,0,1],
+      [1,0,1,1,1,0,1,0,1,1,0,0,1,1,1,0,1],
+      [1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1],
+      [1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1],
+      [0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0],
+      [1,0,1,0,1,1,0,1,1,0,1,1,0,1,0,1,1],
+      [0,1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,0],
+      [1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,0,1],
+      [1,0,0,0,0,0,1,0,0,1,0,1,0,0,1,1,1],
+      [1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1],
+      [1,0,1,1,1,0,1,0,0,1,0,1,1,0,1,1,1],
+      [1,0,1,1,1,0,1,0,1,1,1,0,1,0,0,0,1],
+      [1,0,0,0,0,0,1,0,1,0,1,1,0,1,1,0,1],
+      [1,1,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1]
+    ];
+    const cell = qsize / matrix.length;
+    for (let r = 0; r < matrix.length; r++) {
+      for (let c = 0; c < matrix[r].length; c++) {
+        if (matrix[r][c] === 1) {
+          ctx.fillRect(qx + c * cell, qy + r * cell, cell, cell);
+        }
+      }
+    }
+    // QR Center Seal
+    ctx.fillStyle = '#8B0000';
+    ctx.fillRect(qx + qsize / 2 - 12, qy + qsize / 2 - 12, 24, 24);
+    ctx.strokeStyle = '#D4AF37';
+    ctx.strokeRect(qx + qsize / 2 - 12, qy + qsize / 2 - 12, 24, 24);
+    ctx.fillStyle = '#D4AF37';
+    ctx.font = 'bold 12px "Be Vietnam Pro", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('V', qx + qsize / 2, qy + qsize / 2 + 4);
+    ctx.textAlign = 'left';
+
+    ctx.fillStyle = '#888888';
+    ctx.font = '9px "Be Vietnam Pro", sans-serif';
+    ctx.fillText('QUÃ‰T Äá»‚ TRUY Cáº¬P Tá»¦ Äá»’', qx - 2, qy + qsize + 20);
+
+    // Trigger download
+    const link = document.createElement('a');
+    link.download = `The_Su_Gia_Van_Hoa_${costumeObj.id}_VMix.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  };
+
+  const photoToUse = state.tryOnResultImage || state.userPhotoUrl;
+  if (photoToUse) {
+    const userImg = new Image();
+    userImg.crossOrigin = 'anonymous';
+    userImg.onload = () => {
+      // Crop cover photo to 550x520
+      const imgAspect = userImg.width / userImg.height;
+      const targetAspect = 550 / 520;
+      let sx = 0, sy = 0, sw = userImg.width, sh = userImg.height;
+      if (imgAspect > targetAspect) {
+        sw = userImg.height * targetAspect;
+        sx = (userImg.width - sw) / 2;
+      } else {
+        sh = userImg.width / targetAspect;
+        sy = (userImg.height - sh) / 2;
+      }
+      ctx.drawImage(userImg, sx, sy, sw, sh, 45, 145, 550, 520);
+
+      // Gradient overlay at bottom of photo
+      const grad = ctx.createLinearGradient(0, 540, 0, 665);
+      grad.addColorStop(0, 'rgba(0,0,0,0)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.85)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(45, 540, 550, 125);
+
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = 'bold 20px "Be Vietnam Pro", sans-serif';
+      ctx.fillText(costumeObj.nameVi, 65, 635);
+
+      ctx.fillStyle = '#FAF7F2';
+      ctx.font = '10px "Be Vietnam Pro", sans-serif';
+      ctx.fillText(state.tryOnResultImage ? 'âœ¨ THá»¬ Äá»’ AI: GEMINI-3.1-FLASH-IMAGE Â· 4K EDITORIAL' : 'THá»¬ Äá»’ Cá»” PHá»¤C Â· THIáº¾T Káº¾ Äá»˜C Báº¢N', 65, 605);
+
+      drawFooterAndDownload();
+    };
+    userImg.onerror = () => {
+      ctx.fillStyle = '#8B0000';
+      ctx.font = 'bold 22px "Be Vietnam Pro", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(costumeObj.nameVi, 320, 395);
+      ctx.textAlign = 'left';
+      drawFooterAndDownload();
+    };
+    userImg.src = photoToUse;
+  } else {
+    ctx.fillStyle = '#8B0000';
+    ctx.font = 'bold 24px "Be Vietnam Pro", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(costumeObj.nameVi, 320, 380);
+    ctx.fillStyle = '#555555';
+    ctx.font = '13px "Be Vietnam Pro", sans-serif';
+    ctx.fillText(costumeObj.form, 320, 420);
+    ctx.textAlign = 'left';
+    drawFooterAndDownload();
+  }
+}
+
+function publishToCommunity() {
+  if (!state.stylingResult) {
+    runAiAnalysis();
+  }
+  const costumeObj = COSTUMES_DATA.find(c => c.id === state.stylingResult?.costumeId) || COSTUMES_DATA[0];
+  const newLook = {
+    id: 'look-' + Date.now(),
+    author: state.user.name,
+    titleVi: `${costumeObj.nameVi} - Phong CÃ¡ch Gen Z`,
+    titleEn: `${costumeObj.nameEn} - Contemporary Remix`,
+    costumeId: costumeObj.id,
+    costumeName: costumeObj.nameVi,
+    destination: 'Di sáº£n Viá»‡t Nam',
+    score: state.stylingResult?.score || 96,
+    likes: 1,
+    date: 'Vá»«a xong',
+    photoUrl: state.userPhotoUrl,
+    accentHex: '#8B0000',
+    tags: ['#VietHeritageRemix', '#GenZCoCreation', '#HighFashion']
+  };
+
+  storageHelper.saveCommunityLook(newLook);
+  renderCommunityShowcase();
+
+  alert('âœ“ Báº£n phá»‘i cá»§a báº¡n Ä‘Ã£ Ä‘Æ°á»£c Ä‘Æ°a vÃ o Báº£o TÃ ng SÃ¡ng Táº¡o Cá»™ng Äá»“ng!');
+}
+

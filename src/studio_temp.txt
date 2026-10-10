@@ -1,0 +1,457 @@
+﻿function renderStudioSection() {
+  const isEn = state.lang === 'en';
+
+  return `
+    <section class="space-y-8">
+      <div class="max-w-3xl">
+        <div class="inline-block text-xs font-mono font-bold text-[#8B0000] tracking-wider uppercase mb-1">
+          âœ¦ AI Heritage Atelier
+        </div>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-[#222222]">
+          ${t('studioTitle')}
+        </h2>
+        <p class="text-sm text-[#666666] mt-1">
+          ${t('studioSub')}
+        </p>
+      </div>
+
+      <!-- Asymmetric Split View -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- LEFT PANE: 3-Step Streamlined Try-On Studio -->
+        <div class="lg:col-span-7 bg-white rounded-2xl border border-[#D4AF37]/40 p-5 md:p-6 shadow-sm space-y-5">
+          <!-- BÆ¯á»šC 1: Táº¢I áº¢NH Cá»¦A Báº N (HOáº¶C CHá»ŒN MáºªU NHANH) -->
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wider flex items-center space-x-1.5">
+                <span class="w-5 h-5 rounded-full bg-[#8B0000] text-white flex items-center justify-center text-[10px] font-bold">1</span>
+                <span>Táº£i áº¢nh ChÃ¢n Dung (Hoáº·c Chá»n Nhanh)</span>
+              </label>
+              <span class="text-[10px] font-mono text-stone-400">áº¢nh chÃ¢n dung rÃµ máº·t</span>
+            </div>
+
+            <div class="flex items-center space-x-3.5 p-3 rounded-xl bg-[#FAF7F2] border border-[#D4AF37]/30">
+              <div 
+                class="relative w-16 h-16 sm:w-18 sm:h-18 rounded-xl bg-white border-2 border-dashed border-[#D4AF37] flex items-center justify-center overflow-hidden shrink-0 shadow-inner group cursor-pointer hover:border-[#8B0000] transition-colors"
+                onclick="document.getElementById('userPhoto').click()"
+                title="Báº¥m Ä‘á»ƒ táº£i áº£nh cá»§a báº¡n"
+              >
+                <img id="previewAvatar" src="${state.userPhotoUrl || ''}" class="w-full h-full object-cover ${state.userPhotoUrl ? '' : 'hidden'}" alt="User Portrait">
+                <div id="previewAvatarPlaceholder" class="${state.userPhotoUrl ? 'hidden' : 'flex'} flex-col items-center justify-center text-stone-400">
+                  <i data-lucide="camera" class="w-6 h-6 stroke-1 text-[#8B0000]"></i>
+                  <span class="text-[9px] font-mono mt-0.5 text-stone-500">Táº£i áº£nh</span>
+                </div>
+              </div>
+
+              <div class="flex-1 space-y-2">
+                <input type="file" id="userPhoto" accept="image/*" class="text-xs text-stone-600 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-mono file:bg-[#8B0000] file:text-white hover:file:bg-[#700000] cursor-pointer w-full transition-colors">
+                
+                <div class="flex items-center space-x-1.5">
+                  <span class="text-[10px] font-mono text-stone-500 shrink-0">Máº«u sáºµn:</span>
+                  <div class="grid grid-cols-3 gap-1.5 w-full">
+                    <button type="button" class="preset-avatar-btn px-2 py-1 rounded-lg text-[10px] font-mono bg-white hover:bg-[#8B0000] hover:text-white text-stone-700 border border-stone-200 transition-colors flex items-center justify-center space-x-1 cursor-pointer truncate shadow-2xs" data-url="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80">
+                      <span>ðŸ‘¦</span><span class="truncate">Nam Gen Z</span>
+                    </button>
+                    <button type="button" class="preset-avatar-btn px-2 py-1 rounded-lg text-[10px] font-mono bg-white hover:bg-[#8B0000] hover:text-white text-stone-700 border border-stone-200 transition-colors flex items-center justify-center space-x-1 cursor-pointer truncate shadow-2xs" data-url="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80">
+                      <span>ðŸ‘§</span><span class="truncate">Ná»¯ Gen Z</span>
+                    </button>
+                    <button type="button" class="preset-avatar-btn px-2 py-1 rounded-lg text-[10px] font-mono bg-white hover:bg-[#8B0000] hover:text-white text-stone-700 border border-stone-200 transition-colors flex items-center justify-center space-x-1 cursor-pointer truncate shadow-2xs" data-url="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80">
+                      <span>ðŸŒ¸</span><span class="truncate">NÃ ng ThÆ¡</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BÆ¯á»šC 2: CHá»ŒN Cá»” PHá»¤C MUá»N THá»¬ (DANH Má»¤C TRá»°C QUAN 6 Bá»˜) -->
+          <div class="space-y-2.5 pt-3 border-t border-stone-200">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wider flex items-center space-x-1.5">
+                <span class="w-5 h-5 rounded-full bg-[#8B0000] text-white flex items-center justify-center text-[10px] font-bold">2</span>
+                <span>Chá»n Cá»• Phá»¥c Muá»‘n Máº·c Thá»­</span>
+              </label>
+              <span id="selectedCostumeBadge" class="text-xs font-mono font-bold text-[#8B0000] bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+                ${(COSTUMES_DATA.find(c => c.id === (state.selectedCostumeId || 'ngu-than')) || COSTUMES_DATA[0]).nameVi}
+              </span>
+            </div>
+
+            <!-- Visual Costume Cards Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5" id="costumeVisualGrid">
+              ${COSTUMES_DATA.slice(0, 6).map((c) => {
+                const isSelected = (state.selectedCostumeId || 'ngu-than') === c.id;
+                const photo = c.realPhotography?.heroPhoto || 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=600&q=80';
+                return `
+                  <div 
+                    class="costume-picker-card group relative rounded-xl border-2 overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-md ${isSelected ? 'border-[#8B0000] ring-2 ring-[#8B0000]/40 shadow-sm bg-rose-50/20' : 'border-stone-200 hover:border-[#D4AF37] bg-white'}"
+                    data-costume-id="${c.id}"
+                    data-costume-name="${c.nameVi}"
+                  >
+                    <div class="aspect-[4/3] w-full overflow-hidden bg-stone-900 relative">
+                      <img src="${photo}" alt="${c.nameVi}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                      
+                      <!-- Checkmark Indicator -->
+                      <div class="costume-check-badge absolute top-1.5 right-1.5 w-5 h-5 rounded-full ${isSelected ? 'bg-[#8B0000] text-white flex' : 'hidden'} items-center justify-center text-[10px] font-bold shadow-xs">
+                        âœ“
+                      </div>
+                      
+                      <!-- Era tag on image -->
+                      <span class="absolute bottom-1.5 left-1.5 text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/60 text-[#D4AF37] border border-white/10 backdrop-blur-2xs">
+                        ${c.eraCategory === 'nguyen' ? 'Triá»u Nguyá»…n' : (c.eraCategory ? `Thá»i ${c.eraCategory.toUpperCase()}` : 'Cá»• phá»¥c')}
+                      </span>
+                    </div>
+
+                    <div class="p-2 text-left">
+                      <h4 class="font-serif font-bold text-xs text-[#222222] truncate group-hover:text-[#8B0000] transition-colors">${c.nameVi}</h4>
+                      <p class="text-[10px] text-stone-500 font-sans truncate mt-0.5">${c.form || c.shortDescVi}</p>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Hidden field for script compatibility -->
+            <input type="hidden" id="selectCostume" value="${state.selectedCostumeId || 'ngu-than'}" />
+          </div>
+
+          <!-- BÆ¯á»šC 3: CHá»ŒN Bá»I Cáº¢NH DI Sáº¢N (1 CHáº M) -->
+          <div class="space-y-2 pt-3 border-t border-stone-200">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wider flex items-center space-x-1.5">
+                <span class="w-5 h-5 rounded-full bg-[#8B0000] text-white flex items-center justify-center text-[10px] font-bold">3</span>
+                <span>Chá»n Bá»‘i Cáº£nh Di Sáº£n Check-In</span>
+              </label>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="destinationPillGroup">
+              <button type="button" class="dest-pill-btn px-2.5 py-2 rounded-xl border text-left text-xs font-mono transition-all cursor-pointer ${(!state.selectedDestination || state.selectedDestination === 'hoang-thanh') ? 'bg-[#8B0000] text-white border-[#8B0000] font-bold shadow-xs' : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'}" data-dest="hoang-thanh">
+                ðŸ›ï¸ HoÃ ng ThÃ nh
+              </button>
+              <button type="button" class="dest-pill-btn px-2.5 py-2 rounded-xl border text-left text-xs font-mono transition-all cursor-pointer ${state.selectedDestination === 'dai-noi-hue' ? 'bg-[#8B0000] text-white border-[#8B0000] font-bold shadow-xs' : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'}" data-dest="dai-noi-hue">
+                ðŸ‘‘ Äáº¡i Ná»™i Huáº¿
+              </button>
+              <button type="button" class="dest-pill-btn px-2.5 py-2 rounded-xl border text-left text-xs font-mono transition-all cursor-pointer ${state.selectedDestination === 'hoi-an' ? 'bg-[#8B0000] text-white border-[#8B0000] font-bold shadow-xs' : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'}" data-dest="hoi-an">
+                ðŸ® Phá»‘ Cá»• Há»™i An
+              </button>
+              <button type="button" class="dest-pill-btn px-2.5 py-2 rounded-xl border text-left text-xs font-mono transition-all cursor-pointer ${state.selectedDestination === 'chua-den' ? 'bg-[#8B0000] text-white border-[#8B0000] font-bold shadow-xs' : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'}" data-dest="chua-den">
+                ðŸª· ChÃ¹a Má»™t Cá»™t
+              </button>
+              <button type="button" class="dest-pill-btn px-2.5 py-2 rounded-xl border text-left text-xs font-mono transition-all cursor-pointer ${state.selectedDestination === 'cafe' ? 'bg-[#8B0000] text-white border-[#8B0000] font-bold shadow-xs' : 'bg-stone-50 border-stone-200 text-stone-700 hover:bg-stone-100'}" data-dest="cafe">
+                â˜• Cafe Indochine
+              </button>
+            </div>
+            <input type="hidden" id="selectDest" value="${state.selectedDestination || 'hoang-thanh'}" />
+          </div>
+
+          <!-- TÃ™Y CHá»ˆNH NÃ‚NG CAO (Gáº¬P Láº I Máº¶C Äá»ŠNH - KHÃ”NG Rá»I Máº®T) -->
+          <details class="pt-2 border-t border-stone-200 group">
+            <summary class="text-xs font-mono text-stone-500 hover:text-[#8B0000] cursor-pointer flex items-center justify-between py-1 select-none">
+              <span class="flex items-center space-x-1.5">
+                <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+                <span>TÃ¹y chá»n nÃ¢ng cao (MÃ u sáº¯c, vÃ³c dÃ¡ng, trang phá»¥c dÆ°á»›i)</span>
+              </span>
+              <span class="text-xs text-stone-400 group-open:rotate-180 transition-transform">â–¼</span>
+            </summary>
+
+            <div class="mt-3 space-y-3 p-3 rounded-xl bg-stone-50 border border-stone-200 text-xs font-sans">
+              <!-- Sáº¯c tá»‘ da & Personal Color -->
+              <div>
+                <label class="block text-xs font-mono text-stone-600 mb-1">Undertone 4 MÃ¹a (Personal Color):</label>
+                <select id="selectUndertone" class="w-full px-3 py-2 rounded-lg border border-stone-300 font-sans text-xs focus:ring-1 focus:ring-[#8B0000] outline-none bg-white">
+                  <option value="autumn" ${state.selectedUndertone === 'autumn' ? 'selected' : ''}>ðŸ‚ MÃ¹a Thu (Warm Olive - Phá»• biáº¿n táº¡i Viá»‡t Nam)</option>
+                  <option value="spring" ${state.selectedUndertone === 'spring' ? 'selected' : ''}>ðŸŒ¸ MÃ¹a XuÃ¢n (Warm Fair - Tráº¯ng sÃ¡ng áº¥m)</option>
+                  <option value="summer" ${state.selectedUndertone === 'summer' ? 'selected' : ''}>ðŸŒŠ MÃ¹a Háº¡ (Cool Light - SÃ¡ng há»“ng láº¡nh)</option>
+                  <option value="winter" ${state.selectedUndertone === 'winter' ? 'selected' : ''}>â„ï¸ MÃ¹a ÄÃ´ng (Cool Deep - TÆ°Æ¡ng pháº£n cao)</option>
+                </select>
+              </div>
+
+              <!-- Chiá»u cao & CÃ¢n náº·ng -->
+              <div class="grid grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-[11px] font-mono text-stone-600 mb-1">Chiá»u cao (cm):</label>
+                  <input type="number" id="inputHeight" value="165" class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 font-mono text-xs focus:ring-1 focus:ring-[#8B0000] outline-none bg-white">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-stone-600 mb-1">CÃ¢n náº·ng (kg):</label>
+                  <input type="number" id="inputWeight" value="52" class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 font-mono text-xs focus:ring-1 focus:ring-[#8B0000] outline-none bg-white">
+                </div>
+              </div>
+
+              <!-- DÃ¡ng ngÆ°á»i & Trang phá»¥c dÆ°á»›i -->
+              <div class="grid grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-[11px] font-mono text-stone-600 mb-1">DÃ¡ng ngÆ°á»i:</label>
+                  <select id="selectBodyShape" class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 font-sans text-xs focus:ring-1 focus:ring-[#8B0000] outline-none bg-white">
+                    <option value="hourglass" selected>Äá»“ng há»“ cÃ¡t</option>
+                    <option value="pear">DÃ¡ng quáº£ lÃª</option>
+                    <option value="rectangle">DÃ¡ng chá»¯ nháº­t</option>
+                    <option value="inverted-triangle">Tam giÃ¡c ngÆ°á»£c</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-stone-600 mb-1">Trang phá»¥c dÆ°á»›i:</label>
+                  <select id="selectBottom" class="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 font-sans text-xs focus:ring-1 focus:ring-[#8B0000] outline-none bg-white">
+                    <option value="pant">Quáº§n thá»¥ng lá»¥a tráº¯ng (Chuáº©n má»±c)</option>
+                    <option value="skirt">VÃ¡y quáº¥n gáº¥m dÃ i</option>
+                    <option value="short" class="text-red-700">Quáº§n short (Vi pháº¡m)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Hidden values for compatibility -->
+              <input type="hidden" id="selectWeather" value="cold-18" />
+              <input type="hidden" id="selectCollar" value="huu-nham" />
+              <input type="hidden" id="selectColor" value="#8B0000" />
+            </div>
+          </details>
+
+          <!-- PRIMARY ACTION: Virtual Try-On Button -->
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-[11px] font-mono px-3 py-1.5 rounded-lg bg-stone-50 border border-stone-200">
+              <span id="geminiConnectionStatus" class="flex items-center space-x-1.5 text-stone-600">
+                <span id="geminiStatusDot" class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <span id="geminiStatusText">Äang kiá»ƒm tra káº¿t ná»‘i AI Studio...</span>
+              </span>
+              <span class="text-stone-400 text-[10px] flex items-center space-x-1">
+                <span>ðŸ”’ Backend (.env.local)</span>
+              </span>
+            </div>
+
+            <button id="btnVirtualTryOn" class="w-full py-4 px-4 rounded-xl bg-gradient-to-r from-[#8B0000] via-[#A01625] to-[#8B0000] hover:from-[#700000] hover:to-[#700000] text-white font-mono font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center justify-center space-x-2.5 cursor-pointer transform hover:-translate-y-0.5 active:scale-98 border border-[#D4AF37]/50 relative overflow-hidden group">
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <i data-lucide="sparkles" class="w-4 h-4 text-[#D4AF37]"></i>
+              <span class="tracking-wide">âœ¨ Thá»­ Cá»• Phá»¥c Báº±ng AI (gemini-3.1-flash-image)</span>
+            </button>
+
+            <!-- SECONDARY ACTION: Personal Color & Guardrail Analysis -->
+            <button id="btnAnalyze" class="w-full py-2.5 px-3 rounded-lg bg-[#FAF7F2] hover:bg-[#F0ECE1] text-[#8B0000] border border-[#8B0000]/30 font-mono font-bold text-xs transition-colors flex items-center justify-center space-x-2 cursor-pointer">
+              <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+              <span>PhÃ¢n TÃ­ch Personal Color & Cultural Guardrail</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT PANE: Live Visual Lookbook Mockup & Dynamic Result Dashboard -->
+        <div class="lg:col-span-5 space-y-6">
+          <!-- Scanning Overlay (Appears during analysis) -->
+          <div id="scanningOverlay" class="hidden bg-white rounded-2xl border-2 border-dashed border-[#D4AF37] p-8 md:p-12 text-center flex flex-col items-center justify-center space-y-4 shadow-sm">
+            <div class="w-16 h-16 rounded-full border-4 border-[#8B0000] border-t-transparent animate-spin"></div>
+            <div class="space-y-1.5 max-w-md">
+              <div class="inline-flex items-center space-x-1.5 px-3 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-mono">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Engine: gemini-3.1-flash-image Â· Google AI Studio</span>
+              </div>
+              <p id="scanningProgressText" class="font-mono text-sm text-[#8B0000] font-bold">
+                âœ¦ Äang phÃ¢n tÃ­ch diá»‡n máº¡o & káº¿t ná»‘i gemini-3.1-flash-image...
+              </p>
+              <p id="scanningSubText" class="text-xs text-stone-500 font-sans">
+                TrÃ­ch xuáº¥t Ä‘Æ°á»ng nÃ©t khuÃ´n máº·t, Ä‘á»‘i chiáº¿u quy chuáº©n cá»• phá»¥c 1744 vÃ  káº¿t xuáº¥t áº£nh Editorial...
+              </p>
+            </div>
+            <div class="w-64 h-2 bg-stone-100 rounded-full overflow-hidden border border-stone-200">
+              <div class="h-full bg-gradient-to-r from-[#D4AF37] via-[#8B0000] to-[#D4AF37] animate-[shimmer_1.5s_infinite]"></div>
+            </div>
+          </div>
+
+          <!-- Editorial Lookbook Output Dashboard -->
+          <div id="resultContainer" class="bg-white rounded-2xl border border-[#D4AF37]/40 p-6 md:p-8 shadow-md space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-stone-200 pb-4 gap-2">
+              <div>
+                <span class="text-xs font-mono font-bold text-[#8B0000] tracking-wider uppercase">âœ¦ LOOKBOOK ARCHIVE // NÂ° 1744</span>
+                <h3 id="lookbookTitle" class="font-serif text-2xl font-bold text-[#222222] mt-0.5">
+                  Ão NgÅ© ThÃ¢n - SÄ© Tá»­ Kinh Ká»³ 2026
+                </h3>
+              </div>
+              <div id="respectScoreBadge" class="px-3 py-1.5 rounded-full font-mono text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 w-fit">
+                Cultural Score: 98%
+              </div>
+            </div>
+
+            <!-- Real-time AI Try-On Execution Banner -->
+            <div id="tryOnStatusBanner" class="hidden"></div>
+
+            <!-- Dynamic Lookbook Visual Preview (Editorial Showcase) -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start bg-[#FAF7F2] rounded-xl p-5 md:p-6 border border-stone-200">
+              <div class="md:col-span-6 flex flex-col items-center justify-center">
+                <div id="polaroidPhotocardElement" class="w-full max-w-[340px] rounded-2xl bg-white border-4 border-white shadow-xl p-3 flex flex-col items-center justify-between transition-all hover:shadow-2xl">
+                  <div id="lookbookCostumeVisual" class="w-full h-80 sm:h-96 flex items-center justify-center overflow-hidden rounded-xl bg-stone-900 relative group">
+                    <img 
+                      id="tryOnOutputImage"
+                      src="${COSTUMES_DATA[0].realPhotography?.heroPhoto}" 
+                      alt="${COSTUMES_DATA[0].nameVi}" 
+                      class="w-full h-full object-cover filter brightness-95 transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
+                    <div class="absolute top-2.5 left-2.5 flex items-center space-x-1.5 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-full text-white text-[10px] font-mono border border-white/20">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <span id="tryOnModelBadge">gemini-3.1-flash-image</span>
+                    </div>
+                    <div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-xs font-mono text-white pointer-events-none">
+                      <span id="lookbookImageTitle" class="truncate max-w-[170px] text-[#D4AF37] font-bold">${COSTUMES_DATA[0].nameVi}</span>
+                      <span class="px-2 py-0.5 rounded bg-[#8B0000] text-[9px] uppercase tracking-wider font-bold">4K Editorial</span>
+                    </div>
+                  </div>
+                  <div class="w-full text-center border-t border-stone-100 pt-2 flex items-center justify-between px-2 mt-2">
+                    <span id="lookbookPhotoCredit" class="text-[11px] font-mono text-stone-500 uppercase tracking-tight truncate max-w-[150px]">VietHeritage Editorial</span>
+                    <span class="text-[10px] font-mono text-[#8B0000] font-bold">1744Â·2026</span>
+                  </div>
+                </div>
+
+                <!-- Action Buttons for Output Image -->
+                <div class="w-full max-w-[340px] grid grid-cols-2 gap-2 mt-3.5">
+                  <button id="btnDownloadPolaroid" class="text-xs font-mono font-bold text-white bg-[#8B0000] hover:bg-[#700000] flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl transition-all shadow-xs cursor-pointer">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-[#D4AF37]"></i>
+                    <span>Táº£i áº¢nh HD</span>
+                  </button>
+                  <button id="btnSaveToWardrobe" class="text-xs font-mono font-bold text-[#8B0000] bg-white hover:bg-rose-50 border border-[#8B0000]/30 flex items-center justify-center space-x-1.5 py-2.5 px-3 rounded-xl transition-all shadow-xs cursor-pointer">
+                    <i data-lucide="archive" class="w-3.5 h-3.5"></i>
+                    <span>LÆ°u Tá»§ Äá»“</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="md:col-span-7 space-y-3 text-xs">
+                <!-- Personal Color Diagnosis -->
+                <div>
+                  <span class="font-mono font-bold text-[#8B0000] uppercase text-[10px] tracking-wide">âœ¦ Cháº©n ÄoÃ¡n Sáº¯c Tá»‘ CÃ¡ NhÃ¢n:</span>
+                  <p id="personalColorSeason" class="font-serif font-bold text-base text-[#222222]">
+                    MÃ¹a Thu (Autumn - Warm)
+                  </p>
+                  <p id="personalColorDesc" class="text-stone-600 mt-0.5 leading-relaxed text-[11px]">
+                    Da ngÄƒm áº¥m / vÃ ng olive (Warm Undertone kinh Ä‘iá»ƒn cá»§a ngÆ°á»i Viá»‡t).
+                  </p>
+                  <div class="mt-1 p-2 rounded-lg bg-white border border-stone-200">
+                    <span class="font-mono text-[10px] text-stone-500 block mb-0.5">Gá»£i Ã½ báº£ng mÃ u:</span>
+                    <p id="personalColorPalette" class="font-mono font-medium text-[#8B0000] text-[11px]">
+                      Cam Ä‘áº¥t, Äá» tÃ­a Burgundy, VÃ ng mÃ¹ táº¡t, Xanh rÃªu Olive
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Recommended Costume -->
+                <div>
+                  <span class="font-mono font-bold text-[#D4AF37] uppercase text-[10px] tracking-wide">âœ¦ Cá»• Phá»¥c Äá» Xuáº¥t Theo MÃ¹a:</span>
+                  <p id="recommendedCostumeText" class="font-serif font-bold text-xs text-[#222222] mt-0.5">
+                    Ão Táº¥c bÃ¡nh quy cam, Nháº­t BÃ¬nh gáº¥m Vá»ng Nguyá»‡t Ä‘á» tráº§m, Giao LÄ©nh the vÃ ng Ä‘áº¥t
+                  </p>
+                </div>
+
+                <!-- Natural Dyes Swatches -->
+                <div>
+                  <span class="font-mono text-stone-500 uppercase text-[10px]">${t('dyeTitle')}:</span>
+                  <div id="dyesContainer" class="flex items-center space-x-2 mt-1 flex-wrap gap-1">
+                    <div class="flex items-center space-x-1 px-2 py-0.5 rounded bg-white border border-stone-200">
+                      <span class="w-3 h-3 rounded-full bg-[#8B1E3F]"></span>
+                      <span class="text-[10px] font-mono">Cá»§ Dá»n</span>
+                    </div>
+                    <div class="flex items-center space-x-1 px-2 py-0.5 rounded bg-white border border-stone-200">
+                      <span class="w-3 h-3 rounded-full bg-[#1C3144]"></span>
+                      <span class="text-[10px] font-mono">Xanh ChÃ m</span>
+                    </div>
+                    <div class="flex items-center space-x-1 px-2 py-0.5 rounded bg-white border border-stone-200">
+                      <span class="w-3 h-3 rounded-full bg-[#D4AF37]"></span>
+                      <span class="text-[10px] font-mono">HoÃ ng Yáº¿n</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Body Tailoring Advice -->
+                <div>
+                  <span class="font-mono text-stone-500 uppercase text-[10px]">${t('bodyTitle')}:</span>
+                  <p id="bodyAdviceText" class="text-stone-600 text-[11px] leading-relaxed mt-0.5">
+                    DÃ¡ng ngÆ°á»i cÃ¢n Ä‘á»‘i. Ão NgÅ© ThÃ¢n tay cháº½n vuá»‘t nháº¹ eo táº¡o Ä‘Æ°á»ng cong thanh thoÃ¡t vÃ  tÃ´n chiá»u cao.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CONTEXTUAL LOOKBOOK RECOMMENDATIONS (Destination + Weather + Tutorials) -->
+            <div id="contextualLookbookContainer" class="p-4 rounded-xl bg-[#FAF7F2] border border-[#D4AF37]/30 space-y-3">
+              <div class="flex items-center justify-between border-b border-stone-200/80 pb-2">
+                <span class="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wide flex items-center space-x-1.5">
+                  <i data-lucide="compass" class="w-3.5 h-3.5 text-[#8B0000]"></i>
+                  <span>TÆ° Váº¥n Phá»‘i Äá»“ Theo Ngá»¯ Cáº£nh (Contextual Lookbook)</span>
+                </span>
+                <span class="text-[10px] font-mono text-stone-500">Äá»‹a Äiá»ƒm & Thá»i Tiáº¿t</span>
+              </div>
+
+              <!-- Outfit title & Desc -->
+              <div>
+                <h4 id="contextOutfitTitle" class="font-serif font-bold text-base text-[#222222]">
+                  Ão Giao LÄ©nh The DÃ y & Äá»‘i KhÃ¢m Gáº¥m NhÅ© LÃ³t Lá»¥a
+                </h4>
+                <p id="contextOutfitDesc" class="text-xs text-[#666666] mt-0.5 leading-relaxed">
+                  Lookbook giá»¯ áº¥m trang trá»ng táº¡i khÃ´ng gian di tÃ­ch cá»• kÃ­nh. Táº§ng lá»›p váº£i dÃ y dáº·n giÃºp táº¡o phom dÃ¡ng bá» tháº¿, tÃ´n nghiÃªm.
+                </p>
+              </div>
+
+              <!-- Hair, Makeup & Accessories -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
+                <div class="bg-white p-3 rounded-lg border border-stone-200">
+                  <span class="font-mono font-bold text-[#8B0000] text-[10px] uppercase block mb-1">ðŸ’„ Kiá»ƒu TÃ³c & Trang Äiá»ƒm:</span>
+                  <p id="contextHairMakeup" class="text-stone-700 text-[11px] leading-relaxed">
+                    BÃºi tÃ³c cao váº¥n khÄƒn chá»¯ NhÃ¢n, cá»‘ Ä‘á»‹nh báº±ng trÃ¢m báº¡c. Makeup tÃ´ng áº¥m (Autumn Warm), mÃ¡ há»“ng Ä‘áº¥t, son Ä‘á» tráº§m.
+                  </p>
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-stone-200">
+                  <span class="font-mono font-bold text-[#D4AF37] text-[10px] uppercase block mb-1">âœ¨ Phá»¥ Kiá»‡n Äi KÃ¨m:</span>
+                  <div id="contextAccessories" class="flex flex-wrap gap-1 mt-1">
+                    <span class="px-2 py-0.5 rounded bg-[#FAF7F2] border border-stone-200 text-[10px] font-mono">Kiá»ng báº¡c báº£n lá»›n</span>
+                    <span class="px-2 py-0.5 rounded bg-[#FAF7F2] border border-stone-200 text-[10px] font-mono">NÃ³n quai thao / NÃ³n lÃ¡</span>
+                    <span class="px-2 py-0.5 rounded bg-[#FAF7F2] border border-stone-200 text-[10px] font-mono">TÃºi cá»‘i vintage</span>
+                    <span class="px-2 py-0.5 rounded bg-[#FAF7F2] border border-stone-200 text-[10px] font-mono">Guá»‘c má»™c</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- YouTube Tutorial Video Links -->
+              <div class="pt-2">
+                <span class="font-mono text-[10px] text-stone-500 uppercase block mb-1.5 flex items-center space-x-1">
+                  <i data-lucide="play-circle" class="w-3 h-3 text-[#8B0000]"></i>
+                  <span>Video HÆ°á»›ng Dáº«n Váº¥n KhÄƒn & Trang Äiá»ƒm (YouTube):</span>
+                </span>
+                <div id="contextYoutubeGuides" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <a href="https://www.youtube.com/watch?v=HHTXi9DvhAg" target="_blank" rel="noreferrer" class="p-2.5 rounded-lg bg-white hover:bg-rose-50/50 border border-stone-200 hover:border-[#8B0000] flex items-center justify-between text-xs transition-colors group">
+                    <div class="flex items-center space-x-2 truncate">
+                      <span class="w-6 h-6 rounded bg-red-100 text-red-700 flex items-center justify-center shrink-0">â–¶</span>
+                      <span class="font-sans font-medium text-stone-800 text-[11px] truncate group-hover:text-[#8B0000]">HÆ°á»›ng dáº«n váº¥n khÄƒn & bÃºi tÃ³c</span>
+                    </div>
+                    <span class="text-[10px] font-mono text-stone-400 shrink-0">5:20 â†—</span>
+                  </a>
+                  <a href="https://www.youtube.com/watch?v=FBcvPdh4XoM" target="_blank" rel="noreferrer" class="p-2.5 rounded-lg bg-white hover:bg-rose-50/50 border border-stone-200 hover:border-[#8B0000] flex items-center justify-between text-xs transition-colors group">
+                    <div class="flex items-center space-x-2 truncate">
+                      <span class="w-6 h-6 rounded bg-red-100 text-red-700 flex items-center justify-center shrink-0">â–¶</span>
+                      <span class="font-sans font-medium text-stone-800 text-[11px] truncate group-hover:text-[#8B0000]">Trang Ä‘iá»ƒm hoÃ i cá»• Indochine</span>
+                    </div>
+                    <span class="text-[10px] font-mono text-stone-400 shrink-0">7:45 â†—</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- CULTURAL GUARDRAIL WARNING CONTAINER (Shake Animation Trigger) -->
+            <div id="guardrailAlerts" class="hidden space-y-2"></div>
+
+            <!-- Action Buttons: Publish, Email, Wardrobe -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-stone-200">
+              <button id="btnPublishCommunity" class="py-2.5 px-3 rounded-xl bg-[#222222] hover:bg-[#333333] text-white font-mono text-xs flex items-center justify-center space-x-2 transition-colors shadow-2xs cursor-pointer">
+                <i data-lucide="share-2" class="w-4 h-4 text-[#D4AF37]"></i>
+                <span>${t('btnAddToCommunity')}</span>
+              </button>
+              <button id="btnOpenEmailModal" class="py-2.5 px-3 rounded-xl bg-white hover:bg-[#FAF7F2] text-[#8B0000] border border-[#8B0000]/40 font-mono text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+                <span>${t('btnSendEmail')}</span>
+              </button>
+              <button id="btnSaveToWardrobe" class="py-2.5 px-3 rounded-xl bg-[#D4AF37] hover:bg-[#c29f2e] text-[#222222] font-mono text-xs font-bold flex items-center justify-center space-x-2 transition-colors cursor-pointer">
+                <i data-lucide="bookmark" class="w-4 h-4"></i>
+                <span>${t('btnSaveWardrobe')}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+

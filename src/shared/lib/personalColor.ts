@@ -4,12 +4,12 @@ import { evaluateGuardrails, OutfitConfig } from './guardrails';
  * Traditional Vietnamese natural dye color palette.
  */
 export const TRADITIONAL_DYES = {
-  'cu-den': { nameVi: 'Màu Củ Dền', nameEn: 'Beetroot Crimson', hex: '#8B1E3F', descVi: 'Sắc đỏ tía sâu thẳm từ củ dền tự nhiên, tôn vinh khí chất quý phái.' },
-  'xanh-cham': { nameVi: 'Xanh Chàm', nameEn: 'Indigo Blue', hex: '#1C3144', descVi: 'Chiết xuất từ lá chàm miền sơn cước, biểu trưng cho sự trầm tĩnh, nội lực.' },
-  'do-son': { nameVi: 'Đỏ Son', nameEn: 'Vermilion Red', hex: '#9E1B1B', descVi: 'Màu chu sa may mắn, quyền quý của phẩm phục cung đình và hỷ sự.' },
-  'hoang-yen': { nameVi: 'Vàng Hoàng Yến', nameEn: 'Imperial Canary Gold', hex: '#D4AF37', descVi: 'Màu ánh kim của hoa mai và tơ hoàng yến, thanh nhã và vương giả.' },
-  'xanh-com': { nameVi: 'Xanh Hương Cốm', nameEn: 'Young Rice Mint', hex: '#6B8E23', descVi: 'Sắc xanh dịu mát của lúa non Hà thành, tôn da sáng trẻ trung.' },
-  'nau-gu': { nameVi: 'Nâu Củ Nâu / Nâu Gụ', nameEn: 'Natural Yam Brown', hex: '#6B4226', descVi: 'Nhuộm từ củ nâu cổ truyền, bền bỉ, mộc mạc và phong thái hoài niệm.' }
+  'cu-den': { nameVi: 'Màu Củ Dền', nameEn: 'Beetroot Crimson', hex: '#8B1E3F', descVi: 'Sắc đỏ tía sâu thẳm từ củ dền tự nhiên, tôn vinh khí chất quý phái.', descEn: 'Deep crimson from natural beetroot, exuding noble aura.' },
+  'xanh-cham': { nameVi: 'Xanh Chàm', nameEn: 'Indigo Blue', hex: '#1C3144', descVi: 'Chiết xuất từ lá chàm miền sơn cước, biểu trưng cho sự trầm tĩnh, nội lực.', descEn: 'Mountain indigo extract, symbolizing calm inner strength.' },
+  'do-son': { nameVi: 'Đỏ Son', nameEn: 'Vermilion Red', hex: '#9E1B1B', descVi: 'Màu chu sa may mắn, quyền quý của phẩm phục cung đình và hỷ sự.', descEn: 'Auspicious vermilion, royal majesty for imperial ceremonies.' },
+  'hoang-yen': { nameVi: 'Vàng Hoàng Yến', nameEn: 'Imperial Canary Gold', hex: '#D4AF37', descVi: 'Màu ánh kim của hoa mai và tơ hoàng yến, thanh nhã và vương giả.', descEn: 'Golden shimmer of apricot blossoms, elegant and imperial.' },
+  'xanh-com': { nameVi: 'Xanh Hương Cốm', nameEn: 'Young Rice Mint', hex: '#6B8E23', descVi: 'Sắc xanh dịu mát của lúa non Hà thành, tôn da sáng trẻ trung.', descEn: 'Refreshing mint of young Hanoi rice, brightens youthful skin.' },
+  'nau-gu': { nameVi: 'Nâu Củ Nâu / Nâu Gụ', nameEn: 'Natural Yam Brown', hex: '#6B4226', descVi: 'Nhuộm từ củ nâu cổ truyền, bền bỉ, mộc mạc và phong thái hoài niệm.', descEn: 'Traditional yam dye, durable, rustic with a nostalgic flair.' }
 };
 
 export interface PersonalColorParams extends OutfitConfig {
