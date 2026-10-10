@@ -143,17 +143,10 @@ export const MuseumGallery: React.FC<MuseumGalleryProps> = ({ lang }) => {
           </button>
           <button 
             type="button" 
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${globalMode === 'split' ? 'bg-[#8B0000] text-white shadow-md' : 'text-stone-700 hover:text-stone-900 hover:bg-white/80'}`}
-            onClick={() => setGlobalMode('split')}
-          >
-            ⚡ {isEn ? 'Split Slider' : 'So Sánh Kéo Trượt'}
-          </button>
-          <button 
-            type="button" 
             className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${globalMode === 'svg' ? 'bg-[#8B0000] text-white shadow-md' : 'text-stone-700 hover:text-stone-900 hover:bg-white/80'}`}
             onClick={() => setGlobalMode('svg')}
           >
-            🎨 {isEn ? 'Vector Schema' : 'Bản Vẽ Giải Phẫu'}
+            🎨 {isEn ? 'Vector Schema' : 'Bản Vẽ Đồ Họa 2D'}
           </button>
         </div>
       </div>

@@ -69,19 +69,15 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
       
       <div>
         <div className="relative w-full h-72 rounded-xl bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FFFDF9] via-[#F8F4EC] to-[#EBE2D3] border border-[#D4AF37]/50 group-hover:border-[#8B0000]/50 p-3 mb-5 overflow-hidden flex items-center justify-center transition-colors shadow-inner">
-          <div className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded bg-[#8B0000] text-[#D4AF37] font-mono text-[10px] font-bold tracking-wider shadow-sm border border-[#D4AF37]/60 z-20 flex items-center space-x-1">
-            <span>✦</span>
-            <span>{c.era}</span>
-          </div>
-
+          {/* Top Left: Mode Toggle (Vector vs Ảnh Thật) */}
           <div 
-            className="absolute top-2.5 left-2.5 z-20 flex items-center bg-white/95 backdrop-blur-sm rounded-full p-0.5 border border-[#D4AF37]/60 shadow-sm"
+            className="absolute top-2.5 left-2.5 z-20 flex items-center bg-white/95 backdrop-blur-sm rounded-full p-0.5 border border-[#D4AF37]/60 shadow-md"
             onClick={(e) => e.stopPropagation()}
           >
             <button 
               type="button"
               aria-pressed={localMode === 'svg'}
-              className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8B0000] ${localMode === 'svg' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900'}`}
+              className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8B0000] cursor-pointer ${localMode === 'svg' ? 'bg-[#8B0000] text-white shadow-xs' : 'text-stone-700 hover:text-stone-900'}`}
               onClick={() => setLocalMode('svg')}
               title={isEn ? '2D Vector Illustration' : 'Bản Đồ Họa 2D'}
             >
@@ -90,16 +86,17 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
             <button 
               type="button"
               aria-pressed={localMode === 'split'}
-              className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8B0000] ${localMode === 'split' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900'}`}
+              className="sr-only"
               onClick={() => setLocalMode('split')}
-              title={isEn ? 'Interactive Split Comparison' : 'So Sánh Kéo Trượt'}
+              tabIndex={-1}
+              aria-hidden="true"
             >
               ⚡ So Sánh
             </button>
             <button 
               type="button"
               aria-pressed={localMode === 'real'}
-              className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8B0000] ${localMode === 'real' ? 'bg-[#8B0000] text-white shadow-sm' : 'text-stone-700 hover:text-stone-900'}`}
+              className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#8B0000] cursor-pointer ${localMode === 'real' ? 'bg-[#8B0000] text-white shadow-xs' : 'text-stone-700 hover:text-stone-900'}`}
               onClick={() => setLocalMode('real')}
               title={isEn ? 'Real-Life Photography 4K' : 'Ảnh Thực Tế 4K'}
             >
@@ -107,7 +104,14 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
             </button>
           </div>
 
-          <div className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm text-white/90 font-mono text-[9px] flex items-center space-x-1 z-20 opacity-80 group-hover:opacity-100 transition-opacity">
+          {/* Top Right: Era Badge */}
+          <div className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full bg-[#8B0000] text-[#D4AF37] font-mono text-[10px] font-bold tracking-wider shadow-sm border border-[#D4AF37]/60 z-20 flex items-center space-x-1 pointer-events-none">
+            <span>✦</span>
+            <span>{c.era}</span>
+          </div>
+
+          {/* Bottom Left: Dossier Indicator */}
+          <div className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded bg-black/60 backdrop-blur-sm text-white/90 font-mono text-[9px] flex items-center space-x-1 z-20 opacity-80 group-hover:opacity-100 transition-opacity pointer-events-none">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#D4AF37]"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
             <span>{isEn ? 'Dossier' : 'Hồ Sơ'}</span>
           </div>
@@ -123,16 +127,17 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none"></div>
               
-              <div className="absolute top-2.5 right-2.5 z-20 flex items-center space-x-1.5">
+              {/* Secondary Controls Bar: Positioned below top controls to prevent any overlap */}
+              <div className="absolute top-11 right-2.5 z-20 flex items-center space-x-1.5">
                 {c.realPhotography?.backPhoto && (
                   <div 
-                    className="flex items-center bg-black/80 backdrop-blur-sm rounded-lg p-0.5 border border-[#D4AF37]/60 shadow-md"
+                    className="flex items-center bg-black/85 backdrop-blur-md rounded-lg p-0.5 border border-[#D4AF37]/60 shadow-md"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <button
                       type="button"
                       onClick={() => setCardPhotoSide('front')}
-                      className={`px-1.5 py-0.5 rounded text-[9px] font-mono font-bold transition-all ${cardPhotoSide === 'front' ? 'bg-[#8B0000] text-white' : 'text-stone-300 hover:text-white'}`}
+                      className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold transition-all cursor-pointer ${cardPhotoSide === 'front' ? 'bg-[#8B0000] text-white shadow-xs' : 'text-stone-300 hover:text-white'}`}
                       title={isEn ? "Front View" : "Mặt Trước"}
                     >
                       Trước
@@ -140,7 +145,7 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
                     <button
                       type="button"
                       onClick={() => setCardPhotoSide('back')}
-                      className={`px-1.5 py-0.5 rounded text-[9px] font-mono font-bold transition-all ${cardPhotoSide === 'back' ? 'bg-[#8B0000] text-white' : 'text-stone-300 hover:text-white'}`}
+                      className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold transition-all cursor-pointer ${cardPhotoSide === 'back' ? 'bg-[#8B0000] text-white shadow-xs' : 'text-stone-300 hover:text-white'}`}
                       title={isEn ? "Back View" : "Mặt Sau"}
                     >
                       Sau
@@ -150,7 +155,7 @@ export const CostumeCard: React.FC<CostumeCardProps> = ({
 
                 <button 
                   type="button" 
-                  className="px-2 py-0.5 rounded-lg bg-black/75 hover:bg-[#8B0000] text-white flex items-center space-x-1 text-[10px] font-mono font-bold transition-all border border-[#D4AF37]/60 shadow-md hover:scale-105 cursor-pointer backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+                  className="px-2 py-0.5 rounded-lg bg-black/85 hover:bg-[#8B0000] text-white flex items-center space-x-1 text-[10px] font-mono font-bold transition-all border border-[#D4AF37]/60 shadow-md hover:scale-105 cursor-pointer backdrop-blur-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
                   title={isEn ? 'Inspect 4K Tailoring & Craftsmanship' : 'Soi nếp may & chi tiết may đo 4K'}
                   aria-label={isEn ? `Inspect 4K craftsmanship for ${c.nameEn}` : `Soi nếp may đo 4K cho ${c.nameVi}`}
                   onClick={(e) => {
