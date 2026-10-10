@@ -218,32 +218,80 @@ export const CharacterCanvas2D: React.FC<CharacterCanvas2DProps> = ({
         <g id="layer-hair">
           {state.hairId === 'hair-van-tran' && (
             <g id="hair-van-tran">
-              {/* Neat parted hair covering sides */}
-              <path d="M165 110 Q168 75 200 74 Q232 75 235 110 Q225 90 200 88 Q175 90 165 110 Z" fill={`url(#${uid}-hair)`} />
-              <path d="M165 110 Q162 135 168 150 Q170 125 174 110 Z" fill={`url(#${uid}-hair)`} />
-              <path d="M235 110 Q238 135 232 150 Q230 125 226 110 Z" fill={`url(#${uid}-hair)`} />
-              {/* Center Part Line */}
-              <path d="M200 74 L200 88" stroke="#3D3432" strokeWidth="1.2" />
+              {/* Back chignon roll silhouette behind head */}
+              <ellipse cx="200" cy="64" rx="38" ry="16" fill={`url(#${uid}-hair)`} />
+              
+              {/* Full Rolled Hair Halo (Vanh Toc Van Tran day dan om dau) */}
+              <path 
+                d="M156 126 C152 64, 172 52, 200 52 C228 52, 248 64, 244 126 C240 76, 226 66, 200 66 C174 66, 160 76, 156 126 Z" 
+                fill={`url(#${uid}-hair)`} 
+                stroke="#1A1514" 
+                strokeWidth="1.2"
+              />
+              {/* Lustrous halo ring highlights */}
+              <path d="M164 78 Q200 58 236 78" stroke="#4A3F3D" strokeWidth="2.2" fill="none" opacity="0.6" />
+              <path d="M168 85 Q200 66 232 85" stroke="#635552" strokeWidth="1.2" fill="none" opacity="0.45" />
+
+              {/* Main Parted Hair - Left Wing (Mai toc muot re ngoi trai) */}
+              <path 
+                d="M200 66 L200 102 Q186 105 174 114 Q166 124 164 140 Q160 120 160 92 Q162 66 200 66 Z" 
+                fill={`url(#${uid}-hair)`} 
+              />
+              {/* Main Parted Hair - Right Wing (Mai toc muot re ngoi phai) */}
+              <path 
+                d="M200 66 L200 102 Q214 105 226 114 Q234 124 236 140 Q240 120 240 92 Q238 66 200 66 Z" 
+                fill={`url(#${uid}-hair)`} 
+              />
+
+              {/* Crisp Center Part Line (Duong re ngoi giua thanh thoat) */}
+              <line x1="200" y1="66" x2="200" y2="102" stroke="#161211" strokeWidth="1.4" strokeLinecap="round" />
+
+              {/* Hair Flow Strands & Sheen (Van toc luon theo ngoi dau) */}
+              <path d="M198 74 Q186 86 174 112" stroke="#3D3331" strokeWidth="0.9" fill="none" opacity="0.75" />
+              <path d="M197 84 Q188 94 178 116" stroke="#4E4240" strokeWidth="0.8" fill="none" opacity="0.6" />
+              <path d="M182 86 Q178 96 172 112" stroke="#5E4F4C" strokeWidth="1.4" fill="none" opacity="0.45" />
+
+              <path d="M202 74 Q214 86 226 112" stroke="#3D3331" strokeWidth="0.9" fill="none" opacity="0.75" />
+              <path d="M203 84 Q212 94 222 116" stroke="#4E4240" strokeWidth="0.8" fill="none" opacity="0.6" />
+              <path d="M218 86 Q222 96 228 112" stroke="#5E4F4C" strokeWidth="1.4" fill="none" opacity="0.45" />
+
+              {/* Soft, Natural Tapered Sideburns (Mai toc thanh tu om nhe guong mat) */}
+              <path d="M165 128 Q163 140 166 150 Q168 140 170 130 Z" fill="#241E1D" />
+              <path d="M235 128 Q237 140 234 150 Q232 140 230 130 Z" fill="#241E1D" />
+
+              {/* Hairline Edge Softening (Vien chan toc mem mai, khong bi cung hay hoi) */}
+              <path d="M174 114 Q186 105 200 102 Q214 105 226 114" stroke="#382C29" strokeWidth="1.2" fill="none" opacity="0.9" />
             </g>
           )}
 
           {state.hairId === 'hair-bui-cao' && (
             <g id="hair-bui-cao">
-              <ellipse cx="200" cy="62" rx="22" ry="18" fill={`url(#${uid}-hair)`} />
-              <path d="M165 110 Q168 76 200 76 Q232 76 235 110 Z" fill={`url(#${uid}-hair)`} />
+              {/* High royal bun */}
+              <ellipse cx="200" cy="58" rx="22" ry="17" fill={`url(#${uid}-hair)`} />
+              {/* Sleek updo hair hugging skull down to natural hairline */}
+              <path 
+                d="M162 125 C160 84, 172 68, 200 68 C228 68, 240 84, 238 125 Q230 102 200 98 Q170 102 162 125 Z" 
+                fill={`url(#${uid}-hair)`} 
+              />
+              <path d="M174 102 Q200 96 226 102" stroke="#3D3331" strokeWidth="1" fill="none" opacity="0.8" />
               {/* Golden Lotus Hairpin */}
-              <path d="M178 60 L222 64" stroke={`url(#${uid}-gold-trim)`} strokeWidth="3" strokeLinecap="round" />
-              <circle cx="222" cy="64" r="4.5" fill="#FFE599" stroke="#997A15" strokeWidth="1" />
+              <path d="M178 56 L222 60" stroke={`url(#${uid}-gold-trim)`} strokeWidth="3" strokeLinecap="round" />
+              <circle cx="222" cy="60" r="4.5" fill="#FFE599" stroke="#997A15" strokeWidth="1" />
             </g>
           )}
 
           {state.hairId === 'hair-bui-nam' && (
             <g id="hair-bui-nam">
               {/* Scholar topknot bun */}
-              <ellipse cx="200" cy="68" rx="15" ry="14" fill={`url(#${uid}-hair)`} />
-              <path d="M165 110 Q170 78 200 78 Q230 78 235 110 Z" fill={`url(#${uid}-hair)`} />
-              <rect x="194" y="66" width="12" height="10" rx="3" fill="#754719" />
-              <path d="M188 71 L212 71" stroke="#D1A76E" strokeWidth="2.5" strokeLinecap="round" />
+              <ellipse cx="200" cy="62" rx="15" ry="14" fill={`url(#${uid}-hair)`} />
+              {/* Main hair combed back neatly */}
+              <path 
+                d="M164 125 C162 86, 172 72, 200 72 C228 72, 238 86, 236 125 Q228 102 200 98 Q172 102 164 125 Z" 
+                fill={`url(#${uid}-hair)`} 
+              />
+              <path d="M172 102 Q200 96 228 102" stroke="#3D3331" strokeWidth="1" fill="none" opacity="0.8" />
+              <rect x="194" y="60" width="12" height="10" rx="3" fill="#754719" />
+              <path d="M188 65 L212 65" stroke="#D1A76E" strokeWidth="2.5" strokeLinecap="round" />
             </g>
           )}
 
