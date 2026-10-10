@@ -29,14 +29,14 @@ const COMMUNITY_KEY = 'vheritage_community_v1';
 const WARDROBE_KEY = 'vheritage_wardrobe_v1';
 const USER_KEY = 'vheritage_current_user_v1';
 
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = (): boolean => typeof window !== 'undefined';
 
 /**
  * Utility for persisting and retrieving user data securely across SSR and client.
  */
 export const storageHelper = {
   getCommunityLooks(): CommunityLook[] {
-    if (!isBrowser) return [];
+    if (!isBrowser()) return [];
     const data = localStorage.getItem(COMMUNITY_KEY);
     if (!data) {
       const initial: CommunityLook[] = [
@@ -118,7 +118,7 @@ export const storageHelper = {
   saveCommunityLook(look: CommunityLook): CommunityLook[] {
     const list = this.getCommunityLooks();
     list.unshift(look);
-    if (isBrowser) {
+    if (isBrowser()) {
       try {
         localStorage.setItem(COMMUNITY_KEY, JSON.stringify(list));
       } catch (err) {
@@ -133,7 +133,7 @@ export const storageHelper = {
     const target = list.find((item: CommunityLook) => item.id === id);
     if (target) {
       target.likes = (target.likes || 0) + 1;
-      if (isBrowser) {
+      if (isBrowser()) {
         try {
           localStorage.setItem(COMMUNITY_KEY, JSON.stringify(list));
         } catch (err) {
@@ -145,7 +145,7 @@ export const storageHelper = {
   },
 
   getWardrobe(): WardrobeItem[] {
-    if (!isBrowser) return [];
+    if (!isBrowser()) return [];
     const data = localStorage.getItem(WARDROBE_KEY);
     if (!data) return [];
     try {
@@ -158,7 +158,7 @@ export const storageHelper = {
   saveToWardrobe(item: WardrobeItem): WardrobeItem[] {
     const list = this.getWardrobe();
     list.unshift(item);
-    if (isBrowser) {
+    if (isBrowser()) {
       try {
         localStorage.setItem(WARDROBE_KEY, JSON.stringify(list));
       } catch (err) {
@@ -170,7 +170,7 @@ export const storageHelper = {
 
   removeFromWardrobe(id: string): WardrobeItem[] {
     const list = this.getWardrobe().filter((item: WardrobeItem) => item.id !== id);
-    if (isBrowser) {
+    if (isBrowser()) {
       try {
         localStorage.setItem(WARDROBE_KEY, JSON.stringify(list));
       } catch (err) {
@@ -181,7 +181,7 @@ export const storageHelper = {
   },
 
   getUser(): UserContext {
-    if (!isBrowser) {
+    if (!isBrowser()) {
       return {
         isLoggedIn: false,
         name: 'Khách Di Sản (Guest)',
@@ -204,7 +204,7 @@ export const storageHelper = {
   },
 
   setUser(userObj: UserContext): UserContext {
-    if (isBrowser) {
+    if (isBrowser()) {
       try {
         localStorage.setItem(USER_KEY, JSON.stringify(userObj));
       } catch (err) {

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-// @ts-ignore
-import { COSTUMES_DATA } from '../../../costumes.js';
+import { COSTUMES_DATA } from '../../../costumes';
+import { compressImage } from '../../../shared/lib/imageCompression';
 
 export interface VirtualTryOnState {
   userPhotoUrl: string;
@@ -24,14 +24,24 @@ export interface VirtualTryOnProps {
   onTryOn: () => void;
 }
 
+/**
+ * Interactive virtual try-on configuration panel with client-side image compression.
+ */
 export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ state, setState, onAnalyze, onTryOn }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setState(prev => ({ ...prev, userPhotoUrl: url }));
+    if (!file) {
+      return;
+    }
+
+    try {
+      const compressed = await compressImage(file, 1024, 0.82);
+      setState(prev => ({ ...prev, userPhotoUrl: compressed.dataUrl }));
+    } catch {
+      const fallbackUrl = URL.createObjectURL(file);
+      setState(prev => ({ ...prev, userPhotoUrl: fallbackUrl }));
     }
   };
 
@@ -41,7 +51,6 @@ export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ state, setState, onA
 
   return (
     <div className="bg-white rounded-2xl border border-[#D4AF37]/40 p-5 md:p-6 shadow-sm space-y-5">
-      {/* STEP 1 */}
       <div className="space-y-2.5">
         <div className="flex items-center justify-between">
           <label className="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wider flex items-center space-x-1.5">
@@ -76,7 +85,6 @@ export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ state, setState, onA
         </div>
       </div>
 
-      {/* STEP 2 */}
       <div className="space-y-2.5 pt-3 border-t border-stone-200">
         <div className="flex items-center justify-between">
           <label className="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wider flex items-center space-x-1.5">
@@ -105,7 +113,6 @@ export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ state, setState, onA
         </div>
       </div>
 
-      {/* STEP 3 */}
       <div className="space-y-2 pt-3 border-t border-stone-200">
         <label className="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wider flex items-center space-x-1.5">
           <span className="w-5 h-5 rounded-full bg-[#8B0000] text-white flex items-center justify-center text-[10px] font-bold">3</span>
@@ -124,7 +131,6 @@ export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ state, setState, onA
         </div>
       </div>
 
-      {/* ADVANCED */}
       <details className="pt-2 border-t border-stone-200 group">
         <summary className="text-xs font-mono text-stone-500 hover:text-[#8B0000] cursor-pointer flex items-center justify-between py-1 select-none">
           <span>Tùy chọn nâng cao</span>

@@ -5,12 +5,74 @@ import {
   handleGeminiVirtualTryOn,
   type StylingInput,
   type TryOnInput,
-} from "./geminiService";
+} from "./geminiService.ts";
 
 export interface HandlerResult {
   statusCode: number;
   data: unknown;
 }
+
+/**
+ * In-memory sliding window rate limiter tracking request frequencies per client.
+ */
+export class RateLimiter {
+  private readonly maxRequests: number;
+  private readonly windowMs: number;
+  private readonly timestampsMap: Map<string, number[]>;
+
+  constructor(maxRequests: number = 60, windowMs: number = 60000) {
+    this.maxRequests = maxRequests;
+    this.windowMs = windowMs;
+    this.timestampsMap = new Map();
+  }
+
+  /**
+   * Checks whether a request for a specific client identifier is permitted within the sliding window.
+   */
+  public isAllowed(identifier: string = "global"): boolean {
+    const now = Date.now();
+    const timestamps = this.timestampsMap.get(identifier) || [];
+    const validTimestamps = timestamps.filter((timestamp) => now - timestamp < this.windowMs);
+
+    if (validTimestamps.length >= this.maxRequests) {
+      this.timestampsMap.set(identifier, validTimestamps);
+      return false;
+    }
+
+    validTimestamps.push(now);
+    this.timestampsMap.set(identifier, validTimestamps);
+
+    if (this.timestampsMap.size > 5000) {
+      for (const [key, list] of this.timestampsMap.entries()) {
+        const active = list.filter((t) => now - t < this.windowMs);
+        if (active.length === 0) {
+          this.timestampsMap.delete(key);
+        } else {
+          this.timestampsMap.set(key, active);
+        }
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Clears all tracked rate limit records.
+   */
+  public reset(): void {
+    this.timestampsMap.clear();
+  }
+}
+
+/**
+ * Shared in-memory rate limiter instance for API operations.
+ */
+export const rateLimiter = new RateLimiter(60, 60000);
+
+/**
+ * Alias of the shared rate limiter instance.
+ */
+export const apiRateLimiter = rateLimiter;
 
 /**
  * Executes health check and capability status inquiry.
@@ -26,7 +88,17 @@ export async function executeStatusHandler(): Promise<HandlerResult> {
 /**
  * Validates and executes conversational consultation requests.
  */
-export async function executeChatHandler(payload: unknown): Promise<HandlerResult> {
+export async function executeChatHandler(
+  payload: unknown,
+  identifier: string = "global"
+): Promise<HandlerResult> {
+  if (!rateLimiter.isAllowed(identifier)) {
+    return {
+      statusCode: 429,
+      data: { error: "Quá nhiều yêu cầu. Vui lòng thử lại sau giây lát." },
+    };
+  }
+
   if (!payload || typeof payload !== "object") {
     return {
       statusCode: 400,
@@ -65,7 +137,17 @@ export async function executeChatHandler(payload: unknown): Promise<HandlerResul
 /**
  * Validates and executes styling evaluation requests.
  */
-export async function executeStylingHandler(payload: unknown): Promise<HandlerResult> {
+export async function executeStylingHandler(
+  payload: unknown,
+  identifier: string = "global"
+): Promise<HandlerResult> {
+  if (!rateLimiter.isAllowed(identifier)) {
+    return {
+      statusCode: 429,
+      data: { error: "Quá nhiều yêu cầu. Vui lòng thử lại sau giây lát." },
+    };
+  }
+
   if (!payload || typeof payload !== "object") {
     return {
       statusCode: 400,
@@ -110,7 +192,17 @@ export async function executeStylingHandler(payload: unknown): Promise<HandlerRe
 /**
  * Validates and executes virtual try-on generation requests.
  */
-export async function executeTryOnHandler(payload: unknown): Promise<HandlerResult> {
+export async function executeTryOnHandler(
+  payload: unknown,
+  identifier: string = "global"
+): Promise<HandlerResult> {
+  if (!rateLimiter.isAllowed(identifier)) {
+    return {
+      statusCode: 429,
+      data: { error: "Quá nhiều yêu cầu. Vui lòng thử lại sau giây lát." },
+    };
+  }
+
   if (!payload || typeof payload !== "object") {
     return {
       statusCode: 400,

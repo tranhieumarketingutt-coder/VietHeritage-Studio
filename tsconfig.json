@@ -17,12 +17,14 @@
       "*": ["./*"],
       "@/*": ["./*"]
     },
+    "allowImportingTsExtensions": true,
     "noEmit": true
   },
   "include": [
     "server/**/*",
     "api/**/*",
     "src/**/*",
+    "tests/**/*",
     "server.ts",
     "vite.config.ts"
   ],

@@ -1,0 +1,24 @@
+{
+  "name": "VietHeritage Remix - Gen Z Heritage Co-Creation Platform",
+  "short_name": "VietHeritage",
+  "description": "Indochine High-Fashion Editorial Lookbook, 2D Layered Costume Anatomy, AI Personal Color & Styling, Cultural Guardrail, and Gemini Cultural Advisor.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#8B0000",
+  "background_color": "#FAF7F2",
+  "categories": [
+    "lifestyle",
+    "education",
+    "fashion"
+  ],
+  "icons": [
+    {
+      "src": "/vietnam_heritage_map.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

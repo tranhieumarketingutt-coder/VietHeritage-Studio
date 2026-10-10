@@ -42,13 +42,13 @@ export function evaluateGuardrails({ costumeId, bottomChoice, collarChoice, dest
   }
 
 
-  if (costumeId === 'giao-linh' && collarChoice === 'ta-nham') {
+  if (costumeId === 'giao-linh' && (collarChoice === 'ta' || collarChoice === 'ta-nham')) {
     score -= 40;
     guardrails.push({
-      code: 'ERR_GIAO_LINH_TA',
+      code: 'ERR_GIAO_LINH_COLLAR',
       severity: 'error',
-      titleEn: '⚠️ Critical Rule Breach: Ta Nham Lapel',
-      messageVi: '⚠️ Lỗi sai nguyên tắc: Vạt Tả Nhậm chỉ dành cho người đã khuất. Trang phục Việt luôn tuân thủ Hữu Nhậm (vạt trái đè lên vạt phải).',
+      titleEn: 'Cultural Rule Breach: Ta Nham Lapel',
+      messageVi: 'Lỗi sai nguyên tắc: Vạt Tả Nhậm chỉ dành cho người đã khuất. Trang phục Việt luôn tuân thủ Hữu Nhậm (vạt trái đè lên vạt phải).',
       messageEn: 'Critical Rule Error: Crossing right-over-left (Ta Nham) was reserved exclusively for funerary garments. Vietnamese tradition mandates left-over-right (Huu Nham).'
     });
   }

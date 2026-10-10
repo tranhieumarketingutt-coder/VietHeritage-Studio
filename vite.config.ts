@@ -8,7 +8,7 @@ import {
   executeChatHandler,
   executeStylingHandler,
   executeTryOnHandler,
-} from "./server/handlers";
+} from "./server/handlers.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -61,6 +61,8 @@ function geminiDevApiPlugin(): Plugin {
 
         res.setHeader("Content-Type", "application/json");
 
+        const clientIp = req.socket?.remoteAddress || "127.0.0.1";
+
         try {
           if (pathname === "/api/gemini/status" && req.method === "GET") {
             const { statusCode, data } = await executeStatusHandler();
@@ -71,7 +73,7 @@ function geminiDevApiPlugin(): Plugin {
 
           if (pathname === "/api/gemini/chat" && req.method === "POST") {
             const payload = await readJsonBody();
-            const { statusCode, data } = await executeChatHandler(payload);
+            const { statusCode, data } = await executeChatHandler(payload, clientIp);
             res.statusCode = statusCode;
             res.end(JSON.stringify(data));
             return;
@@ -79,7 +81,7 @@ function geminiDevApiPlugin(): Plugin {
 
           if (pathname === "/api/gemini/styling" && req.method === "POST") {
             const payload = await readJsonBody();
-            const { statusCode, data } = await executeStylingHandler(payload);
+            const { statusCode, data } = await executeStylingHandler(payload, clientIp);
             res.statusCode = statusCode;
             res.end(JSON.stringify(data));
             return;
@@ -87,7 +89,7 @@ function geminiDevApiPlugin(): Plugin {
 
           if (pathname === "/api/gemini/try-on" && req.method === "POST") {
             const payload = await readJsonBody();
-            const { statusCode, data } = await executeTryOnHandler(payload);
+            const { statusCode, data } = await executeTryOnHandler(payload, clientIp);
             res.statusCode = statusCode;
             res.end(JSON.stringify(data));
             return;

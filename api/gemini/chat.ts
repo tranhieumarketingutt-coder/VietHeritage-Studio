@@ -1,5 +1,13 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { executeChatHandler } from "../../server/handlers";
+import { executeChatHandler } from "../../server/handlers.ts";
+
+function getClientIdentifier(req: VercelRequest): string {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string") {
+    return forwarded.split(",")[0].trim();
+  }
+  return req.socket?.remoteAddress || "global";
+}
 
 /**
  * Vercel serverless function endpoint for chat consultation.
@@ -20,6 +28,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
   }
 
   const payload = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
-  const { statusCode, data } = await executeChatHandler(payload);
+  const clientIp = getClientIdentifier(req);
+  const { statusCode, data } = await executeChatHandler(payload, clientIp);
   res.status(statusCode).json(data);
 }

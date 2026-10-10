@@ -8,7 +8,7 @@ import {
   executeChatHandler,
   executeStylingHandler,
   executeTryOnHandler,
-} from "./server/handlers";
+} from "./server/handlers.ts";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config();
@@ -21,23 +21,34 @@ const port = parseInt(process.env.PORT || "3000", 10);
 
 app.use(express.json({ limit: "25mb" }));
 
+function getClientIdentifier(req: Request): string {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string") {
+    return forwarded.split(",")[0].trim();
+  }
+  return req.ip || req.socket.remoteAddress || "global";
+}
+
 app.get("/api/gemini/status", async (_req: Request, res: Response) => {
   const { statusCode, data } = await executeStatusHandler();
   res.status(statusCode).json(data);
 });
 
 app.post("/api/gemini/chat", async (req: Request, res: Response) => {
-  const { statusCode, data } = await executeChatHandler(req.body);
+  const clientIp = getClientIdentifier(req);
+  const { statusCode, data } = await executeChatHandler(req.body, clientIp);
   res.status(statusCode).json(data);
 });
 
 app.post("/api/gemini/styling", async (req: Request, res: Response) => {
-  const { statusCode, data } = await executeStylingHandler(req.body);
+  const clientIp = getClientIdentifier(req);
+  const { statusCode, data } = await executeStylingHandler(req.body, clientIp);
   res.status(statusCode).json(data);
 });
 
 app.post("/api/gemini/try-on", async (req: Request, res: Response) => {
-  const { statusCode, data } = await executeTryOnHandler(req.body);
+  const clientIp = getClientIdentifier(req);
+  const { statusCode, data } = await executeTryOnHandler(req.body, clientIp);
   res.status(statusCode).json(data);
 });
 
