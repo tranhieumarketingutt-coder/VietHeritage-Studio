@@ -64,36 +64,60 @@ export function useAudio() {
     // Initial sync
     setIsPlaying(!audio.paused);
 
-    // Try auto-play immediately on load
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
+    // Immediate autoplay attempt
+    const tryPlay = () => {
+      const p = audio.play();
+      if (p !== undefined) {
+        p.then(() => {
           setIsPlaying(true);
-        })
-        .catch(() => {
-          // Browser prevented autoplay without prior gesture; register one-time user interaction listener
-          if (!listenersInitialized) {
-            listenersInitialized = true;
-            const startAudioOnGesture = () => {
-              const currentAudio = getSharedAudio();
-              if (currentAudio.paused) {
-                currentAudio.play().then(() => {
-                  setIsPlaying(true);
-                }).catch(() => {});
-              }
-              window.removeEventListener('click', startAudioOnGesture);
-              window.removeEventListener('touchstart', startAudioOnGesture);
-              window.removeEventListener('keydown', startAudioOnGesture);
-              window.removeEventListener('scroll', startAudioOnGesture);
-            };
-
-            window.addEventListener('click', startAudioOnGesture, { once: true });
-            window.addEventListener('touchstart', startAudioOnGesture, { once: true });
-            window.addEventListener('keydown', startAudioOnGesture, { once: true });
-            window.addEventListener('scroll', startAudioOnGesture, { once: true });
-          }
+        }).catch(() => {
+          // Blocked by browser autoplay policy - wait for user interaction
         });
+      }
+    };
+
+    tryPlay();
+
+    if (!listenersInitialized) {
+      listenersInitialized = true;
+
+      const triggerPlayback = () => {
+        const currentAudio = getSharedAudio();
+        if (currentAudio.paused) {
+          const p = currentAudio.play();
+          if (p !== undefined) {
+            p.then(() => {
+              setIsPlaying(true);
+              removeGestureListeners();
+            }).catch(() => {});
+          }
+        } else {
+          setIsPlaying(true);
+          removeGestureListeners();
+        }
+      };
+
+      const interactionEvents = [
+        'pointerdown',
+        'mousedown',
+        'touchstart',
+        'click',
+        'keydown',
+        'wheel',
+        'scroll'
+      ];
+
+      const removeGestureListeners = () => {
+        interactionEvents.forEach((evt) => {
+          window.removeEventListener(evt, triggerPlayback, { capture: true } as EventListenerOptions);
+          document.removeEventListener(evt, triggerPlayback, { capture: true } as EventListenerOptions);
+        });
+      };
+
+      interactionEvents.forEach((evt) => {
+        window.addEventListener(evt, triggerPlayback, { once: true, capture: true, passive: true });
+        document.addEventListener(evt, triggerPlayback, { once: true, capture: true, passive: true });
+      });
     }
 
     return () => {

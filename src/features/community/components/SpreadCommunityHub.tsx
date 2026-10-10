@@ -81,14 +81,14 @@ function drawPlaque(ctx: CanvasRenderingContext2D, w: number, h: number, u: numb
   ctx.restore();
 }
 
-// 11 Khung anh truyen thong ve bang Canvas 2D
+// 11 Khung ảnh truyền thống vẽ bằng Canvas 2D
 const FRAMES_CONFIG: FrameItem[] = [
   {
     id: 'tet-nguyen-dan',
     group: 'culture',
-    name: 'Tet Nguyen Dan',
-    context: 'dip Tet co truyen sum vay',
-    desc: 'Sac do may man hoa cung hoa mai vang rang ro don xuan sang.',
+    name: 'Tết Nguyên Đán',
+    context: 'dịp Tết cổ truyền sum vầy',
+    desc: 'Sắc đỏ may mắn hòa cùng hoa mai vàng rạng rỡ đón xuân sang.',
     hashtags: ['#TetNguyenDan', '#XuanVietNam', '#TetSumVay', '#CoPhucViet'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 34 * u;
@@ -124,15 +124,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       drawMai(60 * u, h - 60 * u, 32 * u);
       drawMai(w - 60 * u, h - 60 * u, 32 * u);
 
-      drawPlaque(ctx, w, h, u, text || 'Tet Nguyen Dan', '#8B0000', '#FFFFFF', '#D4AF37');
+      drawPlaque(ctx, w, h, u, text || 'Tết Nguyên Đán', '#8B0000', '#FFFFFF', '#D4AF37');
     }
   },
   {
     id: 'sen-viet',
     group: 'culture',
-    name: 'Sen Viet',
-    context: 'khong gian thanh tinh cua hoa sen',
-    desc: 'Net dep thuan khiet, thanh cao vuon len tu bun lay cua quoc hoa.',
+    name: 'Sen Việt',
+    context: 'không gian thanh tịnh của hoa sen',
+    desc: 'Nét đẹp thuần khiết, thanh cao vươn lên từ bùn lầy của quốc hoa.',
     hashtags: ['#SenViet', '#QuocHoa', '#ThanhTinh', '#NetDepViet'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 28 * u;
@@ -168,15 +168,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       drawLotus(80 * u, h - 80 * u, 1.2 * u);
       drawLotus(w - 80 * u, 70 * u, 1.0 * u);
 
-      drawPlaque(ctx, w, h, u, text || 'Sen Viet', '#14907C', '#FFFFFF', '#D4AF37');
+      drawPlaque(ctx, w, h, u, text || 'Sen Việt', '#14907C', '#FFFFFF', '#D4AF37');
     }
   },
   {
     id: 'trong-dong',
     group: 'culture',
-    name: 'Trong Dong',
-    context: 'hao khi ngan nam van hien Lac Hong',
-    desc: 'Hoa tiet ky ha va vong tron dong tam goi nhac coi nguon van hoa.',
+    name: 'Trống Đồng',
+    context: 'hào khí ngàn năm văn hiến Lạc Hồng',
+    desc: 'Họa tiết hình học kỷ hà và vòng tròn đồng tâm gợi nhắc cội nguồn văn hóa Đông Sơn.',
     hashtags: ['#TrongDong', '#DongSon', '#HaoKhiVietNam', '#DiSanVanHoa'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 32 * u;
@@ -208,15 +208,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       drawCircles(50 * u, h - 50 * u, 48 * u);
       drawCircles(w - 50 * u, h - 50 * u, 48 * u);
 
-      drawPlaque(ctx, w, h, u, text || 'Hon Trong Dong', '#8C6225', '#FFFFFF', '#D4AF37');
+      drawPlaque(ctx, w, h, u, text || 'Hồn Trống Đồng', '#8C6225', '#FFFFFF', '#D4AF37');
     }
   },
   {
     id: 'xuan-hoa-dao',
     group: 'seasons',
-    name: 'Xuan Hoa Dao',
-    context: 'nhung ngay dau xuan am ap',
-    desc: 'Sac hoa dao tham tuoi mang theo loi chuc an khang va khoi sac.',
+    name: 'Xuân Hoa Đào',
+    context: 'những ngày đầu xuân ấm áp',
+    desc: 'Sắc hoa đào thắm tươi mang theo lời chúc an khang và khởi sắc.',
     hashtags: ['#XuanHoaDao', '#DaoPhai', '#DuXuan', '#NhungNgayDauXuan'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 26 * u;
@@ -252,15 +252,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       drawPeachFlower(165 * u, 42 * u, 16 * u);
       drawPeachFlower(w - 70 * u, h - 90 * u, 18 * u);
 
-      drawPlaque(ctx, w, h, u, text || 'Xuan Hoa Dao', '#8B0000', '#FFFFFF', '#FFD1DC');
+      drawPlaque(ctx, w, h, u, text || 'Xuân Hoa Đào', '#8B0000', '#FFFFFF', '#FFD1DC');
     }
   },
   {
     id: 'ha-nang-bien',
     group: 'seasons',
-    name: 'Ha Nang Bien',
-    context: 'mua he day nang gio bien xanh',
-    desc: 'Khuc ca ron ra cua song bien dat dao va anh duong rang ngoi.',
+    name: 'Hạ Nắng Biển',
+    context: 'mùa hè đầy nắng gió biển xanh',
+    desc: 'Khúc ca rộn rã của sóng biển dạt dào và ánh dương rạng ngời.',
     hashtags: ['#HaNangBien', '#BienVietNam', '#MuaHeRucRo', '#NangVang'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 28 * u;
@@ -284,15 +284,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       ctx.closePath();
       ctx.fill();
 
-      drawPlaque(ctx, w, h, u, text || 'Ha Nang Bien', '#1D70B8', '#FFFFFF', '#D4AF37');
+      drawPlaque(ctx, w, h, u, text || 'Hạ Nắng Biển', '#1D70B8', '#FFFFFF', '#D4AF37');
     }
   },
   {
     id: 'thu-la-vang',
     group: 'seasons',
-    name: 'Thu La Vang',
-    context: 'tiet troi mua thu em dem',
-    desc: 'Khoanh khac diu em voi gio heo may va sac la vang xao xuyen.',
+    name: 'Thu Lá Vàng',
+    context: 'tiết trời mùa thu êm đềm',
+    desc: 'Khoảnh khắc dịu êm với gió heo may và sắc lá vàng xao xuyến.',
     hashtags: ['#ThuLaVang', '#HeoMay', '#MuaThuHaNoi', '#ChutThuEmDem'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 26 * u;
@@ -317,15 +317,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       drawLeaf(w - 70 * u, h - 90 * u, 0.9, 26 * u, '#D97A22');
       drawLeaf(w - 110 * u, h - 60 * u, -0.3, 20 * u, '#D4AF37');
 
-      drawPlaque(ctx, w, h, u, text || 'Thu Diu Em', '#B86A25', '#FFFFFF', '#D4AF37');
+      drawPlaque(ctx, w, h, u, text || 'Thu Dịu Êm', '#B86A25', '#FFFFFF', '#D4AF37');
     }
   },
   {
     id: 'dong-se-lanh',
     group: 'seasons',
-    name: 'Dong Se Lanh',
-    context: 'nhung ngay dong mien Bac se lanh',
-    desc: 'Hoi tho se lanh va lan suong bac am ap ben tach tra nong.',
+    name: 'Đông Se Lạnh',
+    context: 'những ngày đông miền Bắc se lạnh',
+    desc: 'Hơi thở se lạnh và làn sương bạc ấm áp bên tách trà nóng.',
     hashtags: ['#DongSeLanh', '#GioMua', '#MuaDongVietNam', '#BinhYen'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 28 * u;
@@ -355,15 +355,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       drawSnowflake(70 * u, h - 70 * u, 20 * u);
       drawSnowflake(w - 70 * u, h - 70 * u, 20 * u);
 
-      drawPlaque(ctx, w, h, u, text || 'Dong Se Lanh', '#3C5B7D', '#FFFFFF', '#D9E8F5');
+      drawPlaque(ctx, w, h, u, text || 'Đông Se Lạnh', '#3C5B7D', '#FFFFFF', '#D9E8F5');
     }
   },
   {
     id: 'hanoi-ho-guom',
     group: 'places',
-    name: 'Ha Noi - Ho Guom',
-    context: 'ben bo Ho Guom co kinh thu do',
-    desc: 'Bong Thap Rua tram mac nghieng minh soi bong lan nuoc biec.',
+    name: 'Hà Nội - Hồ Gươm',
+    context: 'bên bờ Hồ Gươm cổ kính thủ đô',
+    desc: 'Bóng Tháp Rùa trầm mặc nghiêng mình soi bóng làn nước biếc.',
     hashtags: ['#HaNoi', '#HoGuom', '#ThapRua', '#ThuDoHaNoi', '#PhoCo'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 30 * u;
@@ -386,15 +386,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       ctx.fillRect(bx + 10 * u, by + 12 * u, 35 * u, 18 * u);
       ctx.fillRect(bx + 18 * u, by, 18 * u, 12 * u);
 
-      drawPlaque(ctx, w, h, u, text || 'Ha Noi - Ho Guom', '#16213A', '#FFFFFF', '#D4AF37');
+      drawPlaque(ctx, w, h, u, text || 'Hà Nội - Hồ Gươm', '#16213A', '#FFFFFF', '#D4AF37');
     }
   },
   {
     id: 'vinh-ha-long',
     group: 'places',
-    name: 'Vinh Ha Long',
-    context: 'ky quan Vinh Ha Long ngut ngan',
-    desc: 'Nhung dao da voi ky vi soi bong lan nuoc biec va canh buom no gio.',
+    name: 'Vịnh Hạ Long',
+    context: 'kỳ quan Vịnh Hạ Long ngút ngàn',
+    desc: 'Những đảo đá vôi kỳ vĩ soi bóng làn nước biếc và cánh buồm no gió.',
     hashtags: ['#HaLongBay', '#KyQuanTheGioi', '#QuangNinh', '#VietNamDep'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 28 * u;
@@ -420,15 +420,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       ctx.closePath();
       ctx.fill();
 
-      drawPlaque(ctx, w, h, u, text || 'Vinh Ha Long', '#185A7D', '#FFFFFF', '#D4AF37');
+      drawPlaque(ctx, w, h, u, text || 'Vịnh Hạ Long', '#185A7D', '#FFFFFF', '#D4AF37');
     }
   },
   {
     id: 'hoi-an-pho-co',
     group: 'places',
-    name: 'Pho Co Hoi An',
-    context: 'pho co Hoi An ruc ro sac mau',
-    desc: 'Anh den long am ap soi roi mai ngoi reu phong va dong song Hoai.',
+    name: 'Phố Cổ Hội An',
+    context: 'phố cổ Hội An rực rỡ sắc màu',
+    desc: 'Ánh đèn lồng ấm áp soi rọi mái ngói rêu phong và dòng sông Hoài.',
     hashtags: ['#HoiAn', '#PhoCoHoiAn', '#DenLong', '#DiSanVanHoa'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 30 * u;
@@ -463,15 +463,15 @@ const FRAMES_CONFIG: FrameItem[] = [
       drawLantern(w - 70 * u, 65 * u, '#D4AF37', 18 * u);
       drawLantern(w - 115 * u, 55 * u, '#8B0000', 15 * u);
 
-      drawPlaque(ctx, w, h, u, text || 'Pho Co Hoi An', '#8B0000', '#FFFFFF', '#D4AF37');
+      drawPlaque(ctx, w, h, u, text || 'Phố Cổ Hội An', '#8B0000', '#FFFFFF', '#D4AF37');
     }
   },
   {
     id: 'sai-gon-len-den',
     group: 'places',
-    name: 'Sai Gon Len Den',
-    context: 'Sai Gon hoa le ruc ro anh den',
-    desc: 'Nhip song nang dong vuon cao voi duong chan troi lung linh.',
+    name: 'Sài Gòn Lên Đèn',
+    context: 'Sài Gòn hoa lệ rực rỡ ánh đèn',
+    desc: 'Nhịp sống năng động vươn cao với đường chân trời lung linh.',
     hashtags: ['#SaiGon', '#Landmark81', '#SaiGonVeDem', '#ThanhPhoTre'],
     draw: (ctx, w, h, u, text) => {
       const borderW = 28 * u;
@@ -489,94 +489,94 @@ const FRAMES_CONFIG: FrameItem[] = [
       ctx.fillRect(lx - 40 * u, h - 90 * u, 35 * u, 60 * u);
       ctx.fillRect(lx + 22 * u, h - 110 * u, 30 * u, 80 * u);
 
-      drawPlaque(ctx, w, h, u, text || 'Sai Gon Len Den', '#16213A', '#FFFFFF', '#D4AF37');
+      drawPlaque(ctx, w, h, u, text || 'Sài Gòn Lên Đèn', '#16213A', '#FFFFFF', '#D4AF37');
     }
   }
 ];
 
 const PLATFORMS_CONFIG: PlatformItem[] = [
-  { id: 'instagram', name: 'Instagram', ratio: '4:5', width: 1080, height: 1350, peakTime: '11:30 - 13:30 va 19:00 - 21:00' },
-  { id: 'tiktok', name: 'TikTok', ratio: '9:16', width: 1080, height: 1920, peakTime: '18:00 - 20:00 va 21:30 - 22:30' },
-  { id: 'facebook', name: 'Facebook', ratio: '1:1', width: 1200, height: 1200, peakTime: '08:00 - 09:30 va 20:00 - 22:00' },
-  { id: 'zalo', name: 'Zalo', ratio: '1:1', width: 1080, height: 1080, peakTime: '07:30 - 09:00 va 17:30 - 19:00' },
-  { id: 'x', name: 'X (Twitter)', ratio: '16:9', width: 1600, height: 900, peakTime: '12:00 - 13:00 va 17:00 - 18:30' }
+  { id: 'instagram', name: 'Instagram', ratio: '4:5', width: 1080, height: 1350, peakTime: '11:30 - 13:30 và 19:00 - 21:00' },
+  { id: 'tiktok', name: 'TikTok', ratio: '9:16', width: 1080, height: 1920, peakTime: '18:00 - 20:00 và 21:30 - 22:30' },
+  { id: 'facebook', name: 'Facebook', ratio: '1:1', width: 1200, height: 1200, peakTime: '08:00 - 09:30 và 20:00 - 22:00' },
+  { id: 'zalo', name: 'Zalo', ratio: '1:1', width: 1080, height: 1080, peakTime: '07:30 - 09:00 và 17:30 - 19:00' },
+  { id: 'x', name: 'X (Twitter)', ratio: '16:9', width: 1600, height: 900, peakTime: '12:00 - 13:00 và 17:00 - 18:30' }
 ];
 
 const EMOTIONS_CONFIG: EmotionItem[] = [
   {
     id: 'vui-ve',
-    name: 'Vui ve',
+    name: 'Vui vẻ',
     emoji: '😄',
     templates: [
-      'Mot ngay tran day nang luong tich cuc tai {c}!',
-      'Cuoi that tuoi vi thanh xuan luon rang ro cung {c}.',
-      'Nhung nu cuoi dep nhat no ro khi duoc dam minh vao {c}.'
+      'Một ngày tràn đầy năng lượng tích cực tại {c}!',
+      'Cười thật tươi vì thanh xuân luôn rạng rỡ cùng {c}.',
+      'Những nụ cười đẹp nhất nở rộ khi được đắm mình vào {c}.'
     ],
     hashtags: ['#VuiVeMoiNgay', '#NangLuongTichCuc', '#NuCuoiRangRo']
   },
   {
     id: 'binh-yen',
-    name: 'Binh yen',
+    name: 'Bình yên',
     emoji: '🌿',
     templates: [
-      'Tim thay chut thanh thoi nhe nhom giua {c}.',
-      'Lang lai mot nhip de cam nhan su binh yen diu dang tai {c}.',
-      'Khong on ao voi va, chi co su an yen hien huu cung {c}.'
+      'Tìm thấy chút thảnh thơi nhẹ nhõm giữa {c}.',
+      'Lắng lại một nhịp để cảm nhận sự bình yên dịu dàng tại {c}.',
+      'Không ồn ào vội vã, chỉ có sự an yên hiện hữu cùng {c}.'
     ],
     hashtags: ['#BinhYen', '#ThanhThoi', '#GocYenBinh', '#SlowLiving']
   },
   {
     id: 'hoai-niem',
-    name: 'Hoai niem',
+    name: 'Hoài niệm',
     emoji: '🍂',
     templates: [
-      'Co nhung ky niem xua cu ua ve khi ngam nhin {c}.',
-      'Thuoc phim qua khu nhu song dong lai trong tung goc nho cua {c}.',
-      'Gui gam chut hoai niem dau yeu vao khong gian {c}.'
+      'Có những kỷ niệm xưa cũ ùa về khi ngắm nhìn {c}.',
+      'Thước phim quá khứ như sống động lại trong từng góc nhỏ của {c}.',
+      'Gửi gắm chút hoài niệm dấu yêu vào không gian {c}.'
     ],
     hashtags: ['#HoaiNiem', '#KyUcXua', '#NhungNgayDaQua', '#RetroVibes']
   },
   {
     id: 'tu-hao',
-    name: 'Tu hao',
+    name: 'Tự hào',
     emoji: '🇻🇳',
     templates: [
-      'Them yeu net dep van hoa ngan nam va tu hao ve {c}!',
-      'Tu hao khoac len minh ban sac que huong tai {c}.',
-      'Dong mau Lac Hong va tinh yeu non song sang ngoi cung {c}.'
+      'Thêm yêu nét đẹp văn hóa ngàn năm và tự hào về {c}!',
+      'Tự hào khoác lên mình bản sắc quê hương tại {c}.',
+      'Dòng máu Lạc Hồng và tình yêu non sông sáng ngời cùng {c}.'
     ],
     hashtags: ['#TuHaoVietNam', '#BanSacDanToc', '#YeuVietNam', '#VanHoaViet']
   },
   {
     id: 'hao-hung',
-    name: 'Hao hung',
+    name: 'Hào hứng',
     emoji: '✨',
     templates: [
-      'Chuyen hanh trinh ruc lua voi biet bao trai nghiem moi tai {c}!',
-      'Kham pha nhung goc nhin tuyet voi khong the bo lo o {c}.',
-      'Nang luong bung no cho mot ngay dang nho cung {c}!'
+      'Chuyến hành trình rực lửa với biết bao trải nghiệm mới tại {c}!',
+      'Khám phá những góc nhìn tuyệt vời không thể bỏ lỡ ở {c}.',
+      'Năng lượng bùng nổ cho một ngày đáng nhớ cùng {c}!'
     ],
     hashtags: ['#HaoHung', '#KhamPha', '#TraiNghiemMoi', '#CheckinVietNam']
   },
   {
     id: 'biet-on',
-    name: 'Biet on',
+    name: 'Biết ơn',
     emoji: '🙏',
     templates: [
-      'Biet on vi moi som mai thuc day lai duoc tran quy khoanh khac ben {c}.',
-      'Cam on cuoc doi vi nhung mon qua gian di va am ap tai {c}.',
-      'Gui loi tri an chan thanh den nhung nguoi da cung ta dong hanh qua {c}.'
+      'Biết ơn vì mỗi sớm mai thức dậy lại được trân quý khoảnh khắc bên {c}.',
+      'Cảm ơn cuộc đời vì những món quà giản dị và ấm áp tại {c}.',
+      'Gửi lời tri ân chân thành đến những người đã cùng ta đồng hành qua {c}.'
     ],
     hashtags: ['#BietOn', '#TranQuy', '#CuocSongYeuThuong', '#GiaTriGianDi']
   },
   {
     id: 'lang-man',
-    name: 'Lang man',
+    name: 'Lãng mạn',
     emoji: '💖',
     templates: [
-      'Khoanh khac ngot ngao tua nhu ban tinh ca ben {c}.',
-      'Nam tay nhau di qua nhung diu em lang man o {c}.',
-      'Mot thoang mong mo gui trao trong sac mau cua {c}.'
+      'Khoảnh khắc ngọt ngào tựa như bản tình ca bên {c}.',
+      'Nắm tay nhau đi qua những dịu êm lãng mạn ở {c}.',
+      'Một thoáng mộng mơ gửi trao trong sắc màu của {c}.'
     ],
     hashtags: ['#LangMan', '#NgotNgao', '#ChuyenTinhYeu', '#KhoanhKhacDep']
   }
@@ -679,10 +679,10 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
       ctx.fillStyle = '#64748B';
       ctx.font = `500 ${Math.round(24 * u)}px 'Be Vietnam Pro', sans-serif`;
       ctx.textAlign = 'center';
-      ctx.fillText('Bam "Chon anh tu may" de bat dau dong sang tao', w / 2, h / 2 - 10 * u);
+      ctx.fillText('Bấm "Chọn ảnh từ máy" để bắt đầu đồng sáng tạo', w / 2, h / 2 - 10 * u);
       ctx.font = `400 ${Math.round(18 * u)}px 'Be Vietnam Pro', sans-serif`;
       ctx.fillStyle = '#94A3B8';
-      ctx.fillText('Ho tro keo tha va dinh dang anh JPG, PNG, WEBP', w / 2, h / 2 + 25 * u);
+      ctx.fillText('Hỗ trợ kéo thả và định dạng ảnh JPG, PNG, WEBP', w / 2, h / 2 + 25 * u);
       ctx.restore();
     }
 
@@ -694,7 +694,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
     drawMainCanvas();
   }, [drawMainCanvas]);
 
-  // Pointer events keo tha anh
+  // Pointer events kéo thả ảnh
   const handlePointerDown = (e: React.PointerEvent) => {
     if (!userImage || !wrapperRef.current) return;
     isDraggingRef.current = true;
@@ -715,12 +715,12 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
     }
   };
 
-  // Tai anh tu may
+  // Tải ảnh từ máy
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      showToast('Vui long chon tep anh hop le.', true);
+      showToast('Vui lòng chọn tệp ảnh hợp lệ.', true);
       return;
     }
     const reader = new FileReader();
@@ -731,30 +731,30 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
         setPanX(0);
         setPanY(0);
         setZoom(1.0);
-        showToast('Da tai anh len thanh cong.');
+        showToast('Đã tải ảnh lên thành công.');
       };
       img.src = ev.target?.result as string;
     };
     reader.readAsDataURL(file);
   };
 
-  // Xuat anh PNG
+  // Xuất ảnh PNG
   const handleDownload = () => {
     if (!userImage || !canvasRef.current) {
-      showToast('Vui long chon anh truoc khi tai ve.', true);
+      showToast('Vui lòng chọn ảnh trước khi tải về.', true);
       return;
     }
     const link = document.createElement('a');
     link.download = `vietnam-heritage-frame-${selectedFrameId}-${Date.now()}.png`;
     link.href = canvasRef.current.toDataURL('image/png');
     link.click();
-    showToast('Dang tai anh xuong may...');
+    showToast('Đang tải ảnh xuống máy...');
   };
 
-  // Luu vao Look book
+  // Lưu vào Look book
   const handleSaveLookbook = () => {
     if (!userImage || !canvasRef.current) {
-      showToast('Vui long chon anh truoc khi luu vao Look book.', true);
+      showToast('Vui lòng chọn ảnh trước khi lưu vào Look book.', true);
       return;
     }
 
@@ -802,13 +802,13 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(nextItems));
       setLookbookItems(nextItems);
-      showToast('Da luu vao Look book thanh cong!');
+      showToast('Đã lưu vào Look book thành công!');
     } catch {
-      showToast('Bo nho trinh duyet da day. Vui long xoa bot tac pham cu.', true);
+      showToast('Bộ nhớ trình duyệt đã đầy. Vui lòng xóa bớt tác phẩm cũ.', true);
     }
   };
 
-  // Khoi phuc Look book item
+  // Khôi phục Look book item
   const handleRestoreLookbook = (item: LookbookItem) => {
     setSelectedFrameId(item.frameId);
     setSelectedPlatformId(item.platformId);
@@ -824,24 +824,24 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
       const img = new Image();
       img.onload = () => {
         setUserImage(img);
-        showToast(`Da mo lai tac pham "${item.name}".`);
+        showToast(`Đã mở lại tác phẩm "${item.name}".`);
       };
       img.src = item.sourcePhoto;
     }
   };
 
-  // Xoa Look book item
+  // Xóa Look book item
   const handleDeleteLookbook = (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
     const nextItems = lookbookItems.filter(i => i.id !== id);
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(nextItems));
       setLookbookItems(nextItems);
-      showToast('Da xoa tac pham khoi Look book.');
+      showToast('Đã xóa tác phẩm khỏi Look book.');
     } catch {}
   };
 
-  // Chia se Web Share
+  // Chia sẻ Web Share
   const handleShare = async () => {
     if (!userImage || !canvasRef.current) return;
     canvasRef.current.toBlob(async blob => {
@@ -850,19 +850,19 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
       try {
         if (navigator.share) {
           await navigator.share({
-            title: 'Cong dong Lan Toa - VietHeritage Remix',
+            title: 'Cộng đồng Lan Tỏa - VietHeritage Remix',
             text: getGeneratedCaption(),
             files: [file]
           });
-          showToast('Da chia se thanh cong.');
+          showToast('Đã chia sẻ thành công.');
         }
       } catch (err: any) {
-        if (err.name !== 'AbortError') showToast('Khong the chia se tac pham.', true);
+        if (err.name !== 'AbortError') showToast('Không thể chia sẻ tác phẩm.', true);
       }
     }, 'image/png');
   };
 
-  // Sinh caption thong minh theo nen tang
+  // Sinh caption thông minh theo nền tảng
   const getGeneratedCaption = () => {
     const rawContext = customContext.trim() || currentFrame.context;
     const template = currentEmotion.templates[templateIdx % currentEmotion.templates.length];
@@ -871,18 +871,18 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
     switch (currentPlatform.id) {
       case 'instagram': {
         const igTags = [...new Set([...currentFrame.hashtags, ...currentEmotion.hashtags, '#VietNam', '#CheckinVietNam', '#DiSanViet'])].slice(0, 10).join(' ');
-        return `${opening}\n\n${currentFrame.desc}\n\nDung quen luu lai bai viet de lan toa net dep van hoa nhe!\n.\n.\n.\n${igTags}`;
+        return `${opening}\n\n${currentFrame.desc}\n\nĐừng quên lưu lại bài viết để lan tỏa nét đẹp văn hóa nhé!\n.\n.\n.\n${igTags}`;
       }
       case 'tiktok': {
         const ttTags = [...new Set([...currentFrame.hashtags.slice(0, 2), ...currentEmotion.hashtags.slice(0, 1), '#fyp', '#xuhuong'])].join(' ');
-        return `${opening} Xem den cuoi de cam nhan tron ven nhe! ✨ ${ttTags}`;
+        return `${opening} Xem đến cuối để cảm nhận trọn vẹn nhé! ✨ ${ttTags}`;
       }
       case 'facebook': {
         const fbTags = [...new Set([...currentFrame.hashtags.slice(0, 2), ...currentEmotion.hashtags.slice(0, 1)])].join(' ');
-        return `${opening}\n\n${currentFrame.desc}\n\nBan da tung trai nghiem khoanh khac tuyet voi nay chua? Chia se cung minh nhe!\n\n${fbTags}`;
+        return `${opening}\n\n${currentFrame.desc}\n\nBạn đã từng trải nghiệm khoảnh khắc tuyệt vời này chưa? Chia sẻ cùng mình nhé!\n\n${fbTags}`;
       }
       case 'zalo':
-        return `${opening} Mot chut binh di ma am long gui tang ca nha yeu thuong!`;
+        return `${opening} Một chút bình dị mà ấm lòng gửi tặng cả nhà yêu thương!`;
       case 'x': {
         const xTags = `${currentFrame.hashtags[0]} ${currentEmotion.hashtags[0]}`;
         let xContent = `${opening} ${currentFrame.desc}`;
@@ -904,13 +904,13 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
           <div>
             <div className="flex items-center space-x-2">
               <span className="text-xs font-mono font-bold text-[#8B0000] uppercase tracking-wider">✦ HUB 3: CO-CREATION & SHARE</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#14907C]/15 text-[#14907C] font-mono font-bold">MOI</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#14907C]/15 text-[#14907C] font-mono font-bold">MỚI</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#222222] mt-1">
-              Cong Dong Lan Toa: Hub Dang Anh Viet
+              Cộng Đồng Lan Tỏa: Hub Đăng Ảnh Việt
             </h2>
             <p className="text-xs sm:text-sm text-[#666666] mt-1 max-w-2xl font-sans">
-              Gan khung anh mang ban sac Viet Nam, dinh dang ti le chuan mang xa hoi va tao caption thong minh de san sang chia se di san den moi nguoi.
+              Gắn khung ảnh mang bản sắc Việt Nam, định dạng tỉ lệ chuẩn mạng xã hội và tạo caption thông minh để sẵn sàng chia sẻ di sản đến mọi người.
             </p>
           </div>
           <button
@@ -919,7 +919,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
             className="px-5 py-2.5 rounded-xl bg-[#8B0000] hover:bg-[#700000] text-white font-medium text-xs sm:text-sm transition-all shadow-md flex items-center justify-center space-x-2 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
           >
             <Camera className="w-4 h-4 text-[#D4AF37]" />
-            <span>Chon anh tu may</span>
+            <span>Chọn ảnh từ máy</span>
           </button>
           <input
             ref={fileInputRef}
@@ -931,18 +931,18 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
         </div>
       </div>
 
-      {/* Bo cuc 3 cot chinh */}
+      {/* Bố cục 3 cột chính */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        {/* COT 1: LOOK BOOK (3 cot desktop) */}
+        {/* CỘT 1: LOOK BOOK (3 cột desktop) */}
         <div className="lg:col-span-3 bg-white/95 rounded-2xl border border-[#D4AF37]/30 p-5 shadow-xs space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-stone-200">
             <h3 className="font-serif font-bold text-sm text-[#222222] flex items-center space-x-2">
               <Bookmark className="w-4 h-4 text-[#8B0000]" />
-              <span>Look book ca nhan</span>
+              <span>Look book cá nhân</span>
             </h3>
             <span className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded-full bg-stone-100 text-stone-600">
-              {lookbookItems.length} anh
+              {lookbookItems.length} ảnh
             </span>
           </div>
 
@@ -950,8 +950,8 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
             {lookbookItems.length === 0 ? (
               <div className="col-span-2 text-center py-10 px-2 text-stone-400">
                 <Bookmark className="w-8 h-8 mx-auto mb-2 opacity-40 text-[#8B0000]" />
-                <p className="text-xs font-medium text-[#222222]">Chua co tac pham</p>
-                <p className="text-[11px] text-stone-500 mt-1">Gan khung anh va bam "Luu vao Look book" de luu giu tai day.</p>
+                <p className="text-xs font-medium text-[#222222]">Chưa có tác phẩm</p>
+                <p className="text-[11px] text-stone-500 mt-1">Gắn khung ảnh và bấm "Lưu vào Look book" để lưu giữ tại đây.</p>
               </div>
             ) : (
               lookbookItems.map(item => (
@@ -972,7 +972,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
                     type="button"
                     onClick={e => handleDeleteLookbook(e, item.id)}
                     className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[#8B0000]"
-                    title="Xoa tac pham"
+                    title="Xóa tác phẩm"
                   >
                     <Trash2 className="w-2.5 h-2.5" />
                   </button>
@@ -982,7 +982,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
           </div>
         </div>
 
-        {/* COT 2: KHU VUC CANVAS & CONG CU (5 cot desktop) */}
+        {/* CỘT 2: KHU VỰC CANVAS & CÔNG CỤ (5 cột desktop) */}
         <div className="lg:col-span-5 space-y-4">
           <div className="bg-white/95 rounded-2xl border border-[#D4AF37]/30 p-5 shadow-xs space-y-4">
             
@@ -995,7 +995,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
                 onPointerUp={handlePointerUp}
                 onPointerCancel={handlePointerUp}
                 className="relative touch-none cursor-grab active:cursor-grabbing max-w-full flex items-center justify-center select-none"
-                title="Keo anh de dieu chinh vi tri"
+                title="Kéo ảnh để điều chỉnh vị trí"
               >
                 <canvas
                   ref={canvasRef}
@@ -1006,7 +1006,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
               </div>
             </div>
 
-            {/* Cac nut hanh dong chinh */}
+            {/* Các nút hành động chính */}
             <div className="flex flex-wrap gap-2 pt-1">
               <button
                 type="button"
@@ -1014,7 +1014,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
                 className="flex-1 px-4 py-2.5 rounded-xl bg-[#8B0000] hover:bg-[#700000] text-white font-medium text-xs transition-all shadow-xs flex items-center justify-center space-x-1.5 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
               >
                 <Download className="w-3.5 h-3.5 text-[#D4AF37]" />
-                <span>Tai ve may (PNG)</span>
+                <span>Tải về máy (PNG)</span>
               </button>
               <button
                 type="button"
@@ -1022,14 +1022,14 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
                 className="flex-1 px-4 py-2.5 rounded-xl bg-white hover:bg-stone-50 border border-[#D4AF37] text-[#222222] font-medium text-xs transition-all shadow-xs flex items-center justify-center space-x-1.5 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#8B0000]"
               >
                 <Heart className="w-3.5 h-3.5 text-[#8B0000]" />
-                <span>Luu vao Look book</span>
+                <span>Lưu vào Look book</span>
               </button>
               {typeof navigator !== 'undefined' && 'share' in navigator && (
                 <button
                   type="button"
                   onClick={handleShare}
                   className="px-3.5 py-2.5 rounded-xl bg-[#14907C] hover:bg-[#0E7363] text-white font-medium text-xs transition-all shadow-xs flex items-center justify-center space-x-1.5 cursor-pointer"
-                  title="Chia se tac pham"
+                  title="Chia sẻ tác phẩm"
                 >
                   <Share2 className="w-3.5 h-3.5" />
                 </button>
@@ -1037,24 +1037,24 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
             </div>
           </div>
 
-          {/* Bang cong cu chinh anh */}
+          {/* Bảng công cụ chỉnh ảnh */}
           <div className="bg-white/95 rounded-2xl border border-[#D4AF37]/30 p-5 shadow-xs space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-stone-200">
-              <span className="text-xs font-bold text-[#222222] font-mono">CONG CU CHINH ANH</span>
+              <span className="text-xs font-bold text-[#222222] font-mono">CÔNG CỤ CHỈNH ẢNH</span>
               <button
                 type="button"
                 onClick={() => { setPanX(0); setPanY(0); setZoom(1.0); }}
                 className="text-[11px] text-stone-500 hover:text-[#8B0000] flex items-center space-x-1 cursor-pointer"
               >
                 <RotateCcw className="w-3 h-3" />
-                <span>Dat lai vi tri</span>
+                <span>Đặt lại vị trí</span>
               </button>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="text-[11px] font-semibold text-stone-600 block mb-1">
-                  Thu phong anh: <span className="text-[#8B0000] font-mono">{zoom.toFixed(1)}x</span>
+                  Thu phóng ảnh: <span className="text-[#8B0000] font-mono">{zoom.toFixed(1)}x</span>
                 </label>
                 <input
                   type="range"
@@ -1068,7 +1068,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-stone-600 block mb-1">Chu tren khung (tam bien)</label>
+                <label className="text-[11px] font-semibold text-stone-600 block mb-1">Chữ trên khung (tấm biển)</label>
                 <input
                   type="text"
                   maxLength={30}
@@ -1080,17 +1080,17 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
               </div>
             </div>
 
-            {/* Bo loc sac mau */}
+            {/* Bộ lọc sắc màu */}
             <div>
-              <span className="text-[11px] font-semibold text-stone-600 block mb-1.5">Bo loc sac mau</span>
+              <span className="text-[11px] font-semibold text-stone-600 block mb-1.5">Bộ lọc sắc màu</span>
               <div className="flex gap-1.5 overflow-x-auto pb-1">
                 {[
-                  { id: 'none', label: 'Goc' },
-                  { id: 'warm', label: 'Am ap' },
-                  { id: 'cool', label: 'Thanh mat' },
-                  { id: 'film', label: 'Phim co' },
-                  { id: 'bw', label: 'Den trang' },
-                  { id: 'vibrant', label: 'Ruc ro' }
+                  { id: 'none', label: 'Gốc' },
+                  { id: 'warm', label: 'Ấm áp' },
+                  { id: 'cool', label: 'Thanh mát' },
+                  { id: 'film', label: 'Phim cổ' },
+                  { id: 'bw', label: 'Đen trắng' },
+                  { id: 'vibrant', label: 'Rực rỡ' }
                 ].map(f => (
                   <button
                     key={f.id}
@@ -1110,28 +1110,28 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
           </div>
         </div>
 
-        {/* COT 3: 4 BUOC TUAN TU (4 cot desktop) */}
+        {/* CỘT 3: 4 BƯỚC TUẦN TỰ (4 cột desktop) */}
         <div className="lg:col-span-4 space-y-4">
           
-          {/* BUOC 1: CHON KHUNG ANH */}
+          {/* BƯỚC 1: CHỌN KHUNG ẢNH */}
           <div className="bg-white/95 rounded-2xl border border-[#D4AF37]/30 p-5 shadow-xs space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-stone-200">
               <div className="flex items-center space-x-2">
                 <span className="w-5 h-5 rounded-full bg-[#8B0000] text-white text-[11px] font-bold flex items-center justify-center">1</span>
-                <span className="font-serif font-bold text-sm text-[#222222]">Chon khung anh</span>
+                <span className="font-serif font-bold text-sm text-[#222222]">Chọn khung ảnh</span>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold flex items-center space-x-1">
                 <Check className="w-2.5 h-2.5" />
-                <span>Da chon</span>
+                <span>Đã chọn</span>
               </span>
             </div>
 
             <div className="flex gap-1 overflow-x-auto pb-1">
               {[
-                { id: 'all', label: 'Tat ca' },
-                { id: 'culture', label: 'Van hoa' },
-                { id: 'seasons', label: 'Bon mua' },
-                { id: 'places', label: 'Thang canh' }
+                { id: 'all', label: 'Tất cả' },
+                { id: 'culture', label: 'Văn hóa' },
+                { id: 'seasons', label: 'Bốn mùa' },
+                { id: 'places', label: 'Thắng cảnh' }
               ].map(g => (
                 <button
                   key={g.id}
@@ -1169,12 +1169,12 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
             </div>
           </div>
 
-          {/* BUOC 2: CHON NEN TANG */}
+          {/* BƯỚC 2: CHỌN NỀN TẢNG */}
           <div className="bg-white/95 rounded-2xl border border-[#D4AF37]/30 p-5 shadow-xs space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-stone-200">
               <div className="flex items-center space-x-2">
                 <span className="w-5 h-5 rounded-full bg-[#8B0000] text-white text-[11px] font-bold flex items-center justify-center">2</span>
-                <span className="font-serif font-bold text-sm text-[#222222]">Nen tang dang</span>
+                <span className="font-serif font-bold text-sm text-[#222222]">Nền tảng đăng</span>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold flex items-center space-x-1">
                 <Check className="w-2.5 h-2.5" />
@@ -1203,12 +1203,12 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
             </div>
           </div>
 
-          {/* BUOC 3: CHON CAM XUC */}
+          {/* BƯỚC 3: CHỌN CẢM XÚC */}
           <div className="bg-white/95 rounded-2xl border border-[#D4AF37]/30 p-5 shadow-xs space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-stone-200">
               <div className="flex items-center space-x-2">
                 <span className="w-5 h-5 rounded-full bg-[#8B0000] text-white text-[11px] font-bold flex items-center justify-center">3</span>
-                <span className="font-serif font-bold text-sm text-[#222222]">Chon cam xuc</span>
+                <span className="font-serif font-bold text-sm text-[#222222]">Chọn cảm xúc</span>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold flex items-center space-x-1">
                 <Check className="w-2.5 h-2.5" />
@@ -1235,25 +1235,25 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
             </div>
           </div>
 
-          {/* BUOC 4: CAPTION GOI Y */}
+          {/* BƯỚC 4: CAPTION GỢI Ý */}
           <div className="bg-white/95 rounded-2xl border border-[#D4AF37]/30 p-5 shadow-xs space-y-3">
             <div className="flex items-center justify-between pb-2 border-b border-stone-200">
               <div className="flex items-center space-x-2">
                 <span className="w-5 h-5 rounded-full bg-[#8B0000] text-white text-[11px] font-bold flex items-center justify-center">4</span>
-                <span className="font-serif font-bold text-sm text-[#222222]">Caption goi y</span>
+                <span className="font-serif font-bold text-sm text-[#222222]">Caption gợi ý</span>
               </div>
               <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-stone-100 text-stone-600 font-semibold">
-                Tu dong tao
+                Tự động tạo
               </span>
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-stone-600 block mb-1">Dia diem hoac dip (tuy chon)</label>
+              <label className="text-[11px] font-semibold text-stone-600 block mb-1">Địa điểm hoặc dịp (tùy chọn)</label>
               <input
                 type="text"
                 value={customContext}
                 onChange={e => setCustomContext(e.target.value)}
-                placeholder="Vi du: Tet pho co, Chuyen du xuan..."
+                placeholder="Ví dụ: Tết phố cổ, Chuyến du xuân..."
                 className="w-full text-xs px-3 py-1.5 border border-stone-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#8B0000]"
               />
             </div>
@@ -1265,7 +1265,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
               
               <div className="flex items-center justify-between pt-2 border-t border-stone-200 text-[11px]">
                 <span className="text-[#8B0000] font-mono text-[10px] truncate max-w-[150px]">
-                  Gio vang: {currentPlatform.peakTime.split(' va ')[0]}
+                  Giờ vàng: {currentPlatform.peakTime.split(' và ')[0]}
                 </span>
                 <div className="flex space-x-1.5">
                   <button
@@ -1273,21 +1273,21 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
                     onClick={() => setTemplateIdx(prev => prev + 1)}
                     className="px-2 py-1 rounded-md bg-white border border-stone-300 hover:border-stone-500 text-stone-700 text-[10px] font-medium cursor-pointer"
                   >
-                    Doi mau cau
+                    Đổi mẫu câu
                   </button>
                   <button
                     type="button"
                     onClick={() => {
                       navigator.clipboard.writeText(getGeneratedCaption()).then(() => {
-                        showToast('Da sao chep caption vao clipboard!');
+                        showToast('Đã sao chép caption vào clipboard!');
                       }).catch(() => {
-                        showToast('Khong the sao chep tu dong.', true);
+                        showToast('Không thể sao chép tự động.', true);
                       });
                     }}
                     className="px-2.5 py-1 rounded-md bg-[#8B0000] text-white text-[10px] font-medium flex items-center space-x-1 cursor-pointer hover:bg-[#700000]"
                   >
                     <Copy className="w-2.5 h-2.5" />
-                    <span>Sao chep</span>
+                    <span>Sao chép</span>
                   </button>
                 </div>
               </div>
@@ -1298,7 +1298,7 @@ export const SpreadCommunityHub: React.FC<SpreadCommunityHubProps> = () => {
 
       </div>
 
-      {/* Toast thong bao */}
+      {/* Toast thông báo */}
       {toastMsg && (
         <div className="fixed bottom-6 right-6 z-50 flex items-center space-x-2 px-4 py-2.5 rounded-xl shadow-lg bg-[#222222] text-white text-xs font-medium border-l-4 border-[#D4AF37] animate-fade-in">
           <span>{toastMsg.isError ? '⚠️' : '✓'}</span>
