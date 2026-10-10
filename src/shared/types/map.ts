@@ -4,17 +4,18 @@
 export interface MapLocation {
   id: string;
   nameVi: string;
-  nameEn: string;
+  nameEn?: string;
   type: string;
   categoryVi: string;
-  categoryEn: string;
+  categoryEn?: string;
+  region: 'Hà Nội' | 'Huế' | 'Đà Nẵng' | 'Hội An' | 'TP. Hồ Chí Minh' | string;
   address: string;
   hours: string;
   priceVi: string;
-  priceEn: string;
+  priceEn?: string;
   featuresVi: string;
-  featuresEn: string;
-  mapQuery: string;
+  featuresEn?: string;
+  mapQuery?: string;
 }
 
 /**

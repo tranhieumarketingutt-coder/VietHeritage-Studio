@@ -14,6 +14,7 @@ const CommunityGrid = lazy(() => import('../features/community/components/Commun
 const ChatDrawer = lazy(() => import('../features/chat/components/ChatDrawer').then(m => ({ default: m.ChatDrawer })));
 const SpreadCommunityHub = lazy(() => import('../features/community/components/SpreadCommunityHub').then(m => ({ default: m.SpreadCommunityHub })));
 const DressUpStudio = lazy(() => import('../features/dress-up/components/DressUpStudio').then(m => ({ default: m.DressUpStudio })));
+const HeritageMuseumCorner = lazy(() => import('../features/heritage-map/components/HeritageMuseumCorner').then(m => ({ default: m.HeritageMuseumCorner })));
 
 export interface AppProps {}
 
@@ -37,7 +38,7 @@ const SectionLoader = () => (
  */
 export const App: React.FC<AppProps> = () => {
   const [lang, setLang] = useState<'vi' | 'en'>('vi');
-  const [activeHub, setActiveHub] = useState<'hub1' | 'hub2' | 'hub3' | 'dressup'>('hub1');
+  const [activeHub, setActiveHub] = useState<'hub1' | 'hub2' | 'hub3' | 'dressup' | 'museumCorner'>('hub1');
   const [isWardrobeOpen, setIsWardrobeOpen] = useState(false);
   const [isPhotocardOpen, setIsPhotocardOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -64,11 +65,12 @@ export const App: React.FC<AppProps> = () => {
     }
   };
 
-  const handleSelectHub = (hub: 'hub1' | 'hub2' | 'hub3' | 'dressup') => {
+  const handleSelectHub = (hub: 'hub1' | 'hub2' | 'hub3' | 'dressup' | 'museumCorner') => {
     setActiveHub(hub);
     setTimeout(() => {
       const targetId = 
         hub === 'hub1' ? 'museumSection' : 
+        hub === 'museumCorner' ? 'heritageMuseumCornerSection' :
         hub === 'dressup' ? 'dressUpSection' :
         hub === 'hub2' ? 'studioSection' : 
         'communityHubSection';
@@ -109,11 +111,24 @@ export const App: React.FC<AppProps> = () => {
                   <MuseumGallery lang={lang} />
                 </Suspense>
               </div>
+              <div id="heritageMuseumCornerSection">
+                <Suspense fallback={<SectionLoader />}>
+                  <HeritageMuseumCorner lang={lang} />
+                </Suspense>
+              </div>
               <Suspense fallback={<SectionLoader />}>
                 <AnatomySection lang={lang} />
               </Suspense>
               <TimelineSection />
               <WisdomCarousel />
+            </div>
+          )}
+
+          {activeHub === 'museumCorner' && (
+            <div id="heritageMuseumCornerSection" className="space-y-16">
+              <Suspense fallback={<SectionLoader />}>
+                <HeritageMuseumCorner lang={lang} />
+              </Suspense>
             </div>
           )}
 

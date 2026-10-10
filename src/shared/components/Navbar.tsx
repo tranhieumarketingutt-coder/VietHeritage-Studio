@@ -1,5 +1,5 @@
 import React from 'react';
-import { Landmark, Palette, Camera, Sparkles } from 'lucide-react';
+import { Landmark, Palette, Camera, Sparkles, Compass } from 'lucide-react';
 import { useAudio } from '../hooks/useAudio';
 
 /**
@@ -8,8 +8,8 @@ import { useAudio } from '../hooks/useAudio';
 export interface NavbarProps {
   lang: 'vi' | 'en';
   onToggleLang: () => void;
-  activeHub: 'hub1' | 'hub2' | 'hub3' | 'dressup';
-  onSelectHub: (hub: 'hub1' | 'hub2' | 'hub3' | 'dressup') => void;
+  activeHub: 'hub1' | 'hub2' | 'hub3' | 'dressup' | 'museumCorner';
+  onSelectHub: (hub: 'hub1' | 'hub2' | 'hub3' | 'dressup' | 'museumCorner') => void;
   onOpenWardrobe: () => void;
 }
 
@@ -93,6 +93,22 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}>
               MỚI
             </span>
+          </button>
+
+          <button 
+            type="button"
+            id="navTabMuseumCorner" 
+            onClick={() => onSelectHub('museumCorner')}
+            aria-current={activeHub === 'museumCorner' ? 'page' : undefined}
+            className={`px-2.5 lg:px-3 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+              activeHub === 'museumCorner'
+                ? 'bg-[#8B0000] text-white shadow-md border border-[#8B0000]'
+                : 'text-[#666666] hover:text-[#222222] hover:bg-white/60'
+            }`}
+            title={lang === 'en' ? "HERITAGE MUSEUM CORNER" : "GÓC BẢO TÀNG DI SẢN"}
+          >
+            <Compass className={`w-3.5 h-3.5 shrink-0 ${activeHub === 'museumCorner' ? 'text-[#D4AF37]' : 'text-stone-700'}`} />
+            <span className="whitespace-nowrap">{lang === 'en' ? 'GÓC BẢO TÀNG' : 'GÓC BẢO TÀNG'}</span>
           </button>
 
           <button 
@@ -225,6 +241,21 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           <Sparkles className="w-3.5 h-3.5 text-amber-600" />
           <span>PHỐI ĐỒ</span>
+        </button>
+
+        <button 
+          type="button"
+          id="mobTabMuseumCorner" 
+          onClick={() => onSelectHub('museumCorner')}
+          aria-current={activeHub === 'museumCorner' ? 'page' : undefined}
+          className={`flex-1 py-2 text-center text-[11px] font-mono font-bold transition-all flex items-center justify-center space-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+            activeHub === 'museumCorner'
+              ? 'text-[#8B0000] border-b-2 border-[#8B0000] bg-white/60'
+              : 'text-stone-700 hover:text-stone-950'
+          }`}
+        >
+          <Compass className="w-3.5 h-3.5 text-[#8B0000]" />
+          <span>GÓC BẢO TÀNG</span>
         </button>
 
         <button 

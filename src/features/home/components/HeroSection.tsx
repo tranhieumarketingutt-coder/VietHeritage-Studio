@@ -2,8 +2,8 @@ import React from 'react';
 import { Landmark, Palette, Camera, Sparkles } from 'lucide-react';
 
 export interface HeroSectionProps {
-  onSelectHub?: (hub: 'hub1' | 'hub2' | 'hub3' | 'dressup') => void;
-  activeHub?: 'hub1' | 'hub2' | 'hub3' | 'dressup';
+  onSelectHub?: (hub: 'hub1' | 'hub2' | 'hub3' | 'dressup' | 'museumCorner') => void;
+  activeHub?: 'hub1' | 'hub2' | 'hub3' | 'dressup' | 'museumCorner';
 }
 
 /**
