@@ -34,7 +34,7 @@ describe("Virtual Try-On AI Flow & Studio Integration", () => {
     assert.ok(data.promptUsed, "Must contain generated prompt");
   });
 
-  it("verifies StudioSection wires fetch to /api/gemini/try-on", () => {
+  it("verifies StudioSection wires fetch to /api/gemini/try-on and /api/gemini/styling", () => {
     const content = fs.readFileSync(
       path.resolve(process.cwd(), "src/features/studio/components/StudioSection.tsx"),
       "utf-8"
@@ -42,6 +42,10 @@ describe("Virtual Try-On AI Flow & Studio Integration", () => {
     assert.ok(
       content.includes("fetch('/api/gemini/try-on'"),
       "StudioSection must call /api/gemini/try-on"
+    );
+    assert.ok(
+      content.includes("fetch('/api/gemini/styling'"),
+      "StudioSection must call /api/gemini/styling"
     );
     assert.ok(
       content.includes("tryOnMeta"),
@@ -57,7 +61,30 @@ describe("Virtual Try-On AI Flow & Studio Integration", () => {
     );
   });
 
-  it("verifies StylingResults renders tryOnMeta status banner and rotating progress steps", () => {
+  it("verifies VirtualTryOn renders body shape, bottom, weather, and color controls", () => {
+    const content = fs.readFileSync(
+      path.resolve(process.cwd(), "src/features/studio/components/VirtualTryOn.tsx"),
+      "utf-8"
+    );
+    assert.ok(
+      content.includes("userBodyShapeSelect"),
+      "VirtualTryOn must provide userBodyShapeSelect"
+    );
+    assert.ok(
+      content.includes("userBottomSelect"),
+      "VirtualTryOn must provide userBottomSelect"
+    );
+    assert.ok(
+      content.includes("userWeatherSelect"),
+      "VirtualTryOn must provide userWeatherSelect"
+    );
+    assert.ok(
+      content.includes("userColorSelect"),
+      "VirtualTryOn must provide userColorSelect"
+    );
+  });
+
+  it("verifies StylingResults renders tryOnMeta status banner, rotating progress steps, and expert advice", () => {
     const content = fs.readFileSync(
       path.resolve(process.cwd(), "src/features/studio/components/StylingResults.tsx"),
       "utf-8"
@@ -74,12 +101,17 @@ describe("Virtual Try-On AI Flow & Studio Integration", () => {
       content.includes("role=\"status\""),
       "StylingResults must include accessible status alert"
     );
+    assert.ok(
+      content.includes("expertAdvice"),
+      "StylingResults must render expertAdvice when present"
+    );
   });
 
   it("verifies zero em dashes in newly modified files", () => {
     const files = [
       "src/features/studio/components/StudioSection.tsx",
       "src/features/studio/components/StylingResults.tsx",
+      "src/features/studio/components/VirtualTryOn.tsx",
       "server/geminiService.ts"
     ];
     const emDashRegex = /\u2014/;

@@ -67,7 +67,7 @@ export const StudioSection: React.FC<StudioSectionProps> = ({ onOpenPhotocard })
   const currentCostumeName = costumeNameMap[state.selectedCostumeId] || 'Áo Ngũ Thân';
   const currentDestinationName = destinationMap[state.selectedDestination] || 'Hoàng Thành Thăng Long';
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     const res = analyzePersonalColor({
       undertoneChoice: state.selectedUndertone,
       height: state.height,
@@ -80,7 +80,36 @@ export const StudioSection: React.FC<StudioSectionProps> = ({ onOpenPhotocard })
       collarChoice: state.collarChoice,
       colorHex: state.colorHex
     });
+
+    if (!resultImage) {
+      setResultImage(state.userPhotoUrl || null);
+    }
     setAnalysisResult(res);
+
+    try {
+      const response = await fetch('/api/gemini/styling', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          costumeName: currentCostumeName,
+          season: res.season || 'Mùa Thu (Warm Autumn)',
+          undertone: state.selectedUndertone,
+          destination: currentDestinationName,
+          weather: state.weather === 'cold-18' ? 'Se lạnh' : 'Nắng ấm',
+          colorHex: state.colorHex,
+          bodyShape: state.bodyShape
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.expertAdvice) {
+          setAnalysisResult(prev => prev ? { ...prev, expertAdvice: data.expertAdvice } : prev);
+        }
+      }
+    } catch (err) {
+      console.warn('Styling advice API call failed:', err);
+    }
   };
 
   const handleTryOn = async () => {

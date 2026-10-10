@@ -234,6 +234,45 @@ export const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ state, setState, onA
               <input id="userWeightInput" type="number" value={state.weight} onChange={e => setState(prev => ({ ...prev, weight: Number(e.target.value) }))} className="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 font-mono text-xs focus:ring-2 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none bg-white" />
             </div>
           </div>
+          <div className="grid grid-cols-2 gap-2.5">
+            <div>
+              <label htmlFor="userBodyShapeSelect" className="block text-[11px] font-mono text-stone-600 mb-1">Dáng người (Hình thể):</label>
+              <select id="userBodyShapeSelect" value={state.bodyShape} onChange={e => setState(prev => ({ ...prev, bodyShape: e.target.value }))} className="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 font-sans text-xs focus:ring-2 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none bg-white">
+                <option value="hourglass">Đồng hồ cát (Hourglass)</option>
+                <option value="pear">Dáng quả lê (Pear)</option>
+                <option value="rectangle">Dáng thước kẻ (Rectangle)</option>
+                <option value="inverted-triangle">Tam giác ngược (Inverted)</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="userBottomSelect" className="block text-[11px] font-mono text-stone-600 mb-1">Trang phục dưới (Hạ y):</label>
+              <select id="userBottomSelect" value={state.bottomChoice} onChange={e => setState(prev => ({ ...prev, bottomChoice: e.target.value }))} className="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 font-sans text-xs focus:ring-2 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none bg-white">
+                <option value="pant">Quần thụng lụa trắng (Chuẩn mực)</option>
+                <option value="skirt">Váy quấn gấm dài</option>
+                <option value="short">Quần short (Cảnh báo vi phạm)</option>
+              </select>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2.5">
+            <div>
+              <label htmlFor="userWeatherSelect" className="block text-[11px] font-mono text-stone-600 mb-1">Thời tiết & Mùa:</label>
+              <select id="userWeatherSelect" value={state.weather} onChange={e => setState(prev => ({ ...prev, weather: e.target.value }))} className="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 font-sans text-xs focus:ring-2 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none bg-white">
+                <option value="cold-18">Thu đông / Se lạnh (18°C)</option>
+                <option value="warm-28">Nắng ấm / Mùa hè (28°C)</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="userColorSelect" className="block text-[11px] font-mono text-stone-600 mb-1">Sắc màu chủ đạo:</label>
+              <select id="userColorSelect" value={state.colorHex} onChange={e => setState(prev => ({ ...prev, colorHex: e.target.value }))} className="w-full px-2.5 py-1.5 rounded-lg border border-stone-300 font-sans text-xs focus:ring-2 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none bg-white">
+                <option value="#8B0000">Đỏ Son / Chu Sa (#8B0000)</option>
+                <option value="#D4AF37">Vàng Hoàng Yến (#D4AF37)</option>
+                <option value="#1C3144">Xanh Chàm (#1C3144)</option>
+                <option value="#6B4226">Nâu Củ Nâu (#6B4226)</option>
+                <option value="#8B1E3F">Đỏ Củ Dền (#8B1E3F)</option>
+                <option value="#6B8E23">Xanh Hương Cốm (#6B8E23)</option>
+              </select>
+            </div>
+          </div>
         </div>
       </details>
 

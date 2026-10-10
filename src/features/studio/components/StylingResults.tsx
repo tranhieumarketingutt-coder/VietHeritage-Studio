@@ -23,6 +23,7 @@ export interface AnalysisResult {
     accessories?: string[];
   };
   guardrails?: GuardrailItem[];
+  expertAdvice?: string;
 }
 
 export interface TryOnMeta {
@@ -183,7 +184,7 @@ export const StylingResults: React.FC<StylingResultsProps> = ({
           <div className="w-full max-w-[340px] rounded-2xl bg-white border-4 border-white shadow-xl p-3 flex flex-col items-center justify-between transition-all hover:shadow-2xl">
             <div className="w-full h-80 sm:h-96 flex items-center justify-center overflow-hidden rounded-xl bg-stone-900 relative group">
               <img 
-                src={resultImage || COSTUMES_DATA[0].realPhotography?.heroPhoto} 
+                src={resultImage || COSTUMES_DATA.find((c: { id: string }) => c.id === costumeId)?.realPhotography?.heroPhoto || COSTUMES_DATA[0].realPhotography?.heroPhoto} 
                 alt="Styling Result" 
                 className="w-full h-full object-cover filter brightness-95 transition-transform duration-500 group-hover:scale-105"
               />
@@ -237,6 +238,17 @@ export const StylingResults: React.FC<StylingResultsProps> = ({
                 {isEn ? analysis.bodyAdviceEn : analysis.bodyAdviceVi}
               </p>
             </div>
+
+            {analysis.expertAdvice && (
+              <div className="p-3 rounded-lg bg-white border border-[#D4AF37]/50 shadow-2xs space-y-1">
+                <span className="font-mono text-[10px] text-[#8B0000] font-bold block uppercase tracking-wide">
+                  ✦ Cố Vấn Phong Cách Gemini AI:
+                </span>
+                <p className="text-stone-700 text-[11px] leading-relaxed whitespace-pre-line font-sans">
+                  {analysis.expertAdvice}
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>

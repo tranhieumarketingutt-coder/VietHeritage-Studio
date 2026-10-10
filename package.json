@@ -11,7 +11,7 @@
     "clean": "node -e \"try { fs.rmSync('dist', {recursive: true, force: true}); fs.rmSync('server.js', {force: true}); } catch (e) {}\"",
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/**/*.test.ts",
+    "test": "tsx --test tests/*.test.ts",
     "verify": "npm run lint && npm test && npm run build"
   },
   "dependencies": {
