@@ -1,5 +1,5 @@
 import React from 'react';
-import { Landmark, Palette, Camera } from 'lucide-react';
+import { Landmark, Palette, Camera, Sparkles } from 'lucide-react';
 import { useAudio } from '../hooks/useAudio';
 
 /**
@@ -8,8 +8,8 @@ import { useAudio } from '../hooks/useAudio';
 export interface NavbarProps {
   lang: 'vi' | 'en';
   onToggleLang: () => void;
-  activeHub: 'hub1' | 'hub2' | 'hub3';
-  onSelectHub: (hub: 'hub1' | 'hub2' | 'hub3') => void;
+  activeHub: 'hub1' | 'hub2' | 'hub3' | 'dressup';
+  onSelectHub: (hub: 'hub1' | 'hub2' | 'hub3' | 'dressup') => void;
   onOpenWardrobe: () => void;
 }
 
@@ -27,37 +27,41 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#D4AF37]/30 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3 lg:gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3 lg:gap-4">
+        {/* Brand Logo */}
         <button 
           type="button"
           id="navLogo"
           onClick={() => onSelectHub('hub1')}
           aria-label={lang === 'en' ? "VietHeritage Remix - Return to museum home" : "VietHeritage Remix - Về trang chủ bảo tàng di sản"}
-          className="flex items-center space-x-3 cursor-pointer text-left bg-transparent border-0 p-1 -m-1 rounded-xl transition-transform hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] shrink-0"
+          className="flex items-center space-x-2.5 cursor-pointer text-left bg-transparent border-0 p-1 -m-1 rounded-xl transition-transform hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] shrink-0"
         >
           <div aria-hidden="true" className="w-10 h-10 lg:w-11 lg:h-11 rounded-lg bg-[#8B0000] text-[#D4AF37] flex items-center justify-center font-serif text-xl lg:text-2xl font-bold shadow-md border border-[#D4AF37] shrink-0">
             V
           </div>
           <div className="min-w-0">
             <div className="flex items-center space-x-2">
-              <span className="font-serif font-bold text-lg lg:text-xl text-[#222222] tracking-wide whitespace-nowrap">
+              <span className="font-serif font-bold text-base sm:text-lg lg:text-xl text-[#222222] tracking-wide whitespace-nowrap">
                 VietHeritage <span className="text-[#8B0000]">Remix</span>
               </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#8B0000]/10 text-[#8B0000] font-mono font-semibold border border-[#8B0000]/25 uppercase whitespace-nowrap shrink-0">
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#8B0000]/10 text-[#8B0000] font-mono font-semibold border border-[#8B0000]/25 uppercase whitespace-nowrap shrink-0">
                 1744 · 2026
               </span>
             </div>
-            <p className="text-xs text-[#666666] hidden xl:block font-sans whitespace-nowrap">Dự án số hóa & phối màu trang phục truyền thống.</p>
+            <p className="text-xs text-[#666666] hidden xl:block font-sans whitespace-nowrap">
+              Dự án số hóa & phối màu trang phục truyền thống.
+            </p>
           </div>
         </button>
 
+        {/* Desktop Navigation Tabs */}
         <nav className="hidden md:flex items-center space-x-1 p-1 bg-[#F0ECE1] rounded-xl border border-[#D4AF37]/35 shadow-inner shrink-0 overflow-x-auto" id="desktopNavTabs">
           <button 
             type="button"
             id="navTabHub1" 
             onClick={() => onSelectHub('hub1')}
             aria-current={activeHub === 'hub1' ? 'page' : undefined}
-            className={`px-3 lg:px-4 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+            className={`px-2.5 lg:px-3 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
               activeHub === 'hub1'
                 ? 'bg-[#8B0000] text-white shadow-md border border-[#8B0000]'
                 : 'text-[#666666] hover:text-[#222222] hover:bg-white/60'
@@ -67,12 +71,36 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Landmark className={`w-3.5 h-3.5 shrink-0 ${activeHub === 'hub1' ? 'text-[#D4AF37]' : 'text-stone-700'}`} />
             <span className="whitespace-nowrap">{lang === 'en' ? 'BẢO TÀNG DI SẢN' : 'BẢO TÀNG DI SẢN'}</span>
           </button>
+
+          <button 
+            type="button"
+            id="navTabDressUp" 
+            onClick={() => onSelectHub('dressup')}
+            aria-current={activeHub === 'dressup' ? 'page' : undefined}
+            className={`px-2.5 lg:px-3 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+              activeHub === 'dressup'
+                ? 'bg-[#8B0000] text-white shadow-md border border-[#8B0000]'
+                : 'text-[#666666] hover:text-[#222222] hover:bg-white/60'
+            }`}
+            title={lang === 'en' ? "2D TRADITIONAL DRESS-UP" : "PHỐI TRANG PHỤC 2D"}
+          >
+            <Sparkles className={`w-3.5 h-3.5 shrink-0 ${activeHub === 'dressup' ? 'text-[#D4AF37]' : 'text-amber-600'}`} />
+            <span className="whitespace-nowrap">{lang === 'en' ? 'PHỐI ĐỒ 2D' : 'PHỐI ĐỒ 2D'}</span>
+            <span className={`text-[9px] px-1 py-0.5 rounded-full font-sans font-bold whitespace-nowrap shrink-0 ${
+              activeHub === 'dressup'
+                ? 'bg-[#D4AF37] text-[#5C0606]'
+                : 'bg-[#D4AF37]/25 text-[#8B0000] border border-[#D4AF37]/40'
+            }`}>
+              MỚI
+            </span>
+          </button>
+
           <button 
             type="button"
             id="navTabHub2" 
             onClick={() => onSelectHub('hub2')}
             aria-current={activeHub === 'hub2' ? 'page' : undefined}
-            className={`px-3 lg:px-4 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+            className={`px-2.5 lg:px-3 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
               activeHub === 'hub2'
                 ? 'bg-[#8B0000] text-white shadow-md border border-[#8B0000]'
                 : 'text-[#666666] hover:text-[#222222] hover:bg-white/60'
@@ -82,12 +110,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Palette className={`w-3.5 h-3.5 shrink-0 ${activeHub === 'hub2' ? 'text-[#D4AF37]' : 'text-stone-700'}`} />
             <span className="whitespace-nowrap">{lang === 'en' ? 'CO-CREATION STUDIO' : 'XƯỞNG SÁNG TẠO'}</span>
           </button>
+
           <button 
             type="button"
             id="navTabHub3" 
             onClick={() => onSelectHub('hub3')}
             aria-current={activeHub === 'hub3' ? 'page' : undefined}
-            className={`px-3 lg:px-4 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+            className={`px-2.5 lg:px-3 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
               activeHub === 'hub3'
                 ? 'bg-[#8B0000] text-white shadow-md border border-[#8B0000]'
                 : 'text-[#666666] hover:text-[#222222] hover:bg-white/60'
@@ -96,17 +125,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Camera className={`w-3.5 h-3.5 shrink-0 ${activeHub === 'hub3' ? 'text-[#D4AF37]' : 'text-stone-700'}`} />
             <span className="whitespace-nowrap">{lang === 'en' ? 'SPREAD COMMUNITY' : 'CỘNG ĐỒNG LAN TỎA'}</span>
-            <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-sans font-bold whitespace-nowrap shrink-0 ${
-              activeHub === 'hub3'
-                ? 'bg-[#D4AF37] text-[#5C0606]'
-                : 'bg-[#E8B04B]/30 text-[#8B0000] border border-[#E8B04B]/50'
-            }`}>
-              MỚI
-            </span>
           </button>
         </nav>
 
-        <div className="flex items-center space-x-2 lg:space-x-2.5 shrink-0">
+        {/* Global Toolbar Controls */}
+        <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
           <button 
             type="button"
             id="audioToggleBtn" 
@@ -114,11 +137,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label={isPlaying ? (lang === 'en' ? 'Pause Hello Vietnam music' : 'Tạm dừng nhạc Hello Vietnam') : (lang === 'en' ? 'Play Hello Vietnam music' : 'Bật nhạc Hello Vietnam')}
             aria-pressed={isPlaying}
             title={isPlaying ? (lang === 'en' ? 'Pause Hello Vietnam Music' : 'Tạm dừng nhạc Hello Vietnam') : (lang === 'en' ? 'Play Hello Vietnam Music' : 'Bật nhạc Hello Vietnam')} 
-            className={`flex items-center space-x-1.5 px-2.5 lg:px-3 py-2 rounded-full border border-[#D4AF37]/50 text-xs font-mono transition-all shadow-xs cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+            className={`flex items-center space-x-1.5 px-2.5 py-1.5 rounded-full border border-[#D4AF37]/50 text-xs font-mono transition-all shadow-xs cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
               isPlaying ? 'bg-[#FDF6E2] ring-1 ring-[#D4AF37]' : 'bg-white/85 hover:bg-[#FDF6E2]'
             }`}
           >
-            <span aria-hidden="true" className={`w-2.5 h-2.5 rounded-full shrink-0 ${isPlaying ? 'bg-emerald-500 animate-pulse' : 'bg-stone-300'}`}></span>
+            <span aria-hidden="true" className={`w-2 h-2 rounded-full shrink-0 ${isPlaying ? 'bg-emerald-500 animate-pulse' : 'bg-stone-300'}`}></span>
             <span className="hidden xl:inline text-[#222222] font-medium whitespace-nowrap">{lang === 'en' ? 'Hello Vietnam' : 'Hello Vietnam'}</span>
             {isPlaying ? (
               <svg aria-hidden="true" className="w-3.5 h-3.5 text-[#8B0000] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -137,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             id="openWardrobeBtn" 
             onClick={onOpenWardrobe}
             aria-label={lang === 'en' ? 'Open heritage wardrobe archives' : 'Mở tủ đồ di sản cá nhân'}
-            className="px-2.5 lg:px-3 py-2 rounded-lg border border-[#D4AF37]/40 hover:border-[#D4AF37] bg-white text-[#222222] text-xs font-mono hidden sm:flex items-center space-x-1.5 cursor-pointer whitespace-nowrap shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]" 
+            className="px-2.5 py-1.5 rounded-lg border border-[#D4AF37]/40 hover:border-[#D4AF37] bg-white text-[#222222] text-xs font-mono hidden sm:flex items-center space-x-1.5 cursor-pointer whitespace-nowrap shrink-0 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]" 
             title={lang === 'en' ? 'Wardrobe' : 'Tủ Đồ'}
           >
             <svg aria-hidden="true" className="w-3.5 h-3.5 text-[#8B0000] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -150,7 +173,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             type="button"
             id="langToggleBtn" 
             onClick={onToggleLang}
-            className="px-2.5 py-2 rounded-lg border border-[#D4AF37]/40 bg-white hover:bg-[#F0ECE1] text-xs font-bold font-mono text-[#8B0000] transition-colors cursor-pointer whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] focus-visible:ring-offset-2"
+            className="px-2.5 py-1.5 rounded-lg border border-[#D4AF37]/40 bg-white hover:bg-[#F0ECE1] text-xs font-bold font-mono text-[#8B0000] transition-colors cursor-pointer whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] focus-visible:ring-offset-2"
             aria-label={`Chuyển ngôn ngữ: ${lang.toUpperCase()}`}
           >
             {lang.toUpperCase()}
@@ -159,7 +182,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button 
             type="button"
             id="authBtn" 
-            className="flex items-center space-x-1.5 px-3 py-2 rounded-lg bg-[#222222] hover:bg-[#333333] text-[#FAF7F2] text-xs font-medium font-sans transition-colors shadow-xs cursor-pointer whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2"
+            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#222222] hover:bg-[#333333] text-[#FAF7F2] text-xs font-medium font-sans transition-colors shadow-xs cursor-pointer whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2"
             aria-label="Tài khoản khách"
           >
             <svg aria-hidden="true" className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -170,13 +193,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      <div className="flex md:hidden border-t border-[#D4AF37]/20 bg-[#F5F1E8] px-2 py-1.5 justify-around overflow-x-auto" id="mobileNavTabs">
+      {/* Mobile Navigation Tabs */}
+      <div className="flex md:hidden border-t border-[#D4AF37]/20 bg-[#F5F1E8] px-1 py-1.5 justify-around overflow-x-auto" id="mobileNavTabs">
         <button 
           type="button"
           id="mobTabHub1" 
           onClick={() => onSelectHub('hub1')}
           aria-current={activeHub === 'hub1' ? 'page' : undefined}
-          className={`flex-1 py-2 text-center text-xs font-mono font-bold transition-all flex items-center justify-center space-x-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+          className={`flex-1 py-2 text-center text-[11px] font-mono font-bold transition-all flex items-center justify-center space-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
             activeHub === 'hub1'
               ? 'text-[#8B0000] border-b-2 border-[#8B0000] bg-white/60'
               : 'text-stone-700 hover:text-stone-950'
@@ -187,12 +211,28 @@ export const Navbar: React.FC<NavbarProps> = ({
           </svg>
           <span>BẢO TÀNG</span>
         </button>
+
+        <button 
+          type="button"
+          id="mobTabDressUp" 
+          onClick={() => onSelectHub('dressup')}
+          aria-current={activeHub === 'dressup' ? 'page' : undefined}
+          className={`flex-1 py-2 text-center text-[11px] font-mono font-bold transition-all flex items-center justify-center space-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+            activeHub === 'dressup'
+              ? 'text-[#8B0000] border-b-2 border-[#8B0000] bg-white/60'
+              : 'text-stone-700 hover:text-stone-950'
+          }`}
+        >
+          <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+          <span>PHỐI ĐỒ</span>
+        </button>
+
         <button 
           type="button"
           id="mobTabHub2" 
           onClick={() => onSelectHub('hub2')}
           aria-current={activeHub === 'hub2' ? 'page' : undefined}
-          className={`flex-1 py-2 text-center text-xs font-mono font-bold transition-all flex items-center justify-center space-x-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+          className={`flex-1 py-2 text-center text-[11px] font-mono font-bold transition-all flex items-center justify-center space-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
             activeHub === 'hub2'
               ? 'text-[#8B0000] border-b-2 border-[#8B0000] bg-white/60'
               : 'text-stone-700 hover:text-stone-950'
@@ -203,12 +243,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           </svg>
           <span>SÁNG TẠO</span>
         </button>
+
         <button 
           type="button"
           id="mobTabHub3" 
           onClick={() => onSelectHub('hub3')}
           aria-current={activeHub === 'hub3' ? 'page' : undefined}
-          className={`flex-1 py-2 text-center text-xs font-mono font-bold transition-all flex items-center justify-center space-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+          className={`flex-1 py-2 text-center text-[11px] font-mono font-bold transition-all flex items-center justify-center space-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
             activeHub === 'hub3'
               ? 'text-[#8B0000] border-b-2 border-[#8B0000] bg-white/60'
               : 'text-stone-700 hover:text-stone-950'
@@ -219,10 +260,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
           <span>LAN TỎA</span>
-          <span className="text-[8px] px-1 rounded-sm bg-[#E8B04B] text-[#16213A] font-bold">MỚI</span>
         </button>
       </div>
     </header>
   );
 };
-

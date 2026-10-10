@@ -13,6 +13,7 @@ const StudioSection = lazy(() => import('../features/studio/components/StudioSec
 const CommunityGrid = lazy(() => import('../features/community/components/CommunityGrid').then(m => ({ default: m.CommunityGrid })));
 const ChatDrawer = lazy(() => import('../features/chat/components/ChatDrawer').then(m => ({ default: m.ChatDrawer })));
 const SpreadCommunityHub = lazy(() => import('../features/community/components/SpreadCommunityHub').then(m => ({ default: m.SpreadCommunityHub })));
+const DressUpStudio = lazy(() => import('../features/dress-up/components/DressUpStudio').then(m => ({ default: m.DressUpStudio })));
 
 export interface AppProps {}
 
@@ -36,7 +37,7 @@ const SectionLoader = () => (
  */
 export const App: React.FC<AppProps> = () => {
   const [lang, setLang] = useState<'vi' | 'en'>('vi');
-  const [activeHub, setActiveHub] = useState<'hub1' | 'hub2' | 'hub3'>('hub1');
+  const [activeHub, setActiveHub] = useState<'hub1' | 'hub2' | 'hub3' | 'dressup'>('hub1');
   const [isWardrobeOpen, setIsWardrobeOpen] = useState(false);
   const [isPhotocardOpen, setIsPhotocardOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -63,10 +64,14 @@ export const App: React.FC<AppProps> = () => {
     }
   };
 
-  const handleSelectHub = (hub: 'hub1' | 'hub2' | 'hub3') => {
+  const handleSelectHub = (hub: 'hub1' | 'hub2' | 'hub3' | 'dressup') => {
     setActiveHub(hub);
     setTimeout(() => {
-      const targetId = hub === 'hub1' ? 'museumSection' : hub === 'hub2' ? 'studioSection' : 'communityHubSection';
+      const targetId = 
+        hub === 'hub1' ? 'museumSection' : 
+        hub === 'dressup' ? 'dressUpSection' :
+        hub === 'hub2' ? 'studioSection' : 
+        'communityHubSection';
       const el = document.getElementById(targetId) || document.getElementById('mainContent');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -112,8 +117,43 @@ export const App: React.FC<AppProps> = () => {
             </div>
           )}
 
+          {activeHub === 'dressup' && (
+            <div id="dressUpSection" className="space-y-16">
+              <Suspense fallback={<SectionLoader />}>
+                <DressUpStudio 
+                  lang={lang} 
+                  onNavigateToMuseum={() => handleSelectHub('hub1')} 
+                />
+              </Suspense>
+            </div>
+          )}
+
           {activeHub === 'hub2' && (
             <div className="space-y-16">
+              {/* Highlight Banner linking to 2D Dress-Up Mini-Game */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#F5EFE6] to-[#FAF7F2] border border-[#D4AF37]/50 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="flex items-center space-x-3 text-center sm:text-left">
+                  <span className="text-3xl">👘</span>
+                  <div>
+                    <h4 className="font-serif font-bold text-sm text-[#222222]">
+                      {lang === 'en' ? 'Want to mix and match traditional layers in 2D?' : 'Trải nghiệm phòng thay đồ Cổ Phục 2D mini-game'}
+                    </h4>
+                    <p className="text-xs text-stone-600 font-sans">
+                      {lang === 'en' 
+                        ? 'Try on Áo Dài, Nhật Bình, Ngũ Thân with independent layers, hairstyles and accessories.'
+                        : 'Thay đổi từng lớp áo, mũ nón, phụ kiện và màu sắc tự nhiên trên nhân vật đại diện.'}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleSelectHub('dressup')}
+                  className="px-4 py-2 rounded-xl bg-[#8B0000] hover:bg-[#700000] text-white text-xs font-mono font-bold transition-all shadow-md cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]"
+                >
+                  {lang === 'en' ? 'Play 2D Dress-Up' : 'Mở Phối Đồ 2D'}
+                </button>
+              </div>
+
               <div id="studioSection">
                 <Suspense fallback={<SectionLoader />}>
                   <StudioSection onOpenPhotocard={handleOpenPhotocard} />
@@ -173,5 +213,3 @@ export const App: React.FC<AppProps> = () => {
     </div>
   );
 };
-
-

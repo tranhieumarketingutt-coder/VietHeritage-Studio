@@ -1,9 +1,9 @@
 import React from 'react';
-import { Landmark, Palette, Camera } from 'lucide-react';
+import { Landmark, Palette, Camera, Sparkles } from 'lucide-react';
 
 export interface HeroSectionProps {
-  onSelectHub?: (hub: 'hub1' | 'hub2' | 'hub3') => void;
-  activeHub?: 'hub1' | 'hub2' | 'hub3';
+  onSelectHub?: (hub: 'hub1' | 'hub2' | 'hub3' | 'dressup') => void;
+  activeHub?: 'hub1' | 'hub2' | 'hub3' | 'dressup';
 }
 
 /**
@@ -20,12 +20,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectHub, activeHub
           Nền tảng đồng sáng tạo cổ phục Việt Nam. Khám phá giải phẫu 2D chuẩn sử, phối màu cá nhân thông minh và tôn vinh triết lý phương Đông qua từng nếp áo.
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5">
           <button 
             type="button" 
             id="heroGoHub1" 
             onClick={() => onSelectHub && onSelectHub('hub1')}
-            className={`px-7 sm:px-9 py-3.5 sm:py-4 rounded-2xl font-semibold text-sm sm:text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center space-x-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
+            className={`px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-sm sm:text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center space-x-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
               activeHub === 'hub1'
                 ? 'bg-[#8B0000] hover:bg-[#700000] text-white border-2 border-transparent ring-2 ring-[#D4AF37]/50'
                 : 'bg-white hover:bg-[#FDF6E2] text-[#222222] border-2 border-[#D4AF37]/60'
@@ -34,11 +34,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectHub, activeHub
             <Landmark className="w-5 h-5 shrink-0" />
             <span>Khám Phá Bảo Tàng</span>
           </button>
+
+          <button 
+            type="button" 
+            id="heroGoDressUp" 
+            onClick={() => onSelectHub && onSelectHub('dressup')}
+            className={`px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-sm sm:text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center space-x-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
+              activeHub === 'dressup'
+                ? 'bg-[#8B0000] hover:bg-[#700000] text-white border-2 border-transparent ring-2 ring-[#D4AF37]/50'
+                : 'bg-white hover:bg-[#FDF6E2] text-[#222222] border-2 border-[#D4AF37]/60'
+            }`}
+          >
+            <Sparkles className={`w-5 h-5 shrink-0 ${activeHub === 'dressup' ? 'text-[#D4AF37]' : 'text-amber-600'}`} />
+            <span>Phối Đồ 2D Mini-Game</span>
+          </button>
+
           <button 
             type="button" 
             id="heroGoHub2" 
             onClick={() => onSelectHub && onSelectHub('hub2')}
-            className={`px-7 sm:px-9 py-3.5 sm:py-4 rounded-2xl font-semibold text-sm sm:text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center space-x-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
+            className={`px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-sm sm:text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center space-x-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
               activeHub === 'hub2'
                 ? 'bg-[#8B0000] hover:bg-[#700000] text-white border-2 border-transparent ring-2 ring-[#D4AF37]/50'
                 : 'bg-white hover:bg-[#FDF6E2] text-[#222222] border-2 border-[#D4AF37]/60'
@@ -47,11 +62,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectHub, activeHub
             <Palette className={`w-5 h-5 shrink-0 ${activeHub === 'hub2' ? 'text-[#D4AF37]' : 'text-[#8B0000]'}`} />
             <span>Phối Màu Sắc Tố Tự Nhiên</span>
           </button>
+
           <button 
             type="button" 
             id="heroGoHub3" 
             onClick={() => onSelectHub && onSelectHub('hub3')}
-            className={`px-7 sm:px-9 py-3.5 sm:py-4 rounded-2xl font-semibold text-sm sm:text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center space-x-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
+            className={`px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-semibold text-sm sm:text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center space-x-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8B0000] ${
               activeHub === 'hub3'
                 ? 'bg-[#8B0000] hover:bg-[#700000] text-white border-2 border-transparent ring-2 ring-[#D4AF37]/50'
                 : 'bg-white hover:bg-[#FDF6E2] text-[#222222] border-2 border-[#D4AF37]/60'
