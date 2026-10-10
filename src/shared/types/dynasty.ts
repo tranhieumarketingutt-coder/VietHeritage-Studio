@@ -36,4 +36,5 @@ export interface DynastyTimelineItem {
   accentColor: string;
   primaryCostumeId: string;
   svgSilhouette: string;
+  imageUrl?: string;
 }

@@ -149,7 +149,23 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({ onSelectCostum
                   </span>
                   <span className="font-mono text-xs text-stone-500 font-semibold">{selectedDynasty.centuryVi}</span>
                 </div>
-                <div className="h-64 sm:h-72 my-4 flex items-center justify-center overflow-hidden" dangerouslySetInnerHTML={{ __html: selectedDynasty.svgSilhouette }} />
+                {selectedDynasty.imageUrl ? (
+                  <div className="h-64 sm:h-72 my-4 relative rounded-xl overflow-hidden border border-[#D4AF37]/40 bg-stone-100 shadow-inner group">
+                    <img
+                      src={selectedDynasty.imageUrl}
+                      alt={`${selectedDynasty.dynastyVi} - ${selectedDynasty.signatureCostumeVi}`}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-2.5 text-center">
+                      <span className="text-[11px] font-mono font-medium text-white/95">
+                        {selectedDynasty.dynastyVi}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="h-64 sm:h-72 my-4 flex items-center justify-center overflow-hidden" dangerouslySetInnerHTML={{ __html: selectedDynasty.svgSilhouette }} />
+                )}
                 <h4 className="font-serif text-lg font-bold text-[#8B0000]">{selectedDynasty.signatureCostumeVi}</h4>
                 <p className="text-xs text-stone-600 mt-1 italic font-serif">"{selectedDynasty.taglineVi}"</p>
                 <div className="mt-3 space-y-1.5 text-xs">
@@ -173,7 +189,23 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({ onSelectCostum
                   </span>
                   <span className="font-mono text-xs text-stone-500 font-semibold">{compareDynasty.centuryVi}</span>
                 </div>
-                <div className="h-64 sm:h-72 my-4 flex items-center justify-center overflow-hidden" dangerouslySetInnerHTML={{ __html: compareDynasty.svgSilhouette }} />
+                {compareDynasty.imageUrl ? (
+                  <div className="h-64 sm:h-72 my-4 relative rounded-xl overflow-hidden border border-[#D4AF37]/40 bg-stone-100 shadow-inner group">
+                    <img
+                      src={compareDynasty.imageUrl}
+                      alt={`${compareDynasty.dynastyVi} - ${compareDynasty.signatureCostumeVi}`}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-2.5 text-center">
+                      <span className="text-[11px] font-mono font-medium text-white/95">
+                        {compareDynasty.dynastyVi}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="h-64 sm:h-72 my-4 flex items-center justify-center overflow-hidden" dangerouslySetInnerHTML={{ __html: compareDynasty.svgSilhouette }} />
+                )}
                 <h4 className="font-serif text-lg font-bold text-[#8A6D1C]">{compareDynasty.signatureCostumeVi}</h4>
                 <p className="text-xs text-stone-600 mt-1 italic font-serif">"{compareDynasty.taglineVi}"</p>
                 <div className="mt-3 space-y-1.5 text-xs">
@@ -191,8 +223,8 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({ onSelectCostum
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10 animate-fade-in">
-          <div className="lg:col-span-5 bg-gradient-to-b from-[#FFFDF9] via-[#FAF7F2] to-[#F5EFE6] rounded-2xl border border-[#D4AF37]/40 p-6 flex flex-col items-center justify-center shadow-inner relative group">
-            <div className="w-full flex items-center justify-between text-xs font-mono mb-2">
+          <div className="lg:col-span-5 bg-gradient-to-b from-[#FFFDF9] via-[#FAF7F2] to-[#F5EFE6] rounded-2xl border border-[#D4AF37]/40 p-5 sm:p-6 flex flex-col items-center justify-center shadow-inner relative group">
+            <div className="w-full flex items-center justify-between text-xs font-mono mb-3">
               <span className="px-2.5 py-0.5 rounded-full bg-[#8B0000]/10 text-[#8B0000] font-bold">
                 {selectedDynasty.period}
               </span>
@@ -201,10 +233,29 @@ export const TimelineSection: React.FC<TimelineSectionProps> = ({ onSelectCostum
               </span>
             </div>
 
-            <div 
-              className="w-full max-w-[260px] h-72 sm:h-80 flex items-center justify-center py-2 transition-transform duration-500 group-hover:scale-105"
-              dangerouslySetInnerHTML={{ __html: selectedDynasty.svgSilhouette }}
-            />
+            {selectedDynasty.imageUrl ? (
+              <div className="w-full relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 shadow-md bg-stone-100 h-80 sm:h-96 my-1">
+                <img 
+                  src={selectedDynasty.imageUrl} 
+                  alt={`Phục dựng cổ phục ${selectedDynasty.dynastyVi} - ${selectedDynasty.signatureCostumeVi}`} 
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-xs text-yellow-300 text-[10px] font-mono font-bold border border-yellow-400/40 shadow-xs">
+                  ✦ {selectedDynasty.dynastyVi}
+                </div>
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-3 pt-8 text-center">
+                  <span className="text-xs font-medium text-white drop-shadow-sm font-sans block">
+                    {selectedDynasty.signatureCostumeVi}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div 
+                className="w-full max-w-[260px] h-72 sm:h-80 flex items-center justify-center py-2 transition-transform duration-500 group-hover:scale-105"
+                dangerouslySetInnerHTML={{ __html: selectedDynasty.svgSilhouette }}
+              />
+            )}
 
             <div className="w-full text-center mt-3 pt-3 border-t border-stone-200">
               <span className="text-xs font-mono font-bold text-[#8B0000] uppercase block">
