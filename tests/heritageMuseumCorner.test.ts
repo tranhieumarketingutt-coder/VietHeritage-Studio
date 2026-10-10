@@ -183,6 +183,15 @@ describe('Heritage Museum Corner and Locations Atlas Suite', () => {
     assert.ok(navbarFile.includes('navTabMuseumCorner'), 'Navbar must contain navTabMuseumCorner desktop button');
     assert.ok(navbarFile.includes('mobTabMuseumCorner'), 'Navbar must contain mobTabMuseumCorner mobile button');
 
+    // Verify ordering: Hub 2 (Co-creation Studio) is placed before Museum Corner
+    const idxDesktopHub2 = navbarFile.indexOf('id="navTabHub2"');
+    const idxDesktopMuseum = navbarFile.indexOf('id="navTabMuseumCorner"');
+    assert.ok(idxDesktopHub2 !== -1 && idxDesktopMuseum !== -1 && idxDesktopHub2 < idxDesktopMuseum, 'Desktop navTabHub2 must precede navTabMuseumCorner');
+
+    const idxMobileHub2 = navbarFile.indexOf('id="mobTabHub2"');
+    const idxMobileMuseum = navbarFile.indexOf('id="mobTabMuseumCorner"');
+    assert.ok(idxMobileHub2 !== -1 && idxMobileMuseum !== -1 && idxMobileHub2 < idxMobileMuseum, 'Mobile mobTabHub2 must precede mobTabMuseumCorner');
+
     // Check App integration
     const appFile = fs.readFileSync(path.resolve('src/app/App.tsx'), 'utf-8');
     assert.ok(appFile.includes('HeritageMuseumCorner'), 'App must import HeritageMuseumCorner');

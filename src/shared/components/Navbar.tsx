@@ -97,22 +97,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button 
             type="button"
-            id="navTabMuseumCorner" 
-            onClick={() => onSelectHub('museumCorner')}
-            aria-current={activeHub === 'museumCorner' ? 'page' : undefined}
-            className={`px-2.5 lg:px-3 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
-              activeHub === 'museumCorner'
-                ? 'bg-[#8B0000] text-white shadow-md border border-[#8B0000]'
-                : 'text-[#666666] hover:text-[#222222] hover:bg-white/60'
-            }`}
-            title={lang === 'en' ? "HERITAGE MUSEUM CORNER" : "GÓC BẢO TÀNG DI SẢN"}
-          >
-            <Compass className={`w-3.5 h-3.5 shrink-0 ${activeHub === 'museumCorner' ? 'text-[#D4AF37]' : 'text-stone-700'}`} />
-            <span className="whitespace-nowrap">{lang === 'en' ? 'GÓC BẢO TÀNG' : 'GÓC BẢO TÀNG'}</span>
-          </button>
-
-          <button 
-            type="button"
             id="navTabHub2" 
             onClick={() => onSelectHub('hub2')}
             aria-current={activeHub === 'hub2' ? 'page' : undefined}
@@ -125,6 +109,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Palette className={`w-3.5 h-3.5 shrink-0 ${activeHub === 'hub2' ? 'text-[#D4AF37]' : 'text-stone-700'}`} />
             <span className="whitespace-nowrap">{lang === 'en' ? 'CO-CREATION STUDIO' : 'XƯỞNG SÁNG TẠO'}</span>
+          </button>
+
+          <button 
+            type="button"
+            id="navTabMuseumCorner" 
+            onClick={() => onSelectHub('museumCorner')}
+            aria-current={activeHub === 'museumCorner' ? 'page' : undefined}
+            className={`px-2.5 lg:px-3 py-2 rounded-lg text-xs font-bold tracking-wider font-mono transition-all duration-200 cursor-pointer flex items-center space-x-1.5 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+              activeHub === 'museumCorner'
+                ? 'bg-[#8B0000] text-white shadow-md border border-[#8B0000]'
+                : 'text-[#666666] hover:text-[#222222] hover:bg-white/60'
+            }`}
+            title={lang === 'en' ? "HERITAGE MUSEUM CORNER" : "GÓC BẢO TÀNG DI SẢN"}
+          >
+            <Compass className={`w-3.5 h-3.5 shrink-0 ${activeHub === 'museumCorner' ? 'text-[#D4AF37]' : 'text-stone-700'}`} />
+            <span className="whitespace-nowrap">{lang === 'en' ? 'GÓC BẢO TÀNG' : 'GÓC BẢO TÀNG'}</span>
           </button>
 
           <button 
@@ -245,21 +245,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         <button 
           type="button"
-          id="mobTabMuseumCorner" 
-          onClick={() => onSelectHub('museumCorner')}
-          aria-current={activeHub === 'museumCorner' ? 'page' : undefined}
-          className={`flex-1 py-2 text-center text-[11px] font-mono font-bold transition-all flex items-center justify-center space-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
-            activeHub === 'museumCorner'
-              ? 'text-[#8B0000] border-b-2 border-[#8B0000] bg-white/60'
-              : 'text-stone-700 hover:text-stone-950'
-          }`}
-        >
-          <Compass className="w-3.5 h-3.5 text-[#8B0000]" />
-          <span>GÓC BẢO TÀNG</span>
-        </button>
-
-        <button 
-          type="button"
           id="mobTabHub2" 
           onClick={() => onSelectHub('hub2')}
           aria-current={activeHub === 'hub2' ? 'page' : undefined}
@@ -273,6 +258,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
           </svg>
           <span>SÁNG TẠO</span>
+        </button>
+
+        <button 
+          type="button"
+          id="mobTabMuseumCorner" 
+          onClick={() => onSelectHub('museumCorner')}
+          aria-current={activeHub === 'museumCorner' ? 'page' : undefined}
+          className={`flex-1 py-2 text-center text-[11px] font-mono font-bold transition-all flex items-center justify-center space-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
+            activeHub === 'museumCorner'
+              ? 'text-[#8B0000] border-b-2 border-[#8B0000] bg-white/60'
+              : 'text-stone-700 hover:text-stone-950'
+          }`}
+        >
+          <Compass className="w-3.5 h-3.5 text-[#8B0000]" />
+          <span>GÓC BẢO TÀNG</span>
         </button>
 
         <button 
