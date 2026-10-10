@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hương Sắc Sen Việt - Tinh Hoa Di Sản Thiên Nhiên</title>
+  
+  <!-- Google Fonts: Playfair Display (Serif) & Be Vietnam Pro (Sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-primary: #1F4D3A;        /* Deep green */
+      --color-primary-dark: #143527;   /* Darker green for deep contrast */
+      --color-primary-light: #2D6A50;  /* Medium green */
+      --color-accent: #F0A596;         /* Coral pink */
+      --color-accent-dark: #D98878;    /* Darker coral pink for hover/accessible contrast */
+      --color-accent-light: #FDECE9;   /* Soft tinted pink */
+      --color-overlay: rgba(255, 255, 255, 0.25); /* Very light white overlay */
+      --glass-bg: rgba(255, 255, 255, 0.72);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: var(--font-sans);
+      color: var(--color-primary);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Fixed full-page background anchored to bottom */
+    body {
+      background-image: url('lotus_landscape.png');
+      background-size: cover;
+      background-position: center bottom;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    /* Very light white overlay (rgba(255,255,255,0.25)) for readability */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: var(--color-overlay);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Main container */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(31, 77, 58, 0.12);
+      box-shadow: 0 4px 20px -2px rgba(31, 77, 58, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--color-primary);
+      transition: transform 0.2s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-1px);
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #1F4D3A 0%, #2D6A50 100%);
+      color: #FAF7F2;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.35rem;
+      box-shadow: 0 4px 12px rgba(31, 77, 58, 0.18);
+      border: 1.5px solid var(--color-accent);
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .logo-subtitle {
+      font-size: 0.75rem;
+      color: #4A6B5D;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-primary);
+      font-size: 0.925rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width 0.25s ease;
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary-dark);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.55rem 1.25rem;
+      background: var(--color-primary);
+      color: #FFFFFF;
+      text-decoration: none;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      box-shadow: 0 3px 10px rgba(31, 77, 58, 0.15);
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-cta:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 14px rgba(31, 77, 58, 0.22);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 3.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(240, 165, 150, 0.6);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 8px rgba(31, 77, 58, 0.06);
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--color-accent);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--color-primary-dark);
+      margin-bottom: 1.25rem;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+    }
+
+    .hero h1 span {
+      color: var(--color-accent-dark);
+      font-style: italic;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: #355C4C;
+      max-width: 680px;
+      margin: 0 auto 2.25rem;
+      line-height: 1.7;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.95rem 2.25rem;
+      background: var(--color-accent);
+      color: #4A1A12;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 9999px;
+      box-shadow: 0 6px 20px rgba(240, 165, 150, 0.45), 0 2px 6px rgba(31, 77, 58, 0.1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+    }
+
+    .hero-btn:hover {
+      background: var(--color-accent-dark);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(217, 136, 120, 0.55);
+    }
+
+    .hero-btn svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.25s ease;
+    }
+
+    .hero-btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Frosted-Glass Cards Section */
+    .cards-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 6rem;
+      width: 100%;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2.25rem 1.75rem;
+      box-shadow: 0 12px 32px -4px rgba(31, 77, 58, 0.09);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%);
+      opacity: 0.7;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 20px 40px -6px rgba(31, 77, 58, 0.16);
+      border-color: rgba(240, 165, 150, 0.6);
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--color-accent-light);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 4px 12px rgba(240, 165, 150, 0.25);
+      border: 1px solid rgba(240, 165, 150, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .glass-card:hover .card-icon {
+      transform: scale(1.08);
+      background: var(--color-accent);
+      color: #4A1A12;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: #385E4E;
+      line-height: 1.6;
+      flex-grow: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s ease, gap 0.2s ease;
+    }
+
+    .card-link:hover {
+      color: var(--color-accent-dark);
+      gap: 0.75rem;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(31, 77, 58, 0.12);
+      padding: 2.5rem 1.5rem;
+      color: #385E4E;
+      font-size: 0.9rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .footer-brand-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--color-primary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: #385E4E;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-accent-dark);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 992px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .hero {
+        padding: 3.5rem 1.25rem 2.5rem;
+      }
+      .hero h1 {
+        font-size: 2.1rem;
+      }
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      .footer-links {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Light semi-transparent overlay for maximum readability -->
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <!-- Header with logo and navigation -->
+    <header>
+      <div class="nav-container">
+        <a href="#hero" class="logo">
+          <div class="logo-icon" aria-hidden="true">S</div>
+          <div class="logo-text">
+            <span class="logo-title">Hương Sắc Sen</span>
+            <span class="logo-subtitle">Mỹ Học Cổ Truyền</span>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#hero">Trang Chủ</a></li>
+            <li><a href="#kham-pha">Triết Lý Sen</a></li>
+            <li><a href="#bo-suu-tap">Bộ Sưu Tập</a></li>
+            <li><a href="#di-san">Di Sản Nghệ Thuật</a></li>
+          </ul>
+          <a href="#kham-pha" class="nav-cta">Khám Phá Ngay</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Centered Hero Section -->
+    <main>
+      <section id="hero" class="hero">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>Di Sản Thiên Nhiên & Văn Hóa Việt Nam</span>
+        </div>
+
+        <h1>
+          Hồn Nhiên Giữa Đất Trời,<br>
+          <span>Thanh Cao</span> Tựa Đóa Sen
+        </h1>
+
+        <p>
+          Lắng đọng vẻ đẹp thuần khiết của đầm sen non nước. Nơi giao thoa giữa mỹ thuật thủy mặc truyền thống và tinh thần tự tại, thanh tao của văn hóa phương Đông.
+        </p>
+
+        <a href="#kham-pha" class="hero-btn">
+          <span>Thưởng Lãm Di Sản</span>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </section>
+
+      <!-- 3 Frosted-Glass Cards Section -->
+      <section id="kham-pha" class="cards-section">
+        <div class="cards-grid">
+          <!-- Card 1 -->
+          <article class="glass-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <h2 class="card-title">Tinh Hoa Quốc Hoa</h2>
+            <p class="card-desc">
+              Hoa sen biểu trưng cho khí phách kiên cường, "gần bùn mà chẳng hôi tanh mùi bùn". Từng cánh sen hé nở lưu giữ cốt cách thanh khiết, tao nhã ngàn đời của người Việt.
+            </p>
+            <a href="#chi-tiet-1" class="card-link">
+              Tìm hiểu thêm
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="glass-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              </svg>
+            </div>
+            <h2 class="card-title">Mỹ Thuật Thủy Mặc</h2>
+            <p class="card-desc">
+              Sắc lục trầm tĩnh của tán lá ngọc cùng nét hồng phai của búp sen non hòa quyện trên nền mây trời bồng bềnh, tạo nên một thi họa phong cảnh mang đậm hồn thiêng non nước.
+            </p>
+            <a href="#chi-tiet-2" class="card-link">
+              Khám phá sắc họa
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="glass-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <h2 class="card-title">Triết Lý Sống Tự Tại</h2>
+            <p class="card-desc">
+              Tìm lại khoảnh khắc bình yên và lắng dịu trong tâm hồn. Lấy cảm hứng từ sự an nhiên của đóa sen đón nắng sớm để nuôi dưỡng năng lượng tích cực và yêu chuộng cái đẹp.
+            </p>
+            <a href="#chi-tiet-3" class="card-link">
+              Lắng nghe câu chuyện
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-brand">
+          <span class="footer-brand-title">Hương Sắc Sen Việt</span>
+          <span>Bảo tồn & Lan tỏa giá trị mỹ học truyền thống dân tộc.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#dieu-khoan">Điều khoản</a></li>
+          <li><a href="#chinh-sach">Bảo mật</a></li>
+          <li><a href="#lien-he">Liên hệ</a></li>
+        </ul>
+        <div class="footer-copy">
+          &copy; 2026 Hương Sắc Sen Việt. Bản quyền được bảo lưu.
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -111,15 +111,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             type="button"
             id="audioToggleBtn" 
             onClick={toggleAudio}
-            aria-label={isPlaying ? (lang === 'en' ? 'Pause ambient Vietnamese music' : 'Tạm dừng nhạc nền di sản') : (lang === 'en' ? 'Play ambient Vietnamese music' : 'Bật nhạc nền di sản')}
+            aria-label={isPlaying ? (lang === 'en' ? 'Pause Hello Vietnam music' : 'Tạm dừng nhạc Hello Vietnam') : (lang === 'en' ? 'Play Hello Vietnam music' : 'Bật nhạc Hello Vietnam')}
             aria-pressed={isPlaying}
-            title={isPlaying ? (lang === 'en' ? 'Pause Ambient Vietnamese Music' : 'Tạm dừng nhạc nền di sản') : (lang === 'en' ? 'Play Ambient Vietnamese Music' : 'Bật nhạc nền di sản')} 
+            title={isPlaying ? (lang === 'en' ? 'Pause Hello Vietnam Music' : 'Tạm dừng nhạc Hello Vietnam') : (lang === 'en' ? 'Play Hello Vietnam Music' : 'Bật nhạc Hello Vietnam')} 
             className={`flex items-center space-x-1.5 px-2.5 lg:px-3 py-2 rounded-full border border-[#D4AF37]/50 text-xs font-mono transition-all shadow-xs cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000] ${
               isPlaying ? 'bg-[#FDF6E2] ring-1 ring-[#D4AF37]' : 'bg-white/85 hover:bg-[#FDF6E2]'
             }`}
           >
             <span aria-hidden="true" className={`w-2.5 h-2.5 rounded-full shrink-0 ${isPlaying ? 'bg-emerald-500 animate-pulse' : 'bg-stone-300'}`}></span>
-            <span className="hidden xl:inline text-[#222222] font-medium whitespace-nowrap">{lang === 'en' ? 'Ambient Audio' : 'Nhạc Nền'}</span>
+            <span className="hidden xl:inline text-[#222222] font-medium whitespace-nowrap">{lang === 'en' ? 'Hello Vietnam' : 'Hello Vietnam'}</span>
             {isPlaying ? (
               <svg aria-hidden="true" className="w-3.5 h-3.5 text-[#8B0000] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
