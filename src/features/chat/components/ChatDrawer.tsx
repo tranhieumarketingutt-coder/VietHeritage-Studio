@@ -3,7 +3,7 @@ import { ChatMessage } from './ChatMessage';
 // @ts-ignore
 import { I18N } from '../../../shared/i18n';
 // @ts-ignore
-import { GEMINI_RESPONSES } from '../../../heritageLogic.js';
+import { GEMINI_RESPONSES, getCulturalAdvisorResponse } from '../../../heritageLogic.js';
 import { useFocusTrap } from '../../../shared/hooks/useFocusTrap';
 
 export interface ChatDrawerProps {
@@ -24,6 +24,7 @@ export interface MessageData {
 export const ChatDrawer: React.FC<ChatDrawerProps> = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState<MessageData[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const drawerRef = useFocusTrap<HTMLDivElement>({
@@ -37,43 +38,65 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ isOpen, onClose }) => {
   const isEn = lang === 'en';
 
   useEffect(() => {
-    // Initial message
+    // Initial message from Cố vấn cổ phục
     setMessages([
       {
         id: 'init-msg',
         sender: 'ai',
         text: isEn 
-          ? 'Hello! I am your **Heritage Cultural Advisor** (V-Heritage Cultural Stylist). Where are you planning to wear your traditional outfit, or which cultural philosophy would you like to explore today?'
-          : 'Xin chào! Mình là **Cố Vấn Điển Chế Phục Trang** (V-Heritage Cultural Stylist). Bạn đang lên kế hoạch diện cổ phục đi đâu, hay muốn khám phá triết lý trang phục truyền thống nào hôm nay?'
+          ? 'Hello! I am your **Traditional Costume Advisor** (Cố vấn cổ phục). Which occasion are you planning to wear Vietnamese traditional attire for, or which historical period would you like to explore? I would love to assist you!'
+          : 'Xin chào bạn! Mình là **Cố vấn cổ phục**, trợ lý trang phục truyền thống Việt Nam. Bạn đang lên kế hoạch diện cổ phục cho dịp nào, hay muốn tìm hiểu trang phục của thời kỳ lịch sử nào? Mình rất sẵn lòng hỗ trợ bạn!'
       }
     ]);
   }, [isEn]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, isLoading]);
 
-  const handleSend = (text: string) => {
-    if (!text.trim()) return;
+  const handleSend = async (text: string) => {
+    if (!text.trim() || isLoading) return;
     
     const userMsg: MessageData = { id: Date.now().toString(), sender: 'user', text };
     setMessages(prev => [...prev, userMsg]);
     setInputValue('');
+    setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse = isEn 
-        ? "That sounds lovely! Traditional Vietnamese costumes offer a deep connection to our heritage. I can assist you with selecting the right colors and fabrics."
-        : "Thật tuyệt vời! Cổ phục Việt Nam mang ý nghĩa di sản sâu sắc. Mình có thể giúp bạn chọn màu sắc và chất liệu phù hợp.";
-      
-      const aiMsg: MessageData = {
-        id: (Date.now() + 1).toString(),
-        sender: 'ai',
-        text: aiResponse,
-        isStreaming: true
-      };
-      setMessages(prev => [...prev, aiMsg]);
-    }, 600);
+    try {
+      const response = await fetch('/api/gemini/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, lang: isEn ? 'en' : 'vi' })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data && typeof data.text === 'string' && data.text.trim()) {
+          const aiMsg: MessageData = {
+            id: (Date.now() + 1).toString(),
+            sender: 'ai',
+            text: data.text,
+            isStreaming: true
+          };
+          setMessages(prev => [...prev, aiMsg]);
+          setIsLoading(false);
+          return;
+        }
+      }
+    } catch {
+      // Offline fallback handling below
+    }
+
+    // High quality offline fallback adhering strictly to role and knowledge base
+    const fallbackText = getCulturalAdvisorResponse(text, isEn ? 'en' : 'vi');
+    const aiMsg: MessageData = {
+      id: (Date.now() + 1).toString(),
+      sender: 'ai',
+      text: fallbackText,
+      isStreaming: true
+    };
+    setMessages(prev => [...prev, aiMsg]);
+    setIsLoading(false);
   };
 
   const handleChipClick = (promptKey: string) => {
@@ -144,14 +167,20 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className="p-2.5 bg-[#F5F1E8] border-b border-stone-200 overflow-x-auto flex items-center space-x-2 shrink-0">
-          <button type="button" onClick={() => handleChipClick('hue')} className="px-2.5 py-1 rounded-full bg-white hover:bg-[#FDF6E2] text-stone-700 border border-stone-200 text-[10px] font-mono whitespace-nowrap cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]">
-            Tư vấn đồ đi Huế tháng 10
+          <button type="button" onClick={() => handleChipClick('totnghiep')} className="px-2.5 py-1 rounded-full bg-white hover:bg-[#FDF6E2] text-stone-700 border border-stone-200 text-[10px] font-mono whitespace-nowrap cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]">
+            {isEn ? 'Graduation photoshoot' : 'Tư vấn chụp ảnh tốt nghiệp'}
           </button>
           <button type="button" onClick={() => handleChipClick('nhatbinh')} className="px-2.5 py-1 rounded-full bg-white hover:bg-[#FDF6E2] text-stone-700 border border-stone-200 text-[10px] font-mono whitespace-nowrap cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]">
-            Ý nghĩa hoa văn Áo Nhật Bình
+            {isEn ? 'Ao Nhat Binh rules' : 'Quy chế Áo Nhật Bình'}
           </button>
           <button type="button" onClick={() => handleChipClick('nguthan')} className="px-2.5 py-1 rounded-full bg-white hover:bg-[#FDF6E2] text-stone-700 border border-stone-200 text-[10px] font-mono whitespace-nowrap cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]">
-            Phối Áo Ngũ Thân Gen Z
+            {isEn ? 'Ao Ngu Than styling' : 'Phối Áo Ngũ Thân & Phụ kiện'}
+          </button>
+          <button type="button" onClick={() => handleChipClick('lytran')} className="px-2.5 py-1 rounded-full bg-white hover:bg-[#FDF6E2] text-stone-700 border border-stone-200 text-[10px] font-mono whitespace-nowrap cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]">
+            {isEn ? 'Ly - Tran dynasties' : 'Cổ phục thời Lý - Trần'}
+          </button>
+          <button type="button" onClick={() => handleChipClick('hue')} className="px-2.5 py-1 rounded-full bg-white hover:bg-[#FDF6E2] text-stone-700 border border-stone-200 text-[10px] font-mono whitespace-nowrap cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]">
+            {isEn ? 'Hue Imperial City' : 'Trang phục đi Cố Đô Huế'}
           </button>
         </div>
 
@@ -159,6 +188,14 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ isOpen, onClose }) => {
           {messages.map(msg => (
             <ChatMessage key={msg.id} sender={msg.sender} text={msg.text} isStreaming={msg.isStreaming} />
           ))}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="p-2.5 rounded-xl bg-white border border-[#D4AF37]/30 text-stone-500 text-[11px] font-mono flex items-center space-x-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8B0000] animate-pulse"></span>
+                <span>{isEn ? 'Advisor is consulting records...' : 'Cố vấn đang tra cứu điển chế...'}</span>
+              </div>
+            </div>
+          )}
           <div ref={messagesEndRef} />
         </div>
 
@@ -175,7 +212,11 @@ export const ChatDrawer: React.FC<ChatDrawerProps> = ({ isOpen, onClose }) => {
               aria-label={getTranslation('chatPlaceholder')}
               className="flex-1 px-3 py-2 rounded-lg border border-stone-300 font-sans text-xs focus:ring-2 focus:ring-[#8B0000] focus:border-[#8B0000] outline-none" 
             />
-            <button type="submit" className="px-3.5 py-2 rounded-lg bg-[#8B0000] hover:bg-[#700000] text-white font-mono font-bold text-xs transition-colors cursor-pointer shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]">
+            <button 
+              type="submit" 
+              disabled={isLoading || !inputValue.trim()}
+              className="px-3.5 py-2 rounded-lg bg-[#8B0000] hover:bg-[#700000] disabled:opacity-50 text-white font-mono font-bold text-xs transition-colors cursor-pointer shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B0000]"
+            >
               {getTranslation('btnSend')}
             </button>
           </form>
